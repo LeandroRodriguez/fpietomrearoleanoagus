@@ -42,7 +42,7 @@ Bytes RegistroVariable::serializarse() {
 	unsigned int tamanioUID = streamUID.str().size();
 
 	//UID
-	while (tamanioUID < LONGITUD_CANT_BYTES)
+	while (tamanioUID < LONGITUD_CANT_BYTES)//agrego "0" al principio del campo para completar el tamaño del campo
 	{
 		serializacion += "0";
 		tamanioUID++;
@@ -50,7 +50,7 @@ Bytes RegistroVariable::serializarse() {
 	serializacion += streamUID.str();//agrego el uid a la serializacion
 
 	//Tamanio
-	while (tamanioDatos < LONGITUD_CANT_BYTES)
+	while (tamanioDatos < LONGITUD_CANT_BYTES)//agrego "0" al principio del campo para completar el tamaño del campo
 	{
 		serializacion += "0";
 		tamanioDatos++;
