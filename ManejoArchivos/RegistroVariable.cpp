@@ -69,7 +69,9 @@ void RegistroVariable::hidratarse(const Bytes& cadena) {
 	}
 
 	this->nRegistro = atoi(cadena.getSubBytes(0,LONGITUD_CANT_BYTES).toString().c_str());//tomo los primeros LONGITUD_CANT_BYTES bytes para el uid
-	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, 2 * LONGITUD_CANT_BYTES).toString().c_str());//tomo los primeros LONGITUD_CANT_BYTES bytes para el uid
+	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, 2 * LONGITUD_CANT_BYTES).toString().c_str());
+	//tomo los segundos LONGITUD_CANT_BYTES bytes para el tamanioregitsro
+	
 	this->setDato(cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,tamanioRegistro));
 	this->tamanioDato = tamanioRegistro;
 }
