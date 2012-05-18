@@ -6,7 +6,7 @@ typedef uint32_t uint32;
 typedef unsigned long int offset;
 typedef unsigned long int cantBytes;
 typedef unsigned long int tamanioBloque;
-#define LONGITUD_CANT_BYTES (2*sizeof(cantBytes))
+#define LONGITUD_CANT_BYTES (2*sizeof(cantBytes)) //8 Bytes
 #define LONGITUD_BLOQUE_LISTA 450 //para probar los hago chicos //32768 //32kB
 #define LONGITUD_BLOQUE_NODO 32768
 #define LONGITUD_BLOQUE_MAIL 20000 //para probar los hago chicos //32768 //32kB
