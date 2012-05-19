@@ -1,15 +1,29 @@
 #include <iostream>
 #include "NodoInterno.h"
 
-NodoInterno::char* Serializarse() = 0;
-
-        virtual      Hidratar(char* CodigoBinario ) =0;
-
-        virtual unsigned long int getTamanioSerializado() = 0;
-
-        virtual ~InterfazSerializar() {}
+Bytes* NodoInterno:: Serializarse(){
 
 
-offset Nodo::getId(){
-	return this->id;
-}
+
+
+    };
+
+Bytes* NodoInterno::Hidratar(Bytes CodigoBinario){
+
+
+
+
+    };
+
+unsigned long int NodoInterno::getTamanioSerializado(){
+
+
+
+    };
+
+unsigned long int NodoInterno::~NodoInterno(){
+
+
+
+    };
+
