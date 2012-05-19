@@ -4,12 +4,12 @@ class Nodo:public InterfazSerializar {
 
     protected: /*asi al heredar los puede cambiar, si lo pongo private kb */
 
-    unsigned long int CantElem
-    unsigned long int Altura
-    Dimension         dimension
-    unsigned long int  tamanioMaximoNodo;
-    unsigned long int  tamanioUsado;
-    unsigned long int RefBloque;
+    unsigned int CantElem
+    unsigned int Altura
+    int  dimension
+    unsigned int  tamanioMaximoNodo;
+    unsigned int  tamanioUsado;
+    unsigned int RefBloque;
 
     public:
     Nodo();
