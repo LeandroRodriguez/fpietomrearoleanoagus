@@ -12,7 +12,6 @@ typedef unsigned long int tamanioBloque;
 #define LONGITUD_BLOQUE_MAIL 20000 //para probar los hago chicos //32768 //32kB
 
 #define TAMANIO_STRING_MAXIMO 100
-#define MAXIMA_DESCARGA_MAILS 100
 
 #define INDICES_EXTENSION ".idx"
 
