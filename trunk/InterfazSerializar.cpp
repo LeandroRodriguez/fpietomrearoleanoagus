@@ -1,8 +1,10 @@
 #include <iostream>
 
+/* include Bytes */
+
 class InterfazSerializar{
     public:
-        virtual char* Serializarse() = 0;
+        virtual Bytes* Serializarse() = 0;
 
         virtual      Hidratar(char* CodigoBinario ) =0;
 
