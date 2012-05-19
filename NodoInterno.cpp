@@ -5,9 +5,16 @@ Bytes* NodoInterno:: Serializarse(){
 
 
 
+
     };
 
 Bytes* NodoInterno::Nodo(Bytes CodigoBinario){
+
+
+
+    };
+
+Bytes* NodoInterno::Nodo(Key subclave ,unsigned long int ref){
 
 
 
@@ -32,7 +39,13 @@ unsigned long int NodoInterno::~NodoInterno(){
 
     };
 
-bool NodoInterno::InsertarSubClaveReferencia( SubClave subclave ,unsigned long int ref ){
+bool InsertarNuevaSubClaveRef ( Key subclave,refAbloqueArbol ){
+
+
+
+    };
+
+void NodoInterno::Inicializar( Key subclave ,unsigned long int ref ){
 
         SubClaveRef NuevaDupla;
         NuevaDupla.RefNodo=ref;
