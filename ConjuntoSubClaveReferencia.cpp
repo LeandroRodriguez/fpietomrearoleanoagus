@@ -16,7 +16,30 @@ class ConjuntoSubClaveReferencia:public InterfazSerializar {
 
     list<SubClaveRef>* ListaSubClaveRef;
 
+    public:
 
+    ConjuntoSubClaveReferencia(){
+        };
+
+    ConjuntoSubClaveReferencia(unsigned long int RefIzq, SubClave subc, unsigned long int RefDer){
+        this->Ref1erNodo=RefIzq;
+        this->ListaSubClaveRef=new list<SubClaveRef>;
+        this->InsertarSubClaveReferencia(subc,ref);
+        };
+
+
+    ~ConjuntoSubClaveReferencia(){
+        };
+
+    bool InsertarSubClaveReferencia( SubClave subclave ,unsigned long int ref ){
+
+        SubClaveRef NuevaDupla;
+        NuevaDupla.RefNodo=ref;
+        NuevaDupla.SubClae= subclave;
+
+        this->ListaSubClaveRef->push_back(NuevaDupla);
+
+    }
 
 
 
