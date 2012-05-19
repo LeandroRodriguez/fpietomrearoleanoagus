@@ -1,8 +1,8 @@
 #include <iostream>
 
-class Nodo:public  {
+class Nodo:public InterfazSerializar {
 
-    private:
+    protected: /*asi al heredar los puede cambiar, si lo pongo private kb */
 
     unsigned long int CantElem
     unsigned long int Altura
