@@ -1,6 +1,5 @@
 #include <iostream>
-
-/* include Bytes */
+#include "../Bytes.h"
 
 class InterfazSerializar{
     public:
