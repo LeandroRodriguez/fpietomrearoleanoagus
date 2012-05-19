@@ -1,6 +1,7 @@
 #include <iostream>
 #include <list>
 #include "Nodo.h"
+#include "Constantes.h"
 
 class NodoHoja: public Nodo{
 
@@ -9,6 +10,7 @@ class NodoHoja: public Nodo{
     private:
     List<int> listIdRegistros;
     List<int> listNroBloque;
+    int proximaHoja;
 
     
 
@@ -28,5 +30,6 @@ class NodoHoja: public Nodo{
     ~NodoHoja(){}
     
     unsigned long int getTamanioSerializado();
+    Bytes serializarse();
 
 }
