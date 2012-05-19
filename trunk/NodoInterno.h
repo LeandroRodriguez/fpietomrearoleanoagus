@@ -1,10 +1,10 @@
 #include <iostream>
 #include "Nodo.h"
 
-/*include SubClave      */
+/*include Key*/
 
 struct SubClaveRef{
-        SubClave subclave;
+        Key subclave;
         unsigned long int RefNodo;
     }
 
@@ -24,21 +24,21 @@ class NodoInterno: public Nodo{
 
     list<SubClaveRef>* ListaSubClaveRef;
 
-
-    bool InsertarNuevaSubClaveRef (/*SubClave */ subclave,refAbloqueArbol );
+    void Inicializar( Key subclave ,unsigned long int ref );
 
     public:
 
     NodoInterno(){
         this->tamanioMaximoNodo=0;
         this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef>;
     }
 
     ~NodoInterno(){}
 
-    Nodo*   DevolverHijoSegunClave( Clave clave )/*necesitamos nuestra propia clase Clave */
+    bool InsertarNuevaSubClaveRef ( Key subclave,refAbloqueArbol );
 
-
+    Nodo*   DevolverHijoSegunClave( Key clave );
 
 
 }
