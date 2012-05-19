@@ -5,6 +5,11 @@ Bytes* NodoInterno:: Serializarse(){
 
 
 
+    };
+
+Bytes* NodoInterno::Nodo(Bytes CodigoBinario){
+
+
 
     };
 
