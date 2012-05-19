@@ -8,6 +8,7 @@ class Nodo:public InterfazSerializar {
     unsigned long int Altura
     Dimension         dimension
     unsigned long int  tamanioMaximoNodo;
+    unsigned long int  tamanioUsado;
     unsigned long int RefBloque;
 
     public:

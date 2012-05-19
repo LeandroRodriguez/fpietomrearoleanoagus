@@ -16,6 +16,7 @@ class NodoInterno: public Nodo{
     /*hay que buscar alguna forma piola de administrar
     (ref subclave ref subclave ref subclave )*/
 
+
     bool InsertarNuevaSubClaveRef (/*SubClave */ subclave,refAbloqueArbol );
 
     public:
