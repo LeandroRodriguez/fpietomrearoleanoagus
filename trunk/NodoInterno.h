@@ -1,6 +1,13 @@
 #include <iostream>
 #include "Nodo.h"
 
+/*include SubClave      */
+
+struct SubClaveRef{
+        SubClave subclave;
+        unsigned long int RefNodo;
+    }
+
 class NodoInterno: public Nodo{
 
     /*Atributos de clase madre Nodo, se heredan como privados
@@ -13,8 +20,9 @@ class NodoInterno: public Nodo{
 
     private:
 
-    /*hay que buscar alguna forma piola de administrar
-    (ref subclave ref subclave ref subclave )*/
+    unsigned long int Ref1erNodo;
+
+    list<SubClaveRef>* ListaSubClaveRef;
 
 
     bool InsertarNuevaSubClaveRef (/*SubClave */ subclave,refAbloqueArbol );
