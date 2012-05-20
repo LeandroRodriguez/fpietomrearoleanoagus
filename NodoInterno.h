@@ -1,14 +1,16 @@
 #include <iostream>
 #include "Nodo.h"
 
-/*include Key*/
+#include "Key.h"
 
-struct SubClaveRef{
-        Key subclave;
+template<class T>
+struct SubClaveRef<T>{
+        T subclave;
         unsigned long int RefNodo;
     }
 
-class NodoInterno: public Nodo{
+template<class T>
+class NodoInterno<T>: public Nodo{
 
     /*Atributos de clase madre Nodo, se heredan como privados
         unsigned long int CantElem
@@ -22,23 +24,26 @@ class NodoInterno: public Nodo{
 
     unsigned long int Ref1erNodo;
 
-    list<SubClaveRef>* ListaSubClaveRef;
+    list< SubClaveRef<T>  >* ListaSubClaveRef;
 
     void Inicializar( Key subclave ,unsigned long int ref );
 
+    bool InsertarNuevaSubClaveRef ( T subclave,refAbloqueArbol ){
+        }
+
+    Nodo*   DevolverHijoSegunSubClave( T subclave ){
+        }
+
     public:
 
-    NodoInterno(){
+    NodoInterno<T>(){
         this->tamanioMaximoNodo=0;
         this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef>;
+        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
     }
 
+    Nodo* DevolverHijoSegunClave()
+
     ~NodoInterno(){}
-
-    bool InsertarNuevaSubClaveRef ( Key subclave,refAbloqueArbol );
-
-    Nodo*   DevolverHijoSegunClave( Key clave );
-
 
 }
