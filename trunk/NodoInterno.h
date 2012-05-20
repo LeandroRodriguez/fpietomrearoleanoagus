@@ -42,7 +42,8 @@ class NodoInterno<T>: public Nodo{
         this->ListaSubClaveRef= new list<SubClaveRef<T> >;
     }
 
-    Nodo* DevolverHijoSegunClave()
+    Nodo* DevolverHijoSegunClave(Key Clave){
+        }
 
     ~NodoInterno(){}
 
