@@ -54,22 +54,33 @@ class FechaHora:public InterfazSerializar {
 class Key:public InterfazSerializar{
 
     private:
-
     char* LineaFerroviaria;
-    FechaHora* FranjaHorariaDelSiniestro;
-    char* Falla;
-    char* Accidente;
+
     int   Formacion;
+
+    char* Falla;
+
+    char* Accidente;
+
+    FechaHora* FranjaHorariaDelSiniestro;
 
     public:
 
-    void* getSubClaveSegunDim( int dim )
+    void* getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
+        if (dim==0)return this->LineaFerroviaria;
+        if (dim==1)return this->Formacion;
+        if (dim==2)return this->Accidente;
+        if (dim==3)return this->Falla;
+        if (dim==4)return this->FranjaHorariaDelSiniestro;
+
+        return NULL;
+    }
 
     Bytes* Serializarse(){
         }
 
     void Hidratar(Bytes* CodigoBinario){
-    }
+        }
 
 
 
