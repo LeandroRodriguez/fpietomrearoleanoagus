@@ -64,12 +64,12 @@ unsigned long int NodoInterno::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->dimension);
     tamanioSerializado += sizeof(this->Ref1erNodo);
 
-	for (unsigned int i = 0;i < this->listIdRegistros.size(); i++){
+	/*for (unsigned int i = 0;i < this->listIdRegistros.size(); i++){
 		tamanioSerializado += sizeof(this->listIdRegistros[i]);
 		tamanioSerializado += sizeof(this->listNroBloque[i]);
 	}
 
-    list< SubClaveRef<T>  >* ListaSubClaveRef;
+    list< SubClaveRef<T>  >* ListaSubClaveRef;*/
 
 	return tamanioSerializado;
 }
