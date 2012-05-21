@@ -1,6 +1,6 @@
 #include "Controlador.h"
 
-Controlador::Controlador(){
+/*Controlador::Controlador(){
     //not implemented
     }
 
@@ -35,3 +35,4 @@ Controlador::ListarLineas(){
 Controlador::ListarAccidentes(){
     //not implemented
     }
+*/

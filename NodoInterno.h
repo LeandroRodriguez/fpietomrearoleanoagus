@@ -1,13 +1,13 @@
 #include <iostream>
 #include <list>
 #include "Nodo.h"
-#include "Key.h"
+#include "Key.cpp"
 
 template<class T>
 struct SubClaveRef<T>{
         T subclave;
         unsigned long int RefNodo;
-    }
+    };
 
 template<class T>
 class NodoInterno<T>: public Nodo{
@@ -47,4 +47,4 @@ class NodoInterno<T>: public Nodo{
 
     ~NodoInterno(){}
 
-}
+};
