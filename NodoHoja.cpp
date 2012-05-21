@@ -27,7 +27,7 @@ unsigned long int NodoHoja::getTamanioSerializado(){
 	return tamanioSerializado;
 }
 
-Bytes NodoHoja::serializarse()
+char* NodoHoja::serializarse()
 {
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
@@ -70,8 +70,7 @@ unsigned long int Nodo::hidratar(char* bytes){
 	unsigned int cur = 0;/*cur = cursor*/
 
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
-	cur += sizeof(this->CantElem);
-	
+	cur += sizeof(this->CantElem);	
 	
 	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
 	cur += sizeof(this->Altura);

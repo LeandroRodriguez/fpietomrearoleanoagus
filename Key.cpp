@@ -1,5 +1,7 @@
 #include <iostream>
+#include "ManejoArchivos/Bytes.h"
 
+//por ahora dejamos los structs, despues si no los usamos los volamos
 struct Horario {
         unsigned int hora;
         unsigned int minutos;
@@ -54,33 +56,90 @@ class FechaHora:public InterfazSerializar {
 class Key:public InterfazSerializar{
 
     private:
-    char* LineaFerroviaria;
+	char* LineaFerroviaria;
 
-    int   Formacion;
+	int   Formacion;
 
-    char* Falla;
+	char* Falla;
 
-    char* Accidente;
+	char* Accidente;
 
-    FechaHora* FranjaHorariaDelSiniestro;
+	char* FranjaHorariaDelSiniestro;
 
     public:
 
-    void* getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
-        if (dim==0)return this->LineaFerroviaria;
-        if (dim==1)return this->Formacion;
-        if (dim==2)return this->Accidente;
-        if (dim==3)return this->Falla;
-        if (dim==4)return this->FranjaHorariaDelSiniestro;
+	void* getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
+		if (dim==0)return this->LineaFerroviaria;
+		if (dim==1)return this->Formacion;
+		if (dim==2)return this->Accidente;
+		if (dim==3)return this->Falla;
+		if (dim==4)return this->FranjaHorariaDelSiniestro;
 
-        return NULL;
-    }
+		return NULL;
+	}
 
-    Bytes* Serializarse(){
-        }
+	Bytes* Serializarse(){
+    
+		unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
-    void Hidratar(Bytes* CodigoBinario){
-        }
+		char* str =(char*) malloc(tamanioTotal * sizeof(char));
+		unsigned int cur = 0;/*cur = cursor*/
+
+		memcpy(str + cur, &this->LineaFerroviaria , sizeof(this->LineaFerroviaria));
+		cur += sizeof(this->LineaFerroviaria);
+
+		memcpy(str + cur, &this->Formacion , sizeof(this->Formacion));
+		cur += sizeof(this->Formacion);
+
+		memcpy(str + cur, &this->Accidente , sizeof(this->Accidente));
+		cur += sizeof(this->Accidente);
+
+		memcpy(str + cur, &this->Falla , sizeof(this->Falla));
+		cur += sizeof(this->Falla);
+		
+		memcpy(str + cur, &this->FranjaHorariaDelSiniestro , sizeof(this->FranjaHorariaDelSiniestro));
+		cur += sizeof(this->FranjaHorariaDelSiniestro);
+		
+		
+		return Bytes(str);	
+	}
+
+	void Hidratar(Bytes* CodigoBinario){
+		unsigned int cur = 0;/*cur = cursor*/
+
+		memcpy(&this->LineaFerroviaria, bytes + cur, sizeof(this->LineaFerroviaria));
+		cur += sizeof(this->LineaFerroviaria);
+		
+		memcpy(&this->Formacion, bytes + cur, sizeof(this->Formacion));
+		cur += sizeof(this->Formacion);
+		
+		memcpy(&this->Accidente, bytes + cur, sizeof(this->Accidente));
+		cur += sizeof(this->Accidente);
+		
+		memcpy(&this->Falla, bytes + cur, sizeof(this->Falla));
+		cur += sizeof(this->Falla);
+		
+		memcpy(&this->Falla, bytes + cur, sizeof(this->Falla));
+		cur += sizeof(this->Falla);
+		
+		return cur;
+
+	}
+	
+	
+	unsigned long int NodoHoja::getTamanioSerializado(){
+
+		unsigned long int tamanioSerializado = 0;
+
+		tamanioSerializado += sizeof(this->LineaFerroviaria);
+		tamanioSerializado += sizeof(this->Formacion);
+		tamanioSerializado += sizeof(this->Falla);
+		tamanioSerializado += sizeof(this->Accidente);
+		tamanioSerializado += sizeof(this->FranjaHorariaDelSiniestro);
+		
+		return tamanioSerializado;
+	}
+
 
 
 
