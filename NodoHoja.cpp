@@ -96,6 +96,6 @@ unsigned long int Nodo::hidratar(char* bytes){
 		
 		itBloques++;
         }	
-	return cur;
+	return cur; 
 }
 
