@@ -11,10 +11,10 @@
 #include <unistd.h>
 
 #include "../Constantes.h"
-#include "Almacenamiento.h"
-#include "../Datos/Bytes.h"
-#include "../Datos/RegistroVariable.h"
-#include "../Datos/Bloque.h"
+//#include "Almacenamiento.h"
+#include "Bytes.h"
+#include "RegistroVariable.h"
+#include "Bloque.h"
 
 using namespace std;
 
@@ -38,7 +38,7 @@ public:
 
 	/*abro o creo los archivos*/
 	AlmacenamientoBloque(const string &pathDato,const string &pathLibres);
-	/*cierro ambos archivos*/	
+	/*cierro ambos archivos*/
 	virtual ~AlmacenamientoBloque();
 
 	void escribirBloque(const Bytes& dato, offset offsetBloque);

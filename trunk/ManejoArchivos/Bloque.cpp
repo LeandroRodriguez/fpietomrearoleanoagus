@@ -33,7 +33,7 @@ bool Bloque::agregarRegistro(RegistroVariable* registro) {
 		return false;
 	}
 	 */
-	
+
 	/*verifico que el registro no sea nulo, e inserto*/
 	if (registro != NULL) {
 		this->registros.push_back(registro);
@@ -49,9 +49,9 @@ bool Bloque::agregarRegistro(RegistroVariable* registro) {
 }
 
 /*nose que carajo sear esta cosa hardcodeada fea ni pa que sirve*/
-bool Bloque::agregarEspacioNulo() {
+/*bool Bloque::agregarEspacioNulo() {
 	return true;
-}
+}*/
 
 /*devuelve la tira de bytes del objeto serializado*/
 Bytes Bloque::serializarse() {
@@ -79,7 +79,7 @@ Bytes Bloque::serializarse() {
 
 	Bytes bytesNulos(stringNulo);
 	serializacion.agregarAlFinal(bytesNulos);
-	//creo un string con tantos 0 como espacio libre tenga, 
+	//creo un string con tantos 0 como espacio libre tenga,
 	//y lo agrego al final de mi serializacion
 
 	return serializacion;
@@ -105,13 +105,13 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 
 	while (seguir) {
 		/*int = atoi(string)*//*mas info http://www.cplusplus.com/reference/clibrary/cstdlib/atoi/ */
-		/*obtengo los bytes del bloque pasado desde (tamanioUsado + i * LONGITUD_CANT_BYTES * 2) hasta (LONGITUD_CANT_BYTES) 
+		/*obtengo los bytes del bloque pasado desde (tamanioUsado + i * LONGITUD_CANT_BYTES * 2) hasta (LONGITUD_CANT_BYTES)
 		 *eso lo paso a string y le agrego el caracter de fin de linea
-		 *este string es el que convierto en un int con atoi	
+		 *este string es el que convierto en un int con atoi
 
 		Como tamanioUsado=0 y i=0 en la primera levanto los primeros 8 bytes.*/
 		cantBytes datoUID = atoi(bytesBloque.getSubBytes(tamanioUsado + i * LONGITUD_CANT_BYTES * 2, LONGITUD_CANT_BYTES).toString().c_str());
-		/*si pasoCero(o sea, ya paso el bloque con UID=0) y no levante bytes, corto*/		
+		/*si pasoCero(o sea, ya paso el bloque con UID=0) y no levante bytes, corto*/
 		if ((datoUID == 0)&&(pasoCero))
 		{
 			i--; /* vuelvo 8 bytes atras*/
@@ -128,12 +128,12 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 		/*levanto a partir de los bytes del paso anterior (primer ciclo) segun tamanioDato, y ahora no lo convierto en int*/
 		Bytes dato = bytesBloque.getSubBytes(LONGITUD_CANT_BYTES * 2 + i * LONGITUD_CANT_BYTES * 2 + tamanioUsado,tamanioDato);
 		/*Aca es donde recupero el dato en formato de Bytes*/
-		
+
 		/*aumento i para desplazarme sobre la tira de BytesBloques*/
 		i++;
 
 		//cout << dato.toString() << endl;
-		
+
 		/*Hidrato mi registro variable con la cadena de bytes del dato*/
 		RegistroVariable* registro = new RegistroVariable(dato);
 		registro->setNRegistro(datoUID);
@@ -142,7 +142,7 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 
 		tamanioUsado = tamanioUsado + tamanioDato;
 		/*Voy aumentando el tamanio usado del bloque*/
-		
+
 		/*si paso el dato UniqueId de valor 0 seteo esta variable en true*/
 		if (datoUID == 0) pasoCero=true;
 	}

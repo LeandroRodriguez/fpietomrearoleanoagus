@@ -14,9 +14,9 @@
 #include "exception"
 #include "iostream"
 
-#include "Arbol/Nodo.h"
-#include "Arbol/NodoHoja.h"
-#include "Arbol/NodoInterno.h"
+#include "../Nodo.h"
+#include "../NodoHoja.h"
+#include "../NodoInterno.h"
 #include "../Constantes.h"
 
 using namespace std;
@@ -33,7 +33,7 @@ protected:
 public:
 	/*creo o abro el archivo al final, para editarlo*/
 	PersistenciaArbol(string nombreArchivo);
-	/*cierro el archivo, si esta abierto*/	
+	/*cierro el archivo, si esta abierto*/
 	virtual ~PersistenciaArbol();
 
 	/*guardo un nodo nuevo. Si pudo insertar retorno el nro de nodo*/

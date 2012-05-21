@@ -45,15 +45,15 @@ AlmacenamientoBloque::AlmacenamientoBloque(const string &pathDato,const string &
 		this->numeroBloque = 0;
 		this->cantidadBloques = 0;
 
-		
+
 		/*Creo bloque 0 en donde, por ahora, guardare un registro conteniendo el ultimo UID*/
 		Bloque bloqueUIDs(LONGITUD_BLOQUE_DATA);
-		
+
 		/*Creo un registro donde ira solo el ultimo UID*/
 		Bytes bytesUID("0"); //deberia castear el inicialUID a string
 		RegistroVariable rUID(bytesUID);
 		rUID.setNRegistro(this->UID);
-		
+
 
 		/*Agrego el registro al bloque*/
 		bloqueUIDs.agregarRegistro(&rUID);
@@ -64,7 +64,7 @@ AlmacenamientoBloque::AlmacenamientoBloque(const string &pathDato,const string &
 		cout << bloqueIUCs.serializarse().toString() << endl;
 		*/
 		/*escribo el bloque en el archivo*/
-		escribirBloque(bloqueIUCs.serializarse(), 0);
+		escribirBloque(bloqueUIDs.serializarse(), 0);
 	}
 	else
 	{
@@ -136,19 +136,19 @@ void AlmacenamientoBloque::agregarRegistro(RegistroVariable* rv){
 
 	/*busco un bloque creado con el espacio disponible, si es que hay*/
 	offset nBloqueDisponible = getNumeroBloqueDisponible(bytesNecesitados);
-	/*seteo el nro de reg correcto*/	
+	/*seteo el nro de reg correcto*/
 	rv->setNRegistro(ultimo+1);
 	if (nBloqueDisponible == 0)
-	{	
+	{
 		/*no hay bloque disponible para el tamanio solicitado, entonces creo uno nuevo*/
 		/*creo el bloque nuevo*/
 		Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
 		bloqueTemporal.agregarRegistro(rv);
 		/*me fijo la cant de bloques que tengo y la multiplico por la long de los bloques, consiguiendo el offset de mi nuevo bloque. Lo escribo*/
 		escribirBloque(bloqueTemporal.serializarse(), (this->getUltimoBloque())*LONGITUD_BLOQUE_DATA);
-		/*actualizo en el bloque 0 el valor del UID del ultimo reg. (el 1 es porque solo cree 1 nuevo bloque)*/		
+		/*actualizo en el bloque 0 el valor del UID del ultimo reg. (el 1 es porque solo cree 1 nuevo bloque)*/
 		actualizarBloqueUIDs(1);
-		
+
 		/*obtengo el espacio libre que quedo en mi nuevo bloque y escribo en el archivo de espacios libres*/
 		stringstream ssEspacioLibre;
 		ssEspacioLibre << bloqueTemporal.getEspacioLibre();
@@ -170,10 +170,10 @@ void AlmacenamientoBloque::agregarRegistro(RegistroVariable* rv){
 		bloqueTemporal.hidratarse(bloqueBytes);
 		/*agrego el nuevo registro al bloque*/
 		bloqueTemporal.agregarRegistro(rv);
-		
+
 		/*sobreescribo en el archivo el bloque modificado, en la posicion correspondiente*/
 		escribirBloque(bloqueTemporal.serializarse(), (nBloqueDisponible)*LONGITUD_BLOQUE_DATA);
-		/*actualizo el ultimo UID guardado en el bloque 0*/		
+		/*actualizo el ultimo UID guardado en el bloque 0*/
 		actualizarBloqueUIDs(1);
 		/*obtengo el espacio libre que quedo en mi bloque modificado y actualizo el archivo de espacios libres*/
 		stringstream ssEspacioLibre;
@@ -227,7 +227,7 @@ Bytes AlmacenamientoBloque::recuperarBloque(offset nBloque){
 
 		/*levanto el bloque*/
 		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
-		/*paso la lectura a stream y borro el buffer auxiliar*/		
+		/*paso la lectura a stream y borro el buffer auxiliar*/
 		stream.append(buffer, LONGITUD_BLOQUE_DATA);
 		delete[] buffer;
 	}
@@ -254,7 +254,7 @@ Bytes AlmacenamientoBloque::recuperarRegistro(offset nBloque, uint32_t UID){
 
 		/*levanto el bloque*/
 		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
-		/*paso la lectura a stream y borro el buffer auxiliar*/			
+		/*paso la lectura a stream y borro el buffer auxiliar*/
 		stream.append(buffer, LONGITUD_BLOQUE_DATA);
 		delete[] buffer;
 	}
@@ -298,8 +298,8 @@ offset AlmacenamientoBloque::getUltimoBloque(){
 
 /*devuelvo el ultimo UID*/
 offset AlmacenamientoBloque::getUltimoUID(){
-	/*En el bloque 0 se guardo el ultimo UID*/	
-	offset offset = 0; 
+	/*En el bloque 0 se guardo el ultimo UID*/
+	offset offset = 0;
 	Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
 
 	ifstream almacenamientoEntrada;
@@ -386,7 +386,7 @@ void AlmacenamientoBloque::actualizarEspacioLibre(offset nBloqueDisponible, cant
 		}
 	}
 	/*limpio el flag de error de eof y cierro*/
-	file.clear(); 
+	file.clear();
 	file.close();
 
 	this->aLibres.close();
