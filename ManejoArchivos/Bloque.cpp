@@ -7,7 +7,7 @@
 #include "Bloque.h"
 
 /*constructor*/
-Bloque::Bloque(cantBytes tamanio) {
+Bloque::Bloque(const cantBytes& tamanio) {
 	this->tamanio = tamanio;
 	this->usados = 0;
 	/*el nroBloque se lo setean desde afuera*/
