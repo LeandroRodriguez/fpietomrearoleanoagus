@@ -30,7 +30,7 @@ public:
 	uint32 nBloque; /*nro del bloque(unsigned int)*/
 	uint32_t IUC; /*nose*/
 
-	Bloque(cantBytes tamanio); /*constructor*/
+	Bloque(const cantBytes& tamanio); /*constructor*/
 	virtual ~Bloque();/*destructor*/
 
 	/*se devuelve a si mismo, como cadena de clase Bytes */
@@ -54,7 +54,7 @@ public:
 	/*NO se le pasa ningun parametro, y no esta implementada....HUMO */
 	/*Solucion: dado el numero de registro, lo modifica y le setea un parametro en false, asi al serializar, no lo guarda*/
 	bool eliminarRegistro();
-	
+
 	/*Devuelve el tamanio del bloque serializado.O sea, el tamanio de construccion, ya que los bloques son fijos*/
 	cantBytes getTamanioSerializado();
 
