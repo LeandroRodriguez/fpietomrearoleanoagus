@@ -8,11 +8,21 @@ unsigned long int NodoHoja::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->Altura);
 	tamanioSerializado += sizeof(this->dimension);
 	tamanioSerializado += sizeof(this->proximaHoja);
+	
+	this->listIdRegistros::iterator itRegistros;
+	itRegistros= this->listIdRegistros.begin();
 
-	for (unsigned int i = 0;i < this->listIdRegistros.size(); i++){
-		tamanioSerializado += sizeof(this->listIdRegistros[i]);
-		tamanioSerializado += sizeof(this->listNroBloque[i]);
-	}
+	for(itRegistros;itRegistros!=this->listIdRegistros.end();itRegistros++){
+		tamanioSerializado += sizeof(  *itRegistros );
+        }
+	
+	
+	this->listNroBloque::iterator itBloques;
+	itBloques= this->listNroBloque.begin();
+
+	for(itBloques;itBloques!=this->listNroBloque.end();itBloques++){
+		tamanioSerializado += sizeof(  *itBloques );
+        }
 
 	return tamanioSerializado;
 }
@@ -35,15 +45,22 @@ Bytes NodoHoja::serializarse()
 
 	memcpy(str + cur, &this->proximaHoja , sizeof(this->proximaHoja));
 	cur += sizeof(this->proximaHoja);
+	
+	this->listIdRegistros::iterator itRegistros;
+	itRegistros= this->listIdRegistros.begin();
+	
+	this->listNroBloque::iterator itBloques;
+	itBloques= this->listNroBloque.begin();
 
-
-	for (unsigned int i = 0;i < this->listIdRegistros.size(); i++){
-		memcpy(str + cur, this->listIdRegistros[i] , sizeof(this->listIdRegistros[i]));
-		cur += sizeof(this->listIdRegistros[i]);
-
-		memcpy(str + cur, this->listNroBloque[i] , sizeof(this->listNroBloque[i]));
-		cur += sizeof(this->listNroBloque[i]);
-	}
+	for(itRegistros;itRegistros!=this->listIdRegistros.end();itRegistros++){
+		memcpy(str + cur, *itRegistros , sizeof(*itRegistros));
+		cur += sizeof(*itRegistros);
+		
+		memcpy(str + cur, *itBloques , sizeof(*itBloques));
+		cur += sizeof(*itBloques);	
+		
+		itBloques++;
+        }
 
 	return str;
 }
@@ -64,14 +81,22 @@ unsigned long int Nodo::hidratar(char* bytes){
 	
 	memcpy(&this->proximaHoja, bytes + cur, sizeof(this->proximaHoja));
 	cur += sizeof(this->proximaHoja);
+
+	this->listIdRegistros::iterator itRegistros;
+	itRegistros= this->listIdRegistros.begin();
 	
-	for (unsigned int i = 0;i < this->listIdRegistros.size(); i++){
-		memcpy(&this->listIdRegistros[i], bytes + cur  , sizeof(this->listIdRegistros[i]));
-		cur += sizeof(this->listIdRegistros[i]);
+	this->listNroBloque::iterator itBloques;
+	itBloques= this->listNroBloque.begin();
+
+	for(itRegistros;itRegistros!=this->listIdRegistros.end();itRegistros++){
+		memcpy(*itRegistros, bytes + cur  , sizeof(*itRegistros));
+		cur += sizeof(*itRegistros);
 		
-		memcpy(&this->listNroBloque[i], bytes + cur  , sizeof(this->listNroBloque[i]));
-		cur += sizeof(this->listNroBloque[i]);		
-	}	
+		memcpy(*itBloques, bytes + cur  , sizeof(*itBloques));
+		cur += sizeof(*itBloques);
+		
+		itBloques++;
+        }	
 	return cur;
 }
 
