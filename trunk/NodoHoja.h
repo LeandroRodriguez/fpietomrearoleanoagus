@@ -17,7 +17,7 @@ class NodoHoja: public Nodo{
 
     public:
 
-    NodoHoja(Dimension dimension, int refBloque){
+    NodoHoja(int dimension, int refBloque){
     //me pasan un numero de dimension. despues tendre que matchearlo con una de las dimensiones del accidente
     this->tamanioMaximoNodo=0;
     this->CantElem=0;
