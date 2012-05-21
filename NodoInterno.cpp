@@ -35,7 +35,7 @@ void NodoInterno::Inicializar( Key subclave ,unsigned long int ref ){
 
     }
 
-/*OK*/
+
 unsigned long int NodoInterno::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
@@ -44,6 +44,7 @@ unsigned long int NodoInterno::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->Altura);
 	tamanioSerializado += sizeof(this->dimension);
     tamanioSerializado += sizeof(this->Ref1erNodo);
+    tamanioSerializado += sizeof(char) * strlen(typeid(T));
 
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
     /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
@@ -52,7 +53,15 @@ unsigned long int NodoInterno::getTamanioSerializado(){
     it= this->ListaSubClaveRef.begin();
 
     for(it;it!=this->ListaSubClaveRef.end();it++){
-        tamanioSerializado += sizeof(  *it );
+
+        T subC = it->subclave;
+        int refNodo = it->RefNodo;
+
+        /*considerar longitud para char,pero no en int  */
+
+
+
+
         }
 	return tamanioSerializado;
 }
@@ -83,14 +92,14 @@ Bytes NodoInterno::Serializarse(){
 
 	/*aca guardo el tipo*/
     memcpy(str + cur, &typeid(T).name , strlen (typeid(T).name));
-	cur += sizeof(this->RefNodo);
+	cur += strlen(typeid(T));
 
     /*tengo que guardar todos los elementos de la lista */
     this->ListaSubClaveRef::iterator it;
 
     it= this->ListaSubClaveRef.begin();
 
-    /*A continuacion, la muerte de la informatica =) */
+    /*NO : usar template specialization , para aclarar explicitamente el caso de char*/
     for(it;it!=this->ListaSubClaveRef.end();it++){
 
         T subC = it->subclave;
@@ -131,7 +140,17 @@ unsigned long int NodoInterno::Hidratar(char* bytes){
 	memcpy(&this->dimension, bytes + cur, sizeof(this->dimension));
 	cur += sizeof(this->dimension);
 
-	/*  */
+
+	this->listIdRegistros::iterator itRegistros;
+	itRegistros= this->listIdRegistros.begin();
+
+	this-> ::iterator it;
+	i= this-> .begin();
+
+	for(){
+
+        }
+
 
 	return cur;
 }
