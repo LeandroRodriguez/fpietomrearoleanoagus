@@ -1,5 +1,8 @@
+#ifndef NODO_H_INCLUDED
+#define NODO_H_INCLUDED
+
 #include <iostream>
-#include "InterfazSerializar.cpp"
+#include "InterfazSerializar.h"
 
 class Nodo:public InterfazSerializar {
 
@@ -18,3 +21,4 @@ class Nodo:public InterfazSerializar {
 
 
 };
+#endif //
