@@ -33,11 +33,6 @@ class Key : public InterfazSerializar{
 
 		unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
-
-	}
-
-    void Hidratar(Bytes* CodigoBinario){
-
 		char* str =(char*) malloc(tamanioTotal * sizeof(char));
 		unsigned int cur = 0;/*cur = cursor*/
 
@@ -52,12 +47,34 @@ class Key : public InterfazSerializar{
 
 		memcpy(str + cur, &this->Falla , sizeof(this->Falla));
 		cur += sizeof(this->Falla);
-
+		
 		memcpy(str + cur, &this->FranjaHorariaDelSiniestro , sizeof(this->FranjaHorariaDelSiniestro));
+		cur += sizeof(this->FranjaHorariaDelSiniestro);		
+		
+		return Bytes(str);	
+	}
+
+	void Hidratar(Bytes* CodigoBinario){
+
+		unsigned int cur = 0;/*cur = cursor*/
+
+		memcpy(&this->LineaFerroviaria, bytes + cur, sizeof(this->LineaFerroviaria));
+		cur += sizeof(this->LineaFerroviaria);
+		
+		memcpy(&this->Formacion, bytes + cur, sizeof(this->Formacion));
+		cur += sizeof(this->Formacion);
+		
+		memcpy(&this->Accidente, bytes + cur, sizeof(this->Accidente));
+		cur += sizeof(this->Accidente);
+		
+		memcpy(&this->Falla, bytes + cur, sizeof(this->Falla));
+		cur += sizeof(this->Falla);
+		
+		memcpy(&this->FranjaHorariaDelSiniestro, bytes + cur, sizeof(this->FranjaHorariaDelSiniestro));
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
+		
+		return cur;
 
-
-		return Bytes(str);
 	}
 
 	unsigned long int getTamanioSerializado(){
