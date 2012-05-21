@@ -2,6 +2,7 @@
 #include <list>
 #include "Nodo.h"
 #include "Constantes.h"
+#include <malloc.h>
 
 class NodoHoja: public Nodo{
 

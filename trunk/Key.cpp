@@ -1,5 +1,6 @@
 #include <iostream>
 #include "ManejoArchivos/Bytes.h"
+#include <malloc.h>
 
 class Key : public InterfazSerializar{
 
@@ -69,8 +70,4 @@ class Key : public InterfazSerializar{
 
 		return tamanioSerializado;
 	}
-
-
-
-
 };
