@@ -28,4 +28,9 @@ typedef unsigned long int tamanioBloque;
 #define ID_RAIZ  1
 
 
+enum Resultado {
+	RES_OK = 0, RES_DUPLICADO, RES_INEXISTENTE
+};
+
+
 #endif /* CONSTANTES_H_ */
