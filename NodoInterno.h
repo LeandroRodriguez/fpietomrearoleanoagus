@@ -6,7 +6,7 @@
 template<class T>
 struct SubClaveRef<T>{
         T subclave;
-        unsigned long int RefNodo;
+        int RefNodo;
     };
 
 template<class T>
@@ -22,11 +22,11 @@ class NodoInterno<T>: public Nodo{
 
     private:
 
-    unsigned long int Ref1erNodo;
+    int Ref1erNodo;
 
     list< SubClaveRef<T> >* ListaSubClaveRef;
 
-    void Inicializar( Key subclave ,unsigned long int ref );
+    void Inicializar( Key subclave ,int ref );
 
     bool InsertarNuevaSubClaveRef ( T subclave,refAbloqueArbol ){
         }
