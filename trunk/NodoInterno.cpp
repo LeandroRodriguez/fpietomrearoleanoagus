@@ -1,13 +1,6 @@
 #include <iostream>
 #include "NodoInterno.h"
 
-Bytes* NodoInterno:: Serializarse(){
-
-
-
-
-    };
-
 Bytes* NodoInterno::Nodo(Bytes CodigoBinario){
 
 
@@ -15,13 +8,6 @@ Bytes* NodoInterno::Nodo(Bytes CodigoBinario){
     };
 
 Bytes* NodoInterno::Nodo(Key subclave ,unsigned long int ref){
-
-
-
-    };
-
-Bytes* NodoInterno::Hidratar(Bytes CodigoBinario){
-
 
 
 
@@ -55,6 +41,20 @@ void NodoInterno::Inicializar( Key subclave ,unsigned long int ref ){
 
     }
 
+Bytes* NodoInterno::Hidratar(Bytes CodigoBinario){
+
+
+
+
+    };
+
+Bytes* NodoInterno:: Serializarse(){
+
+
+
+
+    };
+
 unsigned long int NodoInterno::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
@@ -64,12 +64,15 @@ unsigned long int NodoInterno::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->dimension);
     tamanioSerializado += sizeof(this->Ref1erNodo);
 
-	/*for (unsigned int i = 0;i < this->listIdRegistros.size(); i++){
-		tamanioSerializado += sizeof(this->listIdRegistros[i]);
-		tamanioSerializado += sizeof(this->listNroBloque[i]);
-	}
+    /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
+    /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
+    this->ListaSubClaveRef::iterator it;
 
-    list< SubClaveRef<T>  >* ListaSubClaveRef;*/
+    it= this->ListaSubClaveRef.begin();
+
+    for(it;it!=this->ListaSubClaveRef.end();it++){
+        tamanioSerializado += sizeof(  *it );
+        }
 
 	return tamanioSerializado;
 }
