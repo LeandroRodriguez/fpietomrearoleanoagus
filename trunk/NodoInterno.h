@@ -1,6 +1,6 @@
 #include <iostream>
+#include <list>
 #include "Nodo.h"
-
 #include "Key.h"
 
 template<class T>
@@ -24,7 +24,7 @@ class NodoInterno<T>: public Nodo{
 
     unsigned long int Ref1erNodo;
 
-    list< SubClaveRef<T>  >* ListaSubClaveRef;
+    list< SubClaveRef<T> >* ListaSubClaveRef;
 
     void Inicializar( Key subclave ,unsigned long int ref );
 
