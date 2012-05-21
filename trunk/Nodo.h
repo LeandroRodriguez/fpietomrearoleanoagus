@@ -1,12 +1,13 @@
 #include <iostream>
+#include "InterfazSerializar.cpp"
 
 class Nodo:public InterfazSerializar {
 
     protected: /*asi al heredar los puede cambiar, si lo pongo private kb */
 
-    unsigned int CantElem
-    unsigned int Altura
-    int  dimension
+    unsigned int CantElem;
+    unsigned int Altura;
+    int  dimension;
     unsigned int  tamanioMaximoNodo;
     unsigned int  tamanioUsado;
     unsigned int RefBloque;
@@ -16,4 +17,4 @@ class Nodo:public InterfazSerializar {
     virtual ~Nodo();
 
 
-}
+};

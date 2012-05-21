@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ManejoArchivos/Bytes.h"
 #include <malloc.h>
+#include "InterfazSerializar.cpp"
 
 class Key : public InterfazSerializar{
 
@@ -17,6 +18,7 @@ class Key : public InterfazSerializar{
 
     public:
 
+	//ESTE METODO ES VOID NO PUEDE DEVOLVER INTS, CHARS*, ETC
 	void* getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
 		if (dim==0)return this->LineaFerroviaria;
 		if (dim==1)return this->Formacion;

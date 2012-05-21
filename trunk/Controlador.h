@@ -6,13 +6,13 @@ using namespace std;
 class Controlador{
     public:
     Controlador();
-    ListarTenesPorFalla(falla);
+    /*ListarTenesPorFalla(falla);
     ListarTenesPorAccidente(accidente);
     ListarFallasPorFormacion(formacion);
     ListarAccidentesPorFormacion(formacion);
     ListarFallas();
     ListarForcaciones();
     ListarLineas();
-    ListarAccidentes();
+    ListarAccidentes();*/
 };
 #endif
