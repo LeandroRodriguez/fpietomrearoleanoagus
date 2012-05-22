@@ -1,35 +1,35 @@
 #include <iostream>
 #include "NodoInterno.h"
 
-Bytes* NodoInterno::Nodo(Bytes CodigoBinario){
+void NodoInterno::Nodo(Bytes* CodigoBinario){
 
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
 
+    this->Hidratar(CodigoBinario->toString() );
 
     };
 
-Bytes* NodoInterno::Nodo(Key subclave ,unsigned long int ref){
+void NodoInterno::Nodo(int ref1,T subclave ,int ref2){
 
+        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
 
+        this->Inicializar(ref1,T,ref2);
 
     };
 
 unsigned long int NodoInterno::~NodoInterno(){
-
-
-
     };
 
 bool NodoInterno::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
 
-        SubClaveRef* item = new SubClaveRef<T>;
-
-        item->subclave = subcl;
-        item->RefNodo = RefNod;
-
-        mylist.push_back (myint)
+        SubClaveRef* item = new SubClaveRef<T>(subclave,refAbloqueArbol);
 
         this->ListaSubClaveRef->push_back(item);
         this->ListaSubClaveRef->sort();
+
+        this->CantElem=(this->CantElem)+1;
 
 
     };
@@ -38,9 +38,7 @@ void NodoInterno::Inicializar( int ref1 ,T subclave ,int ref2 ){
 
         this->Ref1erNodo=ref1;
 
-        SubClaveRef* NuevaDupla= new SubClaveRef();
-        NuevaDupla.RefNodo=ref;
-        NuevaDupla.subClave= subclave;
+        SubClaveRef* NuevaDupla= new SubClaveRef(subclave,ref2);
 
         this->ListaSubClaveRef->push_back(NuevaDupla);
 
