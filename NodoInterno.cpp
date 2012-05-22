@@ -19,7 +19,18 @@ unsigned long int NodoInterno<T>::~NodoInterno(){
 
     };
 
-bool NodoInterno<T>::InsertarNuevaSubClaveRef ( Key subclave,refAbloqueArbol ){
+bool NodoInterno<T>::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
+
+        SubClaveRef* item = new SubClaveRef<T>;
+
+        item->subclave = subcl;
+        item->RefNodo = RefNod;
+
+        mylist.push_back (myint)
+
+        this->ListaSubClaveRef->push_back(item);
+
+
 
 
 
@@ -194,6 +205,7 @@ template<> Bytes NodoInterno<char*>::Serializarse{
 }
 
 
+/*para tipos comunes  */
 void NodoInterno<T>::Hidratar(char* bytes){
 
 	unsigned int cur = 0;/*cur = cursor*/
@@ -211,17 +223,34 @@ void NodoInterno<T>::Hidratar(char* bytes){
 	memcpy(str + cur, &this->RefNodo , sizeof(this->RefNodo));
 	cur += sizeof(this->RefNodo);
 
+    while(cur < strlen(bytes) ){
 
-	this->listIdRegistros::iterator itRegistros;
-	itRegistros= this->listIdRegistros.begin();
+        T subcl;
 
-	this-> ::iterator it;
-	i= this-> .begin();
+        memcpy(&subcl, bytes + cur  , sizeof(T) );
+        cur += sizeof(T);
 
-	for(){
+        int RefNod;
 
-        }
+        memcpy(&RefNod, bytes + cur  , sizeof(int) );
+        cur += sizeof(int);
+
+        this->InsertarNuevaSubClaveRef( subcl,RefNod);
 
 
-	return cur;
+
+    }
 }
+
+template<> void NodoInterno<char*>::Hidratar(char* bytes){
+
+
+
+    while(cur < strlen(bytes) ){
+
+        int longitud =0;
+
+        memcpy(longitud, bytes + cur  , sizeof(int));
+        cur += sizeof(int);
+        }
+    }

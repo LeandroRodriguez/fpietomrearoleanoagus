@@ -5,9 +5,16 @@
 #include "Key.cpp"
 
 template<class T>
-struct SubClaveRef<T>{
+class SubClaveRef<T>{
+    public
         T subclave;
         int RefNodo;
+
+    bool SubClaveRef<t>::operator< (const SubClaveRef<T> ){
+        return ( this->subclave<
+
+        }
+
     };
 
 template<class T>
@@ -25,7 +32,7 @@ class NodoInterno<T>: public Nodo{
 
     int Ref1erNodo;
 
-    list< SubClaveRef<T> >* ListaSubClaveRef;
+    list< SubClaveRef<T>* >* ListaSubClaveRef;
 
     void Inicializar( Key subclave ,int ref );
 
@@ -39,7 +46,7 @@ class NodoInterno<T>: public Nodo{
 
     void Hidratar(char* cadena);
 
-    unsigned long int Hidratar(char* bytes);
+    void Hidratar(char* bytes);
 
     NodoInterno<T>(){
         this->tamanioMaximoNodo=0;

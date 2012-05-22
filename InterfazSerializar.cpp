@@ -9,5 +9,6 @@ class InterfazSerializar{
 
         virtual unsigned long int getTamanioSerializado() = 0;
 
+
         virtual ~InterfazSerializar(){}
 };
