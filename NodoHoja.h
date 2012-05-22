@@ -14,8 +14,8 @@ class NodoHoja: public Nodo{
     //Atributos de clase madre Nodo, se heredan como privados
 
     private:
-    list<int> listIdRegistros;
-    list<int> listNroBloque;
+    list<int>* listIdRegistros;
+    list<int>* listNroBloque;
     int proximaHoja;
     
     Key* cargarDato(offset idRegistro, offset nroBloque);
@@ -29,7 +29,7 @@ class NodoHoja: public Nodo{
 
     unsigned long int getTamanioSerializado();
     char* serializarse();
-    unsigned long int hidratar(char* bytes);
+    void Hidratar(char* bytes);
 
 };
 
