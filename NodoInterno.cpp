@@ -40,7 +40,7 @@ void NodoInterno<T>::Inicializar( int ref1 ,T subclave ,int ref2 ){
 
         SubClaveRef* NuevaDupla= new SubClaveRef();
         NuevaDupla.RefNodo=ref;
-        NuevaDupla.SubClave= subclave;
+        NuevaDupla.subClave= subclave;
 
         this->ListaSubClaveRef->push_back(NuevaDupla);
 
@@ -246,11 +246,42 @@ template<> void NodoInterno<char*>::Hidratar(char* bytes){
 
 
 
+ 	unsigned int cur = 0;/*cur = cursor*/
+
+	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
+	cur += sizeof(this->CantElem);
+
+
+	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
+	cur += sizeof(this->Altura);
+
+	memcpy(&this->dimension, bytes + cur, sizeof(this->dimension));
+	cur += sizeof(this->dimension);
+
+	memcpy(str + cur, &this->RefNodo , sizeof(this->RefNodo));
+	cur += sizeof(this->RefNodo);
+
     while(cur < strlen(bytes) ){
 
-        int longitud =0;
+        int longitud=0;
 
-        memcpy(longitud, bytes + cur  , sizeof(int));
+        memcpy(&longitud, bytes + cur  , sizeof(int) );
         cur += sizeof(int);
-        }
+
+        char* subclave = new char[longitud];
+
+        memcpy(subclave,bytes+longitud,longitud);
+        cur += longitud;
+
+
+        int RefNod=0;
+
+        memcpy(&RefNod, bytes + cur  , sizeof(int) );
+        cur += sizeof(int);
+
+        this->InsertarNuevaSubClaveRef( subclave, RefNod);
+
+
+
     }
+}
