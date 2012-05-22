@@ -7,6 +7,9 @@ RegistroVariable::RegistroVariable(const Bytes& dato) {
 	this->vivo = true;
 }
 
+RegistroVariable::RegistroVariable() {
+}
+
 RegistroVariable::~RegistroVariable() {
 
 }
@@ -72,7 +75,7 @@ void RegistroVariable::hidratarse(const Bytes& cadena) {
 	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, 2 * LONGITUD_CANT_BYTES).toString().c_str());
 	//no entiendo por que toma 2* LONGITUD_CANT_BYTES. deberia ser LONGITUD_CANT_BYTES
 	//tomo los segundos LONGITUD_CANT_BYTES bytes para el tamanioregitsro
-	
+
 	this->setDato(cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,tamanioRegistro));
 	this->tamanioDato = tamanioRegistro;
 }

@@ -19,6 +19,7 @@ protected:
 
 public:
 	RegistroVariable(const Bytes& dato);
+	RegistroVariable();
 	virtual ~RegistroVariable();
 
 	void setDato(const Bytes& dato);

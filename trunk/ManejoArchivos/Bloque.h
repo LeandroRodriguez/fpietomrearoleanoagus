@@ -31,6 +31,7 @@ public:
 	uint32_t IUC; /*nose*/
 
 	Bloque(const cantBytes& tamanio); /*constructor*/
+	Bloque();
 	virtual ~Bloque();/*destructor*/
 
 	/*se devuelve a si mismo, como cadena de clase Bytes */
