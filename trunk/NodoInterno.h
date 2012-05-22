@@ -10,10 +10,17 @@ class SubClaveRef<T>{
         T subclave;
         int RefNodo;
 
-    bool SubClaveRef<t>::operator< (const SubClaveRef<T> ){
-        return ( this->subclave<
+    bool SubClaveRef<T>::operator< (const SubClaveRef<T> ){
 
-        }
+        return ( this->subclave < SubClaveRef.subclave );
+
+        };
+
+    SubClaveRef<T>(){
+    };
+
+    ~SubClaveRef(){
+    };
 
     };
 

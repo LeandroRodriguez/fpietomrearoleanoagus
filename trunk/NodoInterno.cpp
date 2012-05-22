@@ -29,16 +29,16 @@ bool NodoInterno<T>::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol )
         mylist.push_back (myint)
 
         this->ListaSubClaveRef->push_back(item);
-
-
-
+        this->ListaSubClaveRef->sort();
 
 
     };
 
-void NodoInterno<T>::Inicializar( Key subclave ,unsigned long int ref ){
+void NodoInterno<T>::Inicializar( int ref1 ,T subclave ,int ref2 ){
 
-        SubClaveRef NuevaDupla;
+        this->Ref1erNodo=ref1;
+
+        SubClaveRef* NuevaDupla= new SubClaveRef();
         NuevaDupla.RefNodo=ref;
         NuevaDupla.SubClave= subclave;
 
