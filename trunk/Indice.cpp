@@ -2,7 +2,7 @@
 
 Indice::Indice(){
 	this->persistencia = NULL;
-	this->arbol = NULL;;
+	/*this->arbol = NULL;*/
 }
 
 Indice::Indice(string nombreArchivo) {
@@ -11,7 +11,7 @@ Indice::Indice(string nombreArchivo) {
 
 	this->persistencia = new PersistenciaArbol(aux);
 
-	this->arbol = new Arbol(this->persistencia);
+	/*this->arbol = new Arbol(this->persistencia);*/
 
 	//la metadata es la cantidad de elementos del arbol
 	if (!this->persistencia->isVacio()){
@@ -25,24 +25,24 @@ Indice::Indice(string nombreArchivo) {
 }
 
 Indice::~Indice() {
-	delete (this->arbol);
+	/*delete (this->arbol);*/
 	delete (this->persistencia);
 }
 
 offset Indice::buscar(Key* dato){
 	Resultado resul = RES_OK;
-	return this->arbol->buscar(dato, resul);
+	/*return this->arbol->buscar(dato, resul);*/
 }
 
 Resultado Indice::agregarDato(offset nroBloque, offset nroRegistro, Key* dato){
 	//agrego al arbol
-	Resultado res = this->arbol->insertar(nroBloque,  nroRegistro, dato);
+	/*Resultado res = this->arbol->insertar(nroBloque,  nroRegistro, dato);*/
 
 	//actualizo metadata
 	char* ser = this->serializarMetadata();
 	this->persistencia->cargarMetaDatos(ser,this->getTamanioSerializado());
 	free (ser);
-    return res;
+    return ser;
 }
 
 void Indice::imprimir(){
