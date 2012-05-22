@@ -6,7 +6,7 @@
 
 template<class T>
 class SubClaveRef<T>{
-    public
+    public:
         T subclave;
         int RefNodo;
 
@@ -19,7 +19,7 @@ class SubClaveRef<T>{
     SubClaveRef<T>(){
     };
 
-    ~SubClaveRef(){
+    ~SubClaveRef<T>(){
     };
 
     };
@@ -52,8 +52,6 @@ class NodoInterno<T>: public Nodo{
     Bytes Serializarse();
 
     void Hidratar(char* cadena);
-
-    void Hidratar(char* bytes);
 
     NodoInterno<T>(){
         this->tamanioMaximoNodo=0;

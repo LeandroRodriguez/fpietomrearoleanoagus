@@ -1,3 +1,6 @@
+#ifndef NODOHOJA_H_INCLUDED
+#define NODOHOJA_H_INCLUDED
+
 #include <iostream>
 #include <list>
 #include "Nodo.h"
@@ -25,3 +28,5 @@ class NodoHoja: public Nodo{
     unsigned long int hidratar(char* bytes);
 
 };
+
+#endif
