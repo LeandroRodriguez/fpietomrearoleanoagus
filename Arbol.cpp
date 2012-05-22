@@ -15,13 +15,13 @@ Arbol::Arbol( PersistenciaArbol* persistencia) {
 	}
 
 
-}
+};
 
 
 Arbol::~Arbol() {
 	if (this->raiz!=NULL)
 		delete this->raiz;
-}
+};
 
 
 Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
@@ -36,7 +36,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 		raiz->insertarElemento(nroBloque, nroRegistro, dato, res,overflow);
 		if(res == RES_OK)
 			this->cantidadElem  ++;
-			
+
 		return res;
 
 	} else {
@@ -51,13 +51,13 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 		*/
 		if(res == RES_OK)
 			this->cantidadElem  ++;
-			
+
 		return res;
 	}
-}
+};
 
 Nodo* Arbol::getRaiz(){
 	return this->raiz;
-}
+};
 
 

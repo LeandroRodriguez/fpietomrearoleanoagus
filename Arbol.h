@@ -3,28 +3,27 @@
 
 #include "Constantes.h"
 #include "Nodo.h"
-#include "PersistenciaArbol.h"
+#include "ManejoArchivos/PersistenciaArbol.h"
 #include <list>
 
-class PersistenciaArbol;
-
 class Arbol {
+    private:
 	Nodo* raiz;
-	
-public:
+
+    public:
 	int long cantidadElem;
-	
+
 	Arbol(PersistenciaArbol* persistencia);
 	virtual ~Arbol();
-	
+
 	Resultado insertar(offset nroBloque, offset nroRegistro, Key* dato);
-	
-	Nodo* getRaiz();	
-	
+
+	Nodo* getRaiz();
+
 private:
 	PersistenciaArbol* persistir;
 
-}
+};
 
 
 
