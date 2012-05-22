@@ -6,8 +6,6 @@
 #include "Key.h"
 
 
-
-	//ESTE METODO ES VOID NO PUEDE DEVOLVER INTS, CHARS*, ETC
 	void* Key::getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
 		if (dim==0)return this->LineaFerroviaria;
 		if (dim==1)return &this->Formacion;
@@ -15,7 +13,7 @@
 		if (dim==3)return this->Falla;
 		if (dim==4)return this->FranjaHorariaDelSiniestro;
 		return NULL;
-	}
+	};
 
 
 	Bytes* Key::Serializarse(){
@@ -42,8 +40,8 @@
 
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
 
-		return &Bytes(str);
-	}
+		return new Bytes(str);
+	};
 
 	void Key::Hidratar(Bytes* bytes){
 
@@ -64,9 +62,9 @@
 		memcpy(&this->FranjaHorariaDelSiniestro, bytes + cur, sizeof(this->FranjaHorariaDelSiniestro));
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
 
-	}
+	};
 
-	unsigned long int getTamanioSerializado(){
+	unsigned long int Key::getTamanioSerializado(){
 
 		unsigned long int tamanioSerializado = 0;
 
@@ -77,5 +75,4 @@
 		tamanioSerializado += strlen(this->FranjaHorariaDelSiniestro);
 
 		return tamanioSerializado;
-	}
-};
+	};
