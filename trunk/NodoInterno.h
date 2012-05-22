@@ -18,7 +18,9 @@ template<class T> class SubClaveRef{
 
         };
 
-    SubClaveRef(){
+    SubClaveRef(T sub,int ref){
+        this->SubClaveRef=ref;
+        this->RefNodo=ref;
     };
 
     ~SubClaveRef(){
@@ -55,7 +57,7 @@ class NodoInterno: public Nodo{
 
     void Hidratar(char* cadena);
 
-    NodoInterno<T>(){
+    NodoInterno(){
         this->tamanioMaximoNodo=0;
         this->CantElem=0;
         this->ListaSubClaveRef= new list<SubClaveRef<T> >;
