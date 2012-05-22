@@ -107,3 +107,15 @@ unsigned long int Nodo::hidratar(char* bytes){
 	return cur;
 }
 
+Key* cargarDato(offset idRegistro, offset nroBloque){
+	Key* dato = new Key();
+	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
+	
+	Bytes bytes = almacena.recuperarRegistro(nroBloque, idRegistro);
+	Bytes* b = &bytes;
+	
+	dato -> Hidratar(b);
+	return dato;
+}
+
+

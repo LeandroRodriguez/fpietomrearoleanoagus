@@ -47,7 +47,7 @@ public:
 	void agregarRegistro(RegistroVariable* rv);
 
 	Bytes recuperarBloque(offset nBloque);
-	Bytes recuperarRegistro(offset nBloque, uint32_t IUC);
+	Bytes recuperarRegistro(offset nBloque, uint32_t UID);
 
 	offset getNumeroBloque(){return this->numeroBloque;}
 	offset getNumeroUID(){return this->UID;}
