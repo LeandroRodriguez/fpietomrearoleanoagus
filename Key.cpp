@@ -3,24 +3,12 @@
 #include <malloc.h>
 #include "InterfazSerializar.h"
 #include <string.h>
+#include "Key.h"
 
-class Key : public InterfazSerializar{
 
-    private:
-	char* LineaFerroviaria;
-
-	int   Formacion;
-
-	char* Falla;
-
-	char* Accidente;
-
-	char* FranjaHorariaDelSiniestro;
-
-    public:
 
 	//ESTE METODO ES VOID NO PUEDE DEVOLVER INTS, CHARS*, ETC
-	void* getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
+	void* Key::getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
 		if (dim==0)return this->LineaFerroviaria;
 		if (dim==1)return &this->Formacion;
 		if (dim==2)return this->Accidente;
@@ -30,7 +18,7 @@ class Key : public InterfazSerializar{
 	}
 
 
-	Bytes* Serializarse(){
+	Bytes* Key::Serializarse(){
 
 		unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
@@ -57,7 +45,7 @@ class Key : public InterfazSerializar{
 		return &Bytes(str);
 	}
 
-	void Hidratar(Bytes* bytes){
+	void Key::Hidratar(Bytes* bytes){
 
 		unsigned int cur = 0;/*cur = cursor*/
 
