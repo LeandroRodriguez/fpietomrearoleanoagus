@@ -5,14 +5,6 @@ Controlador::Controlador() {
 	 ManipuladorArchivos* manipulo = new ManipuladorArchivos();
 	 manipulo->creoCarpeta("./Indices");
 	 manipulo->creoCarpeta("./Archivos");
-	 manipulo->creoCarpeta("./Indices/Seleccion");
-	 manipulo->creoCarpeta("./Indices/Clasificacion");//nosotros solo necesitamos una de estas 2 creo
-
-	 archivosClasificacion
-		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES_CLASIFICACION,"",".idx");
-
-	 archivosSeleccion
-		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES_SELECCION,"",".idx");
 
 	 vector<string> aux = manipulo->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
 
