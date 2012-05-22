@@ -1,5 +1,6 @@
 #include <iostream>
 #include <list>
+#include <string.h>
 #include "Nodo.h"
 #include "Key.cpp"
 
@@ -28,13 +29,17 @@ class NodoInterno<T>: public Nodo{
 
     void Inicializar( Key subclave ,int ref );
 
-    bool InsertarNuevaSubClaveRef ( T subclave,refAbloqueArbol ){
-        }
+    bool InsertarNuevaSubClaveRef ( T subclave,refAbloqueArbol );
 
-    Nodo*   DevolverHijoSegunSubClave( T subclave ){
-        }
+    Nodo*   DevolverHijoSegunSubClave( T subclave );
 
     public:
+
+    Bytes Serializarse();
+
+    void Hidratar(char* cadena);
+
+    unsigned long int Hidratar(char* bytes);
 
     NodoInterno<T>(){
         this->tamanioMaximoNodo=0;
@@ -42,9 +47,8 @@ class NodoInterno<T>: public Nodo{
         this->ListaSubClaveRef= new list<SubClaveRef<T> >;
     }
 
-    Nodo* DevolverHijoSegunClave(Key Clave){
-        }
+    Nodo* DevolverHijoSegunClave(Key Clave);
 
-    ~NodoInterno(){}
+    ~NodoInterno<T>(){}
 
 };
