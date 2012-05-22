@@ -1,5 +1,16 @@
 #include "NodoHoja.h"
 
+NodoHoja::NodoHoja(int dimension, int refBloque){
+    //me pasan un numero de dimension. despues tendre que matchearlo con una de las dimensiones del accidente
+    this->tamanioMaximoNodo=0;
+    this->CantElem=0;
+	this->dimension = dimension;
+	this->refBloque = refBloque;
+	this->listIdRegistros = new List<int>();
+	this->listNroBloque = new List<int>();
+
+    }
+
 unsigned long int NodoHoja::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;

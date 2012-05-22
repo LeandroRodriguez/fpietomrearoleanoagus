@@ -2,9 +2,9 @@
 #define NODO_H_INCLUDED
 
 #include <iostream>
-#include "InterfazSerializar.h"
+#include "InterfazSerializar.cpp"
 
-class Nodo:public InterfazSerializar {
+class Nodo : public InterfazSerializar {
 
     protected: /*asi al heredar los puede cambiar, si lo pongo private kb */
 

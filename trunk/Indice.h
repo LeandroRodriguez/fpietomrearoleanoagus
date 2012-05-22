@@ -2,14 +2,15 @@
 #define INDICE_H_
 
 #include <iostream>
-using namespace std;
-#include "Arbol.h"
-#include "Key.h"
+//#include "Arbol.h"
+#include "Key.cpp"
 #include "Constantes.h"
+#include "ManejoArchivos/PersistenciaArbol.h"
+using namespace std;
 
 class Indice {
 protected:
-	Arbol* arbol;
+//	Arbol* arbol;
 
 	Indice();
 
