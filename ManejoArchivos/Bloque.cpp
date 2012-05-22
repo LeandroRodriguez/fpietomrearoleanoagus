@@ -14,7 +14,7 @@ Bloque::Bloque(const cantBytes& tamanio) {
 	/*IUC sigo sin saber que es, pero tmp se inicializa*/
 }
 
-Bloque(){}
+    Bloque::Bloque(){}
 
 /*destructor*/
 Bloque::~Bloque() {
