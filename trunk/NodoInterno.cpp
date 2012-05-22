@@ -1,25 +1,25 @@
 #include <iostream>
 #include "NodoInterno.h"
 
-Bytes* NodoInterno<T>::Nodo(Bytes CodigoBinario){
+Bytes* NodoInterno::Nodo(Bytes CodigoBinario){
 
 
 
     };
 
-Bytes* NodoInterno<T>::Nodo(Key subclave ,unsigned long int ref){
+Bytes* NodoInterno::Nodo(Key subclave ,unsigned long int ref){
 
 
 
     };
 
-unsigned long int NodoInterno<T>::~NodoInterno(){
+unsigned long int NodoInterno::~NodoInterno(){
 
 
 
     };
 
-bool NodoInterno<T>::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
+bool NodoInterno::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
 
         SubClaveRef* item = new SubClaveRef<T>;
 
@@ -34,7 +34,7 @@ bool NodoInterno<T>::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol )
 
     };
 
-void NodoInterno<T>::Inicializar( int ref1 ,T subclave ,int ref2 ){
+void NodoInterno::Inicializar( int ref1 ,T subclave ,int ref2 ){
 
         this->Ref1erNodo=ref1;
 
@@ -48,7 +48,7 @@ void NodoInterno<T>::Inicializar( int ref1 ,T subclave ,int ref2 ){
 
 
 /* sirve solo para tipos clasicos, int, double, word etc */
-unsigned long int NodoInterno<T>::getTamanioSerializado(){
+unsigned long int NodoInterno::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
 
@@ -109,7 +109,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
     }
 
 /*sirve solo para tipos clasicos, int, double, word etc*/
-Bytes NodoInterno<T>::Serializarse(){
+Bytes NodoInterno::Serializarse(){
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
     /*el string que voy a devolver*/
@@ -206,7 +206,7 @@ template<> Bytes NodoInterno<char*>::Serializarse{
 
 
 /*para tipos comunes  */
-void NodoInterno<T>::Hidratar(char* bytes){
+void NodoInterno::Hidratar(char* bytes){
 
 	unsigned int cur = 0;/*cur = cursor*/
 

@@ -1,10 +1,4 @@
-#include <iostream>
-#include "ManejoArchivos/Bytes.h"
-#include <malloc.h>
-#include "InterfazSerializar.h"
-#include <string.h>
 #include "Key.h"
-
 
 	void* Key::getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
 		if (dim==0)return this->LineaFerroviaria;

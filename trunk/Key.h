@@ -1,6 +1,12 @@
 #ifndef KEY_H_INCLUDED
 #define KEY_H_INCLUDED
 
+#include <iostream>
+#include "ManejoArchivos/Bytes.h"
+#include <malloc.h>
+#include <string.h>
+#include "InterfazSerializar.h"
+
 class Key : public InterfazSerializar{
 
     private:
