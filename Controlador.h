@@ -42,10 +42,6 @@ public:
 	ListarForcaciones();
 	ListarLineas();
 	ListarAccidentes();*/
-
-
-protected:
-	//REUTILIZABLE? -> void cargarArchivos();
 };
 
 #endif /* CONTROLADOR_H_ */
