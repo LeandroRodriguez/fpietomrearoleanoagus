@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ManejoArchivos/Bytes.h"
 #include <malloc.h>
-#include "InterfazSerializar.cpp"
+#include "InterfazSerializar.h"
 #include <string.h>
 
 class Key : public InterfazSerializar{
@@ -54,7 +54,7 @@ class Key : public InterfazSerializar{
 
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
 
-		return Bytes(str);
+		return &Bytes(str);
 	}
 
 	void Hidratar(Bytes* bytes){
@@ -75,9 +75,6 @@ class Key : public InterfazSerializar{
 
 		memcpy(&this->FranjaHorariaDelSiniestro, bytes + cur, sizeof(this->FranjaHorariaDelSiniestro));
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
-
-		return cur;
-
 
 	}
 
