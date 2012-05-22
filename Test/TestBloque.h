@@ -4,10 +4,17 @@
 #include "../ManejoArchivos/RegistroVariable.h"
 #include "../ManejoArchivos/Bytes.h"
 #include "../Constantes.h"
+using namespace std;
 
 class TestBloque{
+
     public:
     TestBloque();
     void TestAgregarRegistros();
+    void TestSerializarHidratarBloque();
+    void TestCrearBloque();
+
 };
-#endif
+
+
+#endif /* TESTBLOQUE_H_ */
