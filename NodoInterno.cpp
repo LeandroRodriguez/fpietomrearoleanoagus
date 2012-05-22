@@ -109,7 +109,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
     }
 
 /*sirve solo para tipos clasicos, int, double, word etc*/
-Bytes NodoInterno::Serializarse(){
+Bytes* NodoInterno::Serializarse(){
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
     /*el string que voy a devolver*/
@@ -152,11 +152,11 @@ Bytes NodoInterno::Serializarse(){
             cur += sizeof(refNodo);
     }
 
-	return str;
+	return new Bytes(str);
 }
 
 /*sirve para char* */
-template<> Bytes NodoInterno<char*>::Serializarse{
+template<> Bytes* NodoInterno<char*>::Serializarse{
     	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
     /*el string que voy a devolver*/
@@ -201,7 +201,7 @@ template<> Bytes NodoInterno<char*>::Serializarse{
             cur += sizeof(refNodo);
     }
 
-	return str;
+	return new Bytes(str);
 }
 
 
