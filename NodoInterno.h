@@ -1,31 +1,33 @@
+#ifndef NODOINTERNO_H_
+#define NODOINTERNO_H_
+
 #include <iostream>
 #include <list>
 #include <string.h>
 #include "Nodo.h"
-#include "Key.cpp"
+#include "Key.h"
 
-template<class T>
-class SubClaveRef<T>{
+template<class T> class SubClaveRef{
     public:
         T subclave;
         int RefNodo;
 
-    bool SubClaveRef<T>::operator< (const SubClaveRef<T> ){
+    bool operator< (const SubClaveRef otro ){
 
-        return ( this->subclave < SubClaveRef.subclave );
+        return ( this->subclave < otro.subclave );
 
         };
 
-    SubClaveRef<T>(){
+    SubClaveRef(){
     };
 
-    ~SubClaveRef<T>(){
+    ~SubClaveRef(){
     };
 
     };
 
 template<class T>
-class NodoInterno<T>: public Nodo{
+class NodoInterno: public Nodo{
 
     /*Atributos de clase madre Nodo, se heredan como privados
         unsigned long int CantElem
@@ -43,7 +45,7 @@ class NodoInterno<T>: public Nodo{
 
     void Inicializar( Key subclave ,int ref );
 
-    bool InsertarNuevaSubClaveRef ( T subclave,refAbloqueArbol );
+    bool InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol );
 
     Nodo*   DevolverHijoSegunSubClave( T subclave );
 
@@ -61,6 +63,8 @@ class NodoInterno<T>: public Nodo{
 
     Nodo* DevolverHijoSegunClave(Key Clave);
 
-    ~NodoInterno<T>(){}
+    ~NodoInterno(){}
 
 };
+
+#endif
