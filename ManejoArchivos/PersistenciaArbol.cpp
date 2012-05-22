@@ -1,10 +1,3 @@
-/*
- * PersistenciaIndices.cpp
- *
- *  Created on: Sep 22, 2010
- *      Author: peta
- */
-
 #include "PersistenciaArbol.h"
 
 /*creo o abro el archivo al final, para editarlo*/

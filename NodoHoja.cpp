@@ -91,22 +91,19 @@ unsigned long int Nodo::hidratar(char* bytes){
 
 	memcpy(&this->proximaHoja, bytes + cur, sizeof(this->proximaHoja));
 	cur += sizeof(this->proximaHoja);
+	
+	while(cur < strlen(bytes) )
+	{
+		int idRegistro;
+		memcpy(&idRegistro, bytes + cur  , sizeof(int) );
+		cur += sizeof(int);		
+		this->listIdRegistros->push_back(idRegistro);
 
-	this->listIdRegistros::iterator itRegistros;
-	itRegistros= this->listIdRegistros.begin();
-
-	this->listNroBloque::iterator itBloques;
-	itBloques= this->listNroBloque.begin();
-
-	for(itRegistros;itRegistros!=this->listIdRegistros.end();itRegistros++){
-		memcpy(*itRegistros, bytes + cur  , sizeof(*itRegistros));
-		cur += sizeof(*itRegistros);
-
-		memcpy(*itBloques, bytes + cur  , sizeof(*itBloques));
-		cur += sizeof(*itBloques);
-
-		itBloques++;
-        }
+		int nroBloque;
+		memcpy(&nroBloque, bytes + cur  , sizeof(int) );
+		cur += sizeof(int);		
+		this->listNroBloque->push_back(nroBloque);		
+	}
 	return cur;
 }
 
