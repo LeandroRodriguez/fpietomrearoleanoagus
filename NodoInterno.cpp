@@ -56,7 +56,7 @@ unsigned long int NodoInterno::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->Altura);
 	tamanioSerializado += sizeof(this->dimension);
     tamanioSerializado += sizeof(this->Ref1erNodo);
-    tamanioSerializado += sizeof(char) * strlen(typeid(T));
+    tamanioSerializado += sizeof(int);/*aca guardo el tipo*/
 
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
     /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
@@ -85,7 +85,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->Altura);
 	tamanioSerializado += sizeof(this->dimension);
     tamanioSerializado += sizeof(this->Ref1erNodo);
-    tamanioSerializado += sizeof(char) * strlen(typeid(char*));
+    tamanioSerializado += sizeof(int);/*aca guardo el tipo*/
 
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
     /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
@@ -112,6 +112,10 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
 Bytes* NodoInterno::Serializarse(){
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
+    /*PRIMERO GUARDO EL TIPO*/
+    memcpy(str + cur, &typeid(T).name , strlen (typeid(T).name));
+	cur += sizeof(int));
+
     /*el string que voy a devolver*/
 	char* str =(char*) malloc(tamanioTotal * sizeof(char));
 	unsigned int cur = 0;/*cur = cursor*/
@@ -131,10 +135,6 @@ Bytes* NodoInterno::Serializarse(){
     /*bis dimension  */
 	memcpy(str + cur, &this->RefNodo , sizeof(this->RefNodo));
 	cur += sizeof(this->RefNodo);
-
-	/*aca guardo el tipo*/
-    memcpy(str + cur, &typeid(T).name , strlen (typeid(T).name));
-	cur += strlen(typeid(T));
 
     /*tengo que guardar todos los elementos de la lista */
     this->ListaSubClaveRef::iterator it;
@@ -163,6 +163,11 @@ template<> Bytes* NodoInterno<char*>::Serializarse{
 	char* str =(char*) malloc(tamanioTotal * sizeof(char));
 	unsigned int cur = 0;/*cur = cursor*/
 
+
+    /*PRIMERO GUARDO EL TIPO*/
+    memcpy(str + cur, &typeid(T).name , strlen (typeid(T).name));
+	cur += sizeof(int);
+
     /*guardo la cantidad de elementos */
 	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
@@ -178,10 +183,6 @@ template<> Bytes* NodoInterno<char*>::Serializarse{
     /*bis dimension  */
 	memcpy(str + cur, &this->RefNodo , sizeof(this->RefNodo));
 	cur += sizeof(this->RefNodo);
-
-	/*aca guardo el tipo*/
-    memcpy(str + cur, &typeid(char*).name , strlen (typeid(char*).name));
-	cur += strlen(typeid(char*));
 
     /*tengo que guardar todos los elementos de la lista */
     this->ListaSubClaveRef::iterator it;
@@ -208,7 +209,7 @@ template<> Bytes* NodoInterno<char*>::Serializarse{
 /*para tipos comunes  */
 void NodoInterno::Hidratar(char* bytes){
 
-	unsigned int cur = 0;/*cur = cursor*/
+	unsigned int cur = sizeof(int);/*cur = cursor , LOS PRIMEROS 4 fueron leidos para saber el TIPO*/
 
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
@@ -246,7 +247,7 @@ template<> void NodoInterno<char*>::Hidratar(char* bytes){
 
 
 
- 	unsigned int cur = 0;/*cur = cursor*/
+ 	unsigned int cur = sizeof(int);/*cur = cursor primeros 4 para saber tipo*/
 
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
