@@ -2,6 +2,7 @@
 #include "ManejoArchivos/Bytes.h"
 #include <malloc.h>
 #include "InterfazSerializar.cpp"
+#include <string.h>
 
 class Key : public InterfazSerializar{
 
@@ -21,7 +22,7 @@ class Key : public InterfazSerializar{
 	//ESTE METODO ES VOID NO PUEDE DEVOLVER INTS, CHARS*, ETC
 	void* getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
 		if (dim==0)return this->LineaFerroviaria;
-		if (dim==1)return this->Formacion;
+		if (dim==1)return &this->Formacion;
 		if (dim==2)return this->Accidente;
 		if (dim==3)return this->Falla;
 		if (dim==4)return this->FranjaHorariaDelSiniestro;
@@ -49,12 +50,14 @@ class Key : public InterfazSerializar{
 		cur += sizeof(this->Falla);
 
 		memcpy(str + cur, &this->FranjaHorariaDelSiniestro , sizeof(this->FranjaHorariaDelSiniestro));
+
+
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
 
 		return Bytes(str);
 	}
 
-	void Hidratar(Bytes* CodigoBinario){
+	void Hidratar(Bytes* bytes){
 
 		unsigned int cur = 0;/*cur = cursor*/
 
@@ -75,17 +78,18 @@ class Key : public InterfazSerializar{
 
 		return cur;
 
+
 	}
 
 	unsigned long int getTamanioSerializado(){
 
 		unsigned long int tamanioSerializado = 0;
 
-		tamanioSerializado += sizeof(this->LineaFerroviaria);
+		tamanioSerializado += strlen(this->LineaFerroviaria);
 		tamanioSerializado += sizeof(this->Formacion);
-		tamanioSerializado += sizeof(this->Falla);
-		tamanioSerializado += sizeof(this->Accidente);
-		tamanioSerializado += sizeof(this->FranjaHorariaDelSiniestro);
+		tamanioSerializado += strlen(this->Falla);
+		tamanioSerializado += strlen(this->Accidente);
+		tamanioSerializado += strlen(this->FranjaHorariaDelSiniestro);
 
 		return tamanioSerializado;
 	}
