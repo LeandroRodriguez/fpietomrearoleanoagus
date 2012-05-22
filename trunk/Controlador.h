@@ -11,10 +11,7 @@
 
 //#include "Datos/ClaveNumero.h"
 //#include "Datos/Clave.h"
-#include "AccesoAMails/AccesoAEmails.h"
 #include "Indices/Indice.h"
-#include "Indices/IndiceSeleccion.h"
-#include "Indices/IndiceClasificacion.h"
 
 #include "Controlador.h"
 #include "exception"
@@ -26,9 +23,6 @@
 using namespace std;
 
 class Controlador {
-
-	vector<string> archivosClasificacion;
-	vector<string> archivosSeleccion;
 	string archivoPrimario;/*nombre del archivo con el indice(mi arbol)*/
 
 public:
@@ -51,21 +45,7 @@ public:
 
 
 protected:
-
-
 	//REUTILIZABLE? -> void cargarArchivos();
-
-	// Obsoletos?...
-	/*
-	void DescargoMailsCreoIndice(TipoClasificacion tipo,string palabra);
-	void DescargoMailsCreoIndiceFrom(string from);
-	void DescargoMailsCreoIndiceTo(string to);
-	void DescargoMailsCreoIndiceSubject(string subject);
-	void DescargoMailsCreoIndiceClasificacion(TipoClasificacion tipo);
-	void DescargoMailsCreoIndice();
-	void MailsCreoIndice(string palabra);
-	*/
-	// ...Fin Obsoletos?
 };
 
 #endif /* CONTROLADOR_H_ */

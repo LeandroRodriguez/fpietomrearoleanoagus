@@ -18,8 +18,6 @@ typedef unsigned long int tamanioBloque;
 
 #define DIR_ARCHIVO_DATOS "./Archivos/"
 #define DIR_ARCHIVO_INDICES "./Indices/"
-#define DIR_ARCHIVO_INDICES_SELECCION "./Indices/Seleccion/"
-#define DIR_ARCHIVO_INDICES_CLASIFICACION "./Indices/Clasificacion/"
 
 #define ARCHIVO_INDICE_PRIMARIO "PRIMARIO"
 #define ARCHIVO_DATOS "ArchivoDatos.fde"
