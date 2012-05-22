@@ -4,7 +4,9 @@
 #include <iostream>
 #include <list>
 #include "Nodo.h"
+#include "Key.h"
 #include "Constantes.h"
+#include "ManejoArchivos/AlmacenamientoBloques.h"
 #include <malloc.h>
 
 class NodoHoja: public Nodo{
@@ -15,6 +17,8 @@ class NodoHoja: public Nodo{
     list<int> listIdRegistros;
     list<int> listNroBloque;
     int proximaHoja;
+    
+    Key* cargarDato(offset idRegistro, offset nroBloque);
 
 
 
