@@ -17,21 +17,11 @@ class NodoHoja: public Nodo{
 
     public:
 
-    NodoHoja(int dimension, int refBloque){
-    //me pasan un numero de dimension. despues tendre que matchearlo con una de las dimensiones del accidente
-    this->tamanioMaximoNodo=0;
-    this->CantElem=0;
-	this->dimension = dimension;
-	this->refBloque = refBloque;
-	this->listIdRegistros = new List<int>();
-	this->listNroBloque = new List<int>();
-
-    }
-
-    ~NodoHoja(){}
+    NodoHoja(int dimension, int refBloque);
+    ~NodoHoja();
 
     unsigned long int getTamanioSerializado();
     char* serializarse();
     unsigned long int hidratar(char* bytes);
 
-}
+};
