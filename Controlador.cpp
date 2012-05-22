@@ -2,10 +2,11 @@
 
 /*REVISAR Y ARREGLAR*/
 Controlador::Controlador() {
+	 /*creo las carpetas donde guardo los archivos*/
 	 ManipuladorArchivos* manipulo = new ManipuladorArchivos();
 	 manipulo->creoCarpeta("./Indices");
 	 manipulo->creoCarpeta("./Archivos");
-
+	 /*recupero todos los archivos *.idx de la carpeta de indices*/
 	 vector<string> aux = manipulo->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
 
 	 if (aux.size()>0){

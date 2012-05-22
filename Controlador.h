@@ -2,16 +2,17 @@
 #define CONTROLADOR_H_
 
 #include "Constantes.h"
-#include "Datos/Bytes.h"
-#include "Almacenamiento/Almacenamiento.h"
-#include "Almacenamiento/AlmacenamientoBloque.h"
-#include "Datos/Bloque.h"
-#include "Datos/Registro.h"
-#include "Datos/RegistroVariable.h"
+#include "ManejoArchivos/Bytes.h"
+//#include "ManejoArchivos/Almacenamiento.h"
+#include "ManejoArchivos/AlmacenamientoBloque.h"
+#include "ManejoArchivos/Bloque.h"
+//#include "Datos/Registro.h"
+#include "ManejoArchivos/RegistroVariable.h"
+//#include "Key.h"
 
 //#include "Datos/ClaveNumero.h"
 //#include "Datos/Clave.h"
-#include "Indices/Indice.h"
+#include "Indice.h"
 
 #include "Controlador.h"
 #include "exception"
