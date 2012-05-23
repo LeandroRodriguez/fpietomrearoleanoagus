@@ -1,48 +1,6 @@
 #include <iostream>
 #include "NodoInterno.h"
 
-void NodoInterno::Nodo(Bytes* CodigoBinario){
-
-        this->tamanioMaximoNodo=0;
-        this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
-
-    this->Hidratar(CodigoBinario->toString() );
-
-    };
-
-void NodoInterno::Nodo(int ref1,T subclave ,int ref2){
-
-        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
-
-        this->Inicializar(ref1,T,ref2);
-
-    };
-
-unsigned long int NodoInterno::~NodoInterno(){
-    };
-
-bool NodoInterno::InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
-
-        SubClaveRef* item = new SubClaveRef<T>(subclave,refAbloqueArbol);
-
-        this->ListaSubClaveRef->push_back(item);
-        this->ListaSubClaveRef->sort();
-
-        this->CantElem=(this->CantElem)+1;
-
-
-    };
-
-void NodoInterno::Inicializar( int ref1 ,T subclave ,int ref2 ){
-
-        this->Ref1erNodo=ref1;
-
-        SubClaveRef* NuevaDupla= new SubClaveRef(subclave,ref2);
-
-        this->ListaSubClaveRef->push_back(NuevaDupla);
-
-    }
 
 
 /* sirve solo para tipos clasicos, int, double, word etc */
@@ -87,7 +45,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
 
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
     /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
-    this->ListaSubClaveRef::iterator it;
+    list< SubClaveRef<T>* >::iterator it;
 
     it= this->ListaSubClaveRef.begin();
 
@@ -97,7 +55,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
         int refNodo = it->RefNodo;
 
         tamanioSerializado +=  sizeof(int);/*convencion para guardar tamanio  */
-        tamanioSerializado +=  strlen(subC); /*tamnio variable */
+        tamanioSerializado +=  strlen(subC); /*tamanio variable */
         tamanioSerializado +=  sizeof(refNodo);
 
         }
@@ -144,7 +102,7 @@ Bytes* NodoInterno::Serializarse(){
         T subC = it->subclave;
         int refNodo = it->RefNodo;
 
-            memcpy(str + cur, subC , sizeof(T));
+            memcpy(str + cur, subC , sizeof(subC));
             cur += sizeof(subC);
             memcpy(str + cur, refNodo , sizeof(refNodo));
             cur += sizeof(refNodo);
