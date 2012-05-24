@@ -7,28 +7,12 @@
 #include <cstring>
 #include "Nodo.h"
 #include "Key.h"
+#include "SubClaveRef.h"
 #include <typeinfo>
 
-template<class T> class SubClaveRef{
-    public:
-        T subclave;
-        int RefNodo;
+using namespace std;
 
-    bool operator< (const SubClaveRef otro ){
 
-        return ( this->subclave < otro.subclave );
-
-        };
-
-    SubClaveRef(T sub,int ref){
-        this->SubClaveRef=sub;
-        this->RefNodo=ref;
-    };
-
-    ~SubClaveRef(){
-    };
-
-};
 
 template<class T>
 class NodoInterno: public Nodo{
@@ -128,8 +112,10 @@ Bytes* Serializarse(){
 	unsigned int cur = 0;/*cur = cursor*/
 
     /*PRIMERO GUARDO EL TIPO*/
+    string nombre[20];
 
-    memcpy(str + cur, &(typeid(T).name) , strlen (typeid(T).name));
+
+    memcpy(str + cur, &typeid(T).name(), strlen (typeid(T).name() ));
 	cur += sizeof(int);
 
     /*guardo la cantidad de elementos */
@@ -222,14 +208,14 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
 
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
     /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
-    list< SubClaveRef<char*>* >::iterator it;
 
-    it= this->ListaSubClaveRef->begin();
+
+    list< SubClaveRef<char*>* >::iterator it = this->ListaSubClaveRef->begin();
 
     for(;it!=this->ListaSubClaveRef->end();it++){
 
-        char* subC = it->subclave;
-        int refNodo = it->RefNodo;
+        char* subC =it->getSubClave();
+        int refNodo = it->getRefNodo();
 
         tamanioSerializado +=  sizeof(int);/*convencion para guardar tamanio  */
         tamanioSerializado +=  strlen(subC); /*tamanio variable */
@@ -251,7 +237,7 @@ template<> Bytes* NodoInterno<char*>::Serializarse{
 
 
     /*PRIMERO GUARDO EL TIPO*/
-    memcpy(str + cur, &typeid(char*).name , strlen (typeid(char*).name));
+    memcpy(str + cur, &typeid(char*).name() , strlen (typeid(char*).name() ));
 	cur += sizeof(int);
 
     /*guardo la cantidad de elementos */
