@@ -33,6 +33,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 		//Es el primerElemento
 		/*this->raiz = dynamic_cast<NodoHoja*> (this->crearRaiz());*/
 
+        /*no entiendo porque esta funcion recibe TANTOS parametros :S  */
 		raiz->insertarElemento(nroBloque, nroRegistro, dato, res,overflow);
 		if(res == RES_OK)
 			this->cantidadElem  ++;
