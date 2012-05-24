@@ -31,7 +31,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 
 	if (!raiz) {
 		//Es el primerElemento
-		this->raiz = dynamic_cast<NodoHoja*> (this->crearRaiz());
+		/*this->raiz = dynamic_cast<NodoHoja*> (this->crearRaiz());*/
 
 		raiz->insertarElemento(nroBloque, nroRegistro, dato, res,overflow);
 		if(res == RES_OK)
