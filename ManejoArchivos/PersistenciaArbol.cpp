@@ -35,7 +35,7 @@ bool PersistenciaArbol::isVacio(){
 }
 /*me fijo si esta el nro de bloque buscado*/
 bool PersistenciaArbol::existeBloque(offset nro){
-	/*no estoy comprobando que el archivo este abierto ni revisando los flags*/	
+	/*no estoy comprobando que el archivo este abierto ni revisando los flags*/
 	/*apunto el get pointer al final del archivo*/
 	this->archivo.seekg(0, ios::end);
 	/*me fijo si el get pointer esta posicionado mas alla del numero de bloque pasado, sino no hay tal bloque*/
@@ -49,7 +49,7 @@ bool PersistenciaArbol::existeBloque(offset nro){
 offset PersistenciaArbol::NroNodoNuevo(){
 	/*primero me fijo que este abierto y que no tenga seteado ningun flag de error(badbit, eofbit o failbit)*/
 	if (archivo.is_open() && archivo.good()) {
-		/*me posiciono al final*/		
+		/*me posiciono al final*/
 		this->archivo.seekg(0, ios::end);
 		/*mi posicion final/longBloqNodo me va a decir cual es el nro nodo correpondiente*/
 		offset nro= ((this->archivo.tellg() / LONGITUD_BLOQUE_NODO))  ;
@@ -83,8 +83,8 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 
 		/*creo un string auxliar para guardar la cadena total que dps voy a guardar en el archivo*/
 		char auxiliar[LONGITUD_BLOQUE_NODO ];
-		/*serializo el nodo*/		
-		char* serial = nodo->serializar();
+		/*serializo el nodo*/
+		char* serial = nodo->Serializar();
 
 		/*consigo el tamanio serializado y verifico que enre en un bloque*/
 		unsigned long int tam= nodo->getTamanioSerializado();
@@ -212,7 +212,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 	if (nodo->getId() == 9){
 		cerr<< "aca" << endl;
 	}*/
-	
+
 	/*pido el serial y me fijo que entre*/
 	char auxiliar[LONGITUD_BLOQUE_NODO ];
 	char* serial = nodo->serializar();
@@ -242,7 +242,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 
 /*me pasan un nro de nodo y devuelvo un puntero a ese nodo si existe. si hay algun error devuelvo null*/
  Nodo* PersistenciaArbol::leerNodo( offset nroNodo) {
-		/*chequeo estado del archivo y que el nro nodo sea correcto*/		
+		/*chequeo estado del archivo y que el nro nodo sea correcto*/
 		if (!archivo.is_open()){
 			cerr<< "Problemas al intentar abrir el archivo"<< endl;
 			return NULL;
