@@ -8,7 +8,7 @@ template<class T> class SubClaveRef{
 
     public:
 
-    T getSubCLave(){
+     T getSubClave(){
         return this->subclave;
     };
 
@@ -24,7 +24,7 @@ template<class T> class SubClaveRef{
         };
 
     SubClaveRef(T sub,int ref){
-        this->SubClaveRef=sub;
+        this->subclave=sub;
         this->RefNodo=ref;
     };
 

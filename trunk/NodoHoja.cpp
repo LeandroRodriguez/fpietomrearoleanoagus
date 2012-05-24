@@ -9,7 +9,7 @@ NodoHoja::NodoHoja(int dimension, int refBloque){
 	this->listIdRegistros = new list<int>();
 	this->listNroBloque = new list<int>();
 
-    }
+    };
 
 unsigned long int NodoHoja::getTamanioSerializado(){
 
@@ -36,9 +36,9 @@ unsigned long int NodoHoja::getTamanioSerializado(){
         }
 
 	return tamanioSerializado;
-}
+};
 
-char* NodoHoja::serializarse()
+Bytes* NodoHoja::Serializarse()
 {
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
@@ -73,8 +73,8 @@ char* NodoHoja::serializarse()
 		itBloques++;
         }
 
-	return str;
-}
+	return new Bytes(str);
+};
 
 void NodoHoja::Hidratar(char* bytes){
 
@@ -104,17 +104,17 @@ void NodoHoja::Hidratar(char* bytes){
 		cur += sizeof(int);
 		this->listNroBloque->push_back(nroBloque);
 	}
-}
-
+};
+/*
 Key* cargarDato(offset idRegistro, offset nroBloque){
 	Key* dato = new Key();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
-	
+
 	Bytes bytes = almacena.recuperarRegistro(nroBloque, idRegistro);
 	Bytes* b = &bytes;
-	
+
 	dato -> Hidratar(b);
 	return dato;
-}
+}*/
 
 
