@@ -25,10 +25,10 @@ class NodoHoja: public Nodo{
     public:
 
     NodoHoja(int dimension, int refBloque);
-    ~NodoHoja();
+    ~NodoHoja(){};
 
     unsigned long int getTamanioSerializado();
-    char* serializarse();
+    Bytes* Serializarse();
     void Hidratar(char* bytes);
 
 };

@@ -16,8 +16,8 @@ class Nodo : public InterfazSerializar {
     unsigned int RefBloque;
 
     public:
-    Nodo();
-    virtual ~Nodo();
+    Nodo(){};
+    virtual ~Nodo(){};
 
 
 };
