@@ -22,6 +22,7 @@ class NodoInterno: public Nodo{
         unsigned long int Altura
         Dimension         dimension
         unsigned long int  tamanioMaximoNodo;
+        unsigned int  tamanioUsado;
         unsigned long int RefBloque;
     */
 
@@ -46,6 +47,9 @@ class NodoInterno: public Nodo{
         this->ListaSubClaveRef= new list<SubClaveRef<T> >;
         this->Hidratar(cadena);
     }
+
+    NodoInterno(){
+        }
 
     NodoInterno(int ref1,T subclave ,int ref2){
 
@@ -155,7 +159,7 @@ class NodoInterno: public Nodo{
 /*para tipos comunes  */
     void Hidratar(char* bytes){
 
-	unsigned int cur = sizeof(int);/*cur = cursor , LOS PRIMEROS 4 fueron leidos para saber el TIPO*/
+	unsigned int cur = 0;/*cur = cursor , LOS PRIMEROS 4 fueron leidos para saber el TIPO*/
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
 
@@ -186,7 +190,6 @@ class NodoInterno: public Nodo{
 }
 
     ~NodoInterno(){}
-    NodoInterno(){}
 };
 
 

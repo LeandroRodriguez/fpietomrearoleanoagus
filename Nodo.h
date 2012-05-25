@@ -28,5 +28,6 @@ class Nodo : public InterfazSerializar {
     }
 
 
+
 };
 #endif //
