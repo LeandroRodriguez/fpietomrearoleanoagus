@@ -43,6 +43,9 @@ class NodoInterno: public Nodo{
 
     };
 
+    NodoInterno(char* cadena){
+        this->NodoInterno(new Bytes(cadena));
+    }
     NodoInterno(int ref1,T subclave ,int ref2){
 
         this->ListaSubClaveRef= new list<SubClaveRef<T> >;
@@ -83,20 +86,15 @@ class NodoInterno: public Nodo{
     tamanioSerializado += sizeof(int);              /*aca guardo el tipo*/
 
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
-    /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
 
     typename list< SubClaveRef<T> >::iterator it;
-
 
     it = this->ListaSubClaveRef->begin();
 
     for(;it!=this->ListaSubClaveRef->end();it++){
 
-        T subC = it->subclave;
-        int refNodo = it->RefNodo;
-
-        tamanioSerializado +=  sizeof(subC);
-        tamanioSerializado +=  sizeof(refNodo);
+        tamanioSerializado +=  sizeof(T);/*para cada tipo, un tamanio fijo */
+        tamanioSerializado +=  sizeof(int);/*ref a nodo   */
 
         }
 	return tamanioSerializado;
@@ -138,8 +136,10 @@ class NodoInterno: public Nodo{
 
     for(it;it!=this->ListaSubClaveRef.end();it++){
 
-        T subC = it->getSubClave();
-        int refNodo = it->getRefNodo();
+        SubClaveRef<T>* cosa = *it;
+
+         T subC = cosa->getSubClave();
+        int refNodo = cosa->getRefNodo();
 
             memcpy(str + cur, subC , sizeof(subC));
             cur += sizeof(subC);
@@ -155,7 +155,6 @@ class NodoInterno: public Nodo{
     void Hidratar(char* bytes){
 
 	unsigned int cur = sizeof(int);/*cur = cursor , LOS PRIMEROS 4 fueron leidos para saber el TIPO*/
-
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
 
