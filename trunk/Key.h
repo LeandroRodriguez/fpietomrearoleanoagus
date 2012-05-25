@@ -7,7 +7,7 @@
 #include <string.h>
 #include "InterfazSerializar.h"
 
-class Key : public InterfazSerializar{
+class Key : public InterfazSerializar {
 
     private:
 	char* LineaFerroviaria;
@@ -24,11 +24,14 @@ class Key : public InterfazSerializar{
 
 	void* getSubClaveSegunDim( int dim );
 
-	Bytes* Serializarse();
+	Key(){};
 
-	void Hidratar(Bytes* bytes);
+    ~Key(){};
 
-	unsigned long int getTamanioSerializado();
+    unsigned long int getTamanioSerializado();
+    Bytes* Serializarse();
+    void Hidratar(char* bytes);
+
 };
 
 #endif // KEY_H_INCLUDED
