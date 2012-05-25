@@ -10,7 +10,7 @@
 	};
 
 
-	Bytes* Key::Serializarse(){
+	char* Key::Serializarse(){
 
 		unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
@@ -34,10 +34,10 @@
 
 		cur += sizeof(this->FranjaHorariaDelSiniestro);
 
-		return new Bytes(str);
+		return  str;
 	};
 
-	void Key::Hidratar(Bytes* bytes){
+	void Key::Hidratar(char* bytes){
 
 		unsigned int cur = 0;/*cur = cursor*/
 
