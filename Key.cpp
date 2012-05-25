@@ -17,44 +17,84 @@
 		char* str =(char*) malloc(tamanioTotal * sizeof(char));
 		unsigned int cur = 0;/*cur = cursor*/
 
-		memcpy(str + cur, &this->LineaFerroviaria , sizeof(this->LineaFerroviaria));
-		cur += sizeof(this->LineaFerroviaria);
+        int* pLong = new int;/* work around para poder usar memcopy, nada mas*/
 
+        /*----------------------------*/
+        *pLong = strlen(this->LineaFerroviaria);
+		memcpy(str + cur, pLong , sizeof(int));
+		cur += sizeof(int);
+        memcpy(str + cur, &this->LineaFerroviaria , *pLong);
+		cur += *pLong;
+        /*----------------------------*/
 		memcpy(str + cur, &this->Formacion , sizeof(this->Formacion));
 		cur += sizeof(this->Formacion);
+		/*----------------------------*/
+        *pLong = strlen(this->Accidente);
+		memcpy(str + cur, pLong , sizeof(int));
+		cur += sizeof(int);
+        memcpy(str + cur, &this->Accidente ,*pLong);
+		cur += *pLong;
+        /*----------------------------*/
+        *pLong = strlen(this->Falla);
+		memcpy(str + cur, pLong , sizeof(int));
+		cur += sizeof(int);
+        memcpy(str + cur, &this->Falla,*pLong);
+		cur += *pLong;
+        /*----------------------------*/
+        *pLong = strlen(this->FranjaHorariaDelSiniestro);
+		memcpy(str + cur, pLong , sizeof(int));
+		cur += sizeof(int);
+        memcpy(str + cur, &this->FranjaHorariaDelSiniestro,*pLong);
+		cur += *pLong;
+        /*----------------------------*/
 
-		memcpy(str + cur, &this->Accidente , sizeof(this->Accidente));
-		cur += sizeof(this->Accidente);
-
-		memcpy(str + cur, &this->Falla , sizeof(this->Falla));
-		cur += sizeof(this->Falla);
-
-		memcpy(str + cur, &this->FranjaHorariaDelSiniestro , sizeof(this->FranjaHorariaDelSiniestro));
-
-
-		cur += sizeof(this->FranjaHorariaDelSiniestro);
-
+        delete pLong;
 		return  str;
 	};
 
-	void Key::Hidratar(char* bytes){
+	void Key::Hidratar(char* str){
 
 		unsigned int cur = 0;/*cur = cursor*/
 
-		memcpy(&this->LineaFerroviaria, bytes + cur, sizeof(this->LineaFerroviaria));
-		cur += sizeof(this->LineaFerroviaria);
+        int* pLong = new int;/* work around para poder usar memcopy, nada mas*/
 
-		memcpy(&this->Formacion, bytes + cur, sizeof(this->Formacion));
+        /*----------------------------*/
+		memcpy(pLong, str + cur, sizeof(int));
+		cur += sizeof(int);
+
+		this->LineaFerroviaria = new char[*pLong];
+
+		memcpy(this->LineaFerroviaria, str + cur, *pLong);
+		cur += *pLong;
+        /*----------------------------*/
+		memcpy(&this->Formacion ,str + cur,  sizeof(this->Formacion));
 		cur += sizeof(this->Formacion);
+        /*----------------------------*/
+		memcpy(pLong, str + cur, sizeof(int));
+		cur += sizeof(int);
 
-		memcpy(&this->Accidente, bytes + cur, sizeof(this->Accidente));
-		cur += sizeof(this->Accidente);
+        this->Accidente = new char[*pLong];
 
-		memcpy(&this->Falla, bytes + cur, sizeof(this->Falla));
-		cur += sizeof(this->Falla);
+		memcpy(this->Accidente, str + cur, *pLong);
+		cur += *pLong;
+        /*----------------------------*/
+		memcpy(pLong, str + cur, sizeof(int));
+		cur += sizeof(int);
 
-		memcpy(&this->FranjaHorariaDelSiniestro, bytes + cur, sizeof(this->FranjaHorariaDelSiniestro));
-		cur += sizeof(this->FranjaHorariaDelSiniestro);
+        this->Falla = new char[*pLong];
+
+		memcpy(&this->Falla, str + cur, *pLong);
+        /*----------------------------*/
+		memcpy(pLong, str + cur, sizeof(int));
+		cur += sizeof(int);
+
+        this->FranjaHorariaDelSiniestro = new char[*pLong];
+
+		memcpy(this->FranjaHorariaDelSiniestro, str + cur, *pLong);
+		cur += *pLong;
+        /*----------------------------*/
+
+		delete pLong;
 
 	};
 

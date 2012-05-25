@@ -20,6 +20,7 @@ class Key : public InterfazSerializar {
 
 	char* FranjaHorariaDelSiniestro;
 
+
     public:
 
 	void* getSubClaveSegunDim( int dim );
