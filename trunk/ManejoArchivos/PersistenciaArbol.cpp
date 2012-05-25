@@ -69,12 +69,12 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 			return false;
 		}
 
-		if (! this->existeBloque( nodo->getId())){
-			cerr<< "Metodo: Actualizar. Nro de bloque inexistente. Nro: "<< nodo->getId();
+		if (! this->existeBloque( nodo->getRefDelNodo())){
+			cerr<< "Metodo: Actualizar. Nro de bloque inexistente. Nro: "<< nodo->getRefDelNodo();
 			return false;
 		}
 
-		if (nodo->getId() == ID_RAIZ){
+		if (nodo->getRefDelNodo() == ID_RAIZ){
 			cerr<< "Metodo: ActualizarNodo. Se quiere guardar la raiz con el metodo inorrecto." << endl;
 			return NULL;
 		}
@@ -84,7 +84,7 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 		/*creo un string auxliar para guardar la cadena total que dps voy a guardar en el archivo*/
 		char auxiliar[LONGITUD_BLOQUE_NODO ];
 		/*serializo el nodo*/
-		char* serial = nodo->Serializar();
+		char* serial = nodo->Serializarse();
 
 		/*consigo el tamanio serializado y verifico que enre en un bloque*/
 		unsigned long int tam= nodo->getTamanioSerializado();
@@ -100,7 +100,7 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 		}
 
 		/*posiciono el get pointer en el principio + Long*nroBloque (al ppio del bloque a actualizar)*/
-		archivo.seekg((nodo->getId()) * LONGITUD_BLOQUE_NODO , ios::beg);
+		archivo.seekg((nodo->getRefDelNodo()) * LONGITUD_BLOQUE_NODO , ios::beg);
 		/*escribo en el archivo y guardo*/
 		archivo.write(auxiliar, LONGITUD_BLOQUE_NODO);
 		archivo.flush();
@@ -140,7 +140,7 @@ Nodo* PersistenciaArbol::obtenerRaiz(){
 	if  ( lectura2[0] == 'H' ){
 		auxiliar = new NodoHoja(lectura);
 	}else if  (lectura2[0] == 'I' ){
-		auxiliar = new NodoInterno(lectura );
+		auxiliar = new NodoInterno<>(lectura );
 	}
 
 
@@ -165,7 +165,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 	nodo->setId(rta);
 	/*levanto el raiz viejo*/
 	char auxiliar[LONGITUD_BLOQUE_NODO];
-	char* serial = nodo->serializar();
+	char* serial = nodo->Serializarse();
 	/*me fijo el tamanio serializado del candidato a insertar*/
 	unsigned long int tam= nodo->getTamanioSerializado();
 	if (tam + 1> LONGITUD_BLOQUE_NODO){
@@ -198,7 +198,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 		return 0;
 	}
 
-	if (  nodo->getId() == ID_RAIZ){
+	if (  nodo->getRefDelNodo() == ID_RAIZ){
 		/*aca lo podria mandar al metodo guardar raiz, nose :(*/
 		cerr<< "Metodo: AgregarNodo. Se quiere guardar la raiz con el metodo inorrecto." << endl;
 		return NULL;
@@ -209,13 +209,13 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 	nodo->setId(rta);
 
 	/*borrar
-	if (nodo->getId() == 9){
+	if (nodo->getRefDelNodo() == 9){
 		cerr<< "aca" << endl;
 	}*/
 
 	/*pido el serial y me fijo que entre*/
 	char auxiliar[LONGITUD_BLOQUE_NODO ];
-	char* serial = nodo->serializar();
+	char* serial = nodo->Serializarse();
 
 	unsigned long int tam= nodo->getTamanioSerializado();
 	if (tam + 1 > LONGITUD_BLOQUE_NODO ){
