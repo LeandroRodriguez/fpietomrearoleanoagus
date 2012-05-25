@@ -28,7 +28,7 @@ class NodoHoja: public Nodo{
     ~NodoHoja(){};
 
     unsigned long int getTamanioSerializado();
-    Bytes* Serializarse();
+    char* Serializarse();
     void Hidratar(char* bytes);
 
 };

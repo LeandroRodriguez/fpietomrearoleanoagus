@@ -35,17 +35,18 @@ class NodoInterno: public Nodo{
 
     NodoInterno(Bytes* CodigoBinario){
 
-        this->tamanioMaximoNodo=0;
-        this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
-
-    this->Hidratar(CodigoBinario->toString() );
+        this->Hidratar(CodigoBinario->toString() );
 
     };
 
     NodoInterno(char* cadena){
-        this->NodoInterno(new Bytes(cadena));
+
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
+        this->Hidratar(cadena);
     }
+
     NodoInterno(int ref1,T subclave ,int ref2){
 
         this->ListaSubClaveRef= new list<SubClaveRef<T> >;
@@ -101,7 +102,7 @@ class NodoInterno: public Nodo{
 };
 
 /*sirve solo para tipos clasicos, int, double, word etc*/
-    Bytes* Serializarse(){
+    char* Serializarse(){
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
 
@@ -139,7 +140,7 @@ class NodoInterno: public Nodo{
         SubClaveRef<T>* cosa = *it;
 
          T subC = cosa->getSubClave();
-        int refNodo = cosa->getRefNodo();
+         int refNodo = cosa->getRefNodo();
 
             memcpy(str + cur, subC , sizeof(subC));
             cur += sizeof(subC);
@@ -147,7 +148,7 @@ class NodoInterno: public Nodo{
             cur += sizeof(refNodo);
     }
 
-	return new Bytes(str);
+	return str;
 };
 
 
@@ -181,12 +182,8 @@ class NodoInterno: public Nodo{
         cur += sizeof(int);
 
         this->InsertarNuevaSubClaveRef( subcl,RefNod);
-
-
-
     }
 }
-
 
     ~NodoInterno(){}
     NodoInterno(){}
@@ -228,7 +225,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
     };
 
 /*sirve para char* */
-template<> Bytes* NodoInterno<char*>::Serializarse(){
+template<> char* NodoInterno<char*>::Serializarse(){
 
     size_t  tamanioTotal = this->getTamanioSerializado();
     /*el string que voy a devolver*/
@@ -284,7 +281,7 @@ template<> Bytes* NodoInterno<char*>::Serializarse(){
     }
     delete pTempInt;
 
-	return (new Bytes(str));
+	return str;
 };
 
 /*sirve para char* */
