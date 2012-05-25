@@ -19,6 +19,14 @@ class Nodo : public InterfazSerializar {
     Nodo(){};
     virtual ~Nodo(){};
 
+    int getRefDelNodo(){
+        return this->RefBloque;
+    }
+
+    void setRefDelNodo(int ref){
+     this->RefBloque= ref;
+    }
+
 
 };
 #endif //

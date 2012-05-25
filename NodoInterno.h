@@ -188,12 +188,13 @@ class NodoInterno: public Nodo{
     }
 }
 
+
     ~NodoInterno(){}
     NodoInterno(){}
 };
 
 
-/* para char* */
+/*sirve para char* */
 template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
 
     size_t tamanioSerializado = 0;
@@ -287,6 +288,7 @@ template<> Bytes* NodoInterno<char*>::Serializarse(){
 	return (new Bytes(str));
 };
 
+/*sirve para char* */
 template<> void NodoInterno<char*>::Hidratar(char* bytes){
 
  	unsigned int cur = sizeof(int);/*cur = cursor primeros 4 para saber tipo*/

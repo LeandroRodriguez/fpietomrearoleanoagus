@@ -22,14 +22,11 @@ class Key : public InterfazSerializar{
 
     public:
 
-	//ESTE METODO ES VOID NO PUEDE DEVOLVER INTS, CHARS*, ETC
 	void* getSubClaveSegunDim( int dim );
-
 
 	Bytes* Serializarse();
 
 	void Hidratar(Bytes* bytes);
-
 
 	unsigned long int getTamanioSerializado();
 };
