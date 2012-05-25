@@ -1,5 +1,16 @@
 #include "Key.h"
 
+    Key::Key(char* str){
+        this->Hidratar(str);
+    }
+
+    Key::~Key(){
+        delete this->Accidente;
+        delete this->Falla;
+        delete this->FranjaHorariaDelSiniestro;
+        delete this->LineaFerroviaria;
+    }
+
 	void* Key::getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
 		if (dim==0)return this->LineaFerroviaria;
 		if (dim==1)return &this->Formacion;
@@ -8,7 +19,6 @@
 		if (dim==4)return this->FranjaHorariaDelSiniestro;
 		return NULL;
 	};
-
 
 	char* Key::Serializarse(){
 
