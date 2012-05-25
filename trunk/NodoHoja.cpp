@@ -105,6 +105,8 @@ void NodoHoja::Hidratar(char* bytes){
 		this->listNroBloque->push_back(nroBloque);
 	}
 };
+
+
 /*
 Key* cargarDato(offset idRegistro, offset nroBloque){
 	Key* dato = new Key();
