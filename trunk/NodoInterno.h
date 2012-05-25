@@ -22,7 +22,6 @@ class NodoInterno: public Nodo{
         unsigned long int Altura
         Dimension         dimension
         unsigned long int  tamanioMaximoNodo;
-        unsigned int  tamanioUsado;
         unsigned long int RefBloque;
     */
 
@@ -61,12 +60,17 @@ class NodoInterno: public Nodo{
 
     bool InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
 
+        bool NoHuboOverflow = true;
+
         SubClaveRef<T>* item = new SubClaveRef<T>(subclave,refAbloqueArbol);
 
         this->ListaSubClaveRef->push_back(item);
         this->ListaSubClaveRef->sort();
         this->CantElem=(this->CantElem)+1;
-        return true;
+
+        if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) NoHuboOverflow=false;
+
+        return NoHuboOverflow;
     };
 
     void Inicializar( int ref1 ,T subclave ,int ref2 ){
@@ -75,7 +79,7 @@ class NodoInterno: public Nodo{
 
         SubClaveRef<T>* NuevaDupla= new SubClaveRef<T>(subclave,ref2);
 
-        this->ListaSubClaveRef->push_back(NuevaDupla);
+        this->InsertarNuevaSubClaveRef(subclave,ref2);
 
     };
 
@@ -186,8 +190,8 @@ class NodoInterno: public Nodo{
         cur += sizeof(int);
 
         this->InsertarNuevaSubClaveRef( subcl,RefNod);
+        }
     }
-}
 
     ~NodoInterno(){}
 };
