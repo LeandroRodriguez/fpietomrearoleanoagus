@@ -2,11 +2,10 @@
 #define INTERFAZSERIALIZAR_H_INCLUDED
 
 #include <iostream>
-#include "ManejoArchivos/Bytes.h"
 
 class InterfazSerializar{
     public:
-        virtual Bytes* Serializarse() = 0;
+        virtual char* Serializarse() = 0;
 
         virtual void Hidratar(char* CodigoBinario ) =0;
 

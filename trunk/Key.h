@@ -29,7 +29,7 @@ class Key : public InterfazSerializar {
     ~Key(){};
 
     unsigned long int getTamanioSerializado();
-    Bytes* Serializarse();
+    char* Serializarse();
     void Hidratar(char* bytes);
 
 };
