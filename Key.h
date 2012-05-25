@@ -25,13 +25,21 @@ class Key : public InterfazSerializar {
 
 	void* getSubClaveSegunDim( int dim );
 
-	Key(){};
+	Key(){
+	    this->Accidente=NULL;
+	    this->Falla=NULL;
+	    this->FranjaHorariaDelSiniestro=NULL;
+	    this->Formacion=-1;
+	    this->LineaFerroviaria=NULL;
+	    };
 
-    ~Key(){};
+	Key(char* str );
+
+    ~Key();
 
     unsigned long int getTamanioSerializado();
     char* Serializarse();
-    void Hidratar(char* bytes);
+    void Hidratar(char* str);
 
 };
 
