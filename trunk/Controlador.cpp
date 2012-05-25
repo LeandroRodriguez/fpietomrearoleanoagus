@@ -33,7 +33,9 @@ void Controlador::InsertarDato(Key* dato){
 	/*si el dato no es null, lo guardo*/
 	if (dato) {
 		/*obtengo los bytes del dato serializado*/
-		Bytes bytes= *(dato->Serializarse());
+		char* byt= (dato->Serializarse());
+		Bytes bytes = Bytes(byt);
+
 		/*creo un registro donde guardo los bytes del dato, y lo guardo en el archivo de data*/
 		RegistroVariable registro(bytes);
 		almacena.agregarRegistro(&registro);
