@@ -84,9 +84,9 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 		/*creo un string auxliar para guardar la cadena total que dps voy a guardar en el archivo*/
 		char auxiliar[LONGITUD_BLOQUE_NODO ];
 		/*serializo el nodo*/
-		char* serial = nodo->Serializarse();
+		Bytes* serial = nodo->Serializarse();
 
-		/*consigo el tamanio serializado y verifico que enre en un bloque*/
+		/*consigo el tamanio serializado y verifico que entre en un bloque*/
 		unsigned long int tam= nodo->getTamanioSerializado();
 		if (tam + 1 > LONGITUD_BLOQUE_NODO ){
 			cerr<<"Dato Mayor al tamaño de bloque."<<endl;
