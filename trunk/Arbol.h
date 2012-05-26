@@ -1,8 +1,8 @@
 #ifndef ARBOL_H_
 #define ARBOL_H_
 
-#include "Constantes.h"
-#include "Nodo.h"
+/*#include "Constantes.h"*/
+/*#include "Nodo.h"*/
 #include "ManejoArchivos/PersistenciaArbol.h"
 #include <list>
 

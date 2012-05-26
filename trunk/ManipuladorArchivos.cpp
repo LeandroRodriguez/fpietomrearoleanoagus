@@ -1,10 +1,3 @@
-/*
- * ManipuladorArchivos.cpp
- *
- *  Created on: Oct 7, 2010
- *      Author: peta
- */
-
 #include "ManipuladorArchivos.h"
 #include <stdlib.h>
 

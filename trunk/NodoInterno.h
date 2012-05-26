@@ -6,7 +6,7 @@
 #include <string.h>
 #include <cstring>
 #include "Nodo.h"
-#include "Key.h"
+/*#include "Key.h"*/
 #include "SubClaveRef.h"
 #include <typeinfo>
 
@@ -243,6 +243,10 @@ class NodoInterno: public Nodo{
 
     ~NodoInterno(){}
 
+    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato){
+
+        return RES_OK;
+    }
 
 };
 
@@ -279,7 +283,7 @@ template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
 	return tamanioSerializado;
 
 
-    };
+    }
 
 /*sirve para char* */
 template<> char* NodoInterno<char*>::Serializarse(){
@@ -339,7 +343,7 @@ template<> char* NodoInterno<char*>::Serializarse(){
     delete pTempInt;
 
 	return str;
-};
+}
 
 /*sirve para char* */
 template<> void NodoInterno<char*>::Hidratar(char* bytes){
@@ -382,7 +386,7 @@ template<> void NodoInterno<char*>::Hidratar(char* bytes){
 
 
         }
-    };
+    }
 
 
 template<> char* NodoInterno<char*>::conseguirClaveQueDividaAlMedioPonderadoElNodo(){
@@ -420,5 +424,5 @@ template<> char* NodoInterno<char*>::conseguirClaveQueDividaAlMedioPonderadoElNo
         }
 
         return (*it)->getSubClave();
-    };
+    }
 #endif

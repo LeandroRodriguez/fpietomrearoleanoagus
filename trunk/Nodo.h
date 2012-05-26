@@ -34,9 +34,7 @@ class Nodo : public InterfazSerializar {
 
     }
 
-    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato);
-
-
+    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato)=0;
 
 
 };

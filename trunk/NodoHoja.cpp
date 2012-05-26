@@ -153,7 +153,7 @@ int NodoHoja::getTamanioConDatos()
 };
 
 
-Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBloque)
+Resultado NodoHoja::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato)
 {
 	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
 	Si lo encuentra, devuelve como resultado RES_DUPLICADO.
@@ -162,7 +162,7 @@ Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBlo
 	sino, devuelve RES_OK
 	*/
 
-	list<int>::iterator itRegistros;
+	/*list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
 
 	list<int>::iterator itBloques;
@@ -172,19 +172,19 @@ Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBlo
 		offset idReg = *itRegistros;
 		offset nroBlo = *itBloques;
 		Key* d = this->cargarDato(idReg, nroBlo);
-		if(dato->esIgual(d))
+		if(d->esIgual(d))
 			return RES_DUPLICADO;
 		itBloques++;
         }
 
-	this->listIdRegistros->push_back(idRegistro);
-	this->listNroBloque->push_back(nroBloque);
+	this->listIdRegistros->push_back(idReg);
+	this->listNroBloque->push_back(nroBlo);
 
 	//chequeo overflow
 	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO)
 		return RES_DESBORDADO;
 
-	return RES_OK;
+	return RES_OK;*/
 
 };
 
