@@ -107,7 +107,7 @@ void NodoHoja::Hidratar(char* bytes){
 };
 
 
-/*
+
 Key* cargarDato(offset idRegistro, offset nroBloque){
 	Key* dato = new Key();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
@@ -117,6 +117,64 @@ Key* cargarDato(offset idRegistro, offset nroBloque){
 
 	dato -> Hidratar(b);
 	return dato;
-}*/
+};
+
+int getTamanioConDatos()
+{
+	int tamanio;
+	list<int>::iterator itRegistros;
+	itRegistros= this->listIdRegistros->begin();
+
+	list<int>::iterator itBloques;
+	itBloques= this->listNroBloque->begin();
+
+	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
+		offset idReg = *itRegistros;
+		offset nroBlo = *itBloques;
+		Key* d = this->cargarDato(idReg, nroBlo)
+
+		tamanio += dato->getTamanioSerializado();
+		itBloques++;
+        }
+	tamanio += sizeof(this->proximaHoja);
+	return tamanio;
+	
+};
+
+
+Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBloque)
+{
+	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
+	Si lo encuentra, devuelve como resultado RES_DUPLICADO.
+
+	Si el nodo hoja desborda, Devuelve  RES_DESBORDADO  
+	sino, devuelve RES_OK
+	*/
+	
+	list<int>::iterator itRegistros;
+	itRegistros= this->listIdRegistros->begin();
+
+	list<int>::iterator itBloques;
+	itBloques= this->listNroBloque->begin();
+
+	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
+		offset idReg = *itRegistros;
+		offset nroBlo = *itBloques;
+		Key* d = this->cargarDato(idReg, nroBlo)
+		if(dato->esIgual(d))
+			return RES_DUPLICADO;
+		itBloques++;
+        }
+	
+	this->listIdRegistros->push_back(idRegistro);
+	this->listNroBloque->push_back(nroBloque);
+	
+	//chequeo overflow	
+	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO)		
+		return RES_DESBORDADO;
+	
+	return RES_OK;
+
+};
 
 

@@ -60,6 +60,12 @@ Bytes RegistroVariable::serializarse() {
 	}
 	serializacion += streamTamanio.str();//agrego el tamanio del dato a la serializacion
 
+	//Vivo
+	if(this->vivo)
+		serializacion += "1";
+	else
+		serializacion += "0";
+	
 	//DATO
 	serializacion += dato.toString();//agrego el dato a la serializacion
 
@@ -72,11 +78,13 @@ void RegistroVariable::hidratarse(const Bytes& cadena) {
 	}
 
 	this->nRegistro = atoi(cadena.getSubBytes(0,LONGITUD_CANT_BYTES).toString().c_str());//tomo los primeros LONGITUD_CANT_BYTES bytes para el uid
-	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, 2 * LONGITUD_CANT_BYTES).toString().c_str());
-	//no entiendo por que toma 2* LONGITUD_CANT_BYTES. deberia ser LONGITUD_CANT_BYTES
+	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, LONGITUD_CANT_BYTES).toString().c_str());
 	//tomo los segundos LONGITUD_CANT_BYTES bytes para el tamanioregitsro
+	
+	char a = cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,1);
+	this->vivo = (a=="1");
 
-	this->setDato(cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,tamanioRegistro));
+	this->setDato(cadena.getSubBytes(2 * LONGITUD_CANT_BYTES + 1,tamanioRegistro));
 	this->tamanioDato = tamanioRegistro;
 }
 

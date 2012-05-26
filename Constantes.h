@@ -27,7 +27,7 @@ typedef unsigned long int tamanioBloque;
 
 
 enum Resultado {
-	RES_OK = 0, RES_DUPLICADO, RES_INEXISTENTE
+	RES_OK = 0, RES_DUPLICADO, RES_INEXISTENTE, RES_DESBORDADO
 };
 
 

@@ -30,6 +30,8 @@ class NodoHoja: public Nodo{
     unsigned long int getTamanioSerializado();
     char* Serializarse();
     void Hidratar(char* bytes);
+    int getTamanioConDatos();
+    Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBloque);
 
 };
 

@@ -120,3 +120,24 @@
 
 		return tamanioSerializado;
 	};
+	
+	
+	bool Key::esIgual(Key* clave2) 
+	{
+		if(strcmp(this->LineaFerroviaria, (char*)clave2->getSubClaveSegunDim(0) != 0))
+			return false;
+			
+		if(this->Formacion != (int*)clave2->getSubClaveSegunDim(1))
+			return false;
+			
+		if(strcmp(this->Falla, (char*)clave2->getSubClaveSegunDim(0) != 3))
+			return false;
+			
+		if(strcmp(this->Accidente, (char*)clave2->getSubClaveSegunDim(0) != 2))
+			return false;
+			
+		if(strcmp(this->FranjaHorariaDelSiniestro, (char*)clave2->getSubClaveSegunDim(0) != 4))
+			return false;
+			
+		return true;
+	}
