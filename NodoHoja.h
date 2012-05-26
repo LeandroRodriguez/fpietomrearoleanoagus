@@ -1,13 +1,13 @@
 #ifndef NODOHOJA_H_INCLUDED
 #define NODOHOJA_H_INCLUDED
 
+#include <typeinfo>
 #include <iostream>
 #include <list>
 #include "Nodo.h"
-/*#include "Key.h"*/
-/*#include "Constantes.h"*/
 #include "ManejoArchivos/AlmacenamientoBloque.h"
 #include <malloc.h>
+
 
 class NodoHoja: public Nodo{
 
@@ -32,7 +32,7 @@ class NodoHoja: public Nodo{
     char* Serializarse();
     void Hidratar(char* bytes);
     int getTamanioConDatos();
-    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato);
+    Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato);
 
 };
 

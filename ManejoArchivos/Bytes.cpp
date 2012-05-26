@@ -46,7 +46,7 @@ bool Bytes::agregar(const Bytes& bytes,offset offset) {
 		return false;
 	}
 
-	this->bytes.insert(offset,bytes.toString());//a partir de la posición offset, guardo bytes
+	this->bytes.insert(offset,bytes.toString());//a partir de la posiciï¿½n offset, guardo bytes
 	return true;
 }
 
@@ -56,7 +56,7 @@ bool Bytes::agregar(const string &bytes,offset offset) {
 		return false;
 	}
 
-	this->bytes.insert(offset,bytes);//a partir de la posición offset, guardo bytes
+	this->bytes.insert(offset,bytes);//a partir de la posiciï¿½n offset, guardo bytes
 	return true;
 }
 
@@ -67,7 +67,7 @@ bool Bytes::agregar(void* dato, int tamanio, offset offset) {
 	memcpy(aux,dato,tamanio);//copio en aux el dato y lo agrego a aux
 	str.append(aux,tamanio);//agrega a str una copia de los primeros tamanio caracteres de aux
 
-	return agregar(str,offset);//agrega a this->bytes el string str en la posición offset
+	return agregar(str,offset);//agrega a this->bytes el string str en la posiciï¿½n offset
 }
 
 bool Bytes::agregarAlFinal(const string &bytes) {

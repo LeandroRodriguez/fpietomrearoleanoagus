@@ -3,7 +3,6 @@
 
 #include <stdlib.h>
 #include "Bytes.h"
-/*#include "../Constantes.h"*/
 #include <string>
 #include <string.h>
 

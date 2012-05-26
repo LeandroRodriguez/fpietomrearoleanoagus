@@ -2,7 +2,6 @@
 #define NODO_H_INCLUDED
 
 #include <iostream>
-#include "InterfazSerializar.h"
 #include "Key.h"
 
 class Nodo : public InterfazSerializar {
@@ -17,8 +16,8 @@ class Nodo : public InterfazSerializar {
     unsigned int idBloque;
 
     public:
-    Nodo(){};
-    virtual ~Nodo(){};
+    Nodo();
+    virtual ~Nodo();
 
     int getIdDelNodo(){
         return this->idBloque;
@@ -34,7 +33,9 @@ class Nodo : public InterfazSerializar {
 
     }
 
-    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato)=0;
+    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato) = 0;
+
+
 
 
 };

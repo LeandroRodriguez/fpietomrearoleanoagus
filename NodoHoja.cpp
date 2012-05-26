@@ -8,7 +8,7 @@ NodoHoja::NodoHoja(){
 	this->listIdRegistros = new list<int>();
 	this->listNroBloque = new list<int>();
 
-    };
+    }
 
 unsigned long int NodoHoja::getTamanioSerializado(){
 
@@ -35,7 +35,7 @@ unsigned long int NodoHoja::getTamanioSerializado(){
         }
 
 	return tamanioSerializado;
-};
+}
 
     NodoHoja::NodoHoja(char* str){
     this->tamanioMaximoNodo=0;
@@ -81,7 +81,7 @@ char* NodoHoja::Serializarse()
         }
 
 	return str;
-};
+}
 
 void NodoHoja::Hidratar(char* bytes){
 
@@ -111,7 +111,7 @@ void NodoHoja::Hidratar(char* bytes){
 		cur += sizeof(int);
 		this->listNroBloque->push_back(nroBloque);
 	}
-};
+}
 
 
 
@@ -124,11 +124,12 @@ Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 
 	char* bla = new char[b->toString().length() ];
 
-	memcpy(bla,&b->toString(),b->toString().length());
+	string bb = b->toString();
+	memcpy(bla,&bb,b->toString().length());
 
 	dato -> Hidratar(bla);
 	return dato;
-};
+}
 
 int NodoHoja::getTamanioConDatos()
 {
@@ -150,10 +151,10 @@ int NodoHoja::getTamanioConDatos()
 	tamanio += sizeof(this->proximaHoja);
 	return tamanio;
 
-};
+}
 
 
-Resultado NodoHoja::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato)
+Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* dato)
 {
 	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
 	Si lo encuentra, devuelve como resultado RES_DUPLICADO.
@@ -162,7 +163,7 @@ Resultado NodoHoja::insertarElemento(offset nroBloque, offset nroRegistro, Key* 
 	sino, devuelve RES_OK
 	*/
 
-	/*list<int>::iterator itRegistros;
+	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
 
 	list<int>::iterator itBloques;
@@ -172,19 +173,19 @@ Resultado NodoHoja::insertarElemento(offset nroBloque, offset nroRegistro, Key* 
 		offset idReg = *itRegistros;
 		offset nroBlo = *itBloques;
 		Key* d = this->cargarDato(idReg, nroBlo);
-		if(d->esIgual(d))
+		if(dato->esIgual(d))
 			return RES_DUPLICADO;
 		itBloques++;
         }
 
-	this->listIdRegistros->push_back(idReg);
-	this->listNroBloque->push_back(nroBlo);
+	this->listIdRegistros->push_back(idRegistro);
+	this->listNroBloque->push_back(nroBloque);
 
 	//chequeo overflow
 	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO)
 		return RES_DESBORDADO;
 
-	return RES_OK;*/
+	return RES_OK;
 
 };
 

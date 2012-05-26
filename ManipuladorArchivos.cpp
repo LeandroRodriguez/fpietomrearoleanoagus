@@ -82,4 +82,4 @@ void ManipuladorArchivos::creoCarpeta(string dir){
 	 closedir(dp);
 
 
-}
+};

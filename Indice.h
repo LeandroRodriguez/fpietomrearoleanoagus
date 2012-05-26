@@ -3,10 +3,7 @@
 
 #include <iostream>
 #include "Arbol.h"
-#include "Key.h"
 
-#include "Constantes.h"
-#include "ManejoArchivos/PersistenciaArbol.h"
 using namespace std;
 
 class Indice {
@@ -26,7 +23,7 @@ public:
 	Resultado agregarDato(offset nroBloque, offset nroRegistro, Key* dato);
 	Indice(string nombreArchivo);
 	virtual ~Indice();
-	virtual offset buscar(Key* dato);
+	virtual offset buscar(Key* dato){}
 };
 
 #endif /* INDICE_H_ */

@@ -18,7 +18,7 @@
 		if (dim==3)return this->Falla;
 		if (dim==4)return this->FranjaHorariaDelSiniestro;
 		return NULL;
-	};
+	}
 
 	char* Key::Serializarse(){
 
@@ -60,7 +60,7 @@
 
         delete pLong;
 		return  str;
-	};
+	}
 
 	void Key::Hidratar(char* str){
 
@@ -106,7 +106,7 @@
 
 		delete pLong;
 
-	};
+	}
 
 	unsigned long int Key::getTamanioSerializado(){
 
@@ -119,7 +119,7 @@
 		tamanioSerializado += strlen(this->FranjaHorariaDelSiniestro);
 
 		return tamanioSerializado;
-	};
+	}
 
 	bool Key::esIgual(Key* clave2){
 		if(strcmp(this->LineaFerroviaria, (char*)clave2->getSubClaveSegunDim(0)) != 0)
@@ -138,4 +138,4 @@
 			return false;
 
 		return true;
-	}
+	};

@@ -7,10 +7,8 @@
 #include "exception"
 #include "iostream"/* por que va con " " esto?  */
 
-/*#include "../Nodo.h"*/
 #include "../NodoHoja.h"
 #include "../NodoInterno.h"
-/*#include "../Constantes.h"*/
 
 using namespace std;
 class PersistenciaArbol {

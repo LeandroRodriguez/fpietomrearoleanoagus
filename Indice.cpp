@@ -68,4 +68,4 @@ long int Indice::getTamanioSerializado(){
 bool Indice::hidratarMetada(char* metadata){
 	memcpy(&(this->arbol->cantidadElem) ,metadata,sizeof(this->arbol->cantidadElem));
 	return true;
-}
+};
