@@ -25,6 +25,7 @@ class NodoHoja: public Nodo{
     public:
 
     NodoHoja(int dimension, int refBloque);
+    NodoHoja(char* str);
     ~NodoHoja(){};
 
     unsigned long int getTamanioSerializado();
