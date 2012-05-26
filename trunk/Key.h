@@ -40,7 +40,7 @@ class Key : public InterfazSerializar {
     unsigned long int getTamanioSerializado();
     char* Serializarse();
     void Hidratar(char* str);
-    bool Key::esIgual(Key* clave2) 
+    bool esIgual(Key* clave2);
 
 };
 

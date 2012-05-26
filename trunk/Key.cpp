@@ -127,18 +127,16 @@
 		if(strcmp(this->LineaFerroviaria, (char*)clave2->getSubClaveSegunDim(0)) != 0)
 			return false;
 
-		if(this->Formacion != clave2->getSubClaveSegunDim(1))
+		if(this->Formacion != *((int*)(clave2->getSubClaveSegunDim(1))))
 			return false;
 
+		if(strcmp(this->Accidente, (char*)clave2->getSubClaveSegunDim(2)) != 0)
+			return false;
 
-		if(strcmp(this->Falla, (char*)clave2->getSubClaveSegunDim(3) != 0))
+		if(strcmp(this->Falla, (char*)clave2->getSubClaveSegunDim(3)) != 0)
             return false;
 
-
-		if(strcmp(this->Accidente, (char*)clave2->getSubClaveSegunDim(2) != 0))
-			return false;
-
-		if(strcmp(this->FranjaHorariaDelSiniestro, (char*)clave2->getSubClaveSegunDim(4) != 0))
+		if(strcmp(this->FranjaHorariaDelSiniestro, (char*)clave2->getSubClaveSegunDim(4)) != 0)
 			return false;
 
 		return true;
