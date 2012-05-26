@@ -38,7 +38,7 @@ unsigned long int NodoHoja::getTamanioSerializado(){
 	return tamanioSerializado;
 };
 
-void    NodoHoja::NodoHoja(char* str){
+    NodoHoja::NodoHoja(char* str){
     this->tamanioMaximoNodo=0;
     this->CantElem=0;
     this->listIdRegistros = new list<int>();
@@ -46,7 +46,7 @@ void    NodoHoja::NodoHoja(char* str){
     this->Hidratar(str);
     }
 
-Bytes* NodoHoja::Serializarse()
+char* NodoHoja::Serializarse()
 {
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
@@ -81,7 +81,7 @@ Bytes* NodoHoja::Serializarse()
 		itBloques++;
         }
 
-	return new Bytes(str);
+	return str;
 };
 
 void NodoHoja::Hidratar(char* bytes){
@@ -116,18 +116,22 @@ void NodoHoja::Hidratar(char* bytes){
 
 
 
-Key* cargarDato(offset idRegistro, offset nroBloque){
+Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 	Key* dato = new Key();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
 
 	Bytes bytes = almacena.recuperarRegistro(nroBloque, idRegistro);
 	Bytes* b = &bytes;
 
-	dato -> Hidratar(b);
+	char* bla = new char[b->toString().length() ];
+
+	memcpy(bla,&b->toString(),b->toString().length());
+
+	dato -> Hidratar(bla);
 	return dato;
 };
 
-int getTamanioConDatos()
+int NodoHoja::getTamanioConDatos()
 {
 	int tamanio;
 	list<int>::iterator itRegistros;
@@ -139,7 +143,7 @@ int getTamanioConDatos()
 	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
 		offset idReg = *itRegistros;
 		offset nroBlo = *itBloques;
-		Key* d = this->cargarDato(idReg, nroBlo)
+		Key* dato = this->cargarDato(idReg, nroBlo);
 
 		tamanio += dato->getTamanioSerializado();
 		itBloques++;
@@ -168,7 +172,7 @@ Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBlo
 	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
 		offset idReg = *itRegistros;
 		offset nroBlo = *itBloques;
-		Key* d = this->cargarDato(idReg, nroBlo)
+		Key* d = this->cargarDato(idReg, nroBlo);
 		if(dato->esIgual(d))
 			return RES_DUPLICADO;
 		itBloques++;
