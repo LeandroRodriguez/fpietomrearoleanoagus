@@ -32,7 +32,8 @@ Indice::~Indice() {
 /*
 offset Indice::buscar(Key* dato){
 	Resultado resul = RES_OK;
-	return this->arbol->buscar(dato, resul);
+	//return this->arbol->buscar(dato, resul);
+	return 0;
 }*/
 
 
@@ -48,7 +49,7 @@ Resultado Indice::agregarDato(offset nroBloque, offset nroRegistro, Key* dato){
 }
 /*
 void Indice::imprimir(){
-	this->arbol->imprimir();
+	//this->arbol->imprimir();
 }*/
 
 char* Indice::serializarMetadata(){
