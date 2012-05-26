@@ -84,6 +84,33 @@ class NodoInterno: public Nodo{
     };
 
     /* sirve solo para tipos clasicos, int, double, word etc */
+    T conseguirClaveQueDividaAlMedioPonderadoElNodo(){
+
+        typename list< SubClaveRef<T> >::iterator it;
+
+        it = this->ListaSubClaveRef->begin();
+
+        T Suma=0;
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+
+            SubClaveRef<T>* cosa = *it;
+
+            T cosa->getSubClave();
+
+
+
+            }
+
+
+
+
+    }
+
+
+
+
+    /* sirve solo para tipos clasicos, int, double, word etc */
     unsigned long int getTamanioSerializado(){
 
 	size_t tamanioSerializado = 0;
@@ -158,7 +185,6 @@ class NodoInterno: public Nodo{
 
 	return str;
 };
-
 
 /*para tipos comunes  */
     void Hidratar(char* bytes){
