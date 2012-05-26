@@ -10,10 +10,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-#include "../Constantes.h"
+
 //#include "Almacenamiento.h"
-#include "Bytes.h"
-#include "RegistroVariable.h"
+
 #include "Bloque.h"
 
 using namespace std;

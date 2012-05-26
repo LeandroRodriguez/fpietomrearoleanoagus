@@ -1,9 +1,3 @@
-/*
- * Bloque.h
- *
- *	¿Commenting?: Leo
- */
-
 #ifndef BLOQUE_H_
 #define BLOQUE_H_
 

@@ -1,10 +1,3 @@
-/*
- * PersistenciaIndices.h
- *
- *  Created on: Sep 22, 2010
- *      Author: peta
- */
-
 #ifndef PERSISTENCIAINDICES_H_
 #define PERSISTENCIAINDICES_H_
 
@@ -12,7 +5,7 @@
 #include <fstream>
 #include "string"
 #include "exception"
-#include "iostream"
+#include "iostream"/* por que va con " " esto?  */
 
 #include "../Nodo.h"
 #include "../NodoHoja.h"

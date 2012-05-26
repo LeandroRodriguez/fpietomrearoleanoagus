@@ -69,12 +69,12 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 			return false;
 		}
 
-		if (! this->existeBloque( nodo->getRefDelNodo())){
-			cerr<< "Metodo: Actualizar. Nro de bloque inexistente. Nro: "<< nodo->getRefDelNodo();
+		if (! this->existeBloque( nodo->getIdDelNodo())){
+			cerr<< "Metodo: Actualizar. Nro de bloque inexistente. Nro: "<< nodo->getIdDelNodo();
 			return false;
 		}
 
-		if (nodo->getRefDelNodo() == ID_RAIZ){
+		if (nodo->getIdDelNodo() == ID_RAIZ){
 			return NULL;
 		}
 
@@ -99,7 +99,7 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 		}
 
 		/*posiciono el get pointer en el principio + Long*nroBloque (al ppio del bloque a actualizar)*/
-		archivo.seekg((nodo->getRefDelNodo()) * LONGITUD_BLOQUE_NODO , ios::beg);
+		archivo.seekg((nodo->getIdDelNodo()) * LONGITUD_BLOQUE_NODO , ios::beg);
 		/*escribo en el archivo y guardo*/
 		archivo.write(auxiliar, LONGITUD_BLOQUE_NODO);
 		archivo.flush();
@@ -117,7 +117,7 @@ Nodo* PersistenciaArbol::obtenerRaiz(){
 /*devuelvo true si pude actualizar, false si no*/
 bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 
-        nodo->setRefDelNodo(ID_RAIZ);
+        nodo->setIdDelNodo(ID_RAIZ);
         return this->agregarNodo(nodo);
 
 }
@@ -132,12 +132,12 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 
 	 offset rta;
 
-    if(nodo->getRefDelNodo()!=ID_RAIZ){
+    if(nodo->getIdDelNodo()!=ID_RAIZ){
         /* busco nodo libre,LA raiz es el unico nodo que ya viene seteado*/
         rta = this->NroNodoNuevo();
-        nodo->setRefDelNodo(rta);
+        nodo->setIdDelNodo(rta);
     }else{
-         rta=nodo->getRefDelNodo();
+         rta=nodo->getIdDelNodo();
          }
 
 	/*pido el serial y me fijo que entre*/
