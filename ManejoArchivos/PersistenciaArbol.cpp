@@ -75,7 +75,6 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 		}
 
 		if (nodo->getRefDelNodo() == ID_RAIZ){
-			cerr<< "Metodo: ActualizarNodo. Se quiere guardar la raiz con el metodo inorrecto." << endl;
 			return NULL;
 		}
 
@@ -268,7 +267,7 @@ bool PersistenciaArbol::cargarMetaDatos(char* metadatos, long int tamanio){
 	}
 
 	/*me posiciono al ppio del archivo, escribo y guardo*/
-	archivo.seekg(0 , ios::beg);
+	archivo.seekg(rta , ios::beg);
 
 	archivo.write(auxiliar, LONGITUD_BLOQUE_NODO);
 	archivo.flush();
