@@ -8,7 +8,7 @@ template<class T> class SubClaveRef{
 
     public:
 
-     T getSubClave(){
+     T getSubClave()const{
         return this->subclave;
     };
 
@@ -17,9 +17,15 @@ template<class T> class SubClaveRef{
 
         };
 
-    bool operator< (const SubClaveRef* otro ){
+    bool operator< (const SubClaveRef<T>* otro ){
 
         return ( this->subclave < otro->getSubCLave() );
+
+        };
+
+    bool operator == (const SubClaveRef<T>* otro ){
+
+        return ( this->subclave == otro->getSubCLave() );
 
         };
 
@@ -32,5 +38,19 @@ template<class T> class SubClaveRef{
     };
 
 };
+/*para ordenar char*  */
+template<> bool SubClaveRef<char*>::operator< (const SubClaveRef<char*>* otro){
+    int hola = strcmp ( this->subclave , otro->getSubClave() );
+    if ( hola <0)return true;
+    return false;
+    /* http://www.cplusplus.com/reference/clibrary/cstring/strcmp/ */
+}
+
+template<> bool SubClaveRef<char*>::operator== (const SubClaveRef<char*>* otro){
+    int hola = strcmp ( this->subclave , otro->getSubClave() );
+    if ( hola ==0)return true;
+    return false;
+
+}
 
 #endif // SUBCLAVEREF_H_INCLUDED

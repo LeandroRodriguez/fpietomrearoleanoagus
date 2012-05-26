@@ -13,7 +13,6 @@
 using namespace std;
 
 
-
 template<class T>
 class NodoInterno: public Nodo{
 
@@ -30,6 +29,23 @@ class NodoInterno: public Nodo{
     int Ref1erNodo;
 
     list< SubClaveRef<T>* >* ListaSubClaveRef;
+
+    /*funciona para char*,y todos los demas tipos  */
+    bool VerSiSeRepiteSubclave(SubClaveRef<T>* item){
+        typename list< SubClaveRef<T>* >::iterator it;
+        it = this->ListaSubClaveRef->begin();
+
+        bool NoSeRepite=true;
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+                SubClaveRef<T>* cosa = *it;
+                if( cosa == item ){
+                    NoSeRepite=false;
+                    break;
+                    }
+                }
+        return NoSeRepite;
+    }
 
     public:
 
@@ -52,13 +68,13 @@ class NodoInterno: public Nodo{
 
     NodoInterno(int ref1,T subclave ,int ref2){
 
-        this->ListaSubClaveRef= new list<SubClaveRef<T> >;
+        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
 
         this->Inicializar(ref1,subclave,ref2);
 
     };
 
-    bool InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
+    Resultado InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
         /*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
         Si lo encuentra, devuelve como resultado RES_DUPLICADO.
 
@@ -66,6 +82,8 @@ class NodoInterno: public Nodo{
         sino, devuelve RES_OK*/
 
         SubClaveRef<T>* item = new SubClaveRef<T>(subclave,refAbloqueArbol);
+
+        if( this->VerSiSeRepiteSubclave(item) )return RES_DUPLICADO;
 
         this->ListaSubClaveRef->push_back(item);
         this->ListaSubClaveRef->sort();
@@ -110,7 +128,6 @@ class NodoInterno: public Nodo{
 
         return cosa->getSubClave();
     }
-
 
     /* sirve solo para tipos clasicos, int, double, word etc */
     unsigned long int getTamanioSerializado(){
