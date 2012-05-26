@@ -59,8 +59,11 @@ class NodoInterno: public Nodo{
     };
 
     bool InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
+        /*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
+        Si lo encuentra, devuelve como resultado RES_DUPLICADO.
 
-        bool NoHuboOverflow = true;
+        Si el nodo hoja desborda, Devuelve  RES_DESBORDADO
+        sino, devuelve RES_OK*/
 
         SubClaveRef<T>* item = new SubClaveRef<T>(subclave,refAbloqueArbol);
 
@@ -68,9 +71,9 @@ class NodoInterno: public Nodo{
         this->ListaSubClaveRef->sort();
         this->CantElem=(this->CantElem)+1;
 
-        if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) NoHuboOverflow=false;
+        if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
 
-        return NoHuboOverflow;
+        return RES_OK;
     };
 
     void Inicializar( int ref1 ,T subclave ,int ref2 ){

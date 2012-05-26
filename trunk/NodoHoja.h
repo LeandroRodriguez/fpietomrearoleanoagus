@@ -31,7 +31,7 @@ class NodoHoja: public Nodo{
     char* Serializarse();
     void Hidratar(char* bytes);
     int getTamanioConDatos();
-    Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBloque);
+    Resultado insertarElemento(Key* dato, offset idRegistro, offset nroBloque);
 
 };
 
