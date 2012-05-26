@@ -38,6 +38,14 @@ unsigned long int NodoHoja::getTamanioSerializado(){
 	return tamanioSerializado;
 };
 
+void    NodoHoja::NodoHoja(char* str){
+    this->tamanioMaximoNodo=0;
+    this->CantElem=0;
+    this->listIdRegistros = new list<int>();
+	this->listNroBloque = new list<int>();
+    this->Hidratar(str);
+    }
+
 Bytes* NodoHoja::Serializarse()
 {
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
@@ -138,7 +146,7 @@ int getTamanioConDatos()
         }
 	tamanio += sizeof(this->proximaHoja);
 	return tamanio;
-	
+
 };
 
 
@@ -147,10 +155,10 @@ Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBlo
 	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
 	Si lo encuentra, devuelve como resultado RES_DUPLICADO.
 
-	Si el nodo hoja desborda, Devuelve  RES_DESBORDADO  
+	Si el nodo hoja desborda, Devuelve  RES_DESBORDADO
 	sino, devuelve RES_OK
 	*/
-	
+
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
 
@@ -165,14 +173,14 @@ Resultado NodoHoja::insertarElemento(Key* dato, offset idRegistro, offset nroBlo
 			return RES_DUPLICADO;
 		itBloques++;
         }
-	
+
 	this->listIdRegistros->push_back(idRegistro);
 	this->listNroBloque->push_back(nroBloque);
-	
-	//chequeo overflow	
-	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO)		
+
+	//chequeo overflow
+	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO)
 		return RES_DESBORDADO;
-	
+
 	return RES_OK;
 
 };
