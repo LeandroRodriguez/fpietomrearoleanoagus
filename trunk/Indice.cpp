@@ -29,10 +29,11 @@ Indice::~Indice() {
 	delete (this->persistencia);
 }
 
+/*
 offset Indice::buscar(Key* dato){
 	Resultado resul = RES_OK;
 	return this->arbol->buscar(dato, resul);
-}
+}*/
 
 
 Resultado Indice::agregarDato(offset nroBloque, offset nroRegistro, Key* dato){
@@ -45,10 +46,10 @@ Resultado Indice::agregarDato(offset nroBloque, offset nroRegistro, Key* dato){
 	free (ser);
     return res;
 }
-
+/*
 void Indice::imprimir(){
 	this->arbol->imprimir();
-}
+}*/
 
 char* Indice::serializarMetadata(){
 	int tam = this->getTamanioSerializado();

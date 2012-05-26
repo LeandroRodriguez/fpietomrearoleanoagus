@@ -14,7 +14,6 @@
 //#include "Datos/Clave.h"
 #include "Indice.h"
 
-#include "Controlador.h"
 #include "exception"
 #include "string"
 #include "iostream"

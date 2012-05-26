@@ -121,9 +121,7 @@
 		return tamanioSerializado;
 	};
 
-
-	bool Key::esIgual(Key* clave2)
-	{
+	bool Key::esIgual(Key* clave2){
 		if(strcmp(this->LineaFerroviaria, (char*)clave2->getSubClaveSegunDim(0)) != 0)
 			return false;
 

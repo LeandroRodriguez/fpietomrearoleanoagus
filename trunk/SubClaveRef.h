@@ -44,13 +44,13 @@ template<> bool SubClaveRef<char*>::operator< (const SubClaveRef<char*>* otro){
     if ( hola <0)return true;
     return false;
     /* http://www.cplusplus.com/reference/clibrary/cstring/strcmp/ */
-}
+};
 
 template<> bool SubClaveRef<char*>::operator== (const SubClaveRef<char*>* otro){
     int hola = strcmp ( this->subclave , otro->getSubClave() );
     if ( hola ==0)return true;
     return false;
 
-}
+};
 
 #endif // SUBCLAVEREF_H_INCLUDED

@@ -420,5 +420,5 @@ template<> char* NodoInterno<char*>::conseguirClaveQueDividaAlMedioPonderadoElNo
         }
 
         return (*it)->getSubClave();
-    }
+    };
 #endif

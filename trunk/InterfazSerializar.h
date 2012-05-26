@@ -1,8 +1,6 @@
 #ifndef INTERFAZSERIALIZAR_H_INCLUDED
 #define INTERFAZSERIALIZAR_H_INCLUDED
 
-#include <iostream>
-
 class InterfazSerializar{
     public:
         virtual char* Serializarse() = 0;

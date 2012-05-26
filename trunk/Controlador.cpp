@@ -45,7 +45,7 @@ void Controlador::InsertarDato(Key* dato){
 		/*borro el indice primario*/
 		delete indicePrimario;//linea peligrosa quizas, mirarla en caso de que algo falle
 	}
-}
+};
 
 
 /*
