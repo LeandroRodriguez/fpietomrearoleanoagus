@@ -4,8 +4,8 @@
 #include <iostream>
 #include <list>
 #include "Nodo.h"
-#include "Key.h"
-#include "Constantes.h"
+/*#include "Key.h"*/
+/*#include "Constantes.h"*/
 #include "ManejoArchivos/AlmacenamientoBloque.h"
 #include <malloc.h>
 
@@ -32,7 +32,7 @@ class NodoHoja: public Nodo{
     char* Serializarse();
     void Hidratar(char* bytes);
     int getTamanioConDatos();
-    Resultado insertarElemento(Key* dato, offset idRegistro, offset nroBloque);
+    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato);
 
 };
 
