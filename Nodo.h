@@ -27,6 +27,13 @@ class Nodo : public InterfazSerializar {
      this->RefBloque= ref;
     }
 
+    char getHojaOInterno(){
+        if (this->Altura>0)return 'I';
+        return 'H';
+
+    }
+
+
 
 
 };
