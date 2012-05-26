@@ -65,7 +65,7 @@ Bytes RegistroVariable::serializarse() {
 		serializacion += "1";
 	else
 		serializacion += "0";
-	
+
 	//DATO
 	serializacion += dato.toString();//agrego el dato a la serializacion
 
@@ -80,7 +80,7 @@ void RegistroVariable::hidratarse(const Bytes& cadena) {
 	this->nRegistro = atoi(cadena.getSubBytes(0,LONGITUD_CANT_BYTES).toString().c_str());//tomo los primeros LONGITUD_CANT_BYTES bytes para el uid
 	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, LONGITUD_CANT_BYTES).toString().c_str());
 	//tomo los segundos LONGITUD_CANT_BYTES bytes para el tamanioregitsro
-	
+
 	string a = cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,1).toString();
 	this->vivo = (a=="1");
 
