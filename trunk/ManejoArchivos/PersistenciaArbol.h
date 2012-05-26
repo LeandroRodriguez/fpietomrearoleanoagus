@@ -1,5 +1,5 @@
-#ifndef PERSISTENCIAINDICES_H_
-#define PERSISTENCIAINDICES_H_
+#ifndef PERSISTENCIAARBOL_H_
+#define PERSISTENCIAARBOL_H_
 
 #include <iostream>
 #include <fstream>
@@ -7,10 +7,10 @@
 #include "exception"
 #include "iostream"/* por que va con " " esto?  */
 
-#include "../Nodo.h"
+/*#include "../Nodo.h"*/
 #include "../NodoHoja.h"
 #include "../NodoInterno.h"
-#include "../Constantes.h"
+/*#include "../Constantes.h"*/
 
 using namespace std;
 class PersistenciaArbol {

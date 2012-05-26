@@ -262,7 +262,7 @@ bool PersistenciaArbol::cargarMetaDatos(char* metadatos, long int tamanio){
 	offset 	rta = 0;
 	char auxiliar[LONGITUD_BLOQUE_NODO];
 
-	for (unsigned int i = 0; i < tamanio; i++) {
+	for ( int i = 0; i < tamanio; i++) {
 		auxiliar[i] = metadatos[i];
 	}
 
