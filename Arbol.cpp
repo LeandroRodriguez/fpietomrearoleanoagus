@@ -24,8 +24,8 @@ Arbol::~Arbol() {
 };
 
 
-Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
-{
+
+Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 	bool overflow = false;
 	Resultado res;
 
@@ -43,6 +43,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 	} else {
 		//debo insertar recursivamente
 		res = raiz->insertarElemento(nroBloque, nroRegistro, dato);
+
 		/*
 		this->setRaiz(this->raiz->getAdan());
 		if (this->raiz->getHojaOInterno()== 'I')
@@ -80,5 +81,3 @@ Nodo* Arbol::crearNuevoNodo(char tipo) {
 Nodo* Arbol::getRaiz(){
 	return this->raiz;
 };
-
-
