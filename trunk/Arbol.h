@@ -20,6 +20,10 @@ class Arbol {
 
 	Nodo* getRaiz();
 
+	Nodo* crearRaiz();
+
+	Nodo* crearNuevoNodo(char tipo) ;
+
 private:
 	PersistenciaArbol* persistir;
 

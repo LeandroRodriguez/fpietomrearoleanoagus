@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "InterfazSerializar.h"
+#include "Key.h"
 
 class Nodo : public InterfazSerializar {
 
@@ -13,18 +14,18 @@ class Nodo : public InterfazSerializar {
     int  dimension;
     unsigned int  tamanioMaximoNodo;
     unsigned int  tamanioUsado;
-    unsigned int RefBloque;
+    unsigned int idBloque;
 
     public:
     Nodo(){};
     virtual ~Nodo(){};
 
-    int getRefDelNodo(){
-        return this->RefBloque;
+    int getIdDelNodo(){
+        return this->idBloque;
     }
 
-    void setRefDelNodo(int ref){
-     this->RefBloque= ref;
+    void setIdDelNodo(int ref){
+     this->idBloque= ref;
     }
 
     char getHojaOInterno(){
@@ -32,6 +33,8 @@ class Nodo : public InterfazSerializar {
         return 'H';
 
     }
+
+    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato);
 
 
 

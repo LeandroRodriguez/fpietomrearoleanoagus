@@ -24,7 +24,7 @@ class NodoHoja: public Nodo{
 
     public:
 
-    NodoHoja(int dimension, int refBloque);
+    NodoHoja();
     NodoHoja(char* str);
     ~NodoHoja(){};
 

@@ -64,6 +64,7 @@ class NodoInterno: public Nodo{
     }
 
     NodoInterno(){
+
         }
 
     NodoInterno(int ref1,T subclave ,int ref2){
@@ -241,6 +242,8 @@ class NodoInterno: public Nodo{
     }
 
     ~NodoInterno(){}
+
+
 };
 
 
