@@ -130,13 +130,13 @@
 		if(this->Formacion != (int*)clave2->getSubClaveSegunDim(1))
 			return false;
 			
-		if(strcmp(this->Falla, (char*)clave2->getSubClaveSegunDim(0) != 3))
+		if(strcmp(this->Falla, (char*)clave2->getSubClaveSegunDim(3) != 0))
 			return false;
 			
-		if(strcmp(this->Accidente, (char*)clave2->getSubClaveSegunDim(0) != 2))
+		if(strcmp(this->Accidente, (char*)clave2->getSubClaveSegunDim(2) != 0))
 			return false;
 			
-		if(strcmp(this->FranjaHorariaDelSiniestro, (char*)clave2->getSubClaveSegunDim(0) != 4))
+		if(strcmp(this->FranjaHorariaDelSiniestro, (char*)clave2->getSubClaveSegunDim(4) != 0))
 			return false;
 			
 		return true;
