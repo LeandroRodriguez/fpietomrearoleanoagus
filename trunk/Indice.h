@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include "Arbol.h"
-#include "Key.cpp"
+#include "Key.h"
+
 #include "Constantes.h"
 #include "ManejoArchivos/PersistenciaArbol.h"
 using namespace std;
