@@ -111,92 +111,16 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 
 /*devuelvo puntero al nodo raiz del archivo*/
 Nodo* PersistenciaArbol::obtenerRaiz(){
-	/*valido apertura del archivo y que exista el bloque raiz (1)*/
-	if (!archivo.is_open()){
-		cerr<< "Problemas al intentar abrir el archivo"<< endl;
-		return NULL;
-	}
 
-	if (! this->existeBloque( ID_RAIZ )){
-		cerr<< "Metodo: LeerNodo. Nro de bloque inexistente, Nro: " << ID_RAIZ;
-		return NULL;
-	}
-
-	/*Posiciono el get pointer en el principio + (longBloque*1) */
-	archivo.seekg((ID_RAIZ ) * LONGITUD_BLOQUE_NODO , ios::beg);
-
-	/*pido memoria para levantar la raiz*/
-	char* lectura = (char*) malloc (sizeof(char) * LONGITUD_BLOQUE_NODO);
-
-    char* lectura2 = new char[LONGITUD_BLOQUE_NODO];
-
-	archivo.read(reinterpret_cast<char*> (lectura2), LONGITUD_BLOQUE_NODO);
-
-	Nodo* auxiliar = NULL;
-	/*aca evaluo el flag de tipo de nodo y creo el objeto correspondiente*/
-	if  ( lectura2[0] == 'H' ){
-        /*copio la lectura 1 caracter corrido para no levantar el flag si es hoja o interno*/
-        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-            lectura[i] = lectura2[i+1];
-        }
-		auxiliar = new NodoHoja(lectura);
-	}else if  (lectura2[0] == 'I' ){
-            /*bis asi no leo tipo y flag*/
-        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-            lectura[i] = lectura2[i+6];
-        }
-        char* tipo = new char[5];
-        memcpy(tipo,lectura2+1,sizeof(int)+1);
-
-        if ( strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
-        if ( strcmp( tipo,"char*") )auxiliar = new NodoInterno<char*>(lectura);
-	}
-
-
-	/*libero la memoria de la lectura y retorno el puntero a la raiz*/
-	free(lectura);
-	archivo.flush();
-
-	return auxiliar;
-
+    return this->leerNodo(ID_RAIZ);
 }
 
 /*devuelvo true si pude actualizar, false si no*/
 bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
-	/*Si no existe el archivo, se crea¿?*/
-	if (!archivo.is_open()){
-		cerr<< "Problemas al intentar abrir el archivo"<< endl;
-		return 0;
-	}
 
-	/*seteo el id raiz (1)*/
-	offset 	rta = ID_RAIZ;
-	nodo->setRefDelNodo(rta);
-	/*levanto el raiz viejo*/
-	char auxiliar[LONGITUD_BLOQUE_NODO];
-	char* serial = nodo->Serializarse();
-	/*me fijo el tamanio serializado del candidato a insertar*/
-	unsigned long int tam= nodo->getTamanioSerializado();
-	if (tam + 1> LONGITUD_BLOQUE_NODO){
-		cerr<<"Dato Mayor al tamaño de bloque."<<endl;
-		return false;
-	}
-	/*consigo el flag de Hoja o Interno y lo guardo en la pos 0*/
-	auxiliar[0] = nodo->getHojaOInterno();
+        nodo->setRefDelNodo(ID_RAIZ);
+        return this->agregarNodo(nodo);
 
-	/*y en los restantes copio el serial del nodo*/
-	for (unsigned int i = 1; i < tam +1; i++) {
-		auxiliar[i] = serial[i - 1];
-	}
-
-	/*me posiciono*/
-	archivo.seekg((rta ) * LONGITUD_BLOQUE_NODO, ios::beg);
-	/*escribo y guardo*/
-	archivo.write(auxiliar, LONGITUD_BLOQUE_NODO);
-	archivo.flush();
-	/*libero el serial auxiliar que use y retono*/
-	free(serial);
-	return true;
 }
 
 /*guardo un nodo nuevo. Si pudo insertar retorno el nro de nodo*/
@@ -207,20 +131,15 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 		return 0;
 	}
 
-	if (  nodo->getRefDelNodo() == ID_RAIZ){
-		/*aca lo podria mandar al metodo guardar raiz, nose :(*/
-		cerr<< "Metodo: AgregarNodo. Se quiere guardar la raiz con el metodo inorrecto." << endl;
-		return NULL;
-	}
+	 offset rta;
 
-	/* busco nodo libre*/
-	offset 	rta = this->NroNodoNuevo();
-	nodo->setRefDelNodo(rta);
-
-	/*borrar
-	if (nodo->getRefDelNodo() == 9){
-		cerr<< "aca" << endl;
-	}*/
+    if(nodo->getRefDelNodo()!=ID_RAIZ){
+        /* busco nodo libre,LA raiz es el unico nodo que ya viene seteado*/
+        rta = this->NroNodoNuevo();
+        nodo->setRefDelNodo(rta);
+    }else{
+         rta=nodo->getRefDelNodo();
+         }
 
 	/*pido el serial y me fijo que entre*/
 	char auxiliar[LONGITUD_BLOQUE_NODO ];
@@ -256,12 +175,6 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 			cerr<< "Problemas al intentar abrir el archivo"<< endl;
 			return NULL;
 		}
-
-		if ( nroNodo == ID_RAIZ ){
-			cerr<< "Metodo: LeerNodo. Se quiere leer la raiz con el metodo inorrecto." << endl;
-			return NULL;
-		}
-
 		if (! this->existeBloque( nroNodo )){
 			cerr<< "Metodo: LeerNodo. Nro de bloque inexistente, Nro: " << nroNodo << endl;
 			return NULL;
@@ -276,25 +189,32 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 		unsigned char lectura2[LONGITUD_BLOQUE_NODO];
 		archivo.read(reinterpret_cast<char*> (lectura2), LONGITUD_BLOQUE_NODO);
 
-		for (unsigned int i = 0; i < LONGITUD_BLOQUE_NODO -1 ; i++) {
-			lectura[i] = lectura2[i+1];
-		}
-		/*creo el nodo correspondiente*/
-		Nodo* auxiliar;
+        Nodo* auxiliar = NULL;
+	/*aca evaluo el flag de tipo de nodo y creo el objeto correspondiente*/
+	if  ( lectura2[0] == 'H' ){
+        /*copio la lectura 1 caracter corrido para no levantar el flag si es hoja o interno*/
+        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+            lectura[i] = lectura2[i+1];
+        }
+		auxiliar = new NodoHoja(lectura);
+	}else if  (lectura2[0] == 'I' ){
+            /*bis asi no leo tipo y flag*/
+        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+            lectura[i] = lectura2[i+6];
+        }
+        char* tipo = new char[5];
+        memcpy(tipo,lectura2+1,sizeof(int)+1);
 
-		if  ( lectura2[0] == 'H' ){
-			auxiliar = new NodoHoja(lectura);
-		}else if  (lectura2[0] == 'I' ){
-			auxiliar = new NodoInterno(lectura );
-		}
+        if ( strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
+        if ( strcmp( tipo,"char*") )auxiliar = new NodoInterno<char*>(lectura);
+	}
 
 
-		/*libero la lectura que use para levantar la tira de bytes*/
-		free(lectura);
-		/*guardo el archivo y retorno el puntero al nodo*/
-		archivo.flush();
+	/*libero la memoria de la lectura y retorno el puntero a la raiz*/
+	free(lectura);
+	archivo.flush();
 
-		return auxiliar;
+	return auxiliar;
 }
 
 /*devuelve un string de metadatos(bloque 0)*/
