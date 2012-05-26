@@ -81,7 +81,7 @@ void RegistroVariable::hidratarse(const Bytes& cadena) {
 	int tamanioRegistro = atoi(cadena.getSubBytes(LONGITUD_CANT_BYTES, LONGITUD_CANT_BYTES).toString().c_str());
 	//tomo los segundos LONGITUD_CANT_BYTES bytes para el tamanioregitsro
 	
-	char a = cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,1);
+	string a = cadena.getSubBytes(2 * LONGITUD_CANT_BYTES,1).toString();
 	this->vivo = (a=="1");
 
 	this->setDato(cadena.getSubBytes(2 * LONGITUD_CANT_BYTES + 1,tamanioRegistro));
