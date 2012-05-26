@@ -128,19 +128,28 @@ Nodo* PersistenciaArbol::obtenerRaiz(){
 	/*pido memoria para levantar la raiz*/
 	char* lectura = (char*) malloc (sizeof(char) * LONGITUD_BLOQUE_NODO);
 
-	unsigned char lectura2[LONGITUD_BLOQUE_NODO];
+    char* lectura2 = new char[LONGITUD_BLOQUE_NODO];
+
 	archivo.read(reinterpret_cast<char*> (lectura2), LONGITUD_BLOQUE_NODO);
-	/*copio la lectura 1 caracter corrido para no levantar el flag si es hoja o interno*/
-	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-		lectura[i] = lectura2[i+1];
-	}
 
 	Nodo* auxiliar = NULL;
 	/*aca evaluo el flag de tipo de nodo y creo el objeto correspondiente*/
 	if  ( lectura2[0] == 'H' ){
+        /*copio la lectura 1 caracter corrido para no levantar el flag si es hoja o interno*/
+        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+            lectura[i] = lectura2[i+1];
+        }
 		auxiliar = new NodoHoja(lectura);
 	}else if  (lectura2[0] == 'I' ){
-		auxiliar = new NodoInterno<>(lectura );
+            /*bis asi no leo tipo y flag*/
+        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+            lectura[i] = lectura2[i+6];
+        }
+        char* tipo = new char[5];
+        memcpy(tipo,lectura2+1,sizeof(int)+1);
+
+        if ( strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
+        if ( strcmp( tipo,"char*") )auxiliar = new NodoInterno<char*>(lectura);
 	}
 
 
@@ -162,7 +171,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 
 	/*seteo el id raiz (1)*/
 	offset 	rta = ID_RAIZ;
-	nodo->setId(rta);
+	nodo->setRefDelNodo(rta);
 	/*levanto el raiz viejo*/
 	char auxiliar[LONGITUD_BLOQUE_NODO];
 	char* serial = nodo->Serializarse();
@@ -206,7 +215,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 
 	/* busco nodo libre*/
 	offset 	rta = this->NroNodoNuevo();
-	nodo->setId(rta);
+	nodo->setRefDelNodo(rta);
 
 	/*borrar
 	if (nodo->getRefDelNodo() == 9){
