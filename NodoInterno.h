@@ -90,24 +90,23 @@ class NodoInterno: public Nodo{
 
         it = this->ListaSubClaveRef->begin();
 
-        T Suma=0;
+        if( this->CantElem == 0) return -1;
 
-        for(;it!=this->ListaSubClaveRef->end();it++){
+        unsigned int Value = 0;
 
-            SubClaveRef<T>* cosa = *it;
-
-            T cosa->getSubClave();
-
-
-
+        if ( this->CantElem % 2 != 0){
+            Value = ( this->CantElem / 2 )+1;
+            }else{
+                Value=  this->CantElem/2 ;
             }
 
+        for(int I=0;I<=Value;it++){
+        }
 
+        SubClaveRef<T>* cosa = *it;
 
-
+        return cosa->getSubClave();
     }
-
-
 
 
     /* sirve solo para tipos clasicos, int, double, word etc */
@@ -360,4 +359,41 @@ template<> void NodoInterno<char*>::Hidratar(char* bytes){
         }
     };
 
+
+template<> char* NodoInterno<char*>::conseguirClaveQueDividaAlMedioPonderadoElNodo(){
+
+        list< SubClaveRef<char*>* >::iterator it;
+
+        it = this->ListaSubClaveRef->begin();
+
+         unsigned int LongitudTotal=0;
+
+        while(it!= this->ListaSubClaveRef->end()){
+            SubClaveRef<char*>* cosa = *it;
+            LongitudTotal = LongitudTotal + strlen( cosa->getSubClave() );
+            it++;
+            }/*consegui longitud total de los datos */
+
+        it = this->ListaSubClaveRef->begin();
+
+        bool NoSeHallaSuperadoLaMitad = true;
+
+        unsigned int LongMitad = (int) LongitudTotal / (int) 2 ;
+        unsigned int LongParcial = 0;
+
+
+        while(NoSeHallaSuperadoLaMitad){
+             SubClaveRef<char*>* cosa = *it;
+
+             LongParcial = LongParcial + strlen(cosa->getSubClave());
+
+             if ( LongParcial > LongMitad ){
+                 NoSeHallaSuperadoLaMitad = false;
+                 }else{
+                     it++;
+                 }
+        }
+
+        return (*it)->getSubClave();
+    }
 #endif
