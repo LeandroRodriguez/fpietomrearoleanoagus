@@ -67,5 +67,5 @@ void Menu::ImprimirOpciones(){
 	cout << endl;
 	cout << " 0)  Salir" << endl;
 	cout << endl;
-}
+};
 

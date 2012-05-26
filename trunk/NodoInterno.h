@@ -1,17 +1,14 @@
 #ifndef NODOINTERNO_H_
 #define NODOINTERNO_H_
 
+#include <typeinfo>
 #include <iostream>
 #include <list>
 #include <string.h>
 #include <cstring>
-#include "Nodo.h"
-/*#include "Key.h"*/
 #include "SubClaveRef.h"
-#include <typeinfo>
 
 using namespace std;
-
 
 template<class T>
 class NodoInterno: public Nodo{
@@ -53,7 +50,7 @@ class NodoInterno: public Nodo{
 
         this->Hidratar(CodigoBinario->toString() );
 
-    };
+    }
 
     NodoInterno(char* cadena){
 
@@ -73,7 +70,7 @@ class NodoInterno: public Nodo{
 
         this->Inicializar(ref1,subclave,ref2);
 
-    };
+    }
 
     Resultado InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
         /*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
@@ -93,7 +90,7 @@ class NodoInterno: public Nodo{
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
 
         return RES_OK;
-    };
+    }
 
     void Inicializar( int ref1 ,T subclave ,int ref2 ){
 
@@ -103,7 +100,7 @@ class NodoInterno: public Nodo{
 
         this->InsertarNuevaSubClaveRef(subclave,ref2);
 
-    };
+    }
 
     /* sirve solo para tipos clasicos, int, double, word etc */
     T conseguirClaveQueDividaAlMedioPonderadoElNodo(){
@@ -154,7 +151,7 @@ class NodoInterno: public Nodo{
 
         }
 	return tamanioSerializado;
-};
+}
 
 /*sirve solo para tipos clasicos, int, double, word etc*/
     char* Serializarse(){
@@ -206,7 +203,7 @@ class NodoInterno: public Nodo{
 
 
 	return str;
-};
+}
 
 /*para tipos comunes  */
     void Hidratar(char* bytes){
@@ -243,186 +240,185 @@ class NodoInterno: public Nodo{
 
     ~NodoInterno(){}
 
-    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato){
+    /*sirve para char* */
+    unsigned long int getTamanioSerializadoParaChar(){
 
-        return RES_OK;
+        size_t tamanioSerializado = 0;
+
+    	tamanioSerializado += sizeof(this->CantElem);
+    	tamanioSerializado += sizeof(this->Altura);
+    	tamanioSerializado += sizeof(this->dimension);
+        tamanioSerializado += sizeof(this->Ref1erNodo);
+        tamanioSerializado += sizeof(int)+1;/*aca guardo el tipo*/
+
+        /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
+        /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
+
+
+        list< SubClaveRef<char*>* >::iterator it = this->ListaSubClaveRef->begin();
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+
+            SubClaveRef<char*>* cosa = *it;
+
+            char* subC = cosa->getSubClave();
+            int refNodo = cosa->getRefNodo();
+
+            tamanioSerializado +=  sizeof(int);/*convencion para guardar tamanio  */
+            tamanioSerializado +=  strlen(subC); /*tamanio variable */
+            tamanioSerializado +=  sizeof(refNodo);
+
+            }
+    	return tamanioSerializado;
+
+
+        }
+
+    /*sirve para char* */
+    char *Serializarse_sirveparacharasterisco(){
+
+        size_t  tamanioTotal = this->getTamanioSerializado();
+        /*el string que voy a devolver*/
+    	char* str =(char*) malloc(tamanioTotal * sizeof(char));
+    	size_t cur = 0;/*cur = cursor*/
+
+
+        /*PRIMERO GUARDO EL TIPO*/
+        memcpy(str + cur, typeid(char*).name() , sizeof(int)+1);
+    	cur += sizeof(int)+1;
+
+        /*guardo la cantidad de elementos */
+    	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
+    	cur += sizeof(this->CantElem);
+
+        /*bis altura*/
+    	memcpy(str + cur, &this->Altura , sizeof(this->Altura));
+    	cur += sizeof(this->Altura);
+
+        /*bis ref 1er hijo izq  */
+    	memcpy(str + cur, &this->dimension , sizeof(this->dimension));
+    	cur += sizeof(this->dimension);
+
+        /*bis dimension  */
+    	memcpy(str + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
+    	cur += sizeof(this->Ref1erNodo);
+
+        /*tengo que guardar todos los elementos de la lista */
+        list< SubClaveRef<char*>* >::iterator it;
+
+        it= this->ListaSubClaveRef->begin();
+
+        int* pTempInt = new int;/* work around para poder usar memcopy, nada mas*/
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+
+            SubClaveRef<char*>* cosa = *it;
+
+            char* subC = cosa->getSubClave();
+            int refNodo = cosa->getRefNodo();
+
+                *pTempInt = strlen(subC);
+
+                memcpy(str + cur, pTempInt , sizeof(int) ); /*convencion 4 bytes para longitud */
+                cur += sizeof(int);
+                memcpy(str + cur, subC , strlen(subC) );
+                cur += strlen(subC);
+
+                *pTempInt = refNodo;
+
+                memcpy(str + cur, pTempInt , sizeof(refNodo));
+                cur += sizeof(refNodo);
+        }
+        delete pTempInt;
+
+    	return str;
+    }
+
+    /*sirve para char* */
+    void HidratarParaChar(char* bytes){
+
+     	unsigned int cur = 0;/*cur = cursor */
+
+    	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
+    	cur += sizeof(this->CantElem);
+
+
+    	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
+    	cur += sizeof(this->Altura);
+
+    	memcpy(&this->dimension, bytes + cur, sizeof(this->dimension));
+    	cur += sizeof(this->dimension);
+
+    	memcpy(bytes + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
+    	cur += sizeof(this->Ref1erNodo);
+
+        while(cur < strlen(bytes) ){
+
+            int longitud=0;
+
+            memcpy(&longitud, bytes + cur  , sizeof(int) );
+            cur += sizeof(int);
+
+            char* subclave = new char[longitud];
+
+            memcpy(subclave,bytes+longitud,longitud);
+            cur += longitud;
+
+
+            int RefNod=0;
+
+            memcpy(&RefNod, bytes + cur  , sizeof(int) );
+            cur += sizeof(int);
+
+            this->InsertarNuevaSubClaveRef( subclave, RefNod);
+
+
+
+        }
+    }
+
+
+    char* conseguirClaveQueDividaAlMedioPonderadoElNodoParaChar(){
+
+            list< SubClaveRef<char*>* >::iterator it;
+
+            it = this->ListaSubClaveRef->begin();
+
+             unsigned int LongitudTotal=0;
+
+            while(it!= this->ListaSubClaveRef->end()){
+                SubClaveRef<char*>* cosa = *it;
+                LongitudTotal = LongitudTotal + strlen( cosa->getSubClave() );
+                it++;
+                }/*consegui longitud total de los datos */
+
+            it = this->ListaSubClaveRef->begin();
+
+            bool NoSeHallaSuperadoLaMitad = true;
+
+            unsigned int LongMitad = (int) LongitudTotal / (int) 2 ;
+            unsigned int LongParcial = 0;
+
+
+            while(NoSeHallaSuperadoLaMitad){
+                 SubClaveRef<char*>* cosa = *it;
+
+                 LongParcial = LongParcial + strlen(cosa->getSubClave());
+
+                 if ( LongParcial > LongMitad ){
+                     NoSeHallaSuperadoLaMitad = false;
+                     }else{
+                         it++;
+                     }
+            }
+
+            return (*it)->getSubClave();
+        }
+
+    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato)
+    {
+    	return RES_OK;
     }
 
 };
-
-
-/*sirve para char* */
-template<> unsigned long int NodoInterno<char*>::getTamanioSerializado(){
-
-    size_t tamanioSerializado = 0;
-
-	tamanioSerializado += sizeof(this->CantElem);
-	tamanioSerializado += sizeof(this->Altura);
-	tamanioSerializado += sizeof(this->dimension);
-    tamanioSerializado += sizeof(this->Ref1erNodo);
-    tamanioSerializado += sizeof(int)+1;/*aca guardo el tipo*/
-
-    /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
-    /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
-
-
-    list< SubClaveRef<char*>* >::iterator it = this->ListaSubClaveRef->begin();
-
-    for(;it!=this->ListaSubClaveRef->end();it++){
-
-        SubClaveRef<char*>* cosa = *it;
-
-        char* subC = cosa->getSubClave();
-        int refNodo = cosa->getRefNodo();
-
-        tamanioSerializado +=  sizeof(int);/*convencion para guardar tamanio  */
-        tamanioSerializado +=  strlen(subC); /*tamanio variable */
-        tamanioSerializado +=  sizeof(refNodo);
-
-        }
-	return tamanioSerializado;
-
-
-    }
-
-/*sirve para char* */
-template<> char* NodoInterno<char*>::Serializarse(){
-
-    size_t  tamanioTotal = this->getTamanioSerializado();
-    /*el string que voy a devolver*/
-	char* str =(char*) malloc(tamanioTotal * sizeof(char));
-	size_t cur = 0;/*cur = cursor*/
-
-
-    /*PRIMERO GUARDO EL TIPO*/
-    memcpy(str + cur, typeid(char*).name() , sizeof(int)+1);
-	cur += sizeof(int)+1;
-
-    /*guardo la cantidad de elementos */
-	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
-	cur += sizeof(this->CantElem);
-
-    /*bis altura*/
-	memcpy(str + cur, &this->Altura , sizeof(this->Altura));
-	cur += sizeof(this->Altura);
-
-    /*bis ref 1er hijo izq  */
-	memcpy(str + cur, &this->dimension , sizeof(this->dimension));
-	cur += sizeof(this->dimension);
-
-    /*bis dimension  */
-	memcpy(str + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
-	cur += sizeof(this->Ref1erNodo);
-
-    /*tengo que guardar todos los elementos de la lista */
-    list< SubClaveRef<char*>* >::iterator it;
-
-    it= this->ListaSubClaveRef->begin();
-
-    int* pTempInt = new int;/* work around para poder usar memcopy, nada mas*/
-
-    for(;it!=this->ListaSubClaveRef->end();it++){
-
-        SubClaveRef<char*>* cosa = *it;
-
-        char* subC = cosa->getSubClave();
-        int refNodo = cosa->getRefNodo();
-
-            *pTempInt = strlen(subC);
-
-            memcpy(str + cur, pTempInt , sizeof(int) ); /*convencion 4 bytes para longitud */
-            cur += sizeof(int);
-            memcpy(str + cur, subC , strlen(subC) );
-            cur += strlen(subC);
-
-            *pTempInt = refNodo;
-
-            memcpy(str + cur, pTempInt , sizeof(refNodo));
-            cur += sizeof(refNodo);
-    }
-    delete pTempInt;
-
-	return str;
-}
-
-/*sirve para char* */
-template<> void NodoInterno<char*>::Hidratar(char* bytes){
-
- 	unsigned int cur = 0;/*cur = cursor */
-
-	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
-	cur += sizeof(this->CantElem);
-
-
-	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
-	cur += sizeof(this->Altura);
-
-	memcpy(&this->dimension, bytes + cur, sizeof(this->dimension));
-	cur += sizeof(this->dimension);
-
-	memcpy(bytes + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
-	cur += sizeof(this->Ref1erNodo);
-
-    while(cur < strlen(bytes) ){
-
-        int longitud=0;
-
-        memcpy(&longitud, bytes + cur  , sizeof(int) );
-        cur += sizeof(int);
-
-        char* subclave = new char[longitud];
-
-        memcpy(subclave,bytes+longitud,longitud);
-        cur += longitud;
-
-
-        int RefNod=0;
-
-        memcpy(&RefNod, bytes + cur  , sizeof(int) );
-        cur += sizeof(int);
-
-        this->InsertarNuevaSubClaveRef( subclave, RefNod);
-
-
-
-        }
-    }
-
-
-template<> char* NodoInterno<char*>::conseguirClaveQueDividaAlMedioPonderadoElNodo(){
-
-        list< SubClaveRef<char*>* >::iterator it;
-
-        it = this->ListaSubClaveRef->begin();
-
-         unsigned int LongitudTotal=0;
-
-        while(it!= this->ListaSubClaveRef->end()){
-            SubClaveRef<char*>* cosa = *it;
-            LongitudTotal = LongitudTotal + strlen( cosa->getSubClave() );
-            it++;
-            }/*consegui longitud total de los datos */
-
-        it = this->ListaSubClaveRef->begin();
-
-        bool NoSeHallaSuperadoLaMitad = true;
-
-        unsigned int LongMitad = (int) LongitudTotal / (int) 2 ;
-        unsigned int LongParcial = 0;
-
-
-        while(NoSeHallaSuperadoLaMitad){
-             SubClaveRef<char*>* cosa = *it;
-
-             LongParcial = LongParcial + strlen(cosa->getSubClave());
-
-             if ( LongParcial > LongMitad ){
-                 NoSeHallaSuperadoLaMitad = false;
-                 }else{
-                     it++;
-                 }
-        }
-
-        return (*it)->getSubClave();
-    }
 #endif

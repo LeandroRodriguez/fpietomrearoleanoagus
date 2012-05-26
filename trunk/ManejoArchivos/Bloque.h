@@ -1,9 +1,10 @@
 #ifndef BLOQUE_H_
 #define BLOQUE_H_
 
-/*#include "../Constantes.h"*/
-/*#include "Bytes.h"*/
 #include "RegistroVariable.h"
+
+//#include "../claves/TipoClave.h"
+//#include "../claves/Key.h"
 
 #include <list>
 using namespace std;

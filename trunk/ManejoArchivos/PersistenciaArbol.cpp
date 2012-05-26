@@ -189,31 +189,31 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 		archivo.read(reinterpret_cast<char*> (lectura2), LONGITUD_BLOQUE_NODO);
 
         Nodo* auxiliar = NULL;
-	/*aca evaluo el flag de tipo de nodo y creo el objeto correspondiente*/
-	if  ( lectura2[0] == 'H' ){
+        /*aca evaluo el flag de tipo de nodo y creo el objeto correspondiente*/
+        if  ( lectura2[0] == 'H' ){
         /*copio la lectura 1 caracter corrido para no levantar el flag si es hoja o interno*/
-        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-            lectura[i] = lectura2[i+1];
-        }
-		auxiliar = new NodoHoja(lectura);
-	}else if  (lectura2[0] == 'I' ){
+        	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+        		lectura[i] = lectura2[i+1];
+        	}
+        	auxiliar = new NodoHoja(lectura);
+        }else if  (lectura2[0] == 'I' ){
             /*bis asi no leo tipo y flag*/
-        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-            lectura[i] = lectura2[i+6];
+        	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+        		lectura[i] = lectura2[i+6];
+        	}
+        	char* tipo = new char[5];
+        	memcpy(tipo,lectura2+1,sizeof(int)+1);
+
+        	if ( !strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
+        	if ( !strcmp( tipo,"char*") )auxiliar = new NodoInterno<char*>(lectura);
         }
-        char* tipo = new char[5];
-        memcpy(tipo,lectura2+1,sizeof(int)+1);
-
-        if ( strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
-        if ( strcmp( tipo,"char*") )auxiliar = new NodoInterno<char*>(lectura);
-	}
 
 
-	/*libero la memoria de la lectura y retorno el puntero a la raiz*/
-	free(lectura);
-	archivo.flush();
+        /*libero la memoria de la lectura y retorno el puntero a la raiz*/
+        free(lectura);
+        archivo.flush();
 
-	return auxiliar;
+        return auxiliar;
 }
 
 /*devuelve un string de metadatos(bloque 0)*/

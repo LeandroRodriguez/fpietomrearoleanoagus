@@ -15,23 +15,23 @@ Arbol::Arbol( PersistenciaArbol* persistencia) {
 	}
 
 
-};
+}
 
 
 Arbol::~Arbol() {
 	if (this->raiz!=NULL)
 		delete this->raiz;
-};
+}
 
 
 
 Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
-	bool overflow = false;
 	Resultado res;
 
 	if (!raiz) {
 		//Es el primerElemento
-		this->raiz = dynamic_cast<NodoHoja*> (this->crearRaiz());
+		Nodo* aaa = this->crearRaiz();
+		this->raiz = (NodoHoja*) (aaa);
 
         /*no entiendo porque esta funcion recibe TANTOS parametros :S  */
 		res = raiz->insertarElemento(nroBloque, nroRegistro, dato);

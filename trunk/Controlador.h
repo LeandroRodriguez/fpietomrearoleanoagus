@@ -1,13 +1,8 @@
 #ifndef CONTROLADOR_H_
 #define CONTROLADOR_H_
 
-/*#include "Constantes.h"*/
-/*#include "ManejoArchivos/Bytes.h"*/
 //#include "ManejoArchivos/Almacenamiento.h"
-#include "ManejoArchivos/AlmacenamientoBloque.h"
-/*#include "ManejoArchivos/Bloque.h"*/
 //#include "Datos/Registro.h"
-/*#include "ManejoArchivos/RegistroVariable.h"*/
 //#include "Key.h"
 
 //#include "Datos/ClaveNumero.h"
