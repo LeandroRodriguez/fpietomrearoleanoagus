@@ -1,11 +1,10 @@
 #include "NodoHoja.h"
 
-NodoHoja::NodoHoja(int dimension, int refBloque){
+NodoHoja::NodoHoja(){
     //me pasan un numero de dimension. despues tendre que matchearlo con una de las dimensiones del accidente
     this->tamanioMaximoNodo=0;
     this->CantElem=0;
-	this->dimension = dimension;
-	this->RefBloque = refBloque;
+    this->Altura = 0;
 	this->listIdRegistros = new list<int>();
 	this->listNroBloque = new list<int>();
 

@@ -31,10 +31,10 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 
 	if (!raiz) {
 		//Es el primerElemento
-		/*this->raiz = dynamic_cast<NodoHoja*> (this->crearRaiz());*/
+		this->raiz = dynamic_cast<NodoHoja*> (this->crearRaiz());
 
         /*no entiendo porque esta funcion recibe TANTOS parametros :S  */
-		raiz->insertarElemento(nroBloque, nroRegistro, dato, res,overflow);
+		res = raiz->insertarElemento(nroBloque, nroRegistro, dato);
 		if(res == RES_OK)
 			this->cantidadElem  ++;
 
@@ -42,7 +42,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 
 	} else {
 		//debo insertar recursivamente
-		raiz->insertarElemento(nroBloque, nroRegistro, dato, res,overflow);
+		res = raiz->insertarElemento(nroBloque, nroRegistro, dato);
 		/*
 		this->setRaiz(this->raiz->getAdan());
 		if (this->raiz->getHojaOInterno()== 'I')
@@ -55,7 +55,27 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato)
 
 		return res;
 	}
-};
+}
+
+Nodo* Arbol::crearRaiz() {
+
+	Nodo* nuevaRaiz = this->crearNuevoNodo('H');
+	return nuevaRaiz;
+}
+
+Nodo* Arbol::crearNuevoNodo(char tipo) {
+
+	Nodo* nuevoNodo = NULL;
+	if (tipo == 'H') {
+		nuevoNodo = new NodoHoja();
+	} else {
+		//nuevoNodo = new NodoInterno();
+	}
+
+	this->persistir->agregarNodo( nuevoNodo);
+	return nuevoNodo;
+
+}
 
 Nodo* Arbol::getRaiz(){
 	return this->raiz;

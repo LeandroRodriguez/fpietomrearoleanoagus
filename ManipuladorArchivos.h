@@ -1,10 +1,3 @@
-/*
- * ManipuladorArchivos.h
- *
- *  Created on: Oct 7, 2010
- *      Author: peta
- */
-
 #ifndef MANIPULADORARCHIVOS_H_
 #define MANIPULADORARCHIVOS_H_
 
