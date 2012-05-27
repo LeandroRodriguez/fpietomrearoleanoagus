@@ -16,22 +16,15 @@ class Nodo : public InterfazSerializar {
     unsigned int idBloque;
 
     public:
-    Nodo();
-    virtual ~Nodo();
+     ~Nodo(){};
 
     int getIdDelNodo(){
         return this->idBloque;
     }
 
-    void setIdDelNodo(int ref){
-     this->idBloque= ref;
-    }
+    void setIdDelNodo(int ref);
 
-    char getHojaOInterno(){
-        if (this->Altura>0)return 'I';
-        return 'H';
-
-    }
+    char getHojaOInterno();
 
     virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato) = 0;
 
