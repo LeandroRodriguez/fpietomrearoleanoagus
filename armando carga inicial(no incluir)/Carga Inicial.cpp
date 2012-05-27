@@ -8,7 +8,7 @@
 
 
 
-NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves,list<int>* listaReferenciasNodosHoja){
+NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<int>* listaReferenciasNodosHios, int i){
 	/*para la clave de la posicion it de la lista de listas de claves*/
 	List* listaClaves = this->obtenerClavesSegunPos(listaMaestraClaves, i);
 
@@ -23,15 +23,37 @@ NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves,list<int
 	
 }
 
+list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<NodoInterno*>* listaRefsNodosArmados){
+	/*construyo mis NodoI*/
+	int d = 0;
+	list<NodoInterno*>* listaNodosInternos;
+	for(int k = 0,k<listaMaestraClaves.size(),k){	
+		List* listaClaves = this->obtenerClavesSegunPos(listaMaestraClaves, k);		
+		list<int>::iterator itListaClaves;
+		itListaClaves= listaClaves->begin();
+		/*construyo un nodo*/		
+		for(;itListaClaves!=listaClaves->end();itListaClaves++){					
+			/*asigno una referencia(obtengo la ref de la pos d)*/
+			/*asigno una clave*/			
+			d++;
+		}
+		/*asigno una referencia al ultimo nodo(obtengo la ref de la pos d)*/		
+		d++;		
+		/*meto el nodo interno en una lista de resultados, con las refs de los nodos internos*/
+		listaNodosInternos->push_back(nodoInterno);
+				
+	}
+	return listaNodosInternos;
+}
 
 
-
+/*EN TODOS LOS LADOS DONDE METI PUNTEROS A NODOS, HAY QUE CAMBIARLO POR LOS IDS DE LOS NODOS*/
 /*TOMAR POSIBLES ACCIONES ANTE EL CASO QUE UN SUBARBOL SOLO TENGA UN DATO (la clave que tendria??)*/
 /*VER COMO VOY HACIENDO SUBSISTIR LOS NODOS A LO LARGO DE LA RECURSIVIDAD*/
 /*una opcion, devolver los nodos de abajo para arriba a medida que fui terminando, y usar algun flag que me indique cuando llego al nivel de la raiz(la veo muy viable)(repensarlo maniana)*/
 
 //**la recursiva recibe (list* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento)**//
-list* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento){
+list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento){
 	/*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
 	list<int>* listaMaestraNiveles = new list<int>();	
 	list<list*>* listaMaestraClaves = new list<list*>();
@@ -63,6 +85,7 @@ list* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int por
 		
 	/*si el mayor nivel era 2, ya podria recuperar el nodo hoja entero, auque esto lo puedo verificar mas abajo*/
 	if(nivelMayor == 2){
+		list<NodoInterno*>* listaNodosInternos;
 		/*agarro los nodos de algun lado y armo mi arbol resultante*/		
 		list<list*>::iterator itListaSubArboles;
 		itListaSubArboles= listaMaestraDatosSubArboles->begin();
@@ -78,14 +101,15 @@ list* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int por
 				listaReferenciasNodosHoja->push_back(nodoHoja);
 			}
 			
-			NodoInterno* nodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja);
+			NodoInterno* nodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja, i);			
 			
 			/*meto el nodo interno en una lista de resultados, con las refs de los nodos internos*/
+			listaNodosInternos->push_back(nodoInterno);
 			i++;
 		}
+
 		/*retorno la lista de refs de nodos internos*/
-	/*y aca si ya podria hacer un return del arbol que corte con la recursividad*/
-	/**/
+		return listaNodosInternos;
 	}
 	if(nivelMayor == 1){
 		//RAJEMOS VIEJO
@@ -93,19 +117,20 @@ list* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int por
 	}
 
 	list<int>::iterator itListaNiveles;
-	itListaNiveles= listaNiveles->begin();
+	itListaNiveles= listaMaestraNiveles->begin();
 	int j=0;
-	for(;itListaNiveles!=listaNiveles->end();itListaNiveles++){
+	for(;itListaNiveles!=listaMaestraNiveles->end();itListaNiveles++){
 		/*para cada nivel resultante comparo*/
-		if((*itListaNiveles) < nivelMayor){
+		if((*listaMaestraNiveles) < nivelMayor){
 			/*si nivel es menor que el mayor, voy a tener que reacomodar*/
 			/*agarro la subList de ese subArbol(sigo teniendo acceso a ella?)(ponela que la sigo teniendo de arriba) y consigo la clave del 			medio para(dimension+1)*/
-			List* listaListasSubArboles = this->obtenerListasSegunPos(listaSubArboles, j);
-			list listasDatosSubArboles;//para que me devueve los nuevos subarboles
-			list*<Clave> claveMediana = this->partirSubarbol(listaListasSubArboles, dimension, &listasDatosSubArboles);
+			/*mi lista de datos de subarboles, las tendria que juntar en una sola lista*/
+			List<list*>* listaDatosSubArbol = this->obtenerListasSegunPos(listaMaestraDatosSubArboles, j);
+			list<list*>* listasDatosSubArbolesNuevos;//para que me devueve los nuevos subarboles
+			list<Key>* claveMediana = this->partirSubarbol(listaDatosSubArbol, dimension, listasDatosSubArbolesNuevos);
 			/*remplazo la nueva lista de listas de subarboles por la vieja*/
-			this->reemplazarDatoLista(listaSubArboles, &listasDatosSubArboles);
-			this->reemplazarDatoLista(listaClaves, claveMediana);						
+			this->reemplazarDatoLista(listaMaestraDatosSubArboles, listasDatosSubArbolesNuevos, j);
+			this->reemplazarDatoLista(listaMaestraClaves, claveMediana, j);						
 		}			
 		/*sino*/		
 			/*(las demas tenian 2 subarboles minimo)los traslado a mi nueva lista de sublistas(subarboles)*/
@@ -116,23 +141,18 @@ list* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int por
 	/*para cada una de estas sublistas tendria que recomenzar*/
 	/*Arme una lista de sublistas =0*/
 	/*quizas en su momento podria recalcular el porcentajeDeEmpaquetamiento*/
-	list*<Nodo*> listaRefsNodosArmados = cargaInicialArmarNodos(listaSubArboles, Clave::getSiguienteDimmension(dimension), porcentajeDeEmpaquetamiento)
+	list<NodoInterno*>* listaRefsNodosArmados = cargaInicialArmarNodos(listaMaestraDatosSubArboles, Key::getSiguienteDimmension(dimension), 			porcentajeDeEmpaquetamiento);
 
 	/*con los nodos recibidos, reconstruyo mis nodos de nivel superior*/
-	list<int>::iterator itListaRefNodosHijos;
-	itListaRefNodosHijos= listaRefsNodosArmados->begin();
 	/*para cada SubArb de la lista de SubArbs*/
-	int i = 0;		
-	/*podria iterar sobre la lista de claves y las ref las consigo por pos*/
-	for(;itListaRefNodosHijos!=listaRefsNodosArmados->end();itListaRefNodosHijos++){		
-		/*asigno una referencia (*itListaRefNodosHijos)*/
-		//cuando llego a la ultima ref no agrego claves(ver como verifico esto)			
-		/*asigno una clave (la consigo de mi listaClaves)*/			
-	}
+	list<NodoInterno*>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados);
+	
+	delete listaMaestraNiveles;
+	delete listaMaestraClaves;
+	delete listaMaestraDatosSubArboles;
 	/*retorno ahora las refs de estos nodos,(que ya referencian a los inferiores), para que se agreguen en el siguiente nivel*/
+	return listaNodosInternos;
 }
-
-list<int>* listIdRegistros = new list<int>();
 
 
 
