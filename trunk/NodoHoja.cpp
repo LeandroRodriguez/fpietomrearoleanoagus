@@ -187,6 +187,27 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 
 	return RES_OK;
 
-};
+}
+
+vector<int> NodoHoja::getTamanios(){
+	vector<int> tamanios;
+	list<int>::iterator itRegistros;
+	itRegistros= this->listIdRegistros->begin();
+
+	list<int>::iterator itBloques;
+	itBloques= this->listNroBloque->begin();
+
+	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
+		offset idReg = *itRegistros;
+		offset nroBlo = *itBloques;
+		Key* dato = this->cargarDato(idReg, nroBlo);
+
+		int tamanio = dato->getTamanioSerializado();
+		tamanios.push_back(tamanio);
+		itBloques++;
+	}
+	return tamanios;
+
+}
 
 
