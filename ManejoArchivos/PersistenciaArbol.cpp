@@ -3,11 +3,14 @@
 /*creo o abro el archivo al final, para editarlo*/
 PersistenciaArbol::PersistenciaArbol(string nombreArchivo) {
 	// en caso de que exista lo abro al final
-	archivo.open(nombreArchivo.c_str(), ios::in | ios::out | ios::ate | ios::binary);
+	string path = DIR_ARCHIVO_DATOS;
+	string fullPath = path+nombreArchivo;
+
+	archivo.open(fullPath.c_str(), ios::in | ios::out | ios::ate | ios::binary);
 
 	if (archivo.fail()) {
 		// Si no existe lo crea.
-		archivo.open(nombreArchivo.c_str(), ios::in | ios::out | ios::trunc
+		archivo.open(fullPath.c_str(), ios::in | ios::out | ios::trunc
 			| ios::binary);
 	}
 
