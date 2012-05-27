@@ -42,6 +42,12 @@ class Key : public InterfazSerializar {
     void Hidratar(char* str);
     bool esIgual(Key* clave2);
 
+    void setLineaFerroviaria(char* linea){this->LineaFerroviaria = linea;}
+    void setFormacion(int formacion){this->Formacion = formacion;}
+    void setFalla(char* falla){this->Falla = falla;}
+    void setAccidente(char* acc){this->Accidente= acc;}
+    void setFranjaHorariaDelSiniestro(char* franja){this->FranjaHorariaDelSiniestro = franja;}
+
 };
 
 #endif // KEY_H_INCLUDED

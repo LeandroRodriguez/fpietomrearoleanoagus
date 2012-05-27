@@ -16,6 +16,9 @@ Controlador::Controlador() {
 		 archivoPrimario += ".idx";
 	 }
 
+	 /*creo el indice para guardar las referencias al dato en mi arbol*/
+	 Indice* indicePrimario = new Indice(this->archivoPrimario);
+
 	 delete manipulo;
 }
 
@@ -27,8 +30,6 @@ Controlador::~Controlador(){
 void Controlador::InsertarDato(Key* dato){
 	/*creo un objeto que se encargara de almacenar el dato en el archivo correspondiente*/
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
-	/*creo el indice para guardar las referencias al dato en mi arbol*/
-	Indice* indicePrimario = new Indice(this->archivoPrimario);
 
 	/*si el dato no es null, lo guardo*/
 	if (dato) {
@@ -41,9 +42,6 @@ void Controlador::InsertarDato(Key* dato){
 		almacena.agregarRegistro(&registro);
 		/*le paso al arbol el numero de bloque y el UID del reg en donde guarde el dato*/
 		indicePrimario->agregarDato(almacena.getNumeroBloque(), almacena.getNumeroUID(), dato);
-
-		/*borro el indice primario*/
-		delete indicePrimario;//linea peligrosa quizas, mirarla en caso de que algo falle
 	}
 }
 
@@ -78,7 +76,6 @@ void Controlador::ListarLineas(){
 void Controlador::ListarAccidentes(){
     //not implemented
     }
-
 
 
 /*

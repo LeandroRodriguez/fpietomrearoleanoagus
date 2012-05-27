@@ -274,6 +274,11 @@ class NodoInterno: public Nodo{
         return cosa->getRefNodo();
     }
 
+    void imprimir()
+    {
+
+    }
+
     /*TO DO:    */
     //Hay que ir leyendo nodos segun IDNodoAbajo
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
@@ -554,6 +559,11 @@ class NodoInterno<char*>:public Nodo{
 
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
     	return RES_OK;
+    }
+
+    void imprimir()
+    {
+
     }
 
 };

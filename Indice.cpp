@@ -47,10 +47,10 @@ Resultado Indice::agregarDato(offset nroBloque, offset nroRegistro, Key* dato){
 	free (ser);
     return res;
 }
-/*
+
 void Indice::imprimir(){
-	//this->arbol->imprimir();
-}*/
+	this->arbol->imprimir();
+}
 
 char* Indice::serializarMetadata(){
 	int tam = this->getTamanioSerializado();

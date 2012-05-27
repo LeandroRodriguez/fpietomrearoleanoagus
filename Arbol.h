@@ -23,6 +23,8 @@ class Arbol {
 
 	Nodo* crearNuevoNodo(char tipo) ;
 
+	void imprimir();
+
 private:
 	PersistenciaArbol* persistir;
 
