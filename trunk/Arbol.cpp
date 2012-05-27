@@ -33,8 +33,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		Nodo* aaa = this->crearRaiz();
 		this->raiz = (NodoHoja*) (aaa);
 
-        /*no entiendo porque esta funcion recibe TANTOS parametros :S  */
-		res = raiz->insertarElemento(nroBloque, nroRegistro, dato);
+		res = raiz->insertarElemento(nroBloque, nroRegistro, dato, 1);
 		if(res == RES_OK)
 			this->cantidadElem  ++;
 
@@ -42,7 +41,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 
 	} else {
 		//debo insertar recursivamente
-		res = raiz->insertarElemento(nroBloque, nroRegistro, dato);
+		res = raiz->insertarElemento(nroBloque, nroRegistro, dato, 1);
 
 		/*
 		this->setRaiz(this->raiz->getAdan());

@@ -26,7 +26,7 @@ class Nodo : public InterfazSerializar {
 
     char getHojaOInterno();
 
-    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato) = 0;
+    virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje) = 0;
 
 
 

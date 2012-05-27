@@ -32,7 +32,7 @@ class NodoHoja: public Nodo{
     char* Serializarse();
     void Hidratar(char* bytes);
     int getTamanioConDatos();
-    Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato);
+    Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
 
 };
 

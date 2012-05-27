@@ -154,7 +154,7 @@ int NodoHoja::getTamanioConDatos()
 }
 
 
-Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* dato)
+Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje)
 {
 	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
 	Si lo encuentra, devuelve como resultado RES_DUPLICADO.
@@ -182,7 +182,7 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 	this->listNroBloque->push_back(nroBloque);
 
 	//chequeo overflow
-	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO)
+	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO*porcentaje)
 		return RES_DESBORDADO;
 
 	return RES_OK;
