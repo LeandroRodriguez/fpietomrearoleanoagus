@@ -22,7 +22,7 @@ void TestAlmacenamientoBloque::TestAgregarRecuperarRegistro(){
     RegistroVariable reg1 = almacen->recuperarRegistro(bloque,id1);
     RegistroVariable reg2 = almacen->recuperarRegistro(bloque,id2);
     if (reg1.getDato().toString() == "millonarios" && reg2.getDato().toString() == "alteBrown")
-        cout << "TestAlmacenamientoBlque: OK " << endl;
+        cout << "TestAlmacenamientoBloque: OK " << endl;
     else
         cout << "TestAlmacenamientoBloque: FAIL " << endl;
     delete byte1;
