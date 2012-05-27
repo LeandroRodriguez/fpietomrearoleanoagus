@@ -240,7 +240,48 @@ class NodoInterno: public Nodo{
 
     ~NodoInterno(){}
 
+    int DevolverNodoHijoSegunSubclave(T subcReq ){
+        typename list< SubClaveRef<T>* >::iterator it;
+        it= this->ListaSubClaveRef->begin();
+
+        SubClaveRef<T>* cosa = *it;
+
+        bool SubIgual = (cosa->operator==(subcReq));
+        bool SubMenorOigual = !(cosa->operator<(subcReq));
+
+        if (SubMenorOigual && !(SubIgual)){
+            return this->Ref1erNodo;
+        }
+        /*ya considere para el caso del extremo izquierdo  */
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+            cosa = *it;
+            bool SubIgual = (cosa->operator==(subcReq));
+            bool SubMenorOigual = !(cosa->operator<(subcReq));
+
+            /*si es igual, devuelvo ref a la derecha la subK de la lista */
+            if( SubIgual ) return cosa->getRefNodo();
+
+            if (SubMenorOigual && !(SubIgual)){
+            /*si la subK en la que estoy en la lista, es mas grande que subcReq, devuelvo ref anterior */
+                it--;
+                cosa = *it;
+                return (  cosa->getRefNodo()   );
+                }
+            it++;/*si llegue aca, mi subcReq,es mayor que mi subK de la pos en la que estoy */
+            }
+        /*si llegue hasta aca, tengo que irme por el extremo derecho  */
+        return cosa->getRefNodo();
+    }
+
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
+
+         T subclave = (T) dato->getSubClaveSegunDim(this->dimension);
+
+        int RefNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
+
+
+
     	return RES_OK;
     }
 
@@ -289,8 +330,6 @@ class NodoInterno<char*>:public Nodo{
     void Inicializar( int ref1 ,char* subclave ,int ref2 ){
 
         this->Ref1erNodo=ref1;
-
-        SubClaveRef<char*>* NuevaDupla= new SubClaveRef<char*>(subclave,ref2);
 
         this->InsertarNuevaSubClaveRef(subclave,ref2);
 
