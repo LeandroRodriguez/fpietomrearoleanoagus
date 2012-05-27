@@ -30,3 +30,4 @@ void TestRegistro::TestSerializarHidratarRegistro(){
     delete registro1;
     delete registro2;
 }
+
