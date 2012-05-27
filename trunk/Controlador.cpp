@@ -12,7 +12,7 @@ Controlador::Controlador() {
 	 if (aux.size()>0){
 		 archivoPrimario = aux[0];
 	 }else{
-		 archivoPrimario = ARCHIVO_INDICE_PRIMARIO;
+		 archivoPrimario = ARCHIVO_ARBOL;
 		 archivoPrimario += ".idx";
 	 }
 
