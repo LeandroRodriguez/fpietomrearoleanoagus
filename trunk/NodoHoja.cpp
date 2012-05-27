@@ -210,4 +210,8 @@ vector<int> NodoHoja::getTamanios(){
 
 }
 
+void NodoHoja::imprimir() {
+	std::cout <<"idBloque:"<<this->idBloque << ", serializacion:" << Serializarse()<<endl;
+}
+
 

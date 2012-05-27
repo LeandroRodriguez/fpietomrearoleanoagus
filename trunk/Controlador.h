@@ -21,7 +21,7 @@ class Controlador {
 	string archivoPrimario;/*nombre del archivo con el indice(mi arbol)*/
 
 public:
-
+	Indice* indicePrimario;
 	// Crea el controlador y levanta todos los indices en /Archivos/Indices/
 	Controlador();
 	virtual ~Controlador();

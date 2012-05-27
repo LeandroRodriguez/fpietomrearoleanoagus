@@ -34,6 +34,7 @@ class NodoHoja: public Nodo{
     int getTamanioConDatos();
     Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
     vector<int> getTamanios();
+    void imprimir();
 
 };
 

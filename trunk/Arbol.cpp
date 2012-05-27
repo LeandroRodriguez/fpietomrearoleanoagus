@@ -79,4 +79,14 @@ Nodo* Arbol::crearNuevoNodo(char tipo) {
 
 Nodo* Arbol::getRaiz(){
 	return this->raiz;
-};
+}
+
+void Arbol::imprimir(){
+	if (raiz != NULL) {
+		cout << "EL ARBOL: " << endl;
+		this->raiz->imprimir();
+	}
+	else
+		cout << "EL ARBOL NO TIENE ELEMENTOS " << endl;
+}
+
