@@ -10,7 +10,6 @@
 #include "../NodoHoja.h"
 #include "../NodoInterno.h"
 
-using namespace std;
 class PersistenciaArbol {
 
 protected:
