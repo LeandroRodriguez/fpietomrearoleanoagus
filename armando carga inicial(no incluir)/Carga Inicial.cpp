@@ -6,64 +6,79 @@
 /*devuelvo list de punteros de nodos del nivel anterior, y referencio los nuevos nodos con eso*/
 /*en el ultimo la list tiene un solo elemento que debiese ser el puntero de la raiz, esto lo meto en el arbol, pero igual lo manejo en la func no recursiva*/
 
+
+
+NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves,list<int>* listaReferenciasNodosHoja){
+	/*para la clave de la posicion it de la lista de listas de claves*/
+	List* listaClaves = this->obtenerClavesSegunPos(listaMaestraClaves, i);
+
+	list<int>::iterator itListaClaves;
+	itListaClaves= listaClaves->begin();
+	/*construyo mi NodoI*/			
+	for(;itListaClaves!=listaClaves->end();itListaClaves++){
+		/*asigno una referencia*/
+		/*asigno una clave*/			
+	}
+	/*asigno ultima referencia, si es que hay, sino, ref null o algo para identificar (vacio)*/
+	
+}
+
+
+
+
 /*TOMAR POSIBLES ACCIONES ANTE EL CASO QUE UN SUBARBOL SOLO TENGA UN DATO (la clave que tendria??)*/
 /*VER COMO VOY HACIENDO SUBSISTIR LOS NODOS A LO LARGO DE LA RECURSIVIDAD*/
 /*una opcion, devolver los nodos de abajo para arriba a medida que fui terminando, y usar algun flag que me indique cuando llego al nivel de la raiz(la veo muy viable)(repensarlo maniana)*/
 
 //**la recursiva recibe (list* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento)**//
-list* cargaInicialArmarNodos(list* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento){
+list* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento){
+	/*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
+	list<int>* listaMaestraNiveles = new list<int>();	
+	list<list*>* listaMaestraClaves = new list<list*>();
+	list<list*>* listaMaestraDatosSubArboles = new list<list*>();
+	
 	/*para cada una de mis sublistas:*/
-	list<int>::iterator itSubListas;
+	list<list*>::iterator itSubListas;
 	itSubListas= subListasDatos->begin();
 
 	for(;itSubListas!=subListasDatos->end();itSubListas++){
 		/*ordeno datos por mi dimension*/
-		list* subListaOrdenada = this->obtenerListaOrdenadaPorDimension(&(*itSubListas),dimension);//TO DO
+		list<list*>* subListaOrdenada = this->obtenerListaOrdenadaPorDimension(&(*itSubListas),dimension);//TO DO
 		/*una vez que tengo mi lista ordenada, comienzo con la insercion en nodos como si fuese una carga inicial comun(mmm, mas bien una simulacion)*/
-		/*instancio dos listas vacias para que me devuelva resultados*/
-		list listaClaves, listasDatosSubArboles;		
-		int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, &listaClaves, &listasDatosSubArboles);//TO DO
+		/*instancio dos listas vacias para que me devuelva resultados el metodo que simula la carga inicial del subarbol*/
+		list<Key>* listaClaves;//lista de claves
+		list<list*>* listaListasDatosSubArboles;//lista de listas de datos		
+		int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento);//TO DO
 		/*ACA PARTE DE CODEO COMPLICADO. aca dps voy a tener que hacer el codigo groso*/
 		/*recupero el nivel del arbol, las claves del nodo raiz y una lista de subarboles*/
 	
 		/*estos datos los tengo que guardar en algun lado o los voy a perder en la siguiente iteracion(ponele que los voy metiendo en 3 listas)*/
-	
-		/*guardo en un nodo temporal el "nodo" superior(es necesario decirle nivel?)(ver como hacer para lograr esto, nose si se puede asi nomas)(las 			refes a los hijos, que todavia no cree?)*//*esto nodo vendria a ser hijo del del paso anterior*/
-	
-	/*ListalistaClaves.size() == subListasDatos.size()// n=(listaClaves.size()+1) listasDAtos por iteracion// un nivel por iteracion*/
-	/**/
+		listaMaestraNiveles->push_back(nivel);
+		listaMaestraClaves->push_back(listaClaves);
+		listaMaestraDatosSubArboles->push_back(listaListasDatosSubArboles);
 	}
 	/*una vez que sali del primer ciclo compararia los niveles de los distintos subarboles(sublistas)*/
 	/*obtengo el mayor nivel*/	
-	int nivelMayor = this->conseguirNivelMayor(listaNiveles); //TO DO	
+	int nivelMayor = this->conseguirNivelMayor(listaMaestraNiveles); //TO DO	
 		
 	/*si el mayor nivel era 2, ya podria recuperar el nodo hoja entero, auque esto lo puedo verificar mas abajo*/
 	if(nivelMayor == 2){
 		/*agarro los nodos de algun lado y armo mi arbol resultante*/		
-		list<int>::iterator itListaSubArboles;
-		itListaSubArboles= listaSubArboles->begin();
+		list<list*>::iterator itListaSubArboles;
+		itListaSubArboles= listaMaestraDatosSubArboles->begin();
 		/*para cada SubArb de la lista de SubArbs*/
 		int i = 0;		
-		for(;itListaSubArboles!=listaSubArboles->end();itListaSubArboles++){		
-			(*itListaSubArboles)
+		for(;itListaSubArboles!=listaMaestraDatosSubArboles->end();itListaSubArboles++){
+			list<int>* listaReferenciasNodosHoja;		
 			/*para cada SubSubArb de la lista de SubArb*/
 			for(;itListaSubSubArboles!=itListaSubArboles->end();itListaSubSubArboles++){	
 				/*inserto el SubSubArbol en un nodoHoja*/
 				NodoHoja* nodoHoja = this->insertarDatosEnNodoHoja(&(*itListaSubSubArboles));//TO DO
 				/*inserto la ref al nodo hoja en una nueva lista*/
+				listaReferenciasNodosHoja->push_back(nodoHoja);
 			}
 			
-			/*para la clave de la posicion it de la lista de listas de claves*/
-			List* listaClaves = this->obtenerClavesSegunPos(listaClaves, i);
-
-			list<int>::iterator itListaClaves;
-			itListaClaves= listaClaves->begin();
-			/*construyo mi NodoI*/			
-			for(;itListaClaves!=listaClaves->end();itListaClaves++){
-				/*asigno una referencia*/
-				/*asigno una clave*/			
-			}
-			/*asigno ultima referencia, si es que hay, sino, ref null o algo para identificar (vacio)*/
+			NodoInterno* nodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja);
 			
 			/*meto el nodo interno en una lista de resultados, con las refs de los nodos internos*/
 			i++;
@@ -117,7 +132,7 @@ list* cargaInicialArmarNodos(list* subListasDatos, int dimension, int porcentaje
 	/*retorno ahora las refs de estos nodos,(que ya referencian a los inferiores), para que se agreguen en el siguiente nivel*/
 }
 
- list<int>* listIdRegistros = new list<int>();
+list<int>* listIdRegistros = new list<int>();
 
 
 
