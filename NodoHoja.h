@@ -33,6 +33,7 @@ class NodoHoja: public Nodo{
     void Hidratar(char* bytes);
     int getTamanioConDatos();
     Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
+    vector<int> getTamanios();
 
 };
 
