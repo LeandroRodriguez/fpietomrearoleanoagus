@@ -274,15 +274,26 @@ class NodoInterno: public Nodo{
         return cosa->getRefNodo();
     }
 
+    /*TO DO:    */
+    //Hay que ir leyendo nodos segun IDNodoAbajo
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
+        T subclave = (T) dato->getSubClaveSegunDim(this->dimension);
+        int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
+        Resultado Res;
+        if (this->Altura > 1 ){/*He aqui la recursividad.Voy bajando por el arbol */
 
-         T subclave = (T) dato->getSubClaveSegunDim(this->dimension);
+            //levantar un nodo interno, de la persistencia, con IDNodoAbajo
+            //Res = NodoIntLeido->insertarElemento(RefNodoAbajo,nroRegistro,dato,porcentaje);
 
-        int RefNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
+        }else{/*Aca tengo que solucionar overflow Hojas  */
+            //levantar un nodo hoja, de la persistencia, con IDNodoAbajo
+            //Res = NodoHojaLeido->insertarElemento(RefNodoAbajo,nroRegistro,dato,porcentaje);
 
-
-
-    	return RES_OK;
+            if (Res == RES_DESBORDADO ){
+                //magia
+                }else return Res;
+            }
+    	return Res;
     }
 
 };
