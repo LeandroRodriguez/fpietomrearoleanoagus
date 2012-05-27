@@ -316,7 +316,6 @@ class NodoInterno<char*>:public Nodo{
         return RES_OK;
     }
 
-        /*funciona para char*,y todos los demas tipos  */
     bool VerSiSeRepiteSubclave(SubClaveRef<char*>* item){
         list< SubClaveRef<char*>* >::iterator it;
         it = this->ListaSubClaveRef->begin();
