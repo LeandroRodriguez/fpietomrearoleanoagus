@@ -415,7 +415,7 @@ class NodoInterno: public Nodo{
             return (*it)->getSubClave();
         }
 
-    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato)
+    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje)
     {
     	return RES_OK;
     }
