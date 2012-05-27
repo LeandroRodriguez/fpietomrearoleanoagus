@@ -112,7 +112,7 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 		 *este string es el que convierto en un int con atoi
 
 		Como tamanioUsado=0 y i=0 en la primera levanto los primeros 8 bytes.*/
-		cantBytes datoUID = atoi(bytesBloque.getSubBytes(tamanioUsado + i * LONGITUD_CANT_BYTES * 2, LONGITUD_CANT_BYTES).toString().c_str());
+		cantBytes datoUID = atoi(bytesBloque.getSubBytes(tamanioUsado + i * LONGITUD_CANT_BYTES * 2 + i, LONGITUD_CANT_BYTES).toString().c_str());
 		/*si pasoCero(o sea, ya paso el bloque con UID=0) y no levante bytes, corto*/
 		if ((datoUID == 0)&&(pasoCero))
 		{
@@ -120,15 +120,20 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 			break;
 		}
 		/*levanto los siguientes 8 bytes (primer ciclo)*/
-		tamanioDato = atoi(bytesBloque.getSubBytes(tamanioUsado + i * LONGITUD_CANT_BYTES * 2 + LONGITUD_CANT_BYTES, LONGITUD_CANT_BYTES).toString().c_str());
+		tamanioDato = atoi(bytesBloque.getSubBytes(tamanioUsado + i * LONGITUD_CANT_BYTES * 2 + LONGITUD_CANT_BYTES + i, LONGITUD_CANT_BYTES).toString().c_str());
 		/*si no levante bytes corto*/
 		if (tamanioDato == 0) {
 			//cerr << "salame" << endl;
 			i--;
 			break;
 		}
+
+		string a = bytesBloque.getSubBytes(tamanioUsado + i * LONGITUD_CANT_BYTES * 2 + LONGITUD_CANT_BYTES*2 + i,1).toString();
+		bool vivo = (a=="1");
+
+
 		/*levanto a partir de los bytes del paso anterior (primer ciclo) segun tamanioDato, y ahora no lo convierto en int*/
-		Bytes dato = bytesBloque.getSubBytes(LONGITUD_CANT_BYTES * 2 + i * LONGITUD_CANT_BYTES * 2 + tamanioUsado,tamanioDato);
+		Bytes dato = bytesBloque.getSubBytes(LONGITUD_CANT_BYTES * 2 + i * LONGITUD_CANT_BYTES * 2 + tamanioUsado + i + 1,tamanioDato);
 		/*Aca es donde recupero el dato en formato de Bytes*/
 
 		/*aumento i para desplazarme sobre la tira de BytesBloques*/
@@ -139,6 +144,7 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 		/*Hidrato mi registro variable con la cadena de bytes del dato*/
 		RegistroVariable* registro = new RegistroVariable(dato);
 		registro->setNRegistro(datoUID);
+		registro->setVivo(vivo);
 		agregarRegistro(registro);
 		/*Seteo todos sus atributos y lo agrego al bloque*/
 

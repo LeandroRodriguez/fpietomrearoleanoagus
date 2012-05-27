@@ -30,6 +30,7 @@ public:
 	cantBytes getTamanioSerializado();
 	uint32 getNRegistro(){return this->nRegistro;}
 	void setNRegistro(const uint32& UID){this->nRegistro = UID;}
+	void setVivo(bool vivo){this->vivo = vivo;}
 };
 
 #endif /* REGISTROVARIABLE_H_ */
