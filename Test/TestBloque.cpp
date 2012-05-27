@@ -55,3 +55,4 @@ void TestBloque::TestSerializarHidratarBloque(){
     delete byte;
     delete registro;
 }
+

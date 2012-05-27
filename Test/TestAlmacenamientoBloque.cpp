@@ -3,11 +3,10 @@
 TestAlmacenamientoBloque::TestAlmacenamientoBloque(){}
 
 void TestAlmacenamientoBloque::TestCrearAlmacenamientoBloque(){
-    AlmacenamientoBloque* almacen = new AlmacenamientoBloque(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
-    delete almacen;
+    AlmacenamientoBloque(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
 }
 
-void TestAlmacenamientoBloque::TestAgregarRegistroAAlmacenamiento(){
+void TestAlmacenamientoBloque::TestAgregarRecuperarRegistro(){
     AlmacenamientoBloque* almacen = new AlmacenamientoBloque(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
     Bytes* byte1 = new Bytes("millonarios");
     RegistroVariable* registro1 = new RegistroVariable(*byte1);
@@ -23,7 +22,7 @@ void TestAlmacenamientoBloque::TestAgregarRegistroAAlmacenamiento(){
     RegistroVariable reg1 = almacen->recuperarRegistro(bloque,id1);
     RegistroVariable reg2 = almacen->recuperarRegistro(bloque,id2);
     if (reg1.getDato().toString() == "millonarios" && reg2.getDato().toString() == "alteBrown")
-        cout << "TestAlmacenamientoBloque: OK " << endl;
+        cout << "TestAlmacenamientoBlque: OK " << endl;
     else
         cout << "TestAlmacenamientoBloque: FAIL " << endl;
     delete byte1;
