@@ -29,5 +29,6 @@ class Nodo : public InterfazSerializar {
     virtual Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje) = 0;
 
 	virtual void imprimir()=0;
+
 };
 #endif //
