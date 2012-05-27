@@ -240,8 +240,100 @@ class NodoInterno: public Nodo{
 
     ~NodoInterno(){}
 
-    /*sirve para char* */
-    unsigned long int getTamanioSerializadoParaChar(){
+    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
+    	return RES_OK;
+    }
+
+};
+
+template <>
+class NodoInterno<char*>:public Nodo{
+
+    private:
+
+    int Ref1erNodo;
+
+    list< SubClaveRef<char*>* >* ListaSubClaveRef;
+
+    public:
+
+    NodoInterno(Bytes* CodigoBinario){
+
+        char* asd = new char[ CodigoBinario->toString().length() ];
+
+        memcpy(asd ,&CodigoBinario->toString() ,CodigoBinario->toString().length() );
+
+        this->Hidratar( asd );
+        }
+
+    NodoInterno(char* cadena){
+
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<char*>* >;
+        this->Hidratar(cadena);
+    }
+
+    NodoInterno(){
+
+        }
+
+    NodoInterno(int ref1,char* subclave ,int ref2){
+
+        this->ListaSubClaveRef= new list<SubClaveRef<char*>* >;
+
+        this->Inicializar(ref1,subclave,ref2);
+
+    }
+
+    void Inicializar( int ref1 ,char* subclave ,int ref2 ){
+
+        this->Ref1erNodo=ref1;
+
+        SubClaveRef<char*>* NuevaDupla= new SubClaveRef<char*>(subclave,ref2);
+
+        this->InsertarNuevaSubClaveRef(subclave,ref2);
+
+    }
+
+    Resultado InsertarNuevaSubClaveRef ( char* subclave,int refAbloqueArbol ){
+        /*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
+        Si lo encuentra, devuelve como resultado RES_DUPLICADO.
+
+        Si el nodo hoja desborda, Devuelve  RES_DESBORDADO
+        sino, devuelve RES_OK*/
+
+        SubClaveRef<char*>* item = new SubClaveRef<char*>(subclave,refAbloqueArbol);
+
+        if( this->VerSiSeRepiteSubclave(item) )return RES_DUPLICADO;
+
+        this->ListaSubClaveRef->push_back(item);
+        this->ListaSubClaveRef->sort();
+        this->CantElem=(this->CantElem)+1;
+
+        if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
+
+        return RES_OK;
+    }
+
+        /*funciona para char*,y todos los demas tipos  */
+    bool VerSiSeRepiteSubclave(SubClaveRef<char*>* item){
+        list< SubClaveRef<char*>* >::iterator it;
+        it = this->ListaSubClaveRef->begin();
+
+        bool NoSeRepite=true;
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+                SubClaveRef<char*>* cosa = *it;
+                if( cosa == item ){
+                    NoSeRepite=false;
+                    break;
+                    }
+                }
+        return NoSeRepite;
+    }
+
+    unsigned long int getTamanioSerializado(){
 
         size_t tamanioSerializado = 0;
 
@@ -274,8 +366,7 @@ class NodoInterno: public Nodo{
 
         }
 
-    /*sirve para char* */
-    char *Serializarse_sirveparacharasterisco(){
+    char* Serializarse(){
 
         size_t  tamanioTotal = this->getTamanioSerializado();
         /*el string que voy a devolver*/
@@ -334,8 +425,7 @@ class NodoInterno: public Nodo{
     	return str;
     }
 
-    /*sirve para char* */
-    void HidratarParaChar(char* bytes){
+    void Hidratar(char* bytes){
 
      	unsigned int cur = 0;/*cur = cursor */
 
@@ -371,14 +461,10 @@ class NodoInterno: public Nodo{
             cur += sizeof(int);
 
             this->InsertarNuevaSubClaveRef( subclave, RefNod);
-
-
-
+            }
         }
-    }
 
-
-    char* conseguirClaveQueDividaAlMedioPonderadoElNodoParaChar(){
+    char* conseguirClaveQueDividaAlMedioPonderadoElNodo(){
 
             list< SubClaveRef<char*>* >::iterator it;
 
@@ -415,10 +501,12 @@ class NodoInterno: public Nodo{
             return (*it)->getSubClave();
         }
 
-    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje)
-    {
+    ~NodoInterno(){}
+
+    Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
     	return RES_OK;
     }
 
 };
+
 #endif
