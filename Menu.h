@@ -1,5 +1,7 @@
 #ifndef MENU_H_
 #define MENU_H_
+#include <string>
+#include "Controlador.h"
 
 using namespace std;
 
@@ -13,6 +15,6 @@ class Menu{
 
     public:
     Menu();
-    ImprimirOpciones();
+    void ImprimirOpciones();
 };
 #endif
