@@ -9,9 +9,10 @@ class TestAlmacenamientoBloque{
     public:
     TestAlmacenamientoBloque();
     void TestCrearAlmacenamientoBloque();
-    void TestAgregarRegistroAAlmacenamiento();
+    void TestAgregarRecuperarRegistro();
 };
 
 
 #endif /* TESTALMACENAMIENTOBLOQUE_H_ */
+
 
