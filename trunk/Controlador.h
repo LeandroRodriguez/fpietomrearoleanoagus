@@ -29,14 +29,14 @@ public:
 	/*Inserto el dato pasado por parametro tanto en el archivo de data, como sus referencias en el arbol*/
 	void InsertarDato(Key* dato);
 
-	/*ListarTenesPorFalla(falla);
-	ListarTenesPorAccidente(accidente);
-	ListarFallasPorFormacion(formacion);
-	ListarAccidentesPorFormacion(formacion);
-	ListarFallas();
-	ListarForcaciones();
-	ListarLineas();
-	ListarAccidentes();*/
+	void ListarTenesPorFalla(string falla);
+	void ListarTenesPorAccidente(string accidente);
+	void ListarFallasPorFormacion(string formacion);
+	void ListarAccidentesPorFormacion(string formacion);
+	void ListarFallas();
+	void ListarForcaciones();
+	void ListarLineas();
+	void ListarAccidentes();
 };
 
 #endif /* CONTROLADOR_H_ */

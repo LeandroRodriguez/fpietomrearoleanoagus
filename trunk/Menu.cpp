@@ -1,10 +1,8 @@
 #include "Menu.h"
 
-//HICE ESTAS CLASES XQ DE LO OTRO MUCHO NO ESTOY CASANDO Y QUERIA EMEPZAR CON ALGO
-
 
 Menu::Menu(){
-    Controlador controlador = new Controlador();
+    Controlador* controlador = new Controlador();
     continuar = 1;
     while (continuar){
         system("clear");

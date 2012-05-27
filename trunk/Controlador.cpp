@@ -45,7 +45,40 @@ void Controlador::InsertarDato(Key* dato){
 		/*borro el indice primario*/
 		delete indicePrimario;//linea peligrosa quizas, mirarla en caso de que algo falle
 	}
-};
+}
+
+void Controlador::ListarTenesPorFalla(string falla){
+    //not implemented
+    }
+
+void Controlador::ListarTenesPorAccidente(string accidente){
+    //not implemented
+    }
+
+void Controlador::ListarFallasPorFormacion(string formacion){
+    //not implemented
+    }
+
+void Controlador::ListarAccidentesPorFormacion(string formacion){
+    //not implemented
+    }
+
+void Controlador::ListarFallas(){
+    //not implemented
+    }
+
+void Controlador::ListarForcaciones(){
+    //not implemented
+    }
+
+void Controlador::ListarLineas(){
+    //not implemented
+    }
+
+void Controlador::ListarAccidentes(){
+    //not implemented
+    }
+
 
 
 /*
@@ -70,35 +103,5 @@ void Controlador::cargarArchivos(){
     //not implemented
     }
 
-Controlador::ListarTenesPorFalla(falla){
-    //not implemented
-    }
 
-Controlador::ListarTenesPorAccidente(accidente){
-    //not implemented
-    }
-
-Controlador::ListarFallasPorFormacion(formacion){
-    //not implemented
-    }
-
-Controlador::ListarAccidentesPorFormacion(formacion){
-    //not implemented
-    }
-
-Controlador::ListarFallas(){
-    //not implemented
-    }
-
-Controlador::ListarForcaciones(){
-    //not implemented
-    }
-
-Controlador::ListarLineas(){
-    //not implemented
-    }
-
-Controlador::ListarAccidentes(){
-    //not implemented
-    }
 */
