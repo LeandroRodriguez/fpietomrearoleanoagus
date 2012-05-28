@@ -24,13 +24,14 @@ int main(){
     //testAlmacen->TestEscribirBloque();
     delete testAlmacen;
 
-    TestPersistenciaArbol* testPersistencia = new TestPersistenciaArbol();
-    testPersistencia->TestCrearArchivoArbol();
-    delete testPersistencia;
-
     TestManipuladorArchivos* testManipualdor = new TestManipuladorArchivos();
     testManipualdor->TestRecuperarArchivos();
     testManipualdor->TestBorrarArchivos();
     testManipualdor->TestCrearCarpeta();
     delete testManipualdor;
+
+    TestPersistenciaArbol* testPersistencia = new TestPersistenciaArbol();
+    testPersistencia->TestCrearArchivoArbol();
+    //testPersistencia->TestObtenerRaiz();
+    delete testPersistencia;
 };
