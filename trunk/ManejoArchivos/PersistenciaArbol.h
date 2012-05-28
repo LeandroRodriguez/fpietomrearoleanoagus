@@ -5,7 +5,8 @@
 #include <fstream>
 #include "string"
 #include "exception"
-#include "iostream"/* por que va con " " esto?  */
+#include "iostream"
+#include "../Nodo.h"
 #include "../NodoHoja.h"
 #include "../NodoInterno.h"
 
