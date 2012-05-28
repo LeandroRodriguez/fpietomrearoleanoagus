@@ -66,6 +66,7 @@ class NodoInterno: public Nodo{
     NodoInterno(Arbol* arbol):Nodo(arbol){
 
     }
+
     NodoInterno(){
 
         }
