@@ -1,8 +1,13 @@
 #include "Arbol.h"
 
+Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
+    Nodo* aux = this->persistir->leerNodo(IdNodo);
+	aux->setArbol(this);
+	return aux;
+}
 
 Arbol::Arbol( PersistenciaArbol* persistencia) {
-	this->persistir = persistencia;
+	this->persistir=persistencia;
 	this->cantidadElem= 0;
 	this->raiz = NULL;
 
@@ -17,12 +22,10 @@ Arbol::Arbol( PersistenciaArbol* persistencia) {
 
 }
 
-
 Arbol::~Arbol() {
 	if (this->raiz!=NULL)
 		delete this->raiz;
 }
-
 
 
 Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
@@ -68,8 +71,8 @@ Nodo* Arbol::crearNuevoNodo(char tipo) {
 	Nodo* nuevoNodo = NULL;
 	if (tipo == 'H') {
 		nuevoNodo = new NodoHoja();
-	} else {
-		//nuevoNodo = new NodoInterno();
+	} else {// necesitas saber de que tipo es el nodo, segun dimension
+            //nuevoNodo = new NodoInterno();
 	}
 
 	this->persistir->agregarNodo( nuevoNodo);
