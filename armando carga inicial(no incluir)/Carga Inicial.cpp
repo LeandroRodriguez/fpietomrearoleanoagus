@@ -1,9 +1,13 @@
-void* cargaInicial(){
-
-	list<list*>* subListasDatos = new list<list*>*;//LO CREO O LO RECIBO
-	int dimension = 1;//ponele
+void* cargaInicial(list<Dato*>* listaDeDatos){
+	/*creo una sublista donde solo voy a tener la lista con los datos iniciales*/
+	list<list*>* subListasDatos = new list<list*>*;
+	subListasDatos->push_back(listaDeDatos);
+	list<list*>* listaDeSubListasDatos = new list<list*>*;	
+	/*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
+	int dimension = 1;
+	/*elijo un porcentaje de empaquetamineto inicial del 75%*/
 	int porcentajeDeEmpaquetamiento = 75;
-	list<NodoInterno*>* cargaInicialArmarNodos(subListasDatos, dimension, porcentajeDeEmpaquetamiento);
+	list<NodoInterno*>* cargaInicialArmarNodos(listaDeSubListasDatos, dimension, porcentajeDeEmpaquetamiento);
 }
 //**mi funcion, de movida, tiene que recibir una lista con los datos a insertar**//
 /*desde esta llamaria a la recursiva, ponele*/
@@ -21,6 +25,7 @@ list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension)
 
 int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento){
 	//TO DO	
+	/*ACA PARTE DE CODEO COMPLICADO. aca dps voy a tener que hacer el codigo groso*/
 	return 2;
 }
 
@@ -159,7 +164,7 @@ list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, li
 /*VER COMO VOY HACIENDO SUBSISTIR LOS NODOS A LO LARGO DE LA RECURSIVIDAD*/
 /*una opcion, devolver los nodos de abajo para arriba a medida que fui terminando, y usar algun flag que me indique cuando llego al nivel de la raiz(la veo muy viable)(repensarlo maniana)*/
 
-//**la recursiva recibe (list* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento)**//
+/*funcion recursiva encargada de hacer la coordinacion de la magia de la carga inicial*/
 list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento){
 	/*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
 	list<int>* listaMaestraNiveles = new list<int>();	
@@ -182,7 +187,6 @@ list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dime
 			list<SubClaveRef*>* listaClaves;//lista de claves
 			list<list*>* listaListasDatosSubArboles;//lista de listas de datos		
 			int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, 					porcentajeDeEmpaquetamiento); //TO DO
-			/*ACA PARTE DE CODEO COMPLICADO. aca dps voy a tener que hacer el codigo groso*/
 			/*recupero el nivel del arbol, las claves del nodo raiz y una lista de subarboles*/
 	
 			/*estos datos los tengo que guardar en algun lado o los voy a perder en la siguiente iteracion(ponele que los voy metiendo en 3 listas)*/
