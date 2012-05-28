@@ -3,6 +3,15 @@
 TestPersistenciaArbol::TestPersistenciaArbol(){}
 
 void TestPersistenciaArbol::TestCrearArchivoArbol(){
-    PersistenciaArbol(ARCHIVO_ARBOL);
-    cout << "TestCrearArchivoArbol: OK" <<endl;
+    PersistenciaArbol* persistencia = new PersistenciaArbol(ARCHIVO_ARBOL);
+    if (persistencia->isVacio())
+        cout << "TestCrearArchivoArbol: OK" <<endl;
+    else
+        cout << "TestCrearArchivoArbol: FAIL" <<endl;
+    delete persistencia;
+}
+
+void TestPersistenciaArbol::TestObtenerRaiz(){
+    PersistenciaArbol* persistencia = new PersistenciaArbol(ARCHIVO_ARBOL);
+    Nodo* nodo = persistencia->obtenerRaiz();
 }

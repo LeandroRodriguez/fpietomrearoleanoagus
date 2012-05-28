@@ -9,6 +9,7 @@ class TestPersistenciaArbol{
     public:
     TestPersistenciaArbol();
     void TestCrearArchivoArbol();
+    void TestObtenerRaiz();
 };
 
 
