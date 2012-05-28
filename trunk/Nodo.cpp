@@ -9,3 +9,11 @@ char Nodo::getHojaOInterno(){
         return 'H';
         }
 
+Nodo::Nodo(){}
+Nodo::Nodo(Arbol* arb){
+    this->arbol=arb;
+    }
+
+void Nodo::setArbol(Arbol* arb){
+    this->arbol=arb;
+}

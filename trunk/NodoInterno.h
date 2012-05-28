@@ -7,9 +7,11 @@
 #include <string.h>
 #include <cstring>
 #include "SubClaveRef.h"
-#include "ManejoArchivo/PersistenciaArbol.h"
-
+#include "Nodo.h"
+#include "Arbol.h"
 using namespace std;
+
+class NodoHoja;
 
 template<class T>
 class NodoInterno: public Nodo{
@@ -61,6 +63,9 @@ class NodoInterno: public Nodo{
         this->Hidratar(cadena);
     }
 
+    NodoInterno(Arbol* arbol):Nodo(arbol){
+
+    }
     NodoInterno(){
 
         }
@@ -275,33 +280,24 @@ class NodoInterno: public Nodo{
         return cosa->getRefNodo();
     }
 
-    void imprimir(){
+    void imprimir(){}
 
-    }
-
-    /*TO DO:    */
-    //Hay que ir leyendo nodos segun IDNodoAbajo
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
         T subclave = (T) dato->getSubClaveSegunDim(this->dimension);
         int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
         Resultado Res;
-
-
         if (this->Altura > 1 ){/*He aqui la recursividad.Voy bajando por el arbol */
-
             //levantar un nodo interno, de la persistencia, con IDNodoAbajo
+            Nodo* NodoLeido =this->arbol->DevolverNodoSegunID(IDNodoAbajo);
+            Res = NodoLeido->insertarElemento(IDNodoAbajo,nroRegistro,dato,porcentaje);
+        }else{
 
-            PersistenciaArbol* PerA = new PersistenciaArbol( ARCHI );
+            Nodo* NodoHleido =this->arbol->DevolverNodoSegunID(IDNodoAbajo);
+            Res = NodoHleido->insertarElemento(IDNodoAbajo,nroRegistro,dato,porcentaje);
 
-            //Res = NodoIntLeido->insertarElemento(IDNodoAbajo,nroRegistro,dato,porcentaje);
-
-        }else{/*Aca tengo que solucionar overflow Hojas  */
-            //levantar un nodo hoja, de la persistencia, con IDNodoAbajo
-            //Res = NodoHojaLeido->insertarElemento(RefNodoAbajo,nroRegistro,dato,porcentaje);
-
-            if (Res == RES_DESBORDADO ){
+            if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
                 //magia
-                }else return Res;
+                }
             }
     	return Res;
     }
@@ -318,6 +314,10 @@ class NodoInterno<char*>:public Nodo{
     list< SubClaveRef<char*>* >* ListaSubClaveRef;
 
     public:
+
+    NodoInterno(Arbol* arbol):Nodo(arbol){
+
+    }
 
     NodoInterno(Bytes* CodigoBinario){
 
@@ -336,9 +336,7 @@ class NodoInterno<char*>:public Nodo{
         this->Hidratar(cadena);
     }
 
-    NodoInterno(){
-
-        }
+    NodoInterno(){}
 
     NodoInterno(int ref1,char* subclave ,int ref2){
 
@@ -566,11 +564,12 @@ class NodoInterno<char*>:public Nodo{
     	return RES_OK;
     }
 
-    void imprimir()
-    {
-
-    }
+    void imprimir(){}
 
 };
+
+
+
+
 
 #endif

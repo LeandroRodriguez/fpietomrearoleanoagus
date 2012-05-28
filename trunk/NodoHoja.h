@@ -5,8 +5,11 @@
 #include <iostream>
 #include <list>
 #include "Nodo.h"
+#include "Arbol.h"
 #include "ManejoArchivos/AlmacenamientoBloque.h"
 #include <malloc.h>
+
+template <class T> class NodoInterno;
 
 
 class NodoHoja: public Nodo{
@@ -25,6 +28,7 @@ class NodoHoja: public Nodo{
     public:
 
     NodoHoja();
+    NodoHoja(Arbol* arbol);
     NodoHoja(char* str);
     ~NodoHoja(){};
 
