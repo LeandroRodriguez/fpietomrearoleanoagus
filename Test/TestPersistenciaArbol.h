@@ -8,7 +8,7 @@ class TestPersistenciaArbol{
 
     public:
     TestPersistenciaArbol();
-    void TestCrearPersistenciaArbol();
+    void TestCrearArchivoArbol();
 };
 
 
