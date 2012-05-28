@@ -10,6 +10,9 @@ NodoHoja::NodoHoja(){
 
     }
 
+NodoHoja::NodoHoja(Arbol* arbol):Nodo(arbol){
+
+}
 unsigned long int NodoHoja::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
