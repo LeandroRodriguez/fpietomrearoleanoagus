@@ -8,8 +8,10 @@ class TestAlmacenamientoBloque{
 
     public:
     TestAlmacenamientoBloque();
-    void TestCrearAlmacenamientoBloque();
+    void TestCrearArchivosDatos();
     void TestAgregarRecuperarRegistro();
+    void TestRecuperarBloque();
+    void TestEscribirBloque();
 };
 
 
