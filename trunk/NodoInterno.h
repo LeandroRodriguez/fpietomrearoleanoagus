@@ -18,7 +18,7 @@ class NodoInterno: public Nodo{
         unsigned long int Altura
         Dimension         dimension
         unsigned long int  tamanioMaximoNodo;
-        unsigned long int RefBloque;
+        unsigned int idBloque;
     */
 
     private:
@@ -84,7 +84,7 @@ class NodoInterno: public Nodo{
         if( this->VerSiSeRepiteSubclave(item) )return RES_DUPLICADO;
 
         this->ListaSubClaveRef->push_back(item);
-        this->ListaSubClaveRef->sort();
+        this->ListaSubClaveRef->sort();/*tiene un grado mas de complejidad, debido a 1er ref nodo   */
         this->CantElem=(this->CantElem)+1;
 
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
@@ -274,8 +274,7 @@ class NodoInterno: public Nodo{
         return cosa->getRefNodo();
     }
 
-    void imprimir()
-    {
+    void imprimir(){
 
     }
 
@@ -285,10 +284,15 @@ class NodoInterno: public Nodo{
         T subclave = (T) dato->getSubClaveSegunDim(this->dimension);
         int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
         Resultado Res;
+
+
         if (this->Altura > 1 ){/*He aqui la recursividad.Voy bajando por el arbol */
 
             //levantar un nodo interno, de la persistencia, con IDNodoAbajo
-            //Res = NodoIntLeido->insertarElemento(RefNodoAbajo,nroRegistro,dato,porcentaje);
+
+            PersistenciaArbol* PerA = new PersistenciaArbol( ARCHI );
+
+            //Res = NodoIntLeido->insertarElemento(IDNodoAbajo,nroRegistro,dato,porcentaje);
 
         }else{/*Aca tengo que solucionar overflow Hojas  */
             //levantar un nodo hoja, de la persistencia, con IDNodoAbajo
