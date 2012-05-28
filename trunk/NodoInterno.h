@@ -7,6 +7,7 @@
 #include <string.h>
 #include <cstring>
 #include "SubClaveRef.h"
+#include "ManejoArchivo/PersistenciaArbol.h"
 
 using namespace std;
 
