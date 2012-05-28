@@ -2,7 +2,7 @@
 
 TestPersistenciaArbol::TestPersistenciaArbol(){}
 
-void TestPersistenciaArbol::TestCrearPersistenciaArbol(){
-    PersistenciaArbol* persistencia = new PersistenciaArbol(ARCHIVO_ARBOL);
-    delete persistencia;
+void TestPersistenciaArbol::TestCrearArchivoArbol(){
+    PersistenciaArbol(ARCHIVO_ARBOL);
+    cout << "TestCrearArchivoArbol: OK" <<endl;
 }

@@ -21,11 +21,11 @@ int main(){
     testAlmacen->TestCrearArchivosDatos();
     testAlmacen->TestAgregarRecuperarRegistro();
     testAlmacen->TestRecuperarBloque();
-    testAlmacen->TestEscribirBloque();
+    //testAlmacen->TestEscribirBloque();
     delete testAlmacen;
 
     TestPersistenciaArbol* testPersistencia = new TestPersistenciaArbol();
-    testPersistencia->TestCrearPersistenciaArbol();
+    testPersistencia->TestCrearArchivoArbol();
     delete testPersistencia;
 
     TestManipuladorArchivos* testManipualdor = new TestManipuladorArchivos();
