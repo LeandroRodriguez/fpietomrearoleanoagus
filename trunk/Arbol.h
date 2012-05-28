@@ -1,9 +1,12 @@
 #ifndef ARBOL_H_
 #define ARBOL_H_
 
+#include "Nodo.h"
 #include "ManejoArchivos/PersistenciaArbol.h"
 #include <list>
 #include <typeinfo>
+
+class PersistenciaArbol;
 
 class Arbol {
     private:
@@ -11,6 +14,8 @@ class Arbol {
 
     public:
 	int long cantidadElem;
+
+    Nodo* DevolverNodoSegunID(int IDnodo);
 
 	Arbol(PersistenciaArbol* persistencia);
 	virtual ~Arbol();
@@ -24,6 +29,7 @@ class Arbol {
 	Nodo* crearNuevoNodo(char tipo) ;
 
 	void imprimir();
+
 
 private:
 	PersistenciaArbol* persistir;
