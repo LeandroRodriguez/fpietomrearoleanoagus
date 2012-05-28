@@ -6,7 +6,6 @@
 #include "string"
 #include "exception"
 #include "iostream"/* por que va con " " esto?  */
-
 #include "../NodoHoja.h"
 #include "../NodoInterno.h"
 
@@ -23,6 +22,7 @@ protected:
 public:
 	/*creo o abro el archivo al final, para editarlo*/
 	PersistenciaArbol(string nombreArchivo);
+	PersistenciaArbol();
 	/*cierro el archivo, si esta abierto*/
 	virtual ~PersistenciaArbol();
 
