@@ -117,6 +117,7 @@
 		tamanioSerializado += strlen(this->Falla);
 		tamanioSerializado += strlen(this->Accidente);
 		tamanioSerializado += strlen(this->FranjaHorariaDelSiniestro);
+		tamanioSerializado += sizeof(int)*4;
 
 		return tamanioSerializado;
 	}

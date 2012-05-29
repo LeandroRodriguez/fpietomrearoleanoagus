@@ -14,6 +14,7 @@
 //#include "Almacenamiento.h"
 
 #include "Bloque.h"
+#include "Bytes.h"
 
 using namespace std;
 

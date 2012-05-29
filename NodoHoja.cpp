@@ -9,10 +9,10 @@ NodoHoja::NodoHoja(){
 	this->listNroBloque = new list<int>();
 
     }
-
+/*
 NodoHoja::NodoHoja(Arbol* arbol):Nodo(arbol){
 
-}
+}*/
 unsigned long int NodoHoja::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
@@ -122,13 +122,12 @@ Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 	Key* dato = new Key();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
 
-	Bytes bytes = almacena.recuperarRegistro(nroBloque, idRegistro);
-	Bytes* b = &bytes;
+	string str= almacena.recuperarRegistro(nroBloque, idRegistro).toString();
 
-	char* bla = new char[b->toString().length() ];
+	int a = str.length();
+	char* bla = new char[str.length() ];
 
-	string bb = b->toString();
-	memcpy(bla,&bb,b->toString().length());
+	memcpy(bla,&str,str.length());
 
 	dato -> Hidratar(bla);
 	return dato;
@@ -136,7 +135,7 @@ Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 
 int NodoHoja::getTamanioConDatos()
 {
-	int tamanio;
+	int tamanio = 0;
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
 
@@ -181,12 +180,19 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 		itBloques++;
         }
 
-	this->listIdRegistros->push_back(idRegistro);
-	this->listNroBloque->push_back(nroBloque);
 
 	//chequeo overflow
-	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO*porcentaje)
+	int tamanio = this->getTamanioConDatos();
+	if((tamanio + dato->getTamanioSerializado()) > LONGITUD_BLOQUE_NODO*porcentaje){
+		this->listIdRegistros->push_back(idRegistro);
+		this->listNroBloque->push_back(nroBloque);
+		this->CantElem++;
 		return RES_DESBORDADO;
+	}
+
+	this->listIdRegistros->push_back(idRegistro);
+	this->listNroBloque->push_back(nroBloque);
+	this->CantElem++;
 
 	return RES_OK;
 
@@ -214,7 +220,45 @@ vector<int> NodoHoja::getTamanios(){
 }
 
 void NodoHoja::imprimir() {
-	std::cout <<"idBloque:"<<this->idBloque << ", serializacion:" << Serializarse()<<endl;
+	//Bytes b;
+	//b.agregar((void*)this->Serializarse(), getTamanioSerializado(), 0);
+	//string a = b.toString();
+/*
+	std::cout <<"idBloque:"<<this->idBloque << ", serializacion:";
+	int i;
+	char* serial = this->Serializarse();
+	string str = "";
+	int tamanio = this->getTamanioSerializado();
+	for (i = 0; i < tamanio; i++) {
+		//char aux[1];
+		//memcpy(aux,serial + i,1);
+		//cout<<aux;
+		str += serial+i;
+	}
+	cout<<str<<endl;
+
+	string str;
+	char aux[getTamanioSerializado()];
+	memcpy(aux,this->Serializarse(),getTamanioSerializado());
+	str.append(aux,getTamanioSerializado());
+
+	std::cout <<"idBloque:"<<this->idBloque << ", serializacion:" << str<<endl;*/
+	std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
+			<<	", dimension:" << this->dimension<< ", proximahoja:" << this->proximaHoja<< "refs: " << endl;
+
+	list<int>::iterator itRegistros;
+	itRegistros= this->listIdRegistros->begin();
+
+	list<int>::iterator itBloques;
+	itBloques= this->listNroBloque->begin();
+
+	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
+		std::cout<< "idReg:"<< *itRegistros<<", idBloque:"<<*itBloques<<endl;
+		std::cout<<"Dato: "<<this->cargarDato(*itRegistros, *itBloques)->Serializarse()<<endl;
+
+		itBloques++;
+		}
+
 }
 
 

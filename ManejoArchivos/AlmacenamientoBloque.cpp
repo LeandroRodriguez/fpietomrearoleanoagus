@@ -3,7 +3,7 @@
 /*abro o creo los archivos*/
 AlmacenamientoBloque::AlmacenamientoBloque(const string &pathDato,const string &pathLibres) {
 	/*seteo los stream de los archivos*/
-	string auxDatos = DIR_ARCHIVO_DATOS;
+	string auxDatos =  DIR_ARCHIVO_DATOS;
 	string auxLibres = DIR_ARCHIVO_DATOS;
 
 	auxDatos += pathDato;
@@ -14,20 +14,6 @@ AlmacenamientoBloque::AlmacenamientoBloque(const string &pathDato,const string &
 
 	/*Primero intento crear los directorios por si no existen*/
 
-	/*
-	int posicionUltimoSlashDato = pathDato.find_last_of("/");
-	int posicionUltimoSlashLibre = pathLibres.find_last_of("/");
-
-	if (posicionUltimoSlashDato != -1) {
-		string directorios(pathDato, 0, posicionUltimoSlashDato);
-		system(("mkdir -p " + directorios).c_str());
-	}
-
-	if (posicionUltimoSlashLibre != -1) {
-		string directorios(pathLibres, 0, posicionUltimoSlashLibre);
-		system(("mkdir -p " + directorios).c_str());
-	}
-	*/
 	/*intento abrir el archivo de datos*/
 	this->aDatos.open(auxDatos.c_str(), fstream::in | fstream::out
 			| fstream::ate | ios:: binary);
@@ -132,7 +118,7 @@ void AlmacenamientoBloque::agregarRegistro(RegistroVariable* rv){
 	/*obtengo el tamanio necesario para guardar el reg nuevo*/
 	cantBytes bytesNecesitados = rv->getTamanioSerializado();
 	/*obtengo el ultimo UID, para crear mi nuevo registro (autincremental)*/
-	uint32_t ultimo = getUltimoUID();/*cambiar funcion del reg VAr -> antes era IUC en vez de UID*/
+	uint32_t ultimo = getUltimoUID();/*cambiar funcion del reg VAr -> ahora es UID*/
 
 	/*busco un bloque creado con el espacio disponible, si es que hay*/
 	offset nBloqueDisponible = getNumeroBloqueDisponible(bytesNecesitados);
@@ -145,7 +131,9 @@ void AlmacenamientoBloque::agregarRegistro(RegistroVariable* rv){
 		Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
 		bloqueTemporal.agregarRegistro(rv);
 		/*me fijo la cant de bloques que tengo y la multiplico por la long de los bloques, consiguiendo el offset de mi nuevo bloque. Lo escribo*/
-		escribirBloque(bloqueTemporal.serializarse(), (this->getUltimoBloque())*LONGITUD_BLOQUE_DATA);
+		int bloque = this->getUltimoBloque();
+		Bytes b = bloqueTemporal.serializarse();
+		escribirBloque(b, bloque*LONGITUD_BLOQUE_DATA);
 		/*actualizo en el bloque 0 el valor del UID del ultimo reg. (el 1 es porque solo cree 1 nuevo bloque)*/
 		actualizarBloqueUIDs(1);
 
@@ -242,18 +230,18 @@ Bytes AlmacenamientoBloque::recuperarRegistro(offset nBloque, uint32_t UID){
 
 	ifstream almacenamientoEntrada;
 
-	almacenamientoEntrada.open(this->pathDatos.c_str());
-
+	//almacenamientoEntrada.open(this->pathDatos.c_str());
+	this->aDatos.open(this->pathDatos.c_str());
 	string stream;
 	/* Valido que el offset y la cantidad de bytes sean validos */
-	if (almacenamientoEntrada.is_open()) {
+	if (this->aDatos.is_open()) {
 		/*seteo el get pointer en la posicion del bloque donde se encuentra el reg pedido*/
-		almacenamientoEntrada.seekg(nBloque * LONGITUD_BLOQUE_DATA, ios_base::beg);
+		this->aDatos.seekg(nBloque * LONGITUD_BLOQUE_DATA, ios_base::beg);
 		char* buffer;
 		buffer = new char[LONGITUD_BLOQUE_DATA];
 
 		/*levanto el bloque*/
-		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
+		this->aDatos.read(buffer, LONGITUD_BLOQUE_DATA);
 		/*paso la lectura a stream y borro el buffer auxiliar*/
 		stream.append(buffer, LONGITUD_BLOQUE_DATA);
 		delete[] buffer;
@@ -302,18 +290,18 @@ offset AlmacenamientoBloque::getUltimoUID(){
 	offset offset = 0;
 	Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
 
-	ifstream almacenamientoEntrada;
+	//ifstream almacenamientoEntrada;
 	string stream;
 
-	almacenamientoEntrada.open(this->pathDatos.c_str());
-
-	if (almacenamientoEntrada.is_open()) {
+	//almacenamientoEntrada.open(this->pathDatos.c_str());
+	this->aDatos.open(this->pathDatos.c_str());
+	if (this->aDatos.is_open()) {
 		/*posiciono el get pointer en el bloque 0*/
-		almacenamientoEntrada.seekg(offset, ios_base::beg);
+		this->aDatos.seekg(offset, ios_base::beg);
 		char* buffer;
 		buffer = new char[LONGITUD_BLOQUE_DATA];
 		/*levanto el bloque y lo pongo en mi stream, y borro el buffer auxiliar*/
-		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
+		this->aDatos.read(buffer, LONGITUD_BLOQUE_DATA);
 		stream.append(buffer, LONGITUD_BLOQUE_DATA);
 		delete[] buffer;
 

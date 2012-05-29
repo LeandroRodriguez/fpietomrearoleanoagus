@@ -68,8 +68,8 @@ Bytes RegistroVariable::serializarse() {
 
 	//DATO
 	serializacion += dato.toString();//agrego el dato a la serializacion
-
-	return Bytes(serializacion);//devuelve una instancia de Bytes, que contiene la serializacion
+	Bytes bytes(serializacion);
+	return bytes;//devuelve una instancia de Bytes, que contiene la serializacion
 }
 
 void RegistroVariable::hidratarse(const Bytes& cadena) {
@@ -85,9 +85,8 @@ void RegistroVariable::hidratarse(const Bytes& cadena) {
 	this->vivo = (a=="1");
 
 	this->setDato(cadena.getSubBytes(2 * LONGITUD_CANT_BYTES + 1,tamanioRegistro));
-	this->tamanioDato = tamanioRegistro;
 }
 
 cantBytes RegistroVariable::getTamanioSerializado() {
-	return 2 * LONGITUD_CANT_BYTES + this->dato.getTamanio();
+	return 2 * LONGITUD_CANT_BYTES + 1 + this->dato.getTamanio();
 }

@@ -8,6 +8,8 @@
 //#include "Datos/ClaveNumero.h"
 //#include "Datos/Clave.h"
 #include "Indice.h"
+//#include "ManejoArchivos/Bytes.h"
+#include "ManejoArchivos/AlmacenamientoBloque.h"
 
 #include "exception"
 #include "string"

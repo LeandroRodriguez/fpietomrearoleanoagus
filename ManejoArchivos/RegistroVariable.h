@@ -14,7 +14,6 @@ protected:
 	Bytes dato;
 	bool vivo;
 	uint32 nRegistro;
-	cantBytes tamanioDato;
 
 public:
 	RegistroVariable(const Bytes& dato);
