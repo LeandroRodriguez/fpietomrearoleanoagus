@@ -5,18 +5,15 @@
     }
 
     Key::~Key(){
-        delete this->Accidente;
-        delete this->Falla;
-        delete this->FranjaHorariaDelSiniestro;
-        delete this->LineaFerroviaria;
+
     }
 
 	void* Key::getSubClaveSegunDim( int dim ){ /*hardcodeadisimo */
-		if (dim==0)return this->LineaFerroviaria;
+		if (dim==0)return &this->LineaFerroviaria;
 		if (dim==1)return &this->Formacion;
-		if (dim==2)return this->Accidente;
-		if (dim==3)return this->Falla;
-		if (dim==4)return this->FranjaHorariaDelSiniestro;
+		if (dim==2)return &this->Accidente;
+		if (dim==3)return &this->Falla;
+		if (dim==4)return &this->FranjaHorariaDelSiniestro;
 		return NULL;
 	}
 
@@ -38,7 +35,7 @@
 		string serializacion = "";
 		stringstream streamTamanio;
         int f;
-		f = strlen(this->LineaFerroviaria);
+		f = this->LineaFerroviaria.size();
 		streamTamanio << f;
         serializacion += this->getTamString(streamTamanio.str());
 
@@ -50,21 +47,21 @@
         serializacion += this->getTamString(streamTamanioForm.str());
 
         stringstream streamTamanioAcc;
-		f = strlen(this->Accidente);
+		f = this->Accidente.size();
 		streamTamanioAcc << f;
 		serializacion += this->getTamString(streamTamanioAcc.str());
 
 		serializacion += this->Accidente;
 
 		stringstream streamTamanioFalla;
-		f = strlen(this->Falla);
+		f = this->Falla.size();
 		streamTamanioFalla << f;
 		serializacion += this->getTamString(streamTamanioFalla.str());
 
 		serializacion += this->Falla;
 
 		stringstream streamTamanioFranja;
-		f = strlen(this->FranjaHorariaDelSiniestro);
+		f = this->FranjaHorariaDelSiniestro.size();
 		streamTamanioFranja << f;
 		serializacion += this->getTamString(streamTamanioFranja.str());
 
@@ -115,30 +112,30 @@
 
 		unsigned long int tamanioSerializado = 0;
 
-		tamanioSerializado += strlen(this->LineaFerroviaria);
+		tamanioSerializado += this->LineaFerroviaria.size();
 		tamanioSerializado += sizeof(this->Formacion);
-		tamanioSerializado += strlen(this->Falla);
-		tamanioSerializado += strlen(this->Accidente);
-		tamanioSerializado += strlen(this->FranjaHorariaDelSiniestro);
+		tamanioSerializado += this->Falla.size();
+		tamanioSerializado += this->Accidente.size();
+		tamanioSerializado += this->FranjaHorariaDelSiniestro.size();
 		tamanioSerializado += 4*4;
 
 		return tamanioSerializado;
 	}
 
 	bool Key::esIgual(Key* clave2){
-		if(strcmp(this->LineaFerroviaria, (char*)clave2->getSubClaveSegunDim(0)) != 0)
+		if(strcmp(this->LineaFerroviaria.c_str(), (char*)clave2->getSubClaveSegunDim(0)) != 0)
 			return false;
 
 		if(this->Formacion != *((int*)(clave2->getSubClaveSegunDim(1))))
 			return false;
 
-		if(strcmp(this->Accidente, (char*)clave2->getSubClaveSegunDim(2)) != 0)
+		if(strcmp(this->Accidente.c_str(), (char*)clave2->getSubClaveSegunDim(2)) != 0)
 			return false;
 
-		if(strcmp(this->Falla, (char*)clave2->getSubClaveSegunDim(3)) != 0)
+		if(strcmp(this->Falla.c_str(), (char*)clave2->getSubClaveSegunDim(3)) != 0)
             return false;
 
-		if(strcmp(this->FranjaHorariaDelSiniestro, (char*)clave2->getSubClaveSegunDim(4)) != 0)
+		if(strcmp(this->FranjaHorariaDelSiniestro.c_str(), (char*)clave2->getSubClaveSegunDim(4)) != 0)
 			return false;
 
 		return true;

@@ -3,9 +3,13 @@
 #include "Test/TestAlmacenamientoBloque.h"
 #include "Test/TestPersistenciaArbol.h"
 #include "Test/TestManipuladorArchivos.h"
+#include "Test/TestArbol.h"
 using namespace std;
 
 int main(){
+	TestArbol* testArbol = new TestArbol();
+	testArbol->Testear();
+	/*
     TestBloque* testBloque = new TestBloque();
     testBloque->TestCrearBloque();
     testBloque->TestAgregarRegistros();
@@ -34,4 +38,7 @@ int main(){
     testPersistencia->TestCrearArchivoArbol();
     //testPersistencia->TestObtenerRaiz();
     delete testPersistencia;
-};
+<<<<<<< .mine
+    delete testManipualdor;*/
+    };
+
