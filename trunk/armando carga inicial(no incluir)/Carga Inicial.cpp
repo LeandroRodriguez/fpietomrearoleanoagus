@@ -23,13 +23,13 @@ list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension)
 	return listaOrdenadaDatosSubArboles;
 }
 
-int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento){
+int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
 	//TO DO	
 	/*ACA PARTE DE CODEO COMPLICADO. aca dps voy a tener que hacer el codigo groso*/
 	return 2;
 }
 
-int conseguirNivelMayor(listaMaestraNiveles){
+int conseguirNivelMayor(list<int>* listaMaestraNiveles){
 	//TO DO
 	return 2;
 }
@@ -38,9 +38,7 @@ list<SubClaveRef*>* obtenerClavesSegunPos(list<list*>* listaMaestraClaves,int j)
 	int i = 0;	
 	list<SubClaveRef*>* listaClavesSubarboles;
 	list<int>::iterator itListaClaves;
-	itListaClaves= listaMaestraClaves->begin();
-	/*construyo mi NodoI*/			
-	NodoInterno* nodoInterno;	
+	itListaClaves= listaMaestraClaves->begin();	
 	for(;itListaClaves!=listaMaestraClaves->end();itListaClaves++){
 		if(j==i){
 			listaClavesSubarboles = (*itListaClaves);
@@ -51,13 +49,12 @@ list<SubClaveRef*>* obtenerClavesSegunPos(list<list*>* listaMaestraClaves,int j)
 	return listaClavesSubarboles;
 }
 
+/*obtengo la lista de listas de datos de la pos j de la lista de listas de listas de datos*/
 list<list*>* obtenerListasSegunPos(list<list*>* listaMaestraDatosSubArboles, int j){
 	int i = 0;	
 	list<list*>* listaDatosSubarboles;
 	list<int>::iterator itListaClaves;
-	itListaClaves= listaMaestraDatosSubArboles->begin();
-	/*construyo mi NodoI*/			
-	NodoInterno* nodoInterno;	
+	itListaClaves = listaMaestraDatosSubArboles->begin();
 	for(;itListaClaves!=listaMaestraDatosSubArboles->end();itListaClaves++){
 		if(j==i){
 			listaDatosSubarboles = (*itListaClaves);
@@ -68,19 +65,23 @@ list<list*>* obtenerListasSegunPos(list<list*>* listaMaestraDatosSubArboles, int
 	return listaDatosSubarboles;
 }
 			
+/*consigo la clave media(segun tamanio) y las dos sublistas que se parten a partir de esa clave*/
 list<SubClaveRef*>* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>* listasDatosSubArbolesNuevos){
 	//TO DO
+	/*de mi lista de listas de datos vieja las voy metiendo en una sola lista de datos, agregando en orden al final*/
+	
+	/*busco la clave del medio de mi lista de datos*/
+	/*guardo en listasDatosSubArbolesNuevos mis dos subarboles y la clave la meto en una lista y la devuelvo*/
 	list<SubClaveRef*>* listaClavesSubarboles;
 	return listaClavesSubarboles;
 }
-	
+
+/*reemplazo la lista de lista de datos en la lista maestra de listas de listas de datos(en la pos j)*/
 void* reemplazarDatoListaDatos(list<list*>* listaMaestraDatosSubArboles, list<list*>* listasDatosSubArbolesNuevos, j){
 	int i = 0;	
 	list<list*>* listaMaestraDatosSubarbolesNueva;
 	list<int>::iterator itListaClaves;
-	itListaClaves= listaMaestraDatosSubArboles->begin();
-	/*construyo mi NodoI*/			
-	NodoInterno* nodoInterno;	
+	itListaClaves= listaMaestraDatosSubArboles->begin();	
 	for(;itListaClaves!=listaMaestraDatosSubArboles->end();itListaClaves++){
 		if(j==i){
 			listaMaestraDatosSubarbolesNueva->push_back(listasDatosSubArbolesNuevos);
@@ -93,13 +94,12 @@ void* reemplazarDatoListaDatos(list<list*>* listaMaestraDatosSubArboles, list<li
 	listaMaestraDatosSubArboles = listaMaestraDatosSubarbolesNueva;
 }
 
-void* reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<list*>* claveMediana, j){
+/*reemplazo la lista de claves en la lista maestra de listas de claves(en la pos j)*/
+void* reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef*>* claveMediana, j){
 	int i = 0;	
 	list<list*>* listaMaestraClavesNueva;
 	list<int>::iterator itListaClaves;
-	itListaClaves= listaMaestraClaves->begin();
-	/*construyo mi NodoI*/			
-	NodoInterno* nodoInterno;	
+	itListaClaves= listaMaestraClaves->begin();	
 	for(;itListaClaves!=listaMaestraClaves->end();itListaClaves++){
 		if(j==i){
 			listaMaestraClavesNueva->push_back(listasDatosSubArbolesNuevos);
