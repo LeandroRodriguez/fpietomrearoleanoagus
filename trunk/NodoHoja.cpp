@@ -263,7 +263,7 @@ NodoHoja* NodoHoja::PartirEn2(){
         for( ;itRegErase!=this->listIdRegistros->end() ;itRegErase++){
             Nder->InsertarIdRegistro(*itReg);
             }
-        this->proximaHoja
+        this->proximaHoja=Nder->getIdDelNodo();//ojo con esto!
     return Nder;
     }
 
