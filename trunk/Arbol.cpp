@@ -6,6 +6,12 @@ Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
 	return aux;
 }
 
+void Arbol::actualizarNodo(Nodo* nodoAActualizar){
+
+	bool respuesta = this->persistir->ActualizarNodo( nodoAActualizar);
+
+    }
+
 Arbol::Arbol( PersistenciaArbol* persistencia) {
 	this->persistir=persistencia;
 	this->cantidadElem= 0;

@@ -30,6 +30,8 @@ class Arbol {
 
 	void imprimir();
 
+	void actualizarNodo(Nodo* nodoAActualizar);
+
 private:
 	PersistenciaArbol* persistir;
 
