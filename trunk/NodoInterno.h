@@ -78,9 +78,7 @@ class NodoInterno: public Nodo{
         }
 
     NodoInterno(int ref1,T subclave ,int ref2){
-
         this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
-
         this->Inicializar(ref1,subclave,ref2);
 
     }
@@ -96,25 +94,24 @@ class NodoInterno: public Nodo{
 
         if( this->VerSiSeRepiteSubclave(item) )return RES_DUPLICADO;
 
-        this->ListaSubClaveRef->push_back(item);
-        this->ListaSubClaveRef->sort();/*tiene un grado mas de complejidad, debido a 1er ref nodo   */
-        this->CantElem=(this->CantElem)+1;
-
+        if( item < (this->ListaSubClaveRef->front() )){
+            T aux = item->getRefNodo();
+            item->setRefNodo(this->Ref1erNodo);
+            this->Ref1erNodo=aux;/*tiene un grado mas de complejidad, debido a 1er ref nodo*/
+            }
+            this->ListaSubClaveRef->push_back(item);
+            this->ListaSubClaveRef->sort();
+            this->CantElem=(this->CantElem)+1;
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
-
         return RES_OK;
     }
 
     void Inicializar( int ref1 ,T subclave ,int ref2 ){
 
         this->Ref1erNodo=ref1;
-
         this->CantElem=1;
-
         SubClaveRef<T>* NuevaDupla= new SubClaveRef<T>(subclave,ref2);
-
         this->InsertarNuevaSubClaveRef(subclave,ref2);
-
     }
 
     /* sirve solo para tipos clasicos, int, double, word etc */
@@ -136,9 +133,7 @@ class NodoInterno: public Nodo{
 
         for(int I=0;I<=Value;it++){
         }
-
         SubClaveRef<T>* cosa = *it;
-
         return cosa->getSubClave();
     }
 
@@ -179,7 +174,7 @@ class NodoInterno: public Nodo{
 
     /*PRIMERO GUARDO EL TIPO*/
     memcpy(str + cur, typeid(T).name(), sizeof(int)+1);
-	cur += sizeof(int)+1;
+	cur += ESPACIO_TIPOS;
 
     /*guardo la cantidad de elementos */
 	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
@@ -221,7 +216,7 @@ class NodoInterno: public Nodo{
 /*para tipos comunes  */
     void Hidratar(char* bytes){
 
-	unsigned int cur = 0;/*cur = cursor , LOS PRIMEROS 5 fueron leidos para saber el TIPO*/
+	unsigned int cur = 0;/*cur = cursor ,ya se sabe el tipo*/
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
 
@@ -443,7 +438,7 @@ class NodoInterno<string>:public Nodo{
 
         /*PRIMERO GUARDO EL TIPO*/
         memcpy(str + cur, typeid(char*).name() , sizeof(int)+1);
-    	cur += sizeof(int)+1;
+    	cur += ESPACIO_TIPOS;
 
         /*guardo la cantidad de elementos */
     	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
