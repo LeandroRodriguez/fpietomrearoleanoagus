@@ -7,9 +7,7 @@ Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
 }
 
 void Arbol::actualizarNodo(Nodo* nodoAActualizar){
-
 	bool respuesta = this->persistir->ActualizarNodo( nodoAActualizar);
-
     }
 
 Arbol::Arbol( PersistenciaArbol* persistencia) {
@@ -68,7 +66,6 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 }
 
 Nodo* Arbol::crearRaiz() {
-
 	Nodo* nuevaRaiz = this->crearNuevoNodo('H',' ');
 	return nuevaRaiz;
 }
@@ -80,7 +77,7 @@ Nodo* Arbol::crearNuevoNodo(char nivel,char tipo ) {
 		nuevoNodo = new NodoHoja();
 	} else {
             if (tipo == 'i')nuevoNodo = new NodoInterno<int>();
-            if (tipo == 'c')nuevoNodo = new NodoInterno<char*>();
+            if (tipo == 's')nuevoNodo = new NodoInterno<string>();
       }
 
 	this->persistir->agregarNodo( nuevoNodo);
