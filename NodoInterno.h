@@ -308,7 +308,7 @@ class NodoInterno: public Nodo{
 
                 this->arbol->actualizarNodo(NodoHleido);
                 this->arbol->actualizarNodo(NHder);
-
+                //falta la subclave, soy un gil, es facil.
 
                 }
             }
