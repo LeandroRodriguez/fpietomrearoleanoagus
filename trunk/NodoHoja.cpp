@@ -30,6 +30,7 @@ unsigned long int NodoHoja::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->Altura);
 	tamanioSerializado += sizeof(this->dimension);
 	tamanioSerializado += sizeof(this->proximaHoja);
+	tamanioSerializado += sizeof(int);
 
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
@@ -76,6 +77,10 @@ char* NodoHoja::Serializarse()
 	memcpy(str + cur, &this->proximaHoja , sizeof(this->proximaHoja));
 	cur += sizeof(this->proximaHoja);
 
+	int tam = this->listIdRegistros->size();
+	memcpy(str + cur, &tam , sizeof(int));
+	cur += sizeof(int);
+
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
 
@@ -111,8 +116,11 @@ void NodoHoja::Hidratar(char* bytes){
 	memcpy(&this->proximaHoja, bytes + cur, sizeof(this->proximaHoja));
 	cur += sizeof(this->proximaHoja);
 
-	while(cur < strlen(bytes) )
-	{
+	int tam;
+	memcpy(&tam, bytes + cur, sizeof(int));
+	cur += sizeof(int);
+
+	for (int i = 0; i < tam; i++) {
 		int idRegistro;
 		memcpy(&idRegistro, bytes + cur  , sizeof(int) );
 		cur += sizeof(int);
