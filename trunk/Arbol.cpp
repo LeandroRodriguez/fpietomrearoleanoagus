@@ -35,6 +35,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		//Es el primerElemento
 		Nodo* aaa = this->crearRaiz();
 		this->raiz = (NodoHoja*) (aaa);
+		aaa->setIdDelNodo(ID_RAIZ);
 
 		res = raiz->insertarElemento(nroBloque, nroRegistro, dato, 1);
 		if(res == RES_OK)

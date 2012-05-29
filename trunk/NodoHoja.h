@@ -28,7 +28,7 @@ class NodoHoja: public Nodo{
     public:
 
     NodoHoja();
-    NodoHoja(Arbol* arbol);
+    //NodoHoja(Arbol* arbol);
     NodoHoja(char* str);
     ~NodoHoja(){};
 

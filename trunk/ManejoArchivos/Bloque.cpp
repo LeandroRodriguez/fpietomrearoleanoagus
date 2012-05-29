@@ -59,15 +59,16 @@ bool Bloque::agregarRegistro(RegistroVariable* registro) {
 Bytes Bloque::serializarse() {
 	int espacioLibre;
 
-	Bytes serializacion;
+	//Bytes serializacion;
 	/*defino un iterador para recorrer mi lista de registros*/
+	string serializacion = "";
 	list<RegistroVariable*>::iterator it = this->registros.begin();
 
 	//Serializar cada uno de los registros y los voy metiendo todos juntos en una cadena
 	for ( ; it != this->registros.end(); it++) {
 		/*le pido al reg que se serialize*/
 		Bytes registroSerializado = (*it)->serializarse();
-		serializacion.agregarAlFinal(registroSerializado);
+		serializacion += (registroSerializado.toString());
 	}
 
 	/*lleno el espacio libre con 0's*/
@@ -80,11 +81,13 @@ Bytes Bloque::serializarse() {
 	}
 
 	Bytes bytesNulos(stringNulo);
-	serializacion.agregarAlFinal(bytesNulos);
+	serializacion+=(bytesNulos.toString());
 	//creo un string con tantos 0 como espacio libre tenga,
 	//y lo agrego al final de mi serializacion
 
-	return serializacion;
+	Bytes b(serializacion);
+
+	return b;
 }
 
 /*recupero mi objeto a partir de una tira de bytes*/
@@ -95,7 +98,6 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 	cantBytes tamanioUsado = 0;
 
 	int i = 0;
-	/*LONGITUD_CANT_BYTES = 8 = 2*sizeof(cantBytes) ¿porque lo define asi?HUMO*/
 	/*cantBytes es un tipo definido en ctes como un long int*/
 	if (tamanio < LONGITUD_CANT_BYTES) {
 		cerr << "El tamanio del bloque es muy chico (" << tamanio << ")"<< endl;
