@@ -299,12 +299,17 @@ class NodoInterno: public Nodo{
 
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
                 NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo('H',' '));
-                NHder = NodoHleido->PartirEn2();
+                Key* k=NULL;
+                NHder = NodoHleido->PartirEn2(k);
 
-                this->arbol->actualizarNodo(NodoHleido);
-                this->arbol->actualizarNodo(NHder);
-                //falta la subclave, soy un gil, es facil.
+                Res = this->InsertarNuevaSubClaveRef(//para que entre en la pantalla
+                (T)k->getSubClaveSegunDim(this->dimension),NHder->getIdDelNodo());
 
+                 if (Res==RES_OK || Res==RES_DESBORDADO){//actualizo todos los cambios
+                    this->arbol->actualizarNodo(this);
+                    this->arbol->actualizarNodo(NodoHleido);
+                    this->arbol->actualizarNodo(NHder);
+                    }else cout << "subclave repetida, error mortal" << endl;
                 }
             }
     	return Res;
