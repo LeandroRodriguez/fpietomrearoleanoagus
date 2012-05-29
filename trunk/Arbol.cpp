@@ -63,18 +63,19 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 
 Nodo* Arbol::crearRaiz() {
 
-	Nodo* nuevaRaiz = this->crearNuevoNodo('H');
+	Nodo* nuevaRaiz = this->crearNuevoNodo('H',' ');
 	return nuevaRaiz;
 }
 
-Nodo* Arbol::crearNuevoNodo(char tipo) {
+Nodo* Arbol::crearNuevoNodo(char nivel,char tipo ) {
 
 	Nodo* nuevoNodo = NULL;
-	if (tipo == 'H') {
+	if (nivel == 'H') {
 		nuevoNodo = new NodoHoja();
-	} else {// necesitas saber de que tipo es el nodo, segun dimension
-            //nuevoNodo = new NodoInterno();
-	}
+	} else {
+            if (tipo == 'i')nuevoNodo = new NodoInterno<int>();
+            if (tipo == 'c')nuevoNodo = new NodoInterno<char*>();
+      }
 
 	this->persistir->agregarNodo( nuevoNodo);
 	return nuevoNodo;

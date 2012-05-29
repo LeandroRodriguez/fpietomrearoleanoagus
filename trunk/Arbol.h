@@ -26,10 +26,9 @@ class Arbol {
 
 	Nodo* crearRaiz();
 
-	Nodo* crearNuevoNodo(char tipo) ;
+	Nodo* crearNuevoNodo(char nivel,char tipo) ;
 
 	void imprimir();
-
 
 private:
 	PersistenciaArbol* persistir;
