@@ -206,7 +206,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
         	memcpy(tipo,lectura2+1,sizeof(int)+1);
 
         	if ( !strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
-        	if ( !strcmp( tipo,"char*") )auxiliar = new NodoInterno<char*>(lectura);
+        	if ( !strcmp( tipo,"string") )auxiliar = new NodoInterno<string>(lectura);
         }
 
 
