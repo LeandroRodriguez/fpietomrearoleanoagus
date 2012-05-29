@@ -25,7 +25,6 @@ bool Bytes::estaVacio() const {
 }
 
 string Bytes::toString() const {
-
 	return this->bytes;
 }
 

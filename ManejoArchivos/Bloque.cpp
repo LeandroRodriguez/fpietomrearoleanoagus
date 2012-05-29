@@ -66,12 +66,12 @@ Bytes Bloque::serializarse() {
 
 	//Serializar cada uno de los registros y los voy metiendo todos juntos en una cadena
 	for ( ; it != this->registros.end(); it++) {
-		/*le pido al reg que se serialize*/
+		//le pido al reg que se serialize
 		Bytes registroSerializado = (*it)->serializarse();
 		serializacion += (registroSerializado.toString());
 	}
 
-	/*lleno el espacio libre con 0's*/
+	//lleno el espacio libre con 0's
 	espacioLibre = this->tamanio - this->usados;
 
 	string stringNulo;
@@ -85,7 +85,8 @@ Bytes Bloque::serializarse() {
 	//creo un string con tantos 0 como espacio libre tenga,
 	//y lo agrego al final de mi serializacion
 
-	Bytes b(serializacion);
+	Bytes b;
+	b.agregar(serializacion, 0);
 
 	return b;
 }
@@ -141,8 +142,6 @@ void Bloque::hidratarse(const Bytes& bytesBloque) {
 		/*aumento i para desplazarme sobre la tira de BytesBloques*/
 		i++;
 
-		//cout << dato.toString() << endl;
-
 		/*Hidrato mi registro variable con la cadena de bytes del dato*/
 		RegistroVariable* registro = new RegistroVariable(dato);
 		registro->setNRegistro(datoUID);
@@ -193,7 +192,6 @@ Bytes Bloque::obtenerRegistro(uint32_t nRegistro){
 	while (it != this->registros.end()) {
 		RegistroVariable* registro = (RegistroVariable*)*it;
 		Bytes dato = registro->getDato();
-		//cout << dato.toString() << endl;
 		uint32 UID = registro->getNRegistro();
 		if  (UID == nRegistro) {
 			return dato;

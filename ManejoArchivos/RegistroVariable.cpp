@@ -67,7 +67,7 @@ Bytes RegistroVariable::serializarse() {
 		serializacion += "0";
 
 	//DATO
-	serializacion += dato.toString();//agrego el dato a la serializacion
+	serializacion +=dato.toString();
 	Bytes bytes(serializacion);
 	return bytes;//devuelve una instancia de Bytes, que contiene la serializacion
 }
