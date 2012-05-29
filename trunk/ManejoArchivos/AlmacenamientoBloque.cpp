@@ -44,13 +44,9 @@ AlmacenamientoBloque::AlmacenamientoBloque(const string &pathDato,const string &
 		/*Agrego el registro al bloque*/
 		bloqueUIDs.agregarRegistro(&rUID);
 
-		/*
-		cout << "rIUC" << endl;
-		cout << rIUC.serializarse().toString() << endl;
-		cout << bloqueIUCs.serializarse().toString() << endl;
-		*/
 		/*escribo el bloque en el archivo*/
-		escribirBloque(bloqueUIDs.serializarse(), 0);
+		Bytes b = bloqueUIDs.serializarse();
+		escribirBloque(b, 0);
 	}
 	else
 	{
@@ -181,11 +177,14 @@ void AlmacenamientoBloque::agregarRegistro(RegistroVariable* rv){
 void AlmacenamientoBloque::escribirBloque(const Bytes& dato, offset offsetBloque){
 
 	string buffer = dato.toString();
+	fstream file;
+
+	file.open(this->pathDatos.c_str());
 	/*seteo la posicion del put pointer donde necesito*/
-	this->aDatos.seekp(offsetBloque, ios_base::beg);
+	file.seekp(offsetBloque, ios_base::beg);
 	/*escribo y guardo*/
-	this->aDatos.write(buffer.c_str(), buffer.size());
-	this->aDatos.flush();
+	file.write(buffer.c_str(), buffer.size());
+	file.flush();
 }
 
 /*escribo los bytes libres*/
@@ -231,17 +230,17 @@ Bytes AlmacenamientoBloque::recuperarRegistro(offset nBloque, uint32_t UID){
 	ifstream almacenamientoEntrada;
 
 	//almacenamientoEntrada.open(this->pathDatos.c_str());
-	this->aDatos.open(this->pathDatos.c_str());
+	almacenamientoEntrada.open(this->pathDatos.c_str());
 	string stream;
 	/* Valido que el offset y la cantidad de bytes sean validos */
-	if (this->aDatos.is_open()) {
+	if (almacenamientoEntrada.is_open()) {
 		/*seteo el get pointer en la posicion del bloque donde se encuentra el reg pedido*/
-		this->aDatos.seekg(nBloque * LONGITUD_BLOQUE_DATA, ios_base::beg);
+		almacenamientoEntrada.seekg(nBloque * LONGITUD_BLOQUE_DATA, ios_base::beg);
 		char* buffer;
 		buffer = new char[LONGITUD_BLOQUE_DATA];
 
 		/*levanto el bloque*/
-		this->aDatos.read(buffer, LONGITUD_BLOQUE_DATA);
+		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
 		/*paso la lectura a stream y borro el buffer auxiliar*/
 		stream.append(buffer, LONGITUD_BLOQUE_DATA);
 		delete[] buffer;

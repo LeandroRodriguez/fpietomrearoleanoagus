@@ -131,12 +131,7 @@ Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 
 	string str= almacena.recuperarRegistro(nroBloque, idRegistro).toString();
 
-	int a = str.length();
-	char* bla = new char[str.length() ];
-
-	memcpy(bla,&str,str.length());
-
-	dato -> Hidratar(bla);
+	dato -> Hidratar(str);
 	return dato;
 }
 
@@ -273,29 +268,6 @@ NodoHoja* NodoHoja::PartirEn2(){
     }
 
 void NodoHoja::imprimir() {
-	//Bytes b;
-	//b.agregar((void*)this->Serializarse(), getTamanioSerializado(), 0);
-	//string a = b.toString();
-/*
-	std::cout <<"idBloque:"<<this->idBloque << ", serializacion:";
-	int i;
-	char* serial = this->Serializarse();
-	string str = "";
-	int tamanio = this->getTamanioSerializado();
-	for (i = 0; i < tamanio; i++) {
-		//char aux[1];
-		//memcpy(aux,serial + i,1);
-		//cout<<aux;
-		str += serial+i;
-	}
-	cout<<str<<endl;
-
-	string str;
-	char aux[getTamanioSerializado()];
-	memcpy(aux,this->Serializarse(),getTamanioSerializado());
-	str.append(aux,getTamanioSerializado());
-
-	std::cout <<"idBloque:"<<this->idBloque << ", serializacion:" << str<<endl;*/
 	std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
 			<<	", dimension:" << this->dimension<< ", proximahoja:" << this->proximaHoja<< "refs: " << endl;
 
@@ -307,7 +279,8 @@ void NodoHoja::imprimir() {
 
 	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
 		std::cout<< "idReg:"<< *itRegistros<<", idBloque:"<<*itBloques<<endl;
-		std::cout<<"Dato: "<<this->cargarDato(*itRegistros, *itBloques)->Serializarse()<<endl;
+		std::cout<<"Dato: ";
+		this->cargarDato(*itRegistros, *itBloques)->imprimir();
 
 		itBloques++;
 		}

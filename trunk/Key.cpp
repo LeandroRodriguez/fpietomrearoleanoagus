@@ -20,92 +20,95 @@
 		return NULL;
 	}
 
-	char* Key::Serializarse(){
-
-		unsigned long int  tamanioTotal = this->getTamanioSerializado();
-
-		char* str =(char*) malloc(tamanioTotal * sizeof(char));
-		unsigned int cur = 0;/*cur = cursor*/
-
-        int* pLong = new int;/* work around para poder usar memcopy, nada mas*/
-
-        /*----------------------------*/
-        *pLong = strlen(this->LineaFerroviaria);
-		memcpy(str + cur, pLong , sizeof(int));
-		cur += sizeof(int);
-        memcpy(str + cur, &this->LineaFerroviaria , *pLong);
-		cur += *pLong;
-        /*----------------------------*/
-		memcpy(str + cur, &this->Formacion , sizeof(this->Formacion));
-		cur += sizeof(this->Formacion);
-		/*----------------------------*/
-        *pLong = strlen(this->Accidente);
-		memcpy(str + cur, pLong , sizeof(int));
-		cur += sizeof(int);
-        memcpy(str + cur, &this->Accidente ,*pLong);
-		cur += *pLong;
-        /*----------------------------*/
-        *pLong = strlen(this->Falla);
-		memcpy(str + cur, pLong , sizeof(int));
-		cur += sizeof(int);
-        memcpy(str + cur, &this->Falla,*pLong);
-		cur += *pLong;
-        /*----------------------------*/
-        *pLong = strlen(this->FranjaHorariaDelSiniestro);
-		memcpy(str + cur, pLong , sizeof(int));
-		cur += sizeof(int);
-        memcpy(str + cur, &this->FranjaHorariaDelSiniestro,*pLong);
-		cur += *pLong;
-        /*----------------------------*/
-
-        delete pLong;
-		return  str;
+	string Key::getTamString(string str)
+	{
+		string serializacion = "";
+		int tamanio = str.size();
+		while (tamanio < 4)//maxima long de la subclave: 9999
+			{
+				serializacion += "0";
+				tamanio++;
+			}
+		serializacion += str;
+		return serializacion;
 	}
 
-	void Key::Hidratar(char* str){
+	string Key::Serializarse(){
 
-		unsigned int cur = 0;/*cur = cursor*/
+		string serializacion = "";
+		stringstream streamTamanio;
+        int f;
+		f = strlen(this->LineaFerroviaria);
+		streamTamanio << f;
+        serializacion += this->getTamString(streamTamanio.str());
 
-        int* pLong = new int;/* work around para poder usar memcopy, nada mas*/
+        serializacion += this->LineaFerroviaria;
 
-        /*----------------------------*/
-		memcpy(pLong, str + cur, sizeof(int));
-		cur += sizeof(int);
 
-		this->LineaFerroviaria = new char[*pLong];
+        stringstream  streamTamanioForm;
+        streamTamanioForm<<this->Formacion;
+        serializacion += this->getTamString(streamTamanioForm.str());
 
-		memcpy(this->LineaFerroviaria, str + cur, *pLong);
-		cur += *pLong;
-        /*----------------------------*/
-		memcpy(&this->Formacion ,str + cur,  sizeof(this->Formacion));
-		cur += sizeof(this->Formacion);
-        /*----------------------------*/
-		memcpy(pLong, str + cur, sizeof(int));
-		cur += sizeof(int);
+        stringstream streamTamanioAcc;
+		f = strlen(this->Accidente);
+		streamTamanioAcc << f;
+		serializacion += this->getTamString(streamTamanioAcc.str());
 
-        this->Accidente = new char[*pLong];
+		serializacion += this->Accidente;
 
-		memcpy(this->Accidente, str + cur, *pLong);
-		cur += *pLong;
-        /*----------------------------*/
-		memcpy(pLong, str + cur, sizeof(int));
-		cur += sizeof(int);
+		stringstream streamTamanioFalla;
+		f = strlen(this->Falla);
+		streamTamanioFalla << f;
+		serializacion += this->getTamString(streamTamanioFalla.str());
 
-        this->Falla = new char[*pLong];
+		serializacion += this->Falla;
 
-		memcpy(&this->Falla, str + cur, *pLong);
-        /*----------------------------*/
-		memcpy(pLong, str + cur, sizeof(int));
-		cur += sizeof(int);
+		stringstream streamTamanioFranja;
+		f = strlen(this->FranjaHorariaDelSiniestro);
+		streamTamanioFranja << f;
+		serializacion += this->getTamString(streamTamanioFranja.str());
 
-        this->FranjaHorariaDelSiniestro = new char[*pLong];
+		serializacion += this->FranjaHorariaDelSiniestro;
+        std::cout<<serializacion<<endl;
 
-		memcpy(this->FranjaHorariaDelSiniestro, str + cur, *pLong);
-		cur += *pLong;
-        /*----------------------------*/
+		return  serializacion;
+	}
 
-		delete pLong;
+	void Key::Hidratar(string str){
+		int cur = 0;
+		int t = atoi(str.substr(cur, 4).c_str());
+		cur +=4;
+		char* linea;
+		linea = &(str.substr(4,t)[0]);
+		this->LineaFerroviaria=(linea);
+		cur += t;
 
+		this->Formacion= (atoi(str.substr(cur, 4).c_str()));
+		cur +=4;
+
+		t = atoi(str.substr(cur, 4).c_str());
+		cur +=4;
+		char* acc = (&(str.substr(cur,t)[0]));
+		this->Accidente = acc;
+		cur += t;
+
+		t = atoi(str.substr(cur, 4).c_str());
+		cur +=4;
+		char* falla = (&(str.substr(cur,t)[0]));
+		this-> Falla = falla;
+		cur += t;
+
+		t = atoi(str.substr(cur, 4).c_str());
+		cur +=4;
+		char* franja = (&(str.substr(cur,t)[0]));
+		this->FranjaHorariaDelSiniestro = franja;
+		cur += t;
+	}
+
+	void Key::imprimir()
+	{
+		cout <<"LineaFerroviaria: " << this->LineaFerroviaria << ", Formacion: "<< this->Formacion << ", Accidente: "
+				<< this->Accidente << ", Falla: " <<this->Falla << ", Franja horaria: " << this->FranjaHorariaDelSiniestro<< endl;
 	}
 
 	unsigned long int Key::getTamanioSerializado(){
@@ -117,7 +120,7 @@
 		tamanioSerializado += strlen(this->Falla);
 		tamanioSerializado += strlen(this->Accidente);
 		tamanioSerializado += strlen(this->FranjaHorariaDelSiniestro);
-		tamanioSerializado += sizeof(int)*4;
+		tamanioSerializado += 4*4;
 
 		return tamanioSerializado;
 	}

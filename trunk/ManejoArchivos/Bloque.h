@@ -2,6 +2,7 @@
 #define BLOQUE_H_
 
 #include "RegistroVariable.h"
+#include "Bytes.h"
 
 //#include "../claves/TipoClave.h"
 //#include "../claves/Key.h"

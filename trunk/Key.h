@@ -7,7 +7,7 @@
 #include <string.h>
 #include "InterfazSerializar.h"
 
-class Key : public InterfazSerializar {
+class Key {
 
     private:
 	char* LineaFerroviaria;
@@ -19,6 +19,8 @@ class Key : public InterfazSerializar {
 	char* Accidente;
 
 	char* FranjaHorariaDelSiniestro;
+
+	string getTamString(string str);
 
 
     public:
@@ -38,8 +40,8 @@ class Key : public InterfazSerializar {
     ~Key();
 
     unsigned long int getTamanioSerializado();
-    char* Serializarse();
-    void Hidratar(char* str);
+    string Serializarse();
+    void Hidratar(string str);
     bool esIgual(Key* clave2);
 
     void setLineaFerroviaria(char* linea){this->LineaFerroviaria = linea;}
@@ -47,6 +49,7 @@ class Key : public InterfazSerializar {
     void setFalla(char* falla){this->Falla = falla;}
     void setAccidente(char* acc){this->Accidente= acc;}
     void setFranjaHorariaDelSiniestro(char* franja){this->FranjaHorariaDelSiniestro = franja;}
+    void imprimir();
 
 };
 
