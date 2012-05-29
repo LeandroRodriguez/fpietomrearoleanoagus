@@ -238,28 +238,38 @@ NodoHoja* NodoHoja::PartirEn2(){
     int SumaParcial=0;
 
     bool SeLlegoAlaMitad=false;
-
+// optimizacion : hacer un promedio ponderado del peso de los datos y sus claves
         while(!SeLlegoAlaMitad){
         SumaParcial += *itTam;
         if (SumaParcial > TamMitad ){
-            SeLlegoAlaMitad=true;
-            }else{
+            SeLlegoAlaMitad=true;//paso a la derecha desde el que me pasa la "mitad", en adelante.
+            }
             itTam++;
             itReg++;
             itBloq++;
-            }
         }
-
+        list<int>::iterator itRegErase=itReg;//guardo estas posiciones, para borrar despues
+        list<int>::iterator itBloqErase=itBloq;//no se puede borrar sobre lo que se esta iterando
+        //me quedan los iT, apuntando en la "mitad"
         NodoHoja* Nder = new NodoHoja(this->arbol);
 
-        for( ;this->listNroBloque->end() ;itBloq++){
+        for( ;itBloq!=this->listNroBloque->end() ;itBloq++){
             Nder->InsertarNroBloque(*itBloq);
+            }// todo esto es para copiar la mitad derecha al nuevo nodo
+        for( ;itReg!=this->listIdRegistros->end() ;itReg++){
+            Nder->InsertarIdRegistro(*itReg);
             }
-        for( ;this->listIdRegistros->end() ;itReg++){
-            Nder->InsertarIdRegistro
+        Nder->proximaHoja= this->proximaHoja;//ojo con esto !
+        //********************************************
+        //borro la mitad derecha de ESTE nodo, ya que los pase a otro nodo
+        for( ;itBloqErase!=this->listNroBloque->end() ;itBloqErase++){
+            this->EliminarNroBloque(*itBloqErase);
             }
-
-
+        for( ;itRegErase!=this->listIdRegistros->end() ;itRegErase++){
+            Nder->InsertarIdRegistro(*itReg);
+            }
+        this->proximaHoja
+    return Nder;
     }
 
 void NodoHoja::imprimir() {

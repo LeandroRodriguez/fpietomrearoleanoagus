@@ -27,11 +27,42 @@ class NodoHoja: public Nodo{
         this->listNroBloque->push_back(Blo);
         this->ActualizarCantElem();
     }
+    bool EliminarIdRegistro(int id){
+        bool found = false;
+        list<int>::iterator itRegistros;
+        itRegistros= this->listIdRegistros->begin();
 
+        for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
+            int regId = *itRegistros;
+            if( regId == id ){
+                this->listIdRegistros->erase(itRegistros);
+                found = true;
+                break;
+                }
+        }
+        this->ActualizarCantElem();
+        return found;
+    }
+    bool EliminarNroBloque(int Blo){
+        bool found = false;
+        list<int>::iterator itBloq;
+        itBloq= this->listNroBloque->begin();
+
+        for(;itBloq!=this->listNroBloque->end();itBloq++){
+            int nodoId = *itBloq;
+            if( nodoId == Blo ){
+                this->listIdRegistros->erase(itBloq);
+                found = true;
+                break;
+                }
+        }
+        this->ActualizarCantElem();
+        return found;
+    }
     void ActualizarCantElem(){
-        bool Size = (this->listIdRegistros == this->listNroBloque);
+        bool Size = (this->listIdRegistros->size() == this->listNroBloque->size());
         if (Size) {
-            this->CantElem= Size;
+            this->CantElem= this->listIdRegistros->size();
             }
         }
 

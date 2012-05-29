@@ -299,14 +299,15 @@ class NodoInterno: public Nodo{
             Nodo* NodoLeido =this->arbol->DevolverNodoSegunID(IDNodoAbajo);
             Res = NodoLeido->insertarElemento(nroBloque,nroRegistro,dato,porcentaje);
         }else{/*estoy en un nodo interno de nivel 1*/
-            Nodo* NodoHleido = (this->arbol->DevolverNodoSegunID(IDNodoAbajo));
+            NodoHoja* NodoHleido = (NodoHoja*)(this->arbol->DevolverNodoSegunID(IDNodoAbajo));
             Res = NodoHleido->insertarElemento(nroBloque,nroRegistro,dato, porcentaje);
 
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
-                NodoHoja* NH = dynamic_cast<NodoHoja*>(NodoHleido);
-                NodoHoja* NHder = dynamic_cast<NodoHoja*>(this->arbol->crearNuevoNodo('H',' '));
+                NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo('H',' '));
+                NHder = NodoHleido->PartirEn2();
 
-                NHder = NH->PartirEn2();
+                this->arbol->actualizarNodo(NodoHleido);
+                this->arbol->actualizarNodo(NHder);
 
 
                 }
