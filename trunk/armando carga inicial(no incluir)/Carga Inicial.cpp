@@ -1,4 +1,7 @@
 void* cargaInicial(list<Dato*>* listaDeDatos){
+	/*creo la raiz vacia, dps la voy a modificar*/
+	NodoInterno* raiz = new NodoInterno();
+	offset nroNodo = this->persistir->agregarRaiz(raiz);
 	/*creo una sublista donde solo voy a tener la lista con los datos iniciales*/
 	list<list*>* subListasDatos = new list<list*>*;
 	subListasDatos->push_back(listaDeDatos);
@@ -6,7 +9,7 @@ void* cargaInicial(list<Dato*>* listaDeDatos){
 	/*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
 	int dimension = 1;
 	/*elijo un porcentaje de empaquetamineto inicial del 75%*/
-	int porcentajeDeEmpaquetamiento = 75;
+	double porcentajeDeEmpaquetamiento = 0.75;
 	list<NodoInterno*>* cargaInicialArmarNodos(listaDeSubListasDatos, dimension, porcentajeDeEmpaquetamiento);
 }
 //**mi funcion, de movida, tiene que recibir una lista con los datos a insertar**//
@@ -115,22 +118,43 @@ void* reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRe
 	listaMaestraClaves = listaMaestraClavesNueva;
 }
 
-NodoHoja* insertarDatosEnNodoHoja(&(*itListaSubSubArboles)){
-	//TO DO
+/*creo un nodo hoja y meto todos los datos de la lista pasada. Luego lo persisto y retorno el nro de nodo*/
+offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje)){
+	/*instancio un nodoHoja*/
 	NodoHoja* nodoHoja = new NodoHoja();
-	return nodoHoja;
+	
+	list<Dato*>::iterator itSubListaDatos;
+	itSubListaDatos= listaSubSubArboles->begin();
+
+	for(;itSubListaDatos!=listaSubSubArboles->end();itSubListaDatos++){
+		/*obtengo de mi dato los 3 datos que necesito para insertar en el nodo*/
+		offset idRegistro = (*itSubListaDatos)->getIdRegistro();
+		offset nroBloque = (*itSubListaDatos)->getNroBoque();
+		Key clave = (*itSubListaDatos)->getClave();
+		/*para cada elemento de la lista voy insertandolo en mi nodo hoja*/
+		Resultado res = nodoHoja->insertarElemento(idRegistro, nroBloque, &clave, porcentaje)
+		/*por como lo arme, no hay chance de que tire overflow. Y verifique antes que no se repitiesen los datos*/
+		if(res = RES_OK){
+			this->CantElem++;
+		}
+	}	
+	/*llamo a persistencia para que guarde el nodo*/
+	offset nroNodo = this->persistir->agregarNodo(nodoHoja);
+	/*me devuelve el nro de nodo, yo retorno ese numero de nodo*/
+	return nroNodo;
 }
 
-NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<int>* listaReferenciasNodosHios, int i){
+NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i){
 	/*para la clave de la posicion it de la lista de listas de claves*/
 	list<SubClaveRef*>* listaClaves = this->obtenerClavesSegunPos(listaMaestraClaves, i);
 
 	list<int>::iterator itListaClaves;
 	itListaClaves= listaClaves->begin();
 	/*construyo mi NodoI*/			
-	NodoInterno* nodoInterno;	
+	NodoInterno* nodoInterno = new NodoInterno();	
 	for(;itListaClaves!=listaClaves->end();itListaClaves++){
-		/*asigno una referencia*/
+		/*recupero la subClaveRef*/		
+	/*asigno una referencia*/
 		/*asigno una clave*/			
 	}
 	/*asigno ultima referencia, si es que hay, sino, ref null o algo para identificar (vacio)*/
@@ -168,7 +192,7 @@ list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, li
 /*una opcion, devolver los nodos de abajo para arriba a medida que fui terminando, y usar algun flag que me indique cuando llego al nivel de la raiz(la veo muy viable)(repensarlo maniana)*/
 
 /*funcion recursiva encargada de hacer la coordinacion de la magia de la carga inicial*/
-list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, int porcentajeDeEmpaquetamiento){
+list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento){
 	/*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
 	list<int>* listaMaestraNiveles = new list<int>();	
 	list<list*>* listaMaestraClaves = new list<list*>();
@@ -211,13 +235,16 @@ list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dime
 		/*para cada SubArb de la lista de SubArbs*/
 		int i = 0;		
 		for(;itListaSubArboles!=listaMaestraDatosSubArboles->end();itListaSubArboles++){
-			list<int>* listaReferenciasNodosHoja;		
+			list<offset>* listaReferenciasNodosHoja;		
 			/*para cada SubSubArb de la lista de SubArb*/
-			for(;itListaSubSubArboles!=itListaSubArboles->end();itListaSubSubArboles++){	
-				/*inserto el SubSubArbol en un nodoHoja*/
-				NodoHoja* nodoHoja = this->insertarDatosEnNodoHoja(&(*itListaSubSubArboles));//TO DO
+			list<list*>::iterator itSubSubListas;
+			itSubSubListas= (*itListaSubArboles).begin();
+	
+			for(;itSubSubListas!=(*itListaSubArboles).end();itSubSubListas++){
+				/*inserto el SubSubArbol de datos en un nodoHoja*/
+				offset nroNodoHoja = this->insertarDatosEnNodoHoja(&(*itSubSubListas), porcentajeDeEmpaquetamiento);//TO DO
 				/*inserto la ref al nodo hoja en una nueva lista*/
-				listaReferenciasNodosHoja->push_back(nodoHoja);
+				listaReferenciasNodosHoja->push_back(nroNodoHoja);
 			}
 			
 			NodoInterno* nodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja, i);			
