@@ -42,27 +42,42 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		aaa->setIdDelNodo(ID_RAIZ);
 
 		res = raiz->insertarElemento(nroRegistro, nroBloque , dato, 1);
-		if(res == RES_OK)
+		if(res == RES_OK){
 			this->cantidadElem  ++;
+			this->actualizarNodo(this->raiz);
+		}
 
 		return res;
 
 	} else {
 		//debo insertar recursivamente
 		res = raiz->insertarElemento(nroRegistro, nroBloque, dato, 1);
-
-		/*
-		this->setRaiz(this->raiz->getAdan());
-		if (this->raiz->getHojaOInterno()== 'I')
-			this->raiz->actualizarClaves();
 		this->ultimosAdisco();
-		esto despues hay que ver bien como lo hacemos, cuando tengamos los metodos en los nodos
-		*/
 		if(res == RES_OK)
 			this->cantidadElem  ++;
 
 		return res;
 	}
+}
+
+
+void Arbol::ultimosAdisco() {
+	/* La raiz la guardo siempre*/
+	this->persistir->guardarRaiz(this->raiz);
+	//this->actualizarNodo(this->raiz);
+	//raiz = this->getNodo(1);
+	/*Guardo solo los bloques que se modificaron*/
+	/*for (list<Nodo*>::iterator it = ultimosAccedidos.begin(); it
+			!= ultimosAccedidos.end(); ++it) {
+		if ((*it)->getModificado() && (*it)->getId() != this->raiz->getId()) {
+			this->actualizarNodo((*it));
+		}
+		if((*it)->getId() != this->raiz->getId())
+			delete(*it);
+
+	}
+
+	ultimosAccedidos.clear();*/
 }
 
 Nodo* Arbol::crearRaiz() {

@@ -32,6 +32,8 @@ class Arbol {
 
 	void actualizarNodo(Nodo* nodoAActualizar);
 
+	void ultimosAdisco();
+
 private:
 	PersistenciaArbol* persistir;
 
