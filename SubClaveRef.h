@@ -18,6 +18,9 @@ template<class T> class SubClaveRef{
         return this->RefNodo;
 
         }
+    void setRefNodo(int num){
+        this->RefNodo=num;
+    }
 
     SubClaveRef(T sub,int ref){
            this->subclave=sub;
@@ -51,6 +54,10 @@ class SubClaveRef<char*>{
 
     char* getSubClave()const{
         return this->subclave;
+    }
+
+    void setRefNodo(int c){
+     this->RefNodo=c;
     }
 
     int getRefNodo(){
