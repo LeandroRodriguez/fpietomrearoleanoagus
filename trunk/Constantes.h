@@ -23,6 +23,7 @@ typedef unsigned long int tamanioBloque;
 #define ARCHIVO_DATOS "ArchivoDatos.fde"
 #define ARCHIVO_DATOS_LIBRES "ArchivoDatosLibres.fde"
 #define ARCHIVO_ARBOL "ArchivoArbol.fde"
+#define ESPACIO_TIPOS 7
 
 #define ID_RAIZ  1
 
