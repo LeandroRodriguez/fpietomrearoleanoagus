@@ -45,14 +45,14 @@ template<class T> class SubClaveRef{
 
 
 template<>
-class SubClaveRef<char*>{
+class SubClaveRef<string>{
 
     private:
-    char* subclave;
+    string subclave;
     int RefNodo;
     public:
 
-    char* getSubClave()const{
+    string getSubClave()const{
         return this->subclave;
     }
 
@@ -65,26 +65,26 @@ class SubClaveRef<char*>{
 
         }
 
-    bool operator< (const SubClaveRef<char*>* otro){
-        int hola = strcmp ( this->subclave , otro->getSubClave() );
+    bool operator< (const SubClaveRef<string>* otro){
+        int hola = this->subclave.compare(otro->getSubClave());
         if ( hola <0)return true;
         return false;
-        // http://www.cplusplus.com/reference/clibrary/cstring/strcmp/
+        //http://www.cplusplus.com/reference/string/string/compare/
         }
 
-    bool operator< (const char* subc){
-        int hola = strcmp ( this->subclave , subc );
+    bool operator< (const string subc){
+        int hola = this->subclave.compare(subc);
         if ( hola ==0)return true;
         return false;
         }
 
-    bool operator== (const SubClaveRef<char*>* otro){
-        int hola = strcmp ( this->subclave , otro->getSubClave() );
+    bool operator== (const SubClaveRef<string>* otro){
+        int hola = this->subclave.compare(otro->getSubClave() );
         if ( hola ==0)return true;
         return false;
         }
 
-    SubClaveRef(char* sub,int ref){
+    SubClaveRef(string sub,int ref){
            this->subclave=sub;
            this->RefNodo=ref;
        }

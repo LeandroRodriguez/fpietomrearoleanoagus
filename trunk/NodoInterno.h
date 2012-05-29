@@ -318,20 +318,20 @@ class NodoInterno: public Nodo{
 };
 
 template <>
-class NodoInterno<char*>:public Nodo{
+class NodoInterno<string>:public Nodo{
 
     private:
 
     int Ref1erNodo;
 
-    list< SubClaveRef<char*>* >* ListaSubClaveRef;
+    list< SubClaveRef<string>* >* ListaSubClaveRef;
 
     public:
 
     NodoInterno(Arbol* arbol):Nodo(arbol){
         this->tamanioMaximoNodo=0;
         this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<char*>* >;
+        this->ListaSubClaveRef= new list<SubClaveRef<string>* >;
         }
 
     NodoInterno(Bytes* CodigoBinario){
@@ -345,21 +345,21 @@ class NodoInterno<char*>:public Nodo{
 
         this->tamanioMaximoNodo=0;
         this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<char*>* >;
+        this->ListaSubClaveRef= new list<SubClaveRef<string>* >;
         this->Hidratar(cadena);
     }
 
     NodoInterno(){}
 
-    NodoInterno(int ref1,char* subclave ,int ref2){
+    NodoInterno(int ref1,string subclave ,int ref2){
 
-        this->ListaSubClaveRef= new list<SubClaveRef<char*>* >;
+        this->ListaSubClaveRef= new list<SubClaveRef<string>* >;
 
         this->Inicializar(ref1,subclave,ref2);
 
     }
 
-    void Inicializar( int ref1 ,char* subclave ,int ref2 ){
+    void Inicializar( int ref1 ,string subclave ,int ref2 ){
 
         this->Ref1erNodo=ref1;
 
@@ -367,14 +367,14 @@ class NodoInterno<char*>:public Nodo{
 
     }
 
-    Resultado InsertarNuevaSubClaveRef ( char* subclave,int refAbloqueArbol ){
+    Resultado InsertarNuevaSubClaveRef ( string subclave,int refAbloqueArbol ){
         /*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
         Si lo encuentra, devuelve como resultado RES_DUPLICADO.
 
         Si el nodo hoja desborda, Devuelve  RES_DESBORDADO
         sino, devuelve RES_OK*/
 
-        SubClaveRef<char*>* item = new SubClaveRef<char*>(subclave,refAbloqueArbol);
+        SubClaveRef<string>* item = new SubClaveRef<string>(subclave,refAbloqueArbol);
 
         if( this->VerSiSeRepiteSubclave(item) )return RES_DUPLICADO;
 
@@ -387,14 +387,14 @@ class NodoInterno<char*>:public Nodo{
         return RES_OK;
     }
 
-    bool VerSiSeRepiteSubclave(SubClaveRef<char*>* item){
-        list< SubClaveRef<char*>* >::iterator it;
+    bool VerSiSeRepiteSubclave(SubClaveRef<string>* item){
+        list< SubClaveRef<string>* >::iterator it;
         it = this->ListaSubClaveRef->begin();
 
         bool NoSeRepite=true;
 
         for(;it!=this->ListaSubClaveRef->end();it++){
-                SubClaveRef<char*>* cosa = *it;
+                SubClaveRef<string>* cosa = *it;
                 if( cosa == item ){
                     NoSeRepite=false;
                     break;
@@ -417,23 +417,20 @@ class NodoInterno<char*>:public Nodo{
         /*Segun el tipo de nodo de subclave que guarde el nodo, estos tamanios pueden variar */
 
 
-        list< SubClaveRef<char*>* >::iterator it = this->ListaSubClaveRef->begin();
+        list< SubClaveRef<string>* >::iterator it = this->ListaSubClaveRef->begin();
 
         for(;it!=this->ListaSubClaveRef->end();it++){
 
-            SubClaveRef<char*>* cosa = *it;
+            SubClaveRef<string>* cosa = *it;
 
-            char* subC = cosa->getSubClave();
+            string subC = cosa->getSubClave();
             int refNodo = cosa->getRefNodo();
 
             tamanioSerializado +=  sizeof(int);/*convencion para guardar tamanio  */
-            tamanioSerializado +=  strlen(subC); /*tamanio variable */
+            tamanioSerializado +=  subC.length() ; /*tamanio variable */
             tamanioSerializado +=  sizeof(refNodo);
-
             }
     	return tamanioSerializado;
-
-
         }
 
     char* Serializarse(){
@@ -465,7 +462,7 @@ class NodoInterno<char*>:public Nodo{
     	cur += sizeof(this->Ref1erNodo);
 
         /*tengo que guardar todos los elementos de la lista */
-        list< SubClaveRef<char*>* >::iterator it;
+        list< SubClaveRef<string>* >::iterator it;
 
         it= this->ListaSubClaveRef->begin();
 
@@ -473,17 +470,17 @@ class NodoInterno<char*>:public Nodo{
 
         for(;it!=this->ListaSubClaveRef->end();it++){
 
-            SubClaveRef<char*>* cosa = *it;
+            SubClaveRef<string>* cosa = *it;
 
-            char* subC = cosa->getSubClave();
+            string subC = cosa->getSubClave();
             int refNodo = cosa->getRefNodo();
 
-                *pTempInt = strlen(subC);
+                *pTempInt = subC.length();
 
                 memcpy(str + cur, pTempInt , sizeof(int) ); /*convencion 4 bytes para longitud */
                 cur += sizeof(int);
-                memcpy(str + cur, subC , strlen(subC) );
-                cur += strlen(subC);
+                memcpy(str + cur, &subC , subC.length() );
+                cur += subC.length();
 
                 *pTempInt = refNodo;
 
@@ -534,17 +531,17 @@ class NodoInterno<char*>:public Nodo{
             }
         }
 
-    char* conseguirClaveQueDividaAlMedioPonderadoElNodo(){
+    string conseguirClaveQueDividaAlMedioPonderadoElNodo(){
 
-            list< SubClaveRef<char*>* >::iterator it;
+            list< SubClaveRef<string>* >::iterator it;
 
             it = this->ListaSubClaveRef->begin();
 
              unsigned int LongitudTotal=0;
 
             while(it!= this->ListaSubClaveRef->end()){
-                SubClaveRef<char*>* cosa = *it;
-                LongitudTotal = LongitudTotal + strlen( cosa->getSubClave() );
+                SubClaveRef<string>* cosa = *it;
+                LongitudTotal = LongitudTotal +  cosa->getSubClave().length() ;
                 it++;
                 }/*consegui longitud total de los datos */
 
@@ -557,9 +554,9 @@ class NodoInterno<char*>:public Nodo{
 
 
             while(NoSeHallaSuperadoLaMitad){
-                 SubClaveRef<char*>* cosa = *it;
+                 SubClaveRef<string>* cosa = *it;
 
-                 LongParcial = LongParcial + strlen(cosa->getSubClave());
+                 LongParcial = LongParcial + cosa->getSubClave().length();
 
                  if ( LongParcial > LongMitad ){
                      NoSeHallaSuperadoLaMitad = false;
@@ -574,7 +571,7 @@ class NodoInterno<char*>:public Nodo{
     ~NodoInterno(){}
 
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
-    	return RES_OK;
+    //copiar feamente lo de arriba
     }
 
     void imprimir(){}
