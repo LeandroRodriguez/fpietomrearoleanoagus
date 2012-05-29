@@ -70,6 +70,22 @@ list<list*>* obtenerListasSegunPos(list<list*>* listaMaestraDatosSubArboles, int
 	}
 	return listaDatosSubarboles;
 }
+
+/*obtengo la referencia de la posicion j de mi lista de referencias*/
+offset obtenerReferenciaNodosSegunPos(list<offset>* listaReferenciasNodosHios, int j){
+	int i = 0;	
+	offset referenciaNodoHijo;
+	list<offset>::iterator itListaRefs;
+	itListaRefs = listaReferenciasNodosHios->begin();
+	for(;itListaRefs!=listaReferenciasNodosHios->end();itListaRefs++){
+		if(j==i){
+			referenciaNodoHijo = (*itListaRefs);
+			break;
+		}
+		i++;		
+	}
+	return referenciaNodoHijo;
+}
 			
 /*consigo la clave media(segun tamanio) y las dos sublistas que se parten a partir de esa clave*/
 list<SubClaveRef*>* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>* listasDatosSubArbolesNuevos){
@@ -131,11 +147,17 @@ offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaj
 		offset idRegistro = (*itSubListaDatos)->getIdRegistro();
 		offset nroBloque = (*itSubListaDatos)->getNroBoque();
 		Key clave = (*itSubListaDatos)->getClave();
-		/*para cada elemento de la lista voy insertandolo en mi nodo hoja*/
-		Resultado res = nodoHoja->insertarElemento(idRegistro, nroBloque, &clave, porcentaje)
-		/*por como lo arme, no hay chance de que tire overflow. Y verifique antes que no se repitiesen los datos*/
-		if(res = RES_OK){
-			this->CantElem++;
+		if(idRegistro == -1){
+			/*el nodo queda vacio*/
+			/*si esto pasa este tuviese que ser el unico dato*/
+		}
+		else{
+			/*para cada elemento de la lista voy insertandolo en mi nodo hoja*/
+			Resultado res = nodoHoja->insertarElemento(idRegistro, nroBloque, &clave, porcentaje)
+			/*por como lo arme, no hay chance de que tire overflow. Y verifique antes que no se repitiesen los datos*/
+			if(res = RES_OK){
+				this->CantElem++;
+			}
 		}
 	}	
 	/*llamo a persistencia para que guarde el nodo*/
@@ -152,17 +174,30 @@ NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<of
 	itListaClaves= listaClaves->begin();
 	/*construyo mi NodoI*/			
 	NodoInterno* nodoInterno = new NodoInterno();	
+	int k = 0;
+	offset primerReferencia = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
 	for(;itListaClaves!=listaClaves->end();itListaClaves++){
-		/*recupero la subClaveRef*/		
-	/*asigno una referencia*/
-		/*asigno una clave*/			
+		k++;		
+		/*recupero la subClaveRef*/
+		SubClaveRef* subClave = (*itListaClaves);
+		/*asigno una referencia*/		
+		offset referenciaSiguiente = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
+		if(k==1){		
+			/*la primera vez tengo que agregar tambien la primer referencia*/
+			Inicializar(primerReferencia, subClave, referenciaSiguiente);	
+		}
+		else{
+			/*despues solo agrego conjuntos de clave - referencia*/
+			InsertarNuevaSubClaveRef(subClave, referenciaSiguiente);
+		}		
 	}
-	/*asigno ultima referencia, si es que hay, sino, ref null o algo para identificar (vacio)*/
-	
-	return nodoInterno;
+	/*persisto el nodo*/
+	offset nroNodo = this->persistir->agregarNodo(nodoInterno);
+	/*me devuelve el nro de nodo, yo retorno ese numero de nodo*/
+	return nroNodo;
 }
 
-list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<NodoInterno*>* listaRefsNodosArmados){
+list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados){
 	/*construyo mis NodoI*/
 	int d = 0;
 	list<NodoInterno*>* listaNodosInternos;
@@ -192,7 +227,7 @@ list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, li
 /*una opcion, devolver los nodos de abajo para arriba a medida que fui terminando, y usar algun flag que me indique cuando llego al nivel de la raiz(la veo muy viable)(repensarlo maniana)*/
 
 /*funcion recursiva encargada de hacer la coordinacion de la magia de la carga inicial*/
-list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento){
+list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento){
 	/*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
 	list<int>* listaMaestraNiveles = new list<int>();	
 	list<list*>* listaMaestraClaves = new list<list*>();
@@ -228,7 +263,7 @@ list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dime
 		
 	/*si el mayor nivel era 2, ya podria recuperar el nodo hoja entero, auque esto lo puedo verificar mas abajo*/
 	if(nivelMayor == 2){
-		list<NodoInterno*>* listaNodosInternos;
+		list<offset>* listaNodosInternos;
 		/*agarro los nodos de algun lado y armo mi arbol resultante*/		
 		list<list*>::iterator itListaSubArboles;
 		itListaSubArboles= listaMaestraDatosSubArboles->begin();
@@ -247,10 +282,10 @@ list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dime
 				listaReferenciasNodosHoja->push_back(nroNodoHoja);
 			}
 			
-			NodoInterno* nodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja, i);			
+			offset nroNodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja, i);			
 			
 			/*meto el nodo interno en una lista de resultados, con las refs de los nodos internos*/
-			listaNodosInternos->push_back(nodoInterno);
+			listaNodosInternos->push_back(nroNodoInterno);
 			i++;
 		}
 
@@ -287,7 +322,7 @@ list<NodoInterno*>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dime
 	/*para cada una de estas sublistas tendria que recomenzar*/
 	/*Arme una lista de sublistas =0*/
 	/*quizas en su momento podria recalcular el porcentajeDeEmpaquetamiento*/
-	list<NodoInterno*>* listaRefsNodosArmados = cargaInicialArmarNodos(listaMaestraDatosSubArboles, Key::getSiguienteDimmension(dimension), 			porcentajeDeEmpaquetamiento);
+	list<offset>* listaRefsNodosArmados = cargaInicialArmarNodos(listaMaestraDatosSubArboles, Key::getSiguienteDimmension(dimension), 				porcentajeDeEmpaquetamiento);
 
 	/*con los nodos recibidos, reconstruyo mis nodos de nivel superior*/
 	/*para cada SubArb de la lista de SubArbs*/
