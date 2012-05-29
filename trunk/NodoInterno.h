@@ -9,9 +9,10 @@
 #include "SubClaveRef.h"
 #include "Nodo.h"
 #include "Arbol.h"
+#include "NodoHoja.h"
+
 using namespace std;
 
-class NodoHoja;
 
 template<class T>
 class NodoInterno: public Nodo{
@@ -50,10 +51,11 @@ class NodoInterno: public Nodo{
     public:
 
     NodoInterno(Bytes* CodigoBinario){
-
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
         this->Hidratar(CodigoBinario->toString() );
-
-    }
+        }
 
     NodoInterno(char* cadena){
 
@@ -64,11 +66,15 @@ class NodoInterno: public Nodo{
     }
 
     NodoInterno(Arbol* arbol):Nodo(arbol){
-
-    }
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        }
 
     NodoInterno(){
-
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
         }
 
     NodoInterno(int ref1,T subclave ,int ref2){
@@ -102,6 +108,8 @@ class NodoInterno: public Nodo{
     void Inicializar( int ref1 ,T subclave ,int ref2 ){
 
         this->Ref1erNodo=ref1;
+
+        this->CantElem=1;
 
         SubClaveRef<T>* NuevaDupla= new SubClaveRef<T>(subclave,ref2);
 
@@ -207,8 +215,6 @@ class NodoInterno: public Nodo{
             memcpy(str + cur, &RefNodo , sizeof(RefNodo));
             cur += sizeof(RefNodo);
     }
-
-
 	return str;
 }
 
@@ -287,17 +293,22 @@ class NodoInterno: public Nodo{
         T subclave = (T) dato->getSubClaveSegunDim(this->dimension);
         int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
         Resultado Res;
+
         if (this->Altura > 1 ){/*He aqui la recursividad.Voy bajando por el arbol */
             //levantar un nodo interno, de la persistencia, con IDNodoAbajo
             Nodo* NodoLeido =this->arbol->DevolverNodoSegunID(IDNodoAbajo);
-            Res = NodoLeido->insertarElemento(IDNodoAbajo,nroRegistro,dato,porcentaje);
-        }else{
-
-            Nodo* NodoHleido =this->arbol->DevolverNodoSegunID(IDNodoAbajo);
-            Res = NodoHleido->insertarElemento(IDNodoAbajo,nroRegistro,dato,porcentaje);
+            Res = NodoLeido->insertarElemento(nroBloque,nroRegistro,dato,porcentaje);
+        }else{/*estoy en un nodo interno de nivel 1*/
+            Nodo* NodoHleido = (this->arbol->DevolverNodoSegunID(IDNodoAbajo));
+            Res = NodoHleido->insertarElemento(nroBloque,nroRegistro,dato, porcentaje);
 
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
-                //magia
+                NodoHoja* NH = dynamic_cast<NodoHoja*>(NodoHleido);
+                NodoHoja* NHder = dynamic_cast<NodoHoja*>(this->arbol->crearNuevoNodo('H',' '));
+
+                NHder = NH->PartirEn2();
+
+
                 }
             }
     	return Res;
@@ -317,16 +328,16 @@ class NodoInterno<char*>:public Nodo{
     public:
 
     NodoInterno(Arbol* arbol):Nodo(arbol){
-
-    }
+        this->tamanioMaximoNodo=0;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<char*>* >;
+        }
 
     NodoInterno(Bytes* CodigoBinario){
-
         char* asd = new char[ CodigoBinario->toString().length() ];
-
         memcpy(asd ,&CodigoBinario->toString() ,CodigoBinario->toString().length() );
-
         this->Hidratar( asd );
+        delete asd;
         }
 
     NodoInterno(char* cadena){

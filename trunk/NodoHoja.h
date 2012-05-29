@@ -5,12 +5,8 @@
 #include <iostream>
 #include <list>
 #include "Nodo.h"
-#include "Arbol.h"
 #include "ManejoArchivos/AlmacenamientoBloque.h"
 #include <malloc.h>
-
-template <class T> class NodoInterno;
-
 
 class NodoHoja: public Nodo{
 
@@ -23,12 +19,26 @@ class NodoHoja: public Nodo{
 
     Key* cargarDato(offset idRegistro, offset nroBloque);
 
+    void InsertarIdRegistro(int id){
+        this->listIdRegistros->push_back(id);
+        this->ActualizarCantElem();
+    }
+    void InsertarNroBloque(int Blo){
+        this->listNroBloque->push_back(Blo);
+        this->ActualizarCantElem();
+    }
 
+    void ActualizarCantElem(){
+        bool Size = (this->listIdRegistros == this->listNroBloque);
+        if (Size) {
+            this->CantElem= Size;
+            }
+        }
 
     public:
 
     NodoHoja();
-    //NodoHoja(Arbol* arbol);
+    NodoHoja(Arbol* arbol);
     NodoHoja(char* str);
     ~NodoHoja(){};
 
@@ -39,6 +49,8 @@ class NodoHoja: public Nodo{
     Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
     vector<int> getTamanios();
     void imprimir();
+
+    NodoHoja* PartirEn2();
 
 };
 
