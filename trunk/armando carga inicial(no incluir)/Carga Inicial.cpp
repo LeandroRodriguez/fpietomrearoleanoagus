@@ -24,6 +24,9 @@ list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension)
 }
 
 int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
+	/*si la subListaOrdenada tiene un solo elemento, devuelvo en la sublista, ese elemento y uno vacio. y en la de clave tomo la clave del unico elemento
+	(total, ante igualdad hay que ir para las 2 ramas)*/
+
 	//TO DO	
 	/*ACA PARTE DE CODEO COMPLICADO. aca dps voy a tener que hacer el codigo groso*/
 	return 2;
