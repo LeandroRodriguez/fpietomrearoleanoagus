@@ -292,15 +292,15 @@ offset AlmacenamientoBloque::getUltimoUID(){
 	//ifstream almacenamientoEntrada;
 	string stream;
 
-	//almacenamientoEntrada.open(this->pathDatos.c_str());
-	this->aDatos.open(this->pathDatos.c_str());
-	if (this->aDatos.is_open()) {
+	ifstream almacenamientoEntrada;
+	almacenamientoEntrada.open(this->pathDatos.c_str());
+	if (almacenamientoEntrada.is_open()) {
 		/*posiciono el get pointer en el bloque 0*/
-		this->aDatos.seekg(offset, ios_base::beg);
+		almacenamientoEntrada.seekg(offset, ios_base::beg);
 		char* buffer;
 		buffer = new char[LONGITUD_BLOQUE_DATA];
 		/*levanto el bloque y lo pongo en mi stream, y borro el buffer auxiliar*/
-		this->aDatos.read(buffer, LONGITUD_BLOQUE_DATA);
+		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
 		stream.append(buffer, LONGITUD_BLOQUE_DATA);
 		delete[] buffer;
 

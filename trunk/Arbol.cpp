@@ -41,7 +41,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		this->raiz = (NodoHoja*) (aaa);
 		aaa->setIdDelNodo(ID_RAIZ);
 
-		res = raiz->insertarElemento(nroBloque, nroRegistro, dato, 1);
+		res = raiz->insertarElemento(nroRegistro, nroBloque , dato, 1);
 		if(res == RES_OK)
 			this->cantidadElem  ++;
 
@@ -49,7 +49,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 
 	} else {
 		//debo insertar recursivamente
-		res = raiz->insertarElemento(nroBloque, nroRegistro, dato, 1);
+		res = raiz->insertarElemento(nroRegistro, nroBloque, dato, 1);
 
 		/*
 		this->setRaiz(this->raiz->getAdan());

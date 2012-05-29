@@ -10,15 +10,15 @@
 class Key {
 
     private:
-	char* LineaFerroviaria;
+	string LineaFerroviaria;
 
 	int   Formacion;
 
-	char* Falla;
+	string Falla;
 
-	char* Accidente;
+	string Accidente;
 
-	char* FranjaHorariaDelSiniestro;
+	string FranjaHorariaDelSiniestro;
 
 	string getTamString(string str);
 
@@ -28,11 +28,11 @@ class Key {
 	void* getSubClaveSegunDim( int dim );
 
 	Key(){
-	    this->Accidente=NULL;
-	    this->Falla=NULL;
-	    this->FranjaHorariaDelSiniestro=NULL;
+	    this->Accidente="";
+	    this->Falla="";
+	    this->FranjaHorariaDelSiniestro="";
 	    this->Formacion=-1;
-	    this->LineaFerroviaria=NULL;
+	    this->LineaFerroviaria="";
 	    };
 
 	Key(char* str );
@@ -44,11 +44,11 @@ class Key {
     void Hidratar(string str);
     bool esIgual(Key* clave2);
 
-    void setLineaFerroviaria(char* linea){this->LineaFerroviaria = linea;}
+    void setLineaFerroviaria(string linea){this->LineaFerroviaria = linea;}
     void setFormacion(int formacion){this->Formacion = formacion;}
-    void setFalla(char* falla){this->Falla = falla;}
-    void setAccidente(char* acc){this->Accidente= acc;}
-    void setFranjaHorariaDelSiniestro(char* franja){this->FranjaHorariaDelSiniestro = franja;}
+    void setFalla(string falla){this->Falla = falla;}
+    void setAccidente(string acc){this->Accidente= acc;}
+    void setFranjaHorariaDelSiniestro(string franja){this->FranjaHorariaDelSiniestro = franja;}
     void imprimir();
 
 };
