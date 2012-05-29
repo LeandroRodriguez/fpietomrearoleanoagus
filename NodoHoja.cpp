@@ -228,7 +228,8 @@ vector<int> NodoHoja::getTamanios(){
 }
 //Devuelve la mitad derecha, deja en el original la mitad izquierda
 // obviamente divide segun tamanios
-NodoHoja* NodoHoja::PartirEn2(){
+//En Dimension devuelve la subclave del nodo derecho a subir arriba.
+NodoHoja* NodoHoja::PartirEn2(Key* kAsubir){
     vector<int> S = this->getTamanios();
 
     //int TamMitad = ( this->getTamanioConDatos() )/2;
@@ -253,6 +254,7 @@ NodoHoja* NodoHoja::PartirEn2(){
         }
         list<int>::iterator itRegErase=itReg;//guardo estas posiciones, para borrar despues
         list<int>::iterator itBloqErase=itBloq;//no se puede borrar sobre lo que se esta iterando
+         kAsubir=this->cargarDato(*itReg,*itBloq);
         //me quedan los iT, apuntando en la "mitad"
         NodoHoja* Nder = new NodoHoja(this->arbol);
 
