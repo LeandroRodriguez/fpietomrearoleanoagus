@@ -35,14 +35,16 @@ class Key {
 	    this->LineaFerroviaria="";
 	    };
 
-	Key(char* str );
+	Key(string str);
 
     ~Key();
 
     unsigned long int getTamanioSerializado();
+
     string Serializarse();
     void Hidratar(string str);
-    bool esIgual(Key* clave2);
+
+    bool esIgual(Key* dato);
 
     void setLineaFerroviaria(string linea){this->LineaFerroviaria = linea;}
     void setFormacion(int formacion){this->Formacion = formacion;}
