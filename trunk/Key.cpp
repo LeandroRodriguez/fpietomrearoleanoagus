@@ -1,6 +1,6 @@
 #include "Key.h"
 
-    Key::Key(char* str){
+    Key::Key(string str){
         this->Hidratar(str);
     }
 
@@ -17,6 +17,7 @@
 		return NULL;
 	}
 
+
 	string Key::getTamString(string str)
 	{
 		string serializacion = "";
@@ -29,6 +30,7 @@
 		serializacion += str;
 		return serializacion;
 	}
+
 
 	string Key::Serializarse(){
 
@@ -66,7 +68,6 @@
 		serializacion += this->getTamString(streamTamanioFranja.str());
 
 		serializacion += this->FranjaHorariaDelSiniestro;
-        std::cout<<serializacion<<endl;
 
 		return  serializacion;
 	}
@@ -122,21 +123,17 @@
 		return tamanioSerializado;
 	}
 
-	bool Key::esIgual(Key* clave2){
-		if(strcmp(this->LineaFerroviaria.c_str(), (char*)clave2->getSubClaveSegunDim(0)) != 0)
-			return false;
-
-		if(this->Formacion != *((int*)(clave2->getSubClaveSegunDim(1))))
-			return false;
-
-		if(strcmp(this->Accidente.c_str(), (char*)clave2->getSubClaveSegunDim(2)) != 0)
-			return false;
-
-		if(strcmp(this->Falla.c_str(), (char*)clave2->getSubClaveSegunDim(3)) != 0)
+	bool Key::esIgual(Key* dato){
+        if(this->LineaFerroviaria != dato->LineaFerroviaria)
             return false;
+        if(this->Formacion != dato->Formacion)
+            return false;
+        if(this->Accidente != dato->Accidente)
+            return false;
+        if(this->Falla != dato->Falla)
+            return false;
+        if(this->FranjaHorariaDelSiniestro != dato->FranjaHorariaDelSiniestro)
+            return false;
+        return true;
+    };
 
-		if(strcmp(this->FranjaHorariaDelSiniestro.c_str(), (char*)clave2->getSubClaveSegunDim(4)) != 0)
-			return false;
-
-		return true;
-	};
