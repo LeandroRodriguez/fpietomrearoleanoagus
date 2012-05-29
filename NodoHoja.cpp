@@ -1,4 +1,7 @@
 #include "NodoHoja.h"
+#include "Arbol.h"
+
+using namespace std;
 
 NodoHoja::NodoHoja(){
     //me pasan un numero de dimension. despues tendre que matchearlo con una de las dimensiones del accidente
@@ -9,10 +12,16 @@ NodoHoja::NodoHoja(){
 	this->listNroBloque = new list<int>();
 
     }
-/*
-NodoHoja::NodoHoja(Arbol* arbol):Nodo(arbol){
 
-}*/
+NodoHoja::NodoHoja(Arbol* arbol){
+    this->arbol=arbol;
+    this->tamanioMaximoNodo=0;
+    this->CantElem=0;
+    this->Altura = 0;
+	this->listIdRegistros = new list<int>();
+	this->listNroBloque = new list<int>();
+}
+
 unsigned long int NodoHoja::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
@@ -116,8 +125,6 @@ void NodoHoja::Hidratar(char* bytes){
 	}
 }
 
-
-
 Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 	Key* dato = new Key();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
@@ -156,8 +163,7 @@ int NodoHoja::getTamanioConDatos()
 }
 
 
-Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje)
-{
+Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje){
 	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
 	Si lo encuentra, devuelve como resultado RES_DUPLICADO.
 
@@ -199,25 +205,62 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 }
 
 vector<int> NodoHoja::getTamanios(){
-	vector<int> tamanios;
-	list<int>::iterator itRegistros;
-	itRegistros= this->listIdRegistros->begin();
+            vector<int> tamanios;
+            list<int>::iterator itRegistros;
+            itRegistros= this->listIdRegistros->begin();
 
-	list<int>::iterator itBloques;
-	itBloques= this->listNroBloque->begin();
+            list<int>::iterator itBloques;
+            itBloques= this->listNroBloque->begin();
 
-	for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
-		offset idReg = *itRegistros;
-		offset nroBlo = *itBloques;
-		Key* dato = this->cargarDato(idReg, nroBlo);
+            for(;itRegistros!=this->listIdRegistros->end();itRegistros++){
+                offset idReg = *itRegistros;
+                offset nroBlo = *itBloques;
+                Key* dato = this->cargarDato(idReg, nroBlo);
 
-		int tamanio = dato->getTamanioSerializado();
-		tamanios.push_back(tamanio);
-		itBloques++;
-	}
+                int tamanio = dato->getTamanioSerializado();
+                tamanios.push_back(tamanio);
+                itBloques++;
+            }
 	return tamanios;
-
 }
+//Devuelve la mitad derecha, deja en el original la mitad izquierda
+// obviamente divide segun tamanios
+NodoHoja* NodoHoja::PartirEn2(){
+    vector<int> S = this->getTamanios();
+
+    //int TamMitad = ( this->getTamanioConDatos() )/2;
+    int TamMitad = LONGITUD_BLOQUE_NODO /2;
+
+    vector<int>::iterator itTam = S.begin();
+    list<int>::iterator itReg = this->listIdRegistros->begin();
+    list<int>::iterator itBloq = this->listNroBloque->begin();
+
+    int SumaParcial=0;
+
+    bool SeLlegoAlaMitad=false;
+
+        while(!SeLlegoAlaMitad){
+        SumaParcial += *itTam;
+        if (SumaParcial > TamMitad ){
+            SeLlegoAlaMitad=true;
+            }else{
+            itTam++;
+            itReg++;
+            itBloq++;
+            }
+        }
+
+        NodoHoja* Nder = new NodoHoja(this->arbol);
+
+        for( ;this->listNroBloque->end() ;itBloq++){
+            Nder->InsertarNroBloque(*itBloq);
+            }
+        for( ;this->listIdRegistros->end() ;itReg++){
+            Nder->InsertarIdRegistro
+            }
+
+
+    }
 
 void NodoHoja::imprimir() {
 	//Bytes b;
@@ -259,6 +302,6 @@ void NodoHoja::imprimir() {
 		itBloques++;
 		}
 
+
+
 }
-
-
