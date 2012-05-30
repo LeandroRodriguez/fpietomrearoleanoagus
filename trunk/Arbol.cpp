@@ -241,7 +241,28 @@ int conseguirNivelMayor(list<int>* listaMaestraNiveles){
 }
 
 /*obtengo la lista de subClaves de la pos j de la lista de listas de claves*/
-void* obtenerClavesSegunPos(list<list*>* listaMaestraClaves, int j, int dimension){
+void* obtenerClavesSegunPos(list<list<SubClaveRef<int>*>*>* listaMaestraClaves, int j, int dimension){
+	int i = 0;
+	if(Key::EsIntEstaDimension(dimension)){
+		list<SubClaveRef<int>*>* listaClavesSubarboles;
+	}
+	else{
+		list<SubClaveRef<string>*>* listaClavesSubarboles;
+	}
+	list<int>::iterator itListaClaves;
+	itListaClaves= listaMaestraClaves->begin();
+	for(;itListaClaves!=listaMaestraClaves->end();itListaClaves++){
+		if(j==i){
+			listaClavesSubarboles = (*itListaClaves);
+			break;
+		}
+		i++;
+	}
+	return listaClavesSubarboles;
+}
+
+/*SOBRECARGO el metodo de arriba*/
+void* obtenerClavesSegunPos(list<list<SubClaveRef<string>*>*>* listaMaestraClaves, int j, int dimension){
 	int i = 0;
 	if(Key::EsIntEstaDimension(dimension)){
 		list<SubClaveRef<int>*>* listaClavesSubarboles;
@@ -262,9 +283,9 @@ void* obtenerClavesSegunPos(list<list*>* listaMaestraClaves, int j, int dimensio
 }
 
 /*obtengo la lista de listas de datos de la pos j de la lista de listas de listas de datos*/
-list<list*>* obtenerListasSegunPos(list<list*>* listaMaestraDatosSubArboles, int j){
+list<list<Dato*>*>* obtenerListasSegunPos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, int j){
 	int i = 0;
-	list<list*>* listaDatosSubarboles;
+	list<list<Dato*>*>* listaDatosSubarboles;
 	list<int>::iterator itListaClaves;
 	itListaClaves = listaMaestraDatosSubArboles->begin();
 	for(;itListaClaves!=listaMaestraDatosSubArboles->end();itListaClaves++){
