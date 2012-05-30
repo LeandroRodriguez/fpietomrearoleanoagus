@@ -52,8 +52,10 @@ class Key {
     void setAccidente(string acc){this->Accidente= acc;}
     void setFranjaHorariaDelSiniestro(string franja){this->FranjaHorariaDelSiniestro = franja;}
     void imprimir();
-
-
+    /**************************/
+    bool static EsIntEstaDimension(int n);
+    int static getDimensionSegunAltura(int h);
+    int static getSiguienteDimension(int n);
 };
 
 #endif // KEY_H_INCLUDED

@@ -17,9 +17,7 @@
 		return NULL;
 	}
 
-
-	string Key::getTamString(string str)
-	{
+	string Key::getTamString(string str){
 		string serializacion = "";
 		int tamanio = str.size();
 		while (tamanio < 4)//maxima long de la subclave: 9999
@@ -30,7 +28,6 @@
 		serializacion += str;
 		return serializacion;
 	}
-
 
 	string Key::Serializarse(){
 
@@ -122,17 +119,19 @@
 		return tamanioSerializado;
 	}
 
-   bool static EsIntEstaDimension(int n){
-        if(n!=1)return false;
+   bool Key::EsIntEstaDimension(int n){
+        if(n==1)return true;
+        return false;
     }
 
-    int static getSiguienteDimension(int n){
-        if(n==0)return 1;
-        if(n==1)return 2;
-        if(n==2)return 3;
-        if(n==3)return 4;
-        if(n==4)return 0;
-        return -1;
+    int Key::getDimensionSegunAltura(int h){
+        if (h-1<0) return -1;
+        return (h-1)%5;
+    }
+        // dimension va de 0 a 4, o sea, 5 elementos
+    int Key::getSiguienteDimension(int n){
+        if( n<0 ||  n>5 )return -1;// (-infinito,-1] o [6,infinito)
+        return (n+1)%5;
     }
 
 	bool Key::esIgual(Key* dato){

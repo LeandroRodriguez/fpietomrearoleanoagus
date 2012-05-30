@@ -26,7 +26,7 @@ class Arbol {
 
 	Nodo* crearRaiz();
 
-	Nodo* crearNuevoNodo(char nivel,char tipo) ;
+	Nodo* crearNuevoNodo(int nivel,char tipo) ;
 
 	void imprimir();
 

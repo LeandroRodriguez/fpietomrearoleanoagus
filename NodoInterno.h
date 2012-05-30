@@ -55,6 +55,14 @@ class NodoInterno: public Nodo{
         }
     public:
 
+    /*void Copiar(NodoInterno<T>* Nold){
+        this->CantElem= Nold->CantElem;
+        this->Altura= Nold->Altura;
+        this->dimension=Nold->dimension;
+        this->tamanioMaximoNodo=Nold->tamanioMaximoNodo;
+        this->ListaSubClaveRef = new list< SubClaveRef<T>* >(Nold->ListaSubClaveRef);
+        }*/
+
     NodoInterno(Bytes* CodigoBinario){
         this->inicialize();
         this->Hidratar(CodigoBinario->toString() );
@@ -265,7 +273,7 @@ class NodoInterno: public Nodo{
             Res = NodoHleido->insertarElemento(nroBloque,nroRegistro,dato, porcentaje);
 
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
-                NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo('H',' '));
+                NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo(0,' '));
                 Key* k=NULL;
                 NHder = NodoHleido->PartirEn2(k);
 
