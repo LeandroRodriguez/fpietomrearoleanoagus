@@ -25,8 +25,8 @@ typedef unsigned long int tamanioBloque;
 #define ARCHIVO_ARBOL "ArchivoArbol.idx"
 #define ESPACIO_TIPOS 7
 
-#define ID_RAIZ  1
 
+#define ID_RAIZ  1
 
 enum Resultado {
 	RES_OK = 0, RES_DUPLICADO, RES_INEXISTENTE, RES_DESBORDADO
