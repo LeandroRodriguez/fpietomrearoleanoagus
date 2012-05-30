@@ -13,8 +13,7 @@ Controlador::Controlador() {
 		 archivoPrimario = aux[0];
 	 }else{
 		 archivoPrimario = ARCHIVO_ARBOL;
-		 archivoPrimario += ".idx";
-	 }
+     }
 
 	 /*creo el indice para guardar las referencias al dato en mi arbol*/
 	 this->indicePrimario = new Indice(this->archivoPrimario);
