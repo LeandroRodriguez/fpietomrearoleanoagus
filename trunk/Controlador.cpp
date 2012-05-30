@@ -52,11 +52,11 @@ void Controlador::ListarTenesPorAccidente(string accidente){
     //not implemented
     }
 
-void Controlador::ListarFallasPorFormacion(string formacion){
+void Controlador::ListarFallasPorFormacion(int formacion){
     //not implemented
     }
 
-void Controlador::ListarAccidentesPorFormacion(string formacion){
+void Controlador::ListarAccidentesPorFormacion(int formacion){
     //not implemented
     }
 

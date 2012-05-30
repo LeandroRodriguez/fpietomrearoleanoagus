@@ -7,10 +7,11 @@
 #include "Test/TestControlador.h"
 #include "Test/TestKey.h"
 #include "Test/TestArbol.h"
+#include "Test/TestNodoHoja.h"
 using namespace std;
 
 int main(){
-    TestRegistro* testRegistro = new TestRegistro();
+    /*TestRegistro* testRegistro = new TestRegistro();
     testRegistro->TestCrearRegistro();
     testRegistro->TestSerializarHidratarRegistro();
     delete testRegistro;
@@ -48,8 +49,13 @@ int main(){
 
     TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();
-    delete testKey;
+    delete testKey;*/
 
+    TestNodoHoja* testNodoHoja = new TestNodoHoja();
+    testNodoHoja->TestCrearNodoHoja();
+    testNodoHoja->TestSerializarHidtratar();
+    //ESTE NO ANDA POR AHORA
+    //testNodoHoja->TestPartirHojaEn2();
 };
 
 
