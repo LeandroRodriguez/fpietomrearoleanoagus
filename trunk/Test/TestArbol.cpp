@@ -4,7 +4,7 @@ void TestArbol::Testear(){
 
         Key* dato = new Key();
 		dato->setLineaFerroviaria("Sarmiento");
-		dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+		dato->setFranjaHorariaDelSiniestro("2012/03/4 00:00 00:30");
 		dato->setFalla("no cierra puerta");
 		dato->setAccidente("incendio");
 		dato->setFormacion(1);
@@ -12,7 +12,7 @@ void TestArbol::Testear(){
 
 		Key* dato2 = new Key();
 		dato2->setLineaFerroviaria("Mitre");
-		dato2->setFranjaHorariaDelSiniestro("2012/01/21 00:00 00:30");
+		dato2->setFranjaHorariaDelSiniestro("2012/02/21 00:00 10:30");
 		dato2->setFalla("asientos rotos");
 		dato2->setAccidente("choco con estacion");
 		dato2->setFormacion(2);
@@ -22,7 +22,7 @@ void TestArbol::Testear(){
 		Key* dato3 = new Key();
 		char linea3[] ="Roca";
 		dato3->setLineaFerroviaria(linea3);
-		char franja3[] = "2012/02/23 00:00 00:30";
+		char franja3[] = "2012/11/5 00:00 00:25";
 		dato3->setFranjaHorariaDelSiniestro(franja3);
 		char falla3[] = "no frena";
 		dato3->setFalla(falla3);
