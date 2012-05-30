@@ -315,7 +315,7 @@ offset obtenerReferenciaNodosSegunPos(list<offset>* listaReferenciasNodosHios, i
 }
 
 /*consigo la clave media(segun tamanio) y las dos sublistas que se parten a partir de esa clave*/
-void* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>* listasDatosSubArbolesNuevos){
+void* partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos){
 	//TO DO
 	/*de mi lista de listas de datos vieja las voy metiendo en una sola lista de datos, agregando en orden al final*/
 
@@ -331,9 +331,9 @@ void* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>
 }
 
 /*reemplazo la lista de lista de datos en la lista maestra de listas de listas de datos(en la pos j)*/
-void reemplazarDatoListaDatos(list<list*>* listaMaestraDatosSubArboles, list<list*>* listasDatosSubArbolesNuevos, int j){
+void reemplazarDatoListaDatos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, list<list<Dato*>*>* listasDatosSubArbolesNuevos, int j){
 	int i = 0;
-	list<list*>* listaMaestraDatosSubarbolesNueva;
+	list<list<list<Dato*>*>*>* listaMaestraDatosSubarbolesNueva;
 	list<int>::iterator itListaClaves;
 	itListaClaves= listaMaestraDatosSubArboles->begin();
 	for(;itListaClaves!=listaMaestraDatosSubArboles->end();itListaClaves++){
@@ -349,10 +349,10 @@ void reemplazarDatoListaDatos(list<list*>* listaMaestraDatosSubArboles, list<lis
 }
 
 /*reemplazo la lista de claves en la lista maestra de listas de claves(en la pos j)*/
-void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef<int>*>* claveMediana, j){
+void reemplazarDatoListaClaves(list<list<SubClaveRef<int>*>*>* listaMaestraClaves, list<SubClaveRef<int>*>* claveMediana, j){
 	int i = 0;
 	/*si esta lista la malloqueo, tendria que deletear la vieja al final, antes de asignarle la nueva referencia*/
-	list<list*>* listaMaestraClavesNueva;
+	list<list<SubClaveRef<int>*>*>* listaMaestraClavesNueva;
 	list<int>::iterator itListaClaves;
 	itListaClaves= listaMaestraClaves->begin();
 	for(;itListaClaves!=listaMaestraClaves->end();itListaClaves++){
@@ -368,10 +368,10 @@ void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef
 }
 
 /*SOBRECARGO el metodo de arriba*/
-void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef<string>*>* claveMediana, j){
+void reemplazarDatoListaClaves(list<list<SubClaveRef<string>*>*>* listaMaestraClaves, list<SubClaveRef<string>*>* claveMediana, j){
 	int i = 0;
 	/*si esta lista la malloqueo, tendria que deletear la vieja al final, antes de asignarle la nueva referencia*/
-	list<list*>* listaMaestraClavesNueva;
+	list<list<SubClaveRef<string>*>*>* listaMaestraClavesNueva;
 	list<int>::iterator itListaClaves;
 	itListaClaves= listaMaestraClaves->begin();
 	for(;itListaClaves!=listaMaestraClaves->end();itListaClaves++){
