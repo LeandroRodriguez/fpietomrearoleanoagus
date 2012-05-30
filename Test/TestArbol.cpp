@@ -31,7 +31,7 @@ void TestArbol::Testear(){
 		dato3->setFormacion(3);
 		c->InsertarDato(dato3);
 
-        c->indicePrimario->imprimir();
+        c->indice->imprimir();
 		/*Key* dato4 = new Key();
 		char linea4[] ="San martin";
 		dato4->setLineaFerroviaria(linea4);
