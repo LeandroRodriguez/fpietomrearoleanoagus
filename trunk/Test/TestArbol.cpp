@@ -1,17 +1,14 @@
 #include "TestArbol.h"
 void TestArbol::Testear(){
-
 		Controlador* c = new Controlador();
 
-		Key* dato = new Key();
+        Key* dato = new Key();
 		dato->setLineaFerroviaria("Sarmiento");
 		dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 		dato->setFalla("no cierra puerta");
 		dato->setAccidente("incendio");
 		dato->setFormacion(1);
 		c->InsertarDato(dato);
-
-		c->indicePrimario->imprimir();
 
 		Key* dato2 = new Key();
 		dato2->setLineaFerroviaria("Mitre");
@@ -20,7 +17,7 @@ void TestArbol::Testear(){
 		dato2->setAccidente("choco con estacion");
 		dato2->setFormacion(2);
 		c->InsertarDato(dato2);
-		c->indicePrimario->imprimir();
+
 
 		Key* dato3 = new Key();
 		char linea3[] ="Roca";
@@ -33,9 +30,9 @@ void TestArbol::Testear(){
 		dato3->setAccidente(acc3);
 		dato3->setFormacion(3);
 		c->InsertarDato(dato3);
-		c->indicePrimario->imprimir();
 
-		Key* dato4 = new Key();
+        c->indicePrimario->imprimir();
+		/*Key* dato4 = new Key();
 		char linea4[] ="San martin";
 		dato4->setLineaFerroviaria(linea4);
 		char franja4[] = "2012/02/25 00:00 00:30";
@@ -46,7 +43,6 @@ void TestArbol::Testear(){
 		dato4->setAccidente(acc4);
 		dato4->setFormacion(4);
 		c->InsertarDato(dato4);
-		c->indicePrimario->imprimir();
 
 		Key* dato5 = new Key();
 		char linea5[] ="Belgrano";
@@ -59,7 +55,6 @@ void TestArbol::Testear(){
 		dato5->setAccidente(acc5);
 		dato5->setFormacion(5);
 		c->InsertarDato(dato5);
-		c->indicePrimario->imprimir();
 
 		Key* dato6 = new Key();
 		char linea6[] ="Subte";
@@ -72,8 +67,61 @@ void TestArbol::Testear(){
 		dato6->setAccidente(acc6);
 		dato6->setFormacion(6);
 		c->InsertarDato(dato6);
-		c->indicePrimario->imprimir();
+
+		Key* dato7 = new Key();
+		dato7->setLineaFerroviaria("Junin");
+		dato7->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+		dato7->setFalla("no cierra puerta");
+		dato7->setAccidente("incendio");
+		dato7->setFormacion(5);
+		c->InsertarDato(dato7);
+
+		Key* dato8 = new Key();
+		dato8->setLineaFerroviaria("Ledesma");
+		dato8->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+		dato8->setFalla("no tiene puerta");
+		dato8->setAccidente("incendio");
+		dato8->setFormacion(4);
+		c->InsertarDato(dato8);
+
+		Key* dato9 = new Key();
+		dato9->setLineaFerroviaria("Rivadavia");
+		dato9->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:30");
+		dato9->setFalla("no cierra");
+		dato9->setAccidente("quemado");
+		dato9->setFormacion(4);
+		c->InsertarDato(dato9);
+
+		Key* dato10 = new Key();
+		dato10->setLineaFerroviaria("TorCuato");
+		dato10->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
+		dato10->setFalla("no cierra");
+		dato10->setAccidente("roto");
+		dato10->setFormacion(4);
+		c->InsertarDato(dato10);
+
+		Key* dato11 = new Key();
+		dato11->setLineaFerroviaria("LaBoca");
+		dato11->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
+		dato11->setFalla("no abre ventanas");
+		dato11->setAccidente("descarrilamiento");
+		dato11->setFormacion(6);
+		c->InsertarDato(dato11);
+
+		c->indicePrimario->imprimir();*/
+
+		delete c;
+		delete dato;
+		delete dato2;
+		/*delete dato3;
+		delete dato4;
+		delete dato5;
+		delete dato6;
+		delete dato7;
+		delete dato8;
+		delete dato9;
+		delete dato10;
+		delete dato11;*/
 
 
-
-	}
+}
