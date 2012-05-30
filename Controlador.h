@@ -33,8 +33,8 @@ public:
 
 	void ListarTenesPorFalla(string falla);
 	void ListarTenesPorAccidente(string accidente);
-	void ListarFallasPorFormacion(string formacion);
-	void ListarAccidentesPorFormacion(string formacion);
+	void ListarFallasPorFormacion(int formacion);
+	void ListarAccidentesPorFormacion(int formacion);
 	void ListarFallas();
 	void ListarForcaciones();
 	void ListarLineas();
