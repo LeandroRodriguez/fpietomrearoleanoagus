@@ -103,8 +103,7 @@
 		cur += t;
 	}
 
-	void Key::imprimir()
-	{
+	void Key::imprimir(){
 		cout <<"LineaFerroviaria: " << this->LineaFerroviaria << ", Formacion: "<< this->Formacion << ", Accidente: "
 				<< this->Accidente << ", Falla: " <<this->Falla << ", Franja horaria: " << this->FranjaHorariaDelSiniestro<< endl;
 	}
@@ -122,6 +121,10 @@
 
 		return tamanioSerializado;
 	}
+
+   bool static EsIntEstaDimension(int n){
+        if(n!=1)return false;
+    }
 
 	bool Key::esIgual(Key* dato){
         if(this->LineaFerroviaria != dato->LineaFerroviaria)
