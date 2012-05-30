@@ -36,7 +36,7 @@ Arbol::~Arbol() {
 Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 	Resultado res;
 
-	if (!raiz) {
+	if (!raiz) {//lazy initialization ?
 		//Es el primerElemento
 		Nodo* aaa = this->crearRaiz();
 		this->raiz = (NodoHoja*) (aaa);
