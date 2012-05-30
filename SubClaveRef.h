@@ -45,7 +45,7 @@ template<class T> class SubClaveRef{
         }
     ~SubClaveRef(){}
 
-    char* Serializarse(){//haciendo un str() consigo tamanio serializacion
+    char* Serializarse(){
             char* str = new char[(sizeof(this->subclave)+sizeof(this->RefNodo))];
             int cur=0;
             memcpy(str + cur,&this->subclave, sizeof(this->subclave));
@@ -67,6 +67,10 @@ template<class T> class SubClaveRef{
         this->setRefNodo(RefNod);
         this->subclave=subcl;
         }
+
+    unsigned int getTamanioSerializado(){
+        return strlen( this->Serializarse() );
+    }
 };
 
 template<>
@@ -77,6 +81,9 @@ class SubClaveRef<string>{
     int RefNodo;
     public:
 
+    unsigned int getTamanioSerializado(){
+        return strlen( this->Serializarse() );
+    }
     char* Serializarse(){// haciendo strlen() la cadena que me devuelve, se cuanto mover cursor exterior
         int cur=0;
         char* str = new char[(this->subclave.length()+sizeof(int)+sizeof(this->RefNodo)) ];
