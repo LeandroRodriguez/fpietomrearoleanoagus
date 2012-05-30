@@ -66,12 +66,14 @@ class NodoHoja: public Nodo{
             }
         }
     void inicializar(){
-    this->tamanioMaximoNodo=LONGITUD_BLOQUE_NODO;
-    this->CantElem=0;
-    this->Altura = 0;
-	this->listIdRegistros = new list<int>();
-	this->listNroBloque = new list<int>();
-
+        this->tamanioMaximoNodo=LONGITUD_BLOQUE_NODO;
+        this->CantElem=0;
+        this->Altura = 0;
+        this->dimension=-1;
+        this->tamanioUsado=0;
+        this->listIdRegistros = new list<int>();
+        this->listNroBloque = new list<int>();
+        this->proximaHoja=0;//ojo con esto
     }
     public:
 

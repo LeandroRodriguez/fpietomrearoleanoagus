@@ -278,6 +278,4 @@ void NodoHoja::imprimir() {
 		itBloques++;
 		}
 
-
-
 }
