@@ -5,21 +5,12 @@ using namespace std;
 
 NodoHoja::NodoHoja(){
     //me pasan un numero de dimension. despues tendre que matchearlo con una de las dimensiones del accidente
-    this->tamanioMaximoNodo=0;
-    this->CantElem=0;
-    this->Altura = 0;
-	this->listIdRegistros = new list<int>();
-	this->listNroBloque = new list<int>();
-
+    this->inicializar();
     }
 
 NodoHoja::NodoHoja(Arbol* arbol){
     this->arbol=arbol;
-    this->tamanioMaximoNodo=0;
-    this->CantElem=0;
-    this->Altura = 0;
-	this->listIdRegistros = new list<int>();
-	this->listNroBloque = new list<int>();
+    this->inicializar();
 }
 
 unsigned long int NodoHoja::getTamanioSerializado(){
@@ -51,15 +42,11 @@ unsigned long int NodoHoja::getTamanioSerializado(){
 }
 
     NodoHoja::NodoHoja(char* str){
-    this->tamanioMaximoNodo=0;
-    this->CantElem=0;
-    this->listIdRegistros = new list<int>();
-	this->listNroBloque = new list<int>();
+    this->inicializar();
     this->Hidratar(str);
     }
 
-char* NodoHoja::Serializarse()
-{
+char* NodoHoja::Serializarse(){
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
 
 	char* str =(char*) malloc(tamanioTotal * sizeof(char));
@@ -96,7 +83,6 @@ char* NodoHoja::Serializarse()
 
 		itBloques++;
         }
-
 	return str;
 }
 
@@ -143,8 +129,7 @@ Key* NodoHoja::cargarDato(offset idRegistro, offset nroBloque){
 	return dato;
 }
 
-int NodoHoja::getTamanioConDatos()
-{
+int NodoHoja::getTamanioConDatos(){
 	int tamanio = 0;
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
@@ -164,7 +149,6 @@ int NodoHoja::getTamanioConDatos()
 	return tamanio;
 
 }
-
 
 Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje){
 	/*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
@@ -188,7 +172,6 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 			return RES_DUPLICADO;
 		itBloques++;
         }
-
 
 	//chequeo overflow
 	int tamanio = this->getTamanioConDatos();
@@ -228,7 +211,7 @@ vector<int> NodoHoja::getTamanios(){
 }
 //Devuelve la mitad derecha, deja en el original la mitad izquierda
 // obviamente divide segun tamanios
-//En Dimension devuelve la subclave del nodo derecho a subir arriba.
+//Devuelve la clave perteneciente al dato del "medio" ponderado.
 NodoHoja* NodoHoja::PartirEn2(Key* kAsubir){
     vector<int> S = this->getTamanios();
 
