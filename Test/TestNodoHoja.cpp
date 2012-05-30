@@ -37,6 +37,9 @@ void TestNodoHoja::TestCrearNodoHoja(){
 	nodo->insertarElemento(nReg2, nBloque2, dato2, 1);
 
     nodo->imprimir();
+    delete dato1;
+    delete dato2;
+    delete nodo;
 }
 
 void TestNodoHoja::TestSerializarHidtratar(){
@@ -59,6 +62,9 @@ void TestNodoHoja::TestSerializarHidtratar(){
 	char* serializacion = nodo1->Serializarse();
 	NodoHoja* nodo2 = new NodoHoja(serializacion);
     nodo2->imprimir();
+    delete dato;
+    delete nodo1;
+    delete nodo2;
 }
 
 void TestNodoHoja::TestPartirHojaEn2(){
@@ -98,4 +104,7 @@ void TestNodoHoja::TestPartirHojaEn2(){
 	Nodo* nodo2 = nodo1->PartirEn2(dato2);
 	nodo1->imprimir();
 	nodo2->imprimir();
+	delete dato1;
+    delete dato2;
+    delete nodo1;
 }

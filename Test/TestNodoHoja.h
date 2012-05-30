@@ -14,4 +14,4 @@ class TestNodoHoja{
 };
 
 
-#endif /* TESTALMACENAMIENTOBLOQUE_H_ */
+#endif /* TESTNODOHOJA_H_ */
