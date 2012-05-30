@@ -53,6 +53,7 @@ class Key {
     void setFranjaHorariaDelSiniestro(string franja){this->FranjaHorariaDelSiniestro = franja;}
     void imprimir();
 
+
 };
 
 #endif // KEY_H_INCLUDED
