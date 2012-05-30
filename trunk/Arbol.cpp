@@ -129,9 +129,9 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
 	}
 	offset nroNodo = this->persistir->agregarRaiz(raiz);
 	/*creo una sublista donde solo voy a tener la lista con los datos iniciales*/
-	list<list<Dato*>*>* subListasDatos = new list<list<Dato*>*>*();
+	list<list<Dato*>*>* subListasDatos = new list<list<Dato*>*>();
 	subListasDatos->push_back(listaDeDatos);
-	list<list<list<Dato*>*>*>* listaDeSubListasDatos = new list<list<list<Dato*>*>*>*();
+	list<list<list<Dato*>*>*>* listaDeSubListasDatos = new list<list<list<Dato*>*>*>();
 	listaDeSubListasDatos->push_back(subListasDatos);
 	/*elijo un porcentaje de empaquetamineto inicial del 75%*/
 	double porcentajeDeEmpaquetamiento = 0.75;
@@ -216,7 +216,7 @@ void setElemento (list<Dato*>* lista, int index, Dato* dato){
 	return Null;
 }
 
-int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<int>*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
+int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<int>*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
 	/*si la subListaOrdenada tiene un solo elemento, devuelvo en la sublista, ese elemento y uno vacio. y en la de clave tomo la clave del unico elemento
 	(total, ante igualdad hay que ir para las 2 ramas)*/
 
@@ -226,7 +226,7 @@ int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<S
 }
 
 /*SOBRECARGA del metodo de arriba*/
-int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<string>*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
+int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<string>*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
 	/*si la subListaOrdenada tiene un solo elemento, devuelvo en la sublista, ese elemento y uno vacio. y en la de clave tomo la clave del unico elemento
 	(total, ante igualdad hay que ir para las 2 ramas)*/
 
