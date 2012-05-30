@@ -48,40 +48,35 @@ class NodoInterno: public Nodo{
         return NoSeRepite;
     }
 
+    void inicialize(){
+        this->tamanioMaximoNodo=LONGITUD_BLOQUE_NODO;
+        this->CantElem=0;
+        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        }
     public:
 
     NodoInterno(Bytes* CodigoBinario){
-        this->tamanioMaximoNodo=0;
-        this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        this->inicialize();
         this->Hidratar(CodigoBinario->toString() );
         }
 
     NodoInterno(char* cadena){
-
-        this->tamanioMaximoNodo=0;
-        this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        this->inicialize();
         this->Hidratar(cadena);
     }
 
     NodoInterno(Arbol* arbol):Nodo(arbol){
-        this->tamanioMaximoNodo=0;
-        this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        this->inicialize();
         }
 
     NodoInterno(){
-        this->tamanioMaximoNodo=0;
-        this->CantElem=0;
-        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        this->inicialize();
         }
 
     NodoInterno(int ref1,T subclave ,int ref2){
-        this->ListaSubClaveRef= new list<SubClaveRef<T>* >;
+        this->inicialize();
         this->Inicializar(ref1,subclave,ref2);
-
-    }
+        }
 
     Resultado InsertarNuevaSubClaveRef ( T subclave,int refAbloqueArbol ){
         /*Busca en el nodo si hay algún registro con los mismos identificadores que IdentificadorDato.
@@ -107,29 +102,23 @@ class NodoInterno: public Nodo{
     }
 
     void Inicializar( int ref1 ,T subclave ,int ref2 ){
-
         this->Ref1erNodo=ref1;
-        this->CantElem=1;
-        SubClaveRef<T>* NuevaDupla= new SubClaveRef<T>(subclave,ref2);
         this->InsertarNuevaSubClaveRef(subclave,ref2);
     }
 
-    /* sirve solo para tipos clasicos, int, double, word etc */
+        //esto hay que mejorarlo.
     T conseguirClaveQueDividaAlMedioPonderadoElNodo(){
 
         typename list< SubClaveRef<T> >::iterator it;
-
         it = this->ListaSubClaveRef->begin();
-
         if( this->CantElem == 0) return -1;
 
         unsigned int Value = 0;
-
         if ( this->CantElem % 2 != 0){
             Value = ( this->CantElem / 2 )+1;
             }else{
                 Value=  this->CantElem/2 ;
-            }
+                }
 
         for(int I=0;I<=Value;it++){
         }
@@ -137,7 +126,6 @@ class NodoInterno: public Nodo{
         return cosa->getSubClave();
     }
 
-    /* sirve solo para tipos clasicos, int, double, word etc */
     unsigned long int getTamanioSerializado(){
 
 	size_t tamanioSerializado = 0;
