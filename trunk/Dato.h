@@ -8,36 +8,36 @@
 class Dato{
 
     private:
-	Key clave;
-	offset nroBLoque;
+	Key* clave;
+	offset nroBloque;
 	offset idRegistro;
     
     public:
-	Nodo(){
-		this->clave = null;
+	Dato(){
+		this->clave = NULL;
 		this->nroBloque = -1;
 		this->idRegistro = -1;
 	};
-     	~Nodo(){};
+     	~Dato(){};
 
-    int getClave(){
+    Key* getClave(){
         return this->clave;
     }
-    void setClave(clave){
+    void setClave(Key* clave){
         this->clave = clave;
     }
 
     offset getIdRegistro(){
         return this->idRegistro;
     }
-    void setClave(idRegistro){
+    void setIdRegistro(offset idRegistro){
         this->idRegistro = idRegistro;
     }
 
     offset getNroBoque(){
         return this->nroBloque;
     }
-    void setClave(nroBloque){
+    void setNroBoque(offset nroBloque){
         this->nroBloque = nroBloque;
     }
     

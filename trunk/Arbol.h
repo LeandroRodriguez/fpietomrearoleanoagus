@@ -2,6 +2,7 @@
 #define ARBOL_H_
 
 #include "Nodo.h"
+#include "Dato.h"
 #include "ManejoArchivos/PersistenciaArbol.h"
 #include <list>
 #include <typeinfo>
@@ -33,6 +34,8 @@ class Arbol {
 	void actualizarNodo(Nodo* nodoAActualizar);
 
 	void ultimosAdisco();
+
+	void cargaInicial();
 
 private:
 	PersistenciaArbol* persistir;
