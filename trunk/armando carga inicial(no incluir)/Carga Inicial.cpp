@@ -1,4 +1,5 @@
-void* cargaInicial(list<Dato*>* listaDeDatos){
+/*funcion de arranque para la carga inicial. Aca seteo los datos iniciales para arrancar con la recursividad*/
+void cargaInicial(list<Dato*>* listaDeDatos){
 	/*creo la raiz vacia, dps la voy a modificar*/
 	NodoInterno* raiz = new NodoInterno();
 	offset nroNodo = this->persistir->agregarRaiz(raiz);
@@ -10,10 +11,24 @@ void* cargaInicial(list<Dato*>* listaDeDatos){
 	int dimension = 1;
 	/*elijo un porcentaje de empaquetamineto inicial del 75%*/
 	double porcentajeDeEmpaquetamiento = 0.75;
-	list<NodoInterno*>* cargaInicialArmarNodos(listaDeSubListasDatos, dimension, porcentajeDeEmpaquetamiento);
+	/*funcion recursiva*/
+	list<offset>* listaRefs = cargaInicialArmarNodos(listaDeSubListasDatos, dimension, porcentajeDeEmpaquetamiento);
+	/*me tiene que devolver una sola referencia*/
+	list<offset>::iterator itListaRefs;
+	itListaRefs = listaRefs->begin();
+	offset referencia;
+	for(;itListaRefs!=listaRefs->end();itListaRefs++){
+		referencia = (*itListaRefs);
+	}
+	/*levanto el nodo del archivo*/
+	nodoInterno* raiz = leerNodo(referencia);
+	/*le seteo el idRaiz y lo persisto*/
+	this->persistir->guardarRaiz(raiz);
+	/*modifico el nro nodo de referencia y lo pongo vacio*/
+	nodoHoja* nodoVacio = new nodoHoja();
+	setIdDelNodo(referencia);
+	ActualizarNodo(nodoVacio);
 }
-//**mi funcion, de movida, tiene que recibir una lista con los datos a insertar**//
-/*desde esta llamaria a la recursiva, ponele*/
 /*desde aca, la recu me va a devolver una lista con un solo nodo, que va a ser el raiz*/
 
 /*devuelvo list de punteros de nodos del nivel anterior, y referencio los nuevos nodos con eso*/
@@ -40,6 +55,7 @@ int conseguirNivelMayor(list<int>* listaMaestraNiveles){
 	return 2;
 }
 
+/*obtengo la lista de subClaves de la pos j de la lista de listas de claves*/
 list<SubClaveRef*>* obtenerClavesSegunPos(list<list*>* listaMaestraClaves,int j){
 	int i = 0;	
 	list<SubClaveRef*>* listaClavesSubarboles;
@@ -166,6 +182,7 @@ offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaj
 	return nroNodo;
 }
 
+/*creo un nodo interno y meto todos las refs de la lista pasada. Luego lo persisto y retorno el nro de nodo*/
 NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i){
 	/*para la clave de la posicion it de la lista de listas de claves*/
 	list<SubClaveRef*>* listaClaves = this->obtenerClavesSegunPos(listaMaestraClaves, i);
@@ -184,11 +201,11 @@ NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<of
 		offset referenciaSiguiente = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
 		if(k==1){		
 			/*la primera vez tengo que agregar tambien la primer referencia*/
-			Inicializar(primerReferencia, subClave, referenciaSiguiente);	
+			Inicializar(primerReferencia, subClave->getSubClave(), referenciaSiguiente);	
 		}
 		else{
 			/*despues solo agrego conjuntos de clave - referencia*/
-			InsertarNuevaSubClaveRef(subClave, referenciaSiguiente);
+			InsertarNuevaSubClaveRef(subClave->getSubClave(), referenciaSiguiente);
 		}		
 	}
 	/*persisto el nodo*/
@@ -197,27 +214,48 @@ NodoInterno* insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<of
 	return nroNodo;
 }
 
-list<NodoInterno*>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados){
+/*voy creando nodos internos por cada lisa de claves y meto las refs necesarias segun la cant de claves. Los persisto y retorno una lista de nros de nodos*/
+list<offset>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados){
 	/*construyo mis NodoI*/
 	int d = 0;
-	list<NodoInterno*>* listaNodosInternos;
-	for(int k = 0,k<listaMaestraClaves.size(),k){	
-		list<SubClaveRef*>* listaClaves = this->obtenerClavesSegunPos(listaMaestraClaves, k);		
-		list<int>::iterator itListaClaves;
-		itListaClaves= listaClaves->begin();
-		/*construyo un nodo*/		
-		for(;itListaClaves!=listaClaves->end();itListaClaves++){					
-			/*asigno una referencia(obtengo la ref de la pos d)*/
-			/*asigno una clave*/			
-			d++;
+	list<offset>* listaRefsNodosInternos;
+
+	list<int>::iterator itListaMaestraClaves;
+	itListaMaestraClaves= listaMaestraClaves->begin();
+	int k = 0;	
+	/*construyo un nodo por cada lista de listas de claves*/		
+	for(;itListaMaestraClaves!=listaMaestraClaves->end();itListaMaestraClaves++){
+		/*instancio un nodo interno por cada lista de claves*/
+		NodoInterno* nodoInterno = new NodoInterno();		
+		/*voy a iterar sobre mis listas de claves para ir armando el nodo interno*/
+		list<SubClaveRef*>::iterator itListaClaves;
+		itListaClaves = (*itListaMaestraClaves)->begin();
+		/*consigo la primer referencia*/	
+		offset primerReferencia = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
+		/*meto tantas refs como necesite junto con la clave(1 + qe la cant de claves)*/
+		for(;itListaClaves!=(*itListaMaestraClaves)->end();itListaClaves++){
+			k++;		
+			/*recupero la subClaveRef*/
+			SubClaveRef* subClave = (*itListaClaves);
+			/*asigno una referencia*/		
+			offset referenciaSiguiente = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
+			if(k==1){		
+				/*la primera vez tengo que agregar tambien la primer referencia*/
+				Inicializar(primerReferencia, subClave->getSubClave(), referenciaSiguiente);	
+			}
+			else{
+				/*despues solo agrego conjuntos de clave - referencia*/
+				InsertarNuevaSubClaveRef(subClave->getSubClave(), referenciaSiguiente);
+			}
 		}
-		/*asigno una referencia al ultimo nodo(obtengo la ref de la pos d)*/		
-		d++;		
-		/*meto el nodo interno en una lista de resultados, con las refs de los nodos internos*/
-		listaNodosInternos->push_back(nodoInterno);
-				
-	}
-	return listaNodosInternos;
+		k++;
+		/*persisto el nodo*/
+		offset nroNodo = this->persistir->agregarNodo(nodoInterno);
+		/*meto las refs en mi lista*/
+		listaRefsNodosInternos->push_back(nroNodo);	
+	}	
+	/*retorno la lista de refs*/
+	return listaRefsNodosInternos;
 }
 
 
@@ -239,9 +277,9 @@ list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension,
 
 	for(;itSubListas!=subListasDatos->end();itSubListas++){
 		list<list*>::iterator itSubSubListas;
-		itSubSubListas= (*subListasDatos).begin();
+		itSubSubListas= (*subListasDatos)->begin();
 
-		for(;itSubSubListas!=(*subListasDatos).end();itSubSubListas++){
+		for(;itSubSubListas!=(*subListasDatos)->end();itSubSubListas++){
 			/*ordeno datos por mi dimension*/
 			list<Dato*>* subListaOrdenada = this->obtenerListaOrdenadaPorDimension(&(*itSubSubListas),dimension);//TO DO
 			/*una vez que tengo mi lista ordenada, comienzo con la insercion en nodos como si fuese una carga inicial comun(mmm, mas bien una 				simulacion)*/
@@ -288,7 +326,10 @@ list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension,
 			listaNodosInternos->push_back(nroNodoInterno);
 			i++;
 		}
-
+		/*libero memoria*/
+		delete listaMaestraNiveles;
+		delete listaMaestraClaves;
+		delete listaMaestraDatosSubArboles;
 		/*retorno la lista de refs de nodos internos*/
 		return listaNodosInternos;
 	}
@@ -326,7 +367,7 @@ list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension,
 
 	/*con los nodos recibidos, reconstruyo mis nodos de nivel superior*/
 	/*para cada SubArb de la lista de SubArbs*/
-	list<NodoInterno*>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados);
+	list<offset>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados);
 	
 	delete listaMaestraNiveles;
 	delete listaMaestraClaves;
@@ -334,10 +375,3 @@ list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension,
 	/*retorno ahora las refs de estos nodos,(que ya referencian a los inferiores), para que se agreguen en el siguiente nivel*/
 	return listaNodosInternos;
 }
-
-
-
-
-/*agarro los nodos de algun lado y armo mi arbol resultante*/		
-		
-		
