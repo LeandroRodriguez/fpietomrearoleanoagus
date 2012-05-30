@@ -129,9 +129,10 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
 	}
 	offset nroNodo = this->persistir->agregarRaiz(raiz);
 	/*creo una sublista donde solo voy a tener la lista con los datos iniciales*/
-	list<list*>* subListasDatos = new list<list*>*();
+	list<list<Dato*>*>* subListasDatos = new list<list<Dato*>*>*();
 	subListasDatos->push_back(listaDeDatos);
-	list<list*>* listaDeSubListasDatos = new list<list*>*();
+	list<list<list<Dato*>*>*>* listaDeSubListasDatos = new list<list<list<Dato*>*>*>*();
+	listaDeSubListasDatos->push_back(subListasDatos);
 	/*elijo un porcentaje de empaquetamineto inicial del 75%*/
 	double porcentajeDeEmpaquetamiento = 0.75;
 	/*funcion recursiva*/
