@@ -20,10 +20,10 @@
 using namespace std;
 
 class Controlador {
-	string archivoPrimario;/*nombre del archivo con el indice(mi arbol)*/
+	string archivoArbol;/*nombre del archivo con el indice(mi arbol)*/
 
 public:
-	Indice* indicePrimario;
+	Indice* indice;
 	// Crea el controlador y levanta todos los indices en /Archivos/Indices/
 	Controlador();
 	virtual ~Controlador();

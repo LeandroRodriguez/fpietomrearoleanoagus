@@ -36,9 +36,55 @@ void cargaInicial(list<Dato*>* listaDeDatos){
 
 
 list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension){
-	//TO DO
 	list<Dato*>* listaOrdenadaDatosSubArboles = new list<Dato*>();
+	bool swapped;
+	do{
+	     swapped = false;
+	     int i;
+	     for (i = 1; i <= lista->size() - 1; i++) {
+	    	 if((Key->EsIntEstaDimension(dimension) && (*(int*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)) >
+				 (*(int*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension))) || (!(Key->EsIntEstaDimension(dimension)) &&
+				 (*(string*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)) >
+				 (*(string*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension))))
+	    	 {
+	    		 Dato* aux = this->getElemento(lista, i-1);
+	    		 Dato* elem = this->getElemento(lista, i);
+	    		 this->setElemento(lista, i - 1,elem);
+	    		 this->setElemento(lista, i,aux);
+	    		 swapped = true;
+	    	 }
+	     }
+	}
+	while (swapped);
 	return listaOrdenadaDatosSubArboles;
+}
+
+Dato* getElemento (list<Dato*>* lista, int index){
+	list<Dato*>::iterator it;
+	it=lista->begin();
+
+	int i = 0;
+	for(;it!=lista->end();it++){
+		if(i == index)
+			return *it;
+		i++;
+	}
+	return Null;
+}
+
+void setElemento (list<Dato*>* lista, int index, Dato* dato){
+	list<Dato*>::iterator it;
+	it=lista->begin();
+
+	int i = 0;
+	for(;it!=lista->end();it++){
+		if(i == index){
+			list->insert(it, dato);
+			return;
+		}
+		i++;
+	}
+	return Null;
 }
 
 int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento){
@@ -151,7 +197,7 @@ void* reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRe
 }
 
 /*creo un nodo hoja y meto todos los datos de la lista pasada. Luego lo persisto y retorno el nro de nodo*/
-offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje)){
+offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje){
 	/*instancio un nodoHoja*/
 	NodoHoja* nodoHoja = new NodoHoja();
 	
@@ -169,7 +215,7 @@ offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaj
 		}
 		else{
 			/*para cada elemento de la lista voy insertandolo en mi nodo hoja*/
-			Resultado res = nodoHoja->insertarElemento(idRegistro, nroBloque, &clave, porcentaje)
+			Resultado res = nodoHoja->insertarElemento(idRegistro, nroBloque, &clave, porcentaje);
 			/*por como lo arme, no hay chance de que tire overflow. Y verifique antes que no se repitiesen los datos*/
 			if(res = RES_OK){
 				this->CantElem++;
