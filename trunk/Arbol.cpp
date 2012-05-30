@@ -39,9 +39,9 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             this->crearRaiz();
             res = this->raiz->insertarElemento(nroRegistro, nroBloque , dato, 1);
                 if(res == RES_OK){
-                    this->cantidadElem  ++;
+                    this->cantidadElem++;
                     this->actualizarNodo(this->raiz);
-                    }else{cout << "Grave error.Dato no entra en nodo"<< endl;}
+                    }else{cout << "Grave error."<< endl;}
 	} else {
 		//debo insertar recursivamente
 		res = raiz->insertarElemento(nroRegistro, nroBloque, dato, 1);
