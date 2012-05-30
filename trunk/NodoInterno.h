@@ -293,6 +293,16 @@ class NodoInterno: public Nodo{
         this->Altura=h;
         this->dimension= Key::getDimensionSegunAltura(h);
         }
+    void setDim(int h){
+        this->dimension=h;
+        }
+    int getDim(){
+        return this->dimension;
+    }
+
+    int getAltura(){
+        return this->Altura;
+    }
 
 };
 
