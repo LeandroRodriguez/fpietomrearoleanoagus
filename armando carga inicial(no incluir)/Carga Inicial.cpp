@@ -1,3 +1,7 @@
+#include "../Dato.h"
+#include <list>
+
+
 /*funcion de arranque para la carga inicial. Aca seteo los datos iniciales para arrancar con la recursividad*/
 void cargaInicial(list<Dato*>* listaDeDatos){
 	/*creo la raiz vacia, dps la voy a modificar*/
