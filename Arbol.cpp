@@ -16,13 +16,14 @@ Arbol::Arbol( PersistenciaArbol* persistencia) {
 	this->cantidadElem= 0;
 	this->raiz = NULL;
 
-	if (this->persistir->existeBloque( ID_RAIZ)){
+	if (this->persistir->existeBloque(ID_RAIZ)){
 		this->raiz = this->persistir->obtenerRaiz();
-		//if (this->raiz!= NULL)
-		//	this->raiz->setArbol(this);
-		//por ahora esto no lo ponemos, es sucio
-	}
-
+		cout << "El ARBOL cargo raiz existente" << endl;
+		cout << "*****************************" << endl;
+		}else{
+	cout << "No existia raiz previa" << endl;
+	cout << "**********************" << endl;
+		}
 }
 
 Arbol::~Arbol() {
@@ -35,9 +36,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 	Resultado res;
 	if (!raiz) {//lazy initialization
 		//Es el primerElemento
-            Nodo* Riz = this->crearRaiz();
-            this->raiz = (NodoHoja*) (Riz);
-            this->raiz->setIdDelNodo(ID_RAIZ);
+            this->crearRaiz();
             res = this->raiz->insertarElemento(nroRegistro, nroBloque , dato, 1);
                 if(res == RES_OK){
                     this->cantidadElem  ++;
@@ -73,43 +72,24 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
     return res;
 }
 
-
-void Arbol::ultimosAdisco() {
-	/* La raiz la guardo siempre*/
-	this->persistir->guardarRaiz(this->raiz);
-	//this->actualizarNodo(this->raiz);
-	//raiz = this->getNodo(1);
-	/*Guardo solo los bloques que se modificaron*/
-	/*for (list<Nodo*>::iterator it = ultimosAccedidos.begin(); it
-			!= ultimosAccedidos.end(); ++it) {
-		if ((*it)->getModificado() && (*it)->getId() != this->raiz->getId()) {
-			this->actualizarNodo((*it));
-		}
-		if((*it)->getId() != this->raiz->getId())
-			delete(*it);
-
-	}
-
-	ultimosAccedidos.clear();*/
-}
-
-Nodo* Arbol::crearRaiz() {
-	Nodo* nuevaRaiz = this->crearNuevoNodo('H',' ');
+NodoHoja* Arbol::crearRaiz() {
+	NodoHoja* nuevaRaiz = new NodoHoja(this);
+	this->persistir->guardarRaiz(nuevaRaiz);
+    this->raiz=nuevaRaiz;
 	return nuevaRaiz;
-}
+	}
 
 Nodo* Arbol::crearNuevoNodo(int nivel,char tipo ) {
 	Nodo* nuevoNodo = NULL;
 	if (nivel == 0) {
-		nuevoNodo = new NodoHoja();
+		nuevoNodo = new NodoHoja(this);
 	} else {//aca puedo poner la inteligencia para setear la dimension
-            if (tipo == 'i')nuevoNodo = new NodoInterno<int>();
-            if (tipo == 's')nuevoNodo = new NodoInterno<string>();
+            if (tipo == 'i')nuevoNodo = new NodoInterno<int>(this);
+            if (tipo == 's')nuevoNodo = new NodoInterno<string>(this);
       }
 
 	this->persistir->agregarNodo( nuevoNodo);
 	return nuevoNodo;
-
 }
 
 Nodo* Arbol::getRaiz(){

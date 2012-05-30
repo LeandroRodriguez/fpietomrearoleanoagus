@@ -103,6 +103,7 @@
 	void Key::imprimir(){
 		cout <<"LineaFerroviaria: " << this->LineaFerroviaria << ", Formacion: "<< this->Formacion << ", Accidente: "
 				<< this->Accidente << ", Falla: " <<this->Falla << ", Franja horaria: " << this->FranjaHorariaDelSiniestro<< endl;
+        cout << "-------------------" << endl;
 	}
 
 	unsigned long int Key::getTamanioSerializado(){

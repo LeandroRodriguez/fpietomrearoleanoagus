@@ -17,11 +17,14 @@ Indice::Indice(string nombreArchivo) {
 	if (!this->persistencia->isVacio()){
 		//si no esta vacio, leo la metadata, sino la escribo con la cantidad de elementos del arbol
 		this->hidratarMetada( this->persistencia->leerMetaDatos());
+		cout << "Leyo metadata del bloque 0" << endl;
 	}else{
+	    cout << "Escribio metadata en bloque 0"<< endl;
 		char* ser = this->serializarMetadata();
 		this->persistencia->cargarMetaDatos(ser,this->getTamanioSerializado());
 		free (ser);
 	}
+    cout << "++++++++++++++++++++++++++" << endl;
 }
 
 Indice::~Indice() {

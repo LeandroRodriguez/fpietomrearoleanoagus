@@ -24,7 +24,7 @@ class Arbol {
 
 	Nodo* getRaiz();
 
-	Nodo* crearRaiz();
+    NodoHoja* crearRaiz();
 
 	Nodo* crearNuevoNodo(int nivel,char tipo) ;
 
