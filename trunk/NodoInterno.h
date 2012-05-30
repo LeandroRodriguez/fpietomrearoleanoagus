@@ -289,6 +289,10 @@ class NodoInterno: public Nodo{
     	return Res;
     }
 
+    void setAltura(int h){
+        this->Altura=h;
+        this->dimension= Key::getDimensionSegunAltura(h);
+        }
 
 };
 

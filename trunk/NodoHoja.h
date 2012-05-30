@@ -58,7 +58,7 @@ class NodoHoja: public Nodo{
         }
         this->ActualizarCantElem();
         return found;
-    }
+        }
     void ActualizarCantElem(){
         bool Size = (this->listIdRegistros->size() == this->listNroBloque->size());
         if (Size) {
