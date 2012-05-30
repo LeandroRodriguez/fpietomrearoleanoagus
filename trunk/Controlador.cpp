@@ -10,13 +10,13 @@ Controlador::Controlador() {
 	 vector<string> aux = manipulo->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
 
 	 if (aux.size()>0){
-		 archivoPrimario = aux[0];
+		 archivoArbol = aux[0];
 	 }else{
-		 archivoPrimario = ARCHIVO_ARBOL;
+		 archivoArbol = ARCHIVO_ARBOL;
      }
 
 	 /*creo el indice para guardar las referencias al dato en mi arbol*/
-	 this->indicePrimario = new Indice(this->archivoPrimario);
+	 this->indice = new Indice(this->archivoArbol);
 
 	 delete manipulo;
 }
@@ -40,7 +40,7 @@ void Controlador::InsertarDato(Key* dato){
 		RegistroVariable registro(bytes);
 		almacena.agregarRegistro(&registro);
 		/*le paso al arbol el numero de bloque y el UID del reg en donde guarde el dato*/
-		indicePrimario->agregarDato(almacena.getNumeroBloque(), almacena.getNumeroUID(), dato);
+		indice->agregarDato(almacena.getNumeroBloque(), almacena.getNumeroUID(), dato);
 	}
 }
 
