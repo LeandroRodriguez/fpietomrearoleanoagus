@@ -39,14 +39,14 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             this->crearRaiz();
             res = this->raiz->insertarElemento(nroRegistro, nroBloque , dato, 1);
                 if(res == RES_OK){
-                    this->cantidadElem++;
+                    this->cantidadElem+=1;
                     this->actualizarNodo(this->raiz);
                     }else{cout << "Grave error."<< endl;}
 	} else {
+                    if(!this->raiz->tieneArbol())this->raiz->setArbol(this);
 		//debo insertar recursivamente
 		res = raiz->insertarElemento(nroRegistro, nroBloque, dato, 1);
-		if(res == RES_OK)
-			{
+		if(res == RES_OK){
 			this->cantidadElem  ++;
 			this->actualizarNodo(this->raiz);
 			}
@@ -58,7 +58,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		    Nder = raizvieja->PartirEn2(k);//parti mi raiz hoja en 2
             NodoInterno<string>* RAIZNUEVA = (NodoInterno<string>*) this->crearNuevoNodo(1,'s');
             //consigo la subclave que va a subir
-		    string subclaveRaizNueva = *(string*)k->getSubClaveSegunDim(Key::getDimensionSegunAltura(1));
+		    string subclaveRaizNueva = *((string*)k->getSubClaveSegunDim(Key::getDimensionSegunAltura(1)));
             //a continuacion, swapeo IDS, para dejar la raiz siempre en su ID_RAIZ
             int auxID = RAIZNUEVA->getIdDelNodo();
             RAIZNUEVA->setIdDelNodo(raizvieja->getIdDelNodo());
@@ -88,8 +88,14 @@ Nodo* Arbol::crearNuevoNodo(int nivel,char tipo ) {
 	if (nivel == 0) {
 		nuevoNodo = new NodoHoja(this);
 	} else {//aca puedo poner la inteligencia para setear la dimension
-            if (tipo == 'i')nuevoNodo = new NodoInterno<int>(this);
-            if (tipo == 's')nuevoNodo = new NodoInterno<string>(this);
+            if (tipo == 'i'){
+                nuevoNodo = new NodoInterno<int>(this);
+                ((NodoInterno<int>*) nuevoNodo)->setAltura(nivel);
+                }
+            if (tipo == 's'){
+                nuevoNodo = new NodoInterno<string>(this);
+                ((NodoInterno<string>*) nuevoNodo)->setAltura(nivel);
+                }
       }
 
 	this->persistir->agregarNodo( nuevoNodo);
