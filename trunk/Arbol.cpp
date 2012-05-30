@@ -1,4 +1,5 @@
 #include "Arbol.h"
+#include <string.h>
 
 Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
     Nodo* aux = this->persistir->leerNodo(IdNodo);
@@ -109,7 +110,8 @@ void Arbol::imprimir(){
 		cout << "EL ARBOL: " << endl;
 		this->raiz->imprimir();
 	}
-	else
+	else{
 		cout << "EL ARBOL NO TIENE ELEMENTOS " << endl;
+	}
 }
 
