@@ -35,7 +35,7 @@ class Arbol {
 
 	void ultimosAdisco();
 
-	void cargaInicial();
+	void cargaInicial(list<Dato*>* listaDeDatos);
 
 private:
 	PersistenciaArbol* persistir;
