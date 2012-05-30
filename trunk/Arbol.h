@@ -37,6 +37,42 @@ class Arbol {
 
 	void cargaInicial(list<Dato*>* listaDeDatos);
 
+	list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension);
+
+	Dato* getElemento (list<Dato*>* lista, int index);
+
+	void setElemento (list<Dato*>* lista, int index, Dato* dato);
+
+	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<int>*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento);
+
+	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<string>*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento);
+
+	int conseguirNivelMayor(list<int>* listaMaestraNiveles);
+
+	void* obtenerClavesSegunPos(list<list*>* listaMaestraClaves, int j, int dimension);
+
+	list<list*>* obtenerListasSegunPos(list<list*>* listaMaestraDatosSubArboles, int j);
+
+
+	offset obtenerReferenciaNodosSegunPos(list<offset>* listaReferenciasNodosHios, int j);
+
+
+	void* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>* listasDatosSubArbolesNuevos);
+
+	void reemplazarDatoListaDatos(list<list*>* listaMaestraDatosSubArboles, list<list*>* listasDatosSubArbolesNuevos, int j);
+
+	void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef<int>*>* claveMediana, j);
+
+	void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef<string>*>* claveMediana, j);
+
+	offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje));
+
+	offset insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i, int dimension);
+
+	list<offset>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension);
+
+	list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento);
+
 private:
 	PersistenciaArbol* persistir;
 
