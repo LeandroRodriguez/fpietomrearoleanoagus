@@ -37,5 +37,10 @@ class Nodo : public InterfazSerializar {
 
 	void setArbol(Arbol* arbol);
 
+	bool tieneArbol(){
+	    if(this->arbol!=NULL)return true;
+	    return false;
+	    }
+
 };
 #endif //
