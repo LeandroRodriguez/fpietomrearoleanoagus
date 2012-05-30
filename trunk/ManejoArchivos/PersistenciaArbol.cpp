@@ -74,11 +74,9 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 			return false;
 		}
 
-		if (nodo->getIdDelNodo() == ID_RAIZ){
+		/*if (nodo->getIdDelNodo() == ID_RAIZ){
 			return NULL;
-		}
-
-
+		}*/
 
 		/*creo un string auxliar para guardar la cadena total que dps voy a guardar en el archivo*/
 		char auxiliar[LONGITUD_BLOQUE_NODO ];
@@ -110,16 +108,13 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 
 /*devuelvo puntero al nodo raiz del archivo*/
 Nodo* PersistenciaArbol::obtenerRaiz(){
-
     return this->leerNodo(ID_RAIZ);
 }
 
 /*devuelvo true si pude actualizar, false si no*/
 bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
-
         nodo->setIdDelNodo(ID_RAIZ);
         return this->agregarNodo(nodo);
-
 }
 
 /*guardo un nodo nuevo. Si pudo insertar retorno el nro de nodo*/
@@ -207,12 +202,9 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
         	if ( !strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
         	if ( !strcmp( tipo,"string") )auxiliar = new NodoInterno<string>(lectura);
         }
-
-
         /*libero la memoria de la lectura y retorno el puntero a la raiz*/
         free(lectura);
         archivo.flush();
-
         return auxiliar;
 }
 
@@ -240,7 +232,6 @@ char* PersistenciaArbol::leerMetaDatos(){
 	for (unsigned int i = 0; i < LONGITUD_BLOQUE_NODO  ; i++) {
 		lectura[i] = lectura2[i];
 	}
-
 	return lectura;
 }
 
