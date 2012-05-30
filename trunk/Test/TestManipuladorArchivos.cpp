@@ -7,13 +7,16 @@ void TestManipuladorArchivos::TestRecuperarArchivos(){
     ManipuladorArchivos* manipulador = new ManipuladorArchivos();
     cout << endl << "Archivos Borrados:" << endl;
     manipulador->borrarArchivos(DIR_ARCHIVO_DATOS,"",".fde");
-    vector<string> archivos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
-    if (archivos.size() == 0)
+    manipulador->borrarArchivos(DIR_ARCHIVO_INDICES,"",".idx");
+    vector<string> archivosDatos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
+    vector<string> archivosIndices = manipulador->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
+    if (archivosDatos.size() == 0 && archivosIndices.size() == 0)
         borrar = true;
     AlmacenamientoBloque(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
-    PersistenciaArbol(ARCHIVO_ARBOL);
-    archivos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
-    if (archivos[0] == ARCHIVO_DATOS_LIBRES && archivos[1] == ARCHIVO_DATOS && archivos[2] == ARCHIVO_ARBOL && borrar)
+    Indice(ARCHIVO_ARBOL);
+    archivosDatos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
+    archivosIndices = manipulador->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
+    if (archivosDatos[0] == ARCHIVO_DATOS_LIBRES && archivosDatos[1] == ARCHIVO_DATOS && archivosIndices[0] == ARCHIVO_ARBOL && borrar)
        cout << "TestRecuperarArchivos: OK " << endl;
     else
        cout << "TestRecuperarArchivos: FAIL " << endl;
@@ -25,14 +28,17 @@ void TestManipuladorArchivos::TestBorrarArchivos(){
     bool borrar = false;
     ManipuladorArchivos* manipulador = new ManipuladorArchivos();
     AlmacenamientoBloque(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
-    PersistenciaArbol(ARCHIVO_ARBOL);
-    vector<string> archivos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
-    if (archivos.size() == 3)
+    Indice(ARCHIVO_ARBOL);
+    vector<string> archivosDatos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
+    vector<string> archivosIndices = manipulador->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
+    if (archivosDatos.size() == 2 && archivosIndices.size() == 1)
         crear = true;
     cout << endl << "Archivos Borrados:" << endl;
     manipulador->borrarArchivos(DIR_ARCHIVO_DATOS,"",".fde");
-    archivos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
-    if (archivos.size() == 0)
+    manipulador->borrarArchivos(DIR_ARCHIVO_INDICES,"",".idx");
+    archivosDatos = manipulador->getArchivos(DIR_ARCHIVO_DATOS,"",".fde");
+    archivosIndices = manipulador->getArchivos(DIR_ARCHIVO_INDICES,"",".idx");
+    if (archivosDatos.size() == 0 && archivosIndices.size() == 0)
         borrar = true;
     if (crear && borrar)
        cout << "TestBorrarArchivos: OK " << endl;

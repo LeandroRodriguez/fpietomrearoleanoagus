@@ -10,16 +10,16 @@
 using namespace std;
 
 int main(){
-    /*TestBloque* testBloque = new TestBloque();
-    testBloque->TestCrearBloque();
-    testBloque->TestAgregarRegistros();
-    testBloque->TestSerializarHidratarBloque();
-    delete testBloque;
-
     TestRegistro* testRegistro = new TestRegistro();
     testRegistro->TestCrearRegistro();
     testRegistro->TestSerializarHidratarRegistro();
     delete testRegistro;
+
+    TestBloque* testBloque = new TestBloque();
+    testBloque->TestCrearBloque();
+    testBloque->TestAgregarRegistros();
+    testBloque->TestSerializarHidratarBloque();
+    delete testBloque;
 
     TestAlmacenamientoBloque* testAlmacen = new TestAlmacenamientoBloque();
     testAlmacen->TestCrearArchivosDatos();
@@ -36,7 +36,6 @@ int main(){
 
     TestPersistenciaArbol* testPersistencia = new TestPersistenciaArbol();
     testPersistencia->TestCrearArchivoArbol();
-    //testPersistencia->TestObtenerRaiz();
     delete testPersistencia;
 
     TestArbol* testArbol = new TestArbol();
@@ -45,7 +44,7 @@ int main(){
 
     TestControlador* testControlador = new TestControlador();
     testControlador->TestInsertarDato();
-    delete testControlador;*/
+    delete testControlador;
 
     TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();

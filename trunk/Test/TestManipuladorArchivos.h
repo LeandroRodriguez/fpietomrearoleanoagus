@@ -3,6 +3,7 @@
 #include "../ManipuladorArchivos.h"
 #include "../ManejoArchivos/AlmacenamientoBloque.h"
 #include "../ManejoArchivos/PersistenciaArbol.h"
+#include "../Indice.h"
 #include "../Constantes.h"
 using namespace std;
 

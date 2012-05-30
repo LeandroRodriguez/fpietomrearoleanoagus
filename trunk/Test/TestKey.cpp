@@ -12,8 +12,8 @@ void TestKey::TestSerializarHidratarKey(){
 	string serializacion = dato1->Serializarse();
 
 	Key* dato2 = new Key(serializacion);
-	dato1->imprimir();
-	dato2->imprimir();
+	//dato1->imprimir();
+	//dato2->imprimir();
 	if (dato1->esIgual(dato2))
         cout << "TestSerializarHidratarKey: OK" << endl;
     else
