@@ -24,12 +24,12 @@ template<class T> class SubClaveRef{
         this->RefNodo=num;
     }
 
-    SubClaveRef(T sub,int ref){
+    SubClaveRef(T sub, int ref){
            this->subclave=sub;
            this->RefNodo=ref;
         }
 
-    SubClaveRef(char* bytes,int& cur){
+    SubClaveRef(char* bytes,unsigned int& cur){
         this->Hidratar(bytes,cur);
     }
     bool operator< (const T subc){
@@ -54,9 +54,9 @@ template<class T> class SubClaveRef{
             cur += sizeof(RefNodo);
             return str;
         }
-    void Hidratar(char* bytes,int& cur){//cursos,voy moviendo un cursor que me pasan de afuera
+    void Hidratar(char* bytes,unsigned int& cur){//cursos,voy moviendo un cursor que me pasan de afuera
         T subcl;
-        memcpy(subcl, bytes + cur  , sizeof(T) );
+        memcpy(&subcl, bytes + cur  , sizeof(T) );
         cur += sizeof(T);
 
         int RefNod;
@@ -65,7 +65,7 @@ template<class T> class SubClaveRef{
         cur += sizeof(int);
 
         this->setRefNodo(RefNod);
-        this->subclave(subcl);
+        this->subclave=subcl;
         }
 };
 
@@ -92,7 +92,7 @@ class SubClaveRef<string>{
         return str;
         }
 
-    void Hidratar(char* bytes,int &cur){//devuelvo el tamanio que use de la cadena
+    void Hidratar(char* bytes,unsigned int &cur){//devuelvo el tamanio que use de la cadena
         int longitud=0;
         memcpy(&longitud, bytes + cur  , sizeof(int) );
         cur += sizeof(int);
@@ -147,7 +147,7 @@ class SubClaveRef<string>{
         return false;
         }
 
-    SubClaveRef(char* bytes,int& cur){
+    SubClaveRef(char* bytes,unsigned int& cur){
         this->Hidratar(bytes,cur);
     }
     SubClaveRef(string sub,int ref){

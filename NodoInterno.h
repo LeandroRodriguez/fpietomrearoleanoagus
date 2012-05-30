@@ -205,7 +205,7 @@ class NodoInterno: public Nodo{
 /*  */
     void Hidratar(char* bytes){
 
-	unsigned int cur = 0;/*cur = cursor ,ya se sabe el tipo*/
+    unsigned int cur = 0;/*cur = cursor ,ya se sabe el tipo*/
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
 
@@ -219,8 +219,9 @@ class NodoInterno: public Nodo{
 	cur += sizeof(this->Ref1erNodo);
 
     while(cur < strlen(bytes) ){
-        SubClaveRef<T>* scr = new SubClaveRef<T>();
-        this->InsertarNuevaSubClaveRef( scr->getSubClave(),scr->getRefNodo() );
+        SubClaveRef<T> scr(bytes,cur);
+        this->InsertarNuevaSubClaveRef( scr.getSubClave(),scr.getRefNodo() );
+        //el cur se va incrementando solo, adentro del constructor de SubClaveRef
         }
     }
 
