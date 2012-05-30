@@ -65,7 +65,14 @@ class NodoHoja: public Nodo{
             this->CantElem= this->listIdRegistros->size();
             }
         }
+    void inicializar(){
+    this->tamanioMaximoNodo=LONGITUD_BLOQUE_NODO;
+    this->CantElem=0;
+    this->Altura = 0;
+	this->listIdRegistros = new list<int>();
+	this->listNroBloque = new list<int>();
 
+    }
     public:
 
     NodoHoja();
