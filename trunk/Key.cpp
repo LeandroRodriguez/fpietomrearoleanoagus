@@ -9,8 +9,12 @@
     }
 
 	void* Key::getSubClaveSegunDim(int dim){ /*hardcodeadisimo */
-		if (dim==0)return &this->LineaFerroviaria;
-		if (dim==1)return &this->Formacion;
+		if (dim==0){
+		    cout << this->LineaFerroviaria << endl;
+		    string* aux = new string(LineaFerroviaria);
+		    return aux;
+		}
+		//if (dim==1)return &this->Formacion;
 		if (dim==2)return &this->Accidente;
 		if (dim==3)return &this->Falla;
 		if (dim==4)return &this->FranjaHorariaDelSiniestro;
@@ -127,7 +131,8 @@
 
     int Key::getDimensionSegunAltura(int h){
         if (h-1<0) return -1;
-        return (h-1)%5;
+        int aux = (h-1)%5;
+        return aux;
     }
         // dimension va de 0 a 4, o sea, 5 elementos
     int Key::getSiguienteDimension(int n){
