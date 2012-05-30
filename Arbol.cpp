@@ -118,15 +118,20 @@ void Arbol::imprimir(){
 
 /*funcion de arranque para la carga inicial. Aca seteo los datos iniciales para arrancar con la recursividad*/
 void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
+    /*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
+	int dimension = 1;
 	/*creo la raiz vacia, dps la voy a modificar*/
-	NodoInterno* raiz = new NodoInterno();
+	if(Key::EsIntEstaDimension(dimension)){
+        NodoInterno<int>* raiz = new NodoInterno<int>();
+	}
+	else{
+	    NodoInterno<string>* raiz = new NodoInterno<string>();
+	}
 	offset nroNodo = this->persistir->agregarRaiz(raiz);
 	/*creo una sublista donde solo voy a tener la lista con los datos iniciales*/
 	list<list*>* subListasDatos = new list<list*>*();
 	subListasDatos->push_back(listaDeDatos);
 	list<list*>* listaDeSubListasDatos = new list<list*>*();
-	/*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
-	int dimension = 1;
 	/*elijo un porcentaje de empaquetamineto inicial del 75%*/
 	double porcentajeDeEmpaquetamiento = 0.75;
 	/*funcion recursiva*/
@@ -139,7 +144,12 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
 		referencia = (*itListaRefs);
 	}
 	/*levanto el nodo del archivo*/
-	nodoInterno* raiz = leerNodo(referencia);
+	if(Key::EsIntEstaDimension(dimension)){
+        nodoInterno<int>* raiz = leerNodo(referencia);
+	}
+	else{
+        nodoInterno<string>* raiz = leerNodo(referencia);
+	}
 	/*le seteo el idRaiz y lo persisto*/
 	this->persistir->guardarRaiz(raiz);
 	/*modifico el nro nodo de referencia y lo pongo vacio*/
@@ -398,7 +408,12 @@ offset insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<offset>*
 	list<int>::iterator itListaClaves;
 	itListaClaves= listaClaves->begin();
 	/*construyo mi NodoI*/
-	NodoInterno* nodoInterno = new NodoInterno();
+	if(Key::EsIntEstaDimension(dimension)){
+        NodoInterno<int>* nodoInterno = new NodoInterno<int>();
+	}
+	else{
+	    NodoInterno<string>* nodoInterno = new NodoInterno<string>();
+	}
 	int k = 0;
 	offset primerReferencia = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
 	for(;itListaClaves!=listaClaves->end();itListaClaves++){
@@ -439,12 +454,13 @@ list<offset>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<off
 	/*construyo un nodo por cada lista de listas de claves*/
 	for(;itListaMaestraClaves!=listaMaestraClaves->end();itListaMaestraClaves++){
 		/*instancio un nodo interno por cada lista de claves*/
-		NodoInterno* nodoInterno = new NodoInterno();
 		/*voy a iterar sobre mis listas de claves para ir armando el nodo interno*/
 		if(Key::EsIntEstaDimension(dimension)){
+		    NodoInterno<int>* nodoInterno = new NodoInterno<int>();
 			list<SubClaveRef<int>*>::iterator itListaClaves;
 		}
 		else{
+		    NodoInterno<string>* nodoInterno = new NodoInterno<string>();
 			list<SubClaveRef<string>*>::iterator itListaClaves;
 		}
 		itListaClaves = (*itListaMaestraClaves)->begin();
