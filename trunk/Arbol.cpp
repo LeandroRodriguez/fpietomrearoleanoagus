@@ -45,7 +45,11 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 	} else {
 		//debo insertar recursivamente
 		res = raiz->insertarElemento(nroRegistro, nroBloque, dato, 1);
-		if(res == RES_OK)this->cantidadElem  ++;
+		if(res == RES_OK)
+			{
+			this->cantidadElem  ++;
+			this->actualizarNodo(this->raiz);
+			}
 		if(res == RES_DESBORDADO && (this->raiz->getHojaOInterno()=='H')){
             //se desborda y solo habia 1 nodo hoja
 		    NodoHoja* Nder = (NodoHoja*) this->crearNuevoNodo(0,' ');
