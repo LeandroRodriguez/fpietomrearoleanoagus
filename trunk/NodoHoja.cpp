@@ -187,7 +187,6 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 	this->CantElem++;
 
 	return RES_OK;
-
 }
 
 vector<int> NodoHoja::getTamanios(){
@@ -212,7 +211,7 @@ vector<int> NodoHoja::getTamanios(){
 //Devuelve la mitad derecha, deja en el original la mitad izquierda
 // obviamente divide segun tamanios
 //Devuelve la clave perteneciente al dato del "medio" ponderado.
-NodoHoja* NodoHoja::PartirEn2(Key* kAsubir){
+NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
     vector<int> S = this->getTamanios();
 
     //int TamMitad = ( this->getTamanioConDatos() )/2;
@@ -237,7 +236,8 @@ NodoHoja* NodoHoja::PartirEn2(Key* kAsubir){
         }
         list<int>::iterator itRegErase=itReg;//guardo estas posiciones, para borrar despues
         list<int>::iterator itBloqErase=itBloq;//no se puede borrar sobre lo que se esta iterando
-         kAsubir=this->cargarDato(*itReg,*itBloq);
+
+        kAsubir=this->cargarDato(*itReg,*itBloq);
         //me quedan los iT, apuntando en la "mitad"
         NodoHoja* Nder = new NodoHoja(this->arbol);
 

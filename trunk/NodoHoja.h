@@ -90,7 +90,7 @@ class NodoHoja: public Nodo{
     vector<int> getTamanios();
     void imprimir();
 
-    NodoHoja* PartirEn2(Key* key);
+    NodoHoja* PartirEn2(Key* &key);
 
 };
 
