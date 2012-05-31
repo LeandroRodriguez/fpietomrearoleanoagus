@@ -257,7 +257,22 @@ class NodoInterno: public Nodo{
         return cosa->getRefNodo();
     }
 
-    void imprimir(){}
+    void imprimir(){
+        std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
+			<<	", dimension:" << this->dimension<< "refs: " << endl;
+
+        typename list< SubClaveRef<T>* >::iterator it;
+        it= this->ListaSubClaveRef->begin();
+
+        SubClaveRef<T>* cosa = *it;
+        cosa->imprimir();
+        it++;
+
+        for(;it!=this->ListaSubClaveRef->end();it++){
+            SubClaveRef<T>* cosa = *it;
+            cosa->imprimir();
+            }
+        }
 
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
         T* subclave = (T*)dato->getSubClaveSegunDim(this->dimension);
@@ -273,7 +288,8 @@ class NodoInterno: public Nodo{
             Res = NodoHleido->insertarElemento(nroBloque,nroRegistro,dato, porcentaje);
 
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
-                NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo(0,' '));
+                //NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo(0,' '));
+                NodoHoja* NHder=NULL;
                 Key* k=NULL;
                 NHder = NodoHleido->PartirEn2(k);
 

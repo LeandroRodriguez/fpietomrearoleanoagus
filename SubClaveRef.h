@@ -45,6 +45,10 @@ template<class T> class SubClaveRef{
         }
     ~SubClaveRef(){}
 
+    void imprimir(){
+        std::cout<< "subclave:"<< this->subclave <<", idNodo:"<<this->RefNodo<<endl;
+        }
+
     char* Serializarse(){
             char* str = new char[(sizeof(this->subclave)+sizeof(this->RefNodo))];
             int cur=0;
@@ -80,6 +84,10 @@ class SubClaveRef<string>{
     string subclave;
     int RefNodo;
     public:
+
+    void imprimir(){
+        std::cout<< "subclave:"<< this->subclave <<", idNodo:"<<this->RefNodo<<endl;
+        }
 
     unsigned int getTamanioSerializado(){
         return strlen( this->Serializarse() );

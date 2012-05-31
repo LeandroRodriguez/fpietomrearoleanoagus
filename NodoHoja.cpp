@@ -239,7 +239,7 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
 
         kAsubir=this->cargarDato(*itReg,*itBloq);
         //me quedan los iT, apuntando en la "mitad"
-        NodoHoja* Nder = new NodoHoja(this->arbol);
+        NodoHoja* Nder = (NodoHoja*)(this->arbol->crearNuevoNodo(0,' '));
 
         for( ;itBloq!=this->listNroBloque->end() ;itBloq++){
             Nder->InsertarNroBloque(*itBloq);
