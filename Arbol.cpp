@@ -209,7 +209,7 @@ list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dim
 
 int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>* listaListasResultadosDevolucion, list<SubClaveRef*>* listaClavesDevolucion){
 	nivel++;
-	if(listaSubClaves.size()>1){
+	if(listaSubClaves->size()>1){
 		/*aca guardo los resultados de este nivel*/
 		list<list<Dato*>*>* listaListasResultadosNueva = new list<list<Dato*>*>();
 		list<SubClaveRef*>* listaClavesNueva = new list<SubClaveRef*>();
@@ -307,13 +307,13 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	/*acabo de pasar el nivel 1*/
 	int nivel = 1;
 	/*tendria que verificar el caso que lista de claves el size sea 0(aca tendria que crear nodo vacio)*/
-	if(listaSubClaves.size()==0){
+	if(listaSubClaves->size()==0){
 		/*setear un nodo vacio o algo*/
 		/*agarro la clave del ultimo elemento*/
 	}
 	else{
 		/*le paso las listas a ordenar, y las 2 donde quiero que me devuelva los resultados*/
-		nivel = conseguirParticionRecursiva(nivel, dimension, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
+		nivel = this->conseguirParticionRecursiva(nivel, dimension, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
 	}
 
         return nivel;
