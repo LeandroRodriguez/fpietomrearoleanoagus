@@ -7,11 +7,9 @@ typedef unsigned long int offset;
 typedef unsigned long int cantBytes;
 typedef unsigned long int tamanioBloque;
 #define LONGITUD_CANT_BYTES (2*sizeof(cantBytes)) //8 Bytes
-#define LONGITUD_BLOQUE_LISTA 450 //para probar los hago chicos //32768 //32kB
-//#define LONGITUD_BLOQUE_NODO 32768
+#define LONGITUD_BLOQUE_LISTA 450
 #define LONGITUD_BLOQUE_NODO 200
-#define LONGITUD_BLOQUE_DATA 20000 //lo cambie, antes era MAIL en vez de DATA, si lo ven en algun lado cambienlo por este.
-//para probar los hago chicos //32768 //32kB
+#define LONGITUD_BLOQUE_DATA 1024
 
 #define TAMANIO_STRING_MAXIMO 100
 #define VACIO 9999;
