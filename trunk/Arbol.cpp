@@ -43,7 +43,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
                     this->actualizarNodo(this->raiz);
                     }else{cout << "Grave error."<< endl;}
 	} else {
-                    if(!this->raiz->tieneArbol())this->raiz->setArbol(this);
+            if(!this->raiz->tieneArbol())this->raiz->setArbol(this);
 		//debo insertar recursivamente
 		res = raiz->insertarElemento(nroRegistro, nroBloque, dato, 1);
 		if(res == RES_OK){
@@ -52,7 +52,8 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 			}
 		if(res == RES_DESBORDADO && (this->raiz->getHojaOInterno()=='H')){
             //se desborda y solo habia 1 nodo hoja
-		    NodoHoja* Nder = (NodoHoja*) this->crearNuevoNodo(0,' ');
+		    //NodoHoja* Nder = (NodoHoja*) this->crearNuevoNodo(0,' ');
+		    NodoHoja* Nder=NULL;
 		    NodoHoja* raizvieja = (NodoHoja*) this->raiz;
             Key* k=NULL;
 		    Nder = raizvieja->PartirEn2(k);//parti mi raiz hoja en 2
@@ -65,6 +66,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             raizvieja->setIdDelNodo(auxID);
             //en mi raiz nueva, coloco la subclave del medio,y referencias a mis 2 hijos.
             RAIZNUEVA->Inicializar(raizvieja->getIdDelNodo(),subclaveRaizNueva,Nder->getIdDelNodo());
+            this->raiz=RAIZNUEVA;
             /*guardo todos los cambios*/
             this->actualizarNodo(RAIZNUEVA);
             this->actualizarNodo(raizvieja);
@@ -108,7 +110,7 @@ Nodo* Arbol::getRaiz(){
 
 void Arbol::imprimir(){
 	if (raiz != NULL) {
-		cout << "EL ARBOL: " << endl;
+		cout << "Raiz Del Arbol: " << endl;
 		this->raiz->imprimir();
 	}
 	else{
