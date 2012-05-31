@@ -2,7 +2,7 @@
 #define SUBCLAVEREF_H_INCLUDED
 
 using namespace std;
-
+/*
 template<class T> class SubClaveRef{
     private:
         T subclave;
@@ -76,9 +76,9 @@ template<class T> class SubClaveRef{
         return strlen( this->Serializarse() );
     }
 };
+*/
 
-template<>
-class SubClaveRef<string>{
+class SubClaveRef{
 
     private:
     string subclave;
@@ -138,7 +138,7 @@ class SubClaveRef<string>{
 
         }
 
-    bool operator< (const SubClaveRef<string>* otro){
+    bool operator< (const SubClaveRef* otro){
         int hola = this->subclave.compare(otro->getSubClave());
         if ( hola <0)return true;
         return false;
@@ -151,7 +151,7 @@ class SubClaveRef<string>{
         return false;
         }
 
-    bool operator== (const SubClaveRef<string>* otro){
+    bool operator== (const SubClaveRef* otro){
         int hola = this->subclave.compare(otro->getSubClave() );
         if ( hola ==0)return true;
         return false;

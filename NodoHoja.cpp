@@ -157,7 +157,6 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 	Si el nodo hoja desborda, Devuelve  RES_DESBORDADO
 	sino, devuelve RES_OK
 	*/
-
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();
 
@@ -233,13 +232,13 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
             itTam++;
             itReg++;
             itBloq++;
-        }
+            }
         list<int>::iterator itRegErase=itReg;//guardo estas posiciones, para borrar despues
         list<int>::iterator itBloqErase=itBloq;//no se puede borrar sobre lo que se esta iterando
 
         kAsubir=this->cargarDato(*itReg,*itBloq);
         //me quedan los iT, apuntando en la "mitad"
-        NodoHoja* Nder = (NodoHoja*)(this->arbol->crearNuevoNodo(0,' '));
+        NodoHoja* Nder = (NodoHoja*)(this->arbol->crearNuevoNodo(0));
 
         for( ;itBloq!=this->listNroBloque->end() ;itBloq++){
             Nder->InsertarNroBloque(*itBloq);
@@ -254,9 +253,10 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
             this->EliminarNroBloque(*itBloqErase);
             }
         for( ;itRegErase!=this->listIdRegistros->end() ;itRegErase++){
-            Nder->InsertarIdRegistro(*itReg);
+            this->EliminarIdRegistro(*itRegErase);
             }
         this->proximaHoja=Nder->getIdDelNodo();//ojo con esto!
+
     return Nder;
     }
 
