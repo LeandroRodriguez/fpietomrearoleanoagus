@@ -89,6 +89,7 @@ class NodoHoja: public Nodo{
     Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
     vector<int> getTamanios();
     void imprimir();
+    void ordenarBloquesRegistros();
 
     NodoHoja* PartirEn2(Key* &key);
 
