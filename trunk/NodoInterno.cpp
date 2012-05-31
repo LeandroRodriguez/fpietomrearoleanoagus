@@ -62,7 +62,7 @@ Resultado NodoInterno::InsertarNuevaSubClaveRef ( string subclave,int refAbloque
             }
             this->ListaSubClaveRef->push_back(item);
             this->ListaSubClaveRef->sort();
-            this->CantElem=(this->CantElem)+1;
+            this->CantElem=this->CantElem+1;
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
         return RES_OK;
     }
@@ -252,7 +252,6 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
             Res = NodoHleido->insertarElemento(nroBloque,nroRegistro,dato, porcentaje);
 
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
-                //NodoHoja* NHder = (NodoHoja*)(this->arbol->crearNuevoNodo(0,' '));
                 NodoHoja* NHder=NULL;
                 Key* k=NULL;
                 NHder = NodoHleido->PartirEn2(k);
@@ -264,7 +263,9 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
                     this->arbol->actualizarNodo(NodoHleido);
                     this->arbol->actualizarNodo(NHder);
                     }else cout << "subclave repetida, error mortal" << endl;
-                }
+                }else{
+                    this->arbol->actualizarNodo(NodoHleido);
+                    }
             }
     	return Res;
     }
