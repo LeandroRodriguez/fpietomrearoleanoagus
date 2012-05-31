@@ -40,7 +40,7 @@ class Nodo : public InterfazSerializar {
 	bool tieneArbol(){
 	    if(this->arbol!=NULL)return true;
 	    return false;
-	    }
+    }
 
 };
 #endif //

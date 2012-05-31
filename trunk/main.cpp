@@ -8,6 +8,7 @@
 #include "Test/TestKey.h"
 #include "Test/TestArbol.h"
 #include "Test/TestNodoHoja.h"
+#include "Test/TestNodoInterno.h"
 using namespace std;
 
 int main(){
@@ -37,17 +38,17 @@ int main(){
 
     TestPersistenciaArbol* testPersistencia = new TestPersistenciaArbol();
     testPersistencia->TestCrearArchivoArbol();
-    delete testPersistencia;
+    delete testPersistencia;/*
 
-    */TestArbol* testArbol = new TestArbol();
+    /*TestArbol* testArbol = new TestArbol();
 	testArbol->Testear();
-    delete testArbol;/*
+    delete testArbol;*/
 
     TestControlador* testControlador = new TestControlador();
     testControlador->TestInsertarDato();
     delete testControlador;
 
-    TestKey* testKey = new TestKey();
+    /*TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();
     delete testKey;*/
 
@@ -55,7 +56,10 @@ int main(){
     //testNodoHoja->TestCrearNodoHoja();
     //testNodoHoja->TestSerializarHidtratar();
     //ESTE NO ANDA POR AHORA
-    //testNodoHoja->TestPartirHojaEn2();
+    //testNodoHoja->TestPartirHojaEn2();*/
+
+    /*TestNodoInterno* testNodoInterno = new TestNodoInterno();
+    testNodoInterno->TestCrearNodoInterno();*/
 };
 
 

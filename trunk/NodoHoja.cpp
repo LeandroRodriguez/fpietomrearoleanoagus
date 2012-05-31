@@ -184,6 +184,7 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 	this->listNroBloque->push_back(nroBloque);
 	this->CantElem++;
 
+
 	return RES_OK;
 }
 
@@ -206,6 +207,59 @@ vector<int> NodoHoja::getTamanios(){
             }
 	return tamanios;
 }
+
+void NodoHoja::ordenarBloquesRegistros(){
+    list<int>* listOrdenadaIdReg = new list<int>();
+    list<int>* listOrdenadaNroBloq = new list<int>();
+    list<int>::iterator itRegi1 = this->listIdRegistros->begin();;
+    list<int>::iterator itBloqi2 = this->listNroBloque->begin();;
+    list<int>::iterator itRegj1 = this->listIdRegistros->begin();
+    list<int>::iterator itBloqj2 = this->listNroBloque->begin();
+    list<int>::iterator minItReg;
+    list<int>::iterator minItBloq;
+    int dim = Key::getDimensionSegunAltura(this->Altura);
+    int i1,i2,j1,j2,minReg,minBloq;
+    bool seguir = true;
+    while (itRegi1 != this->listIdRegistros->end() && itBloqi2 != this->listNroBloque->end() && seguir){
+        list<int>::iterator itRegi1 = this->listIdRegistros->begin();
+        list<int>::iterator itBloqi2 = this->listNroBloque->begin();
+        i1 = *itRegi1;
+        i2 = *itBloqi2;
+        Key* actual = this->cargarDato(i1, i2);
+        minReg = i1;
+        minBloq = i2;
+        minItReg = itRegi1;
+        minItReg = itBloqi2;
+        itRegj1 = ++itRegi1;
+        itRegi1--;
+        itBloqj2 = ++itBloqi2;
+        itBloqi2--;
+        while(itRegj1 != this->listIdRegistros->end() && itBloqj2 != this->listNroBloque->end()){
+            j1=*itRegj1;
+            j2=*itBloqj2;
+            dim = 0;
+            Key* siguiente = this->cargarDato(j1, j2);
+            if (siguiente->getSubClaveSegunDim(dim) < actual->getSubClaveSegunDim(dim)){
+                minReg = j1;
+                minBloq = j2;
+                actual = siguiente;
+                minItReg = itRegj1;
+                minItBloq = itBloqj2;
+            }
+            itRegj1++;
+            itBloqj2++;
+        }
+        listOrdenadaIdReg->push_back(minReg);
+        listOrdenadaNroBloq->push_back(minBloq);
+        listIdRegistros->erase(minItReg);
+        listNroBloque->erase(minItBloq);
+        if (listIdRegistros->size() == 0 || listNroBloque->size() == 0)
+            seguir = false;
+    }
+    this->listIdRegistros = listOrdenadaIdReg;
+    this->listNroBloque = listOrdenadaNroBloq;
+}
+
 //Devuelve la mitad derecha, deja en el original la mitad izquierda
 // obviamente divide segun tamanios
 //Devuelve la clave perteneciente al dato del "medio" ponderado.

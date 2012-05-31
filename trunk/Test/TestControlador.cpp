@@ -32,7 +32,7 @@ void TestControlador::TestInsertarDato(){
 	dato3->setFormacion("3");
 	controlador->InsertarDato(dato3);
 
-	Key* dato4 = new Key();
+	/*Key* dato4 = new Key();
 	char linea4[] ="San martin";
 	dato4->setLineaFerroviaria(linea4);
 	char franja4[] = "2012/02/25 00:00 00:30";
@@ -44,7 +44,7 @@ void TestControlador::TestInsertarDato(){
 	dato4->setFormacion("4");
 	controlador->InsertarDato(dato4);
     /*
-	Key* dato5 = new Key();
+	/*Key* dato5 = new Key();
 	char linea5[] ="Belgrano";
 	dato5->setLineaFerroviaria(linea5);
 	char franja5[] = "2011/02/21 00:00 00:30";
@@ -113,7 +113,7 @@ void TestControlador::TestInsertarDato(){
 	delete dato;
 	delete dato2;
 	delete dato3;
-	delete dato4;
+//	delete dato4;
 	/*delete dato5;
 	delete dato6;
 	delete dato7;

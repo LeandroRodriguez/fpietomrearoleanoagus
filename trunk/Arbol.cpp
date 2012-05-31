@@ -59,6 +59,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		    NodoHoja* Nder=NULL;
 		    NodoHoja* raizvieja = (NodoHoja*) this->raiz;
             Key* k=NULL;
+		    raizvieja->ordenarBloquesRegistros();
 		    Nder = raizvieja->PartirEn2(k);//parti mi raiz hoja en 2
             NodoInterno* RAIZNUEVA = (NodoInterno*) this->crearNuevoNodo(1);
             //consigo la subclave que va a subir
@@ -113,7 +114,6 @@ void Arbol::imprimir(){
 	else{
 		cout << "EL ARBOL NO TIENE ELEMENTOS " << endl;
 	}
-
 }
 
 /*funcion de arranque para la carga inicial. Aca seteo los datos iniciales para arrancar con la recursividad*/
@@ -589,3 +589,4 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
         /*retorno ahora las refs de estos nodos,(que ya referencian a los inferiores), para que se agreguen en el siguiente nivel*/
         return listaNodosInternos;
 }
+
