@@ -50,12 +50,19 @@ Resultado NodoInterno::InsertarNuevaSubClaveRef ( string subclave,int refAbloque
 
         Si el nodo hoja desborda, Devuelve  RES_DESBORDADO
         sino, devuelve RES_OK*/
+        if(this->ListaSubClaveRef->empty()){
+            this->ListaSubClaveRef->push_front(new SubClaveRef(subclave,refAbloqueArbol));
+            this->CantElem=this->CantElem+1;
+            return RES_OK;
+            }
 
         SubClaveRef* item = new SubClaveRef(subclave,refAbloqueArbol);
 
         if( this->SeRepiteSubclave(item) )return RES_DUPLICADO;
 
-        if( item < (this->ListaSubClaveRef->front() )){
+        SubClaveRef* primeritem = this->ListaSubClaveRef->front();
+
+        if( item < ( primeritem )){
             int aux = item->getRefNodo();
             item->setRefNodo(this->Ref1erNodo);
             this->Ref1erNodo=aux;/*tiene un grado mas de complejidad, debido a 1er ref nodo*/
