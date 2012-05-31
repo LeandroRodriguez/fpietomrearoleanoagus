@@ -2,7 +2,7 @@
 #define ARBOL_H_
 
 #include "Nodo.h"
-//#include "Dato.h"
+#include "Dato.h"
 #include "ManejoArchivos/PersistenciaArbol.h"
 #include <list>
 #include <typeinfo>
@@ -33,7 +33,7 @@ class Arbol {
 
 	void actualizarNodo(Nodo* nodoAActualizar);
 
-/*	void ultimosAdisco();
+//	void ultimosAdisco();
 
 	void cargaInicial(list<Dato*>* listaDeDatos);
 
@@ -43,36 +43,42 @@ class Arbol {
 
 	void setElemento (list<Dato*>* lista, int index, Dato* dato);
 
-	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<int>*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento);
+	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<int>*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento);
 
-	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<string>*>* listaClaves, list<list*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento);
+	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef<string>*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento);
 
 	int conseguirNivelMayor(list<int>* listaMaestraNiveles);
 
-	void* obtenerClavesSegunPos(list<list*>* listaMaestraClaves, int j, int dimension);
+	void* obtenerClavesSegunPos(list<list<SubClaveRef<int>*>*>* listaMaestraClaves, int j, int dimension);
 
-	list<list*>* obtenerListasSegunPos(list<list*>* listaMaestraDatosSubArboles, int j);
+	void* obtenerClavesSegunPos(list<list<SubClaveRef<string>*>*>* listaMaestraClaves, int j, int dimension);
+
+	list<list<Dato*>*>* obtenerListasSegunPos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, int j);
 
 
 	offset obtenerReferenciaNodosSegunPos(list<offset>* listaReferenciasNodosHios, int j);
 
 
-	void* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>* listasDatosSubArbolesNuevos);
+	void* partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos);
 
-	void reemplazarDatoListaDatos(list<list*>* listaMaestraDatosSubArboles, list<list*>* listasDatosSubArbolesNuevos, int j);
+	void reemplazarDatoListaDatos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, list<list<Dato*>*>* listasDatosSubArbolesNuevos, int j);
 
-	void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef<int>*>* claveMediana, j);
+	void reemplazarDatoListaClaves(list<list<SubClaveRef<int>*>*>* listaMaestraClaves, list<SubClaveRef<int>*>* claveMediana, int j);
 
-	void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef<string>*>* claveMediana, j);
+	void reemplazarDatoListaClaves(list<list<SubClaveRef<string>*>*>* listaMaestraClaves, list<SubClaveRef<string>*>* claveMediana, int j);
 
-	offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje));
+	offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje);
 
-	offset insertarDatosEnNodoInterno(list<list*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i, int dimension);
+	offset insertarDatosEnNodoInterno(list<list<SubClaveRef<int>*>*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i, int dimension);
 
-	list<offset>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension);
+	offset insertarDatosEnNodoInterno(list<list<SubClaveRef<string>*>*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i, int dimension);
 
-	list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento);
-*/
+	list<offset>* insertarHijosEnNodoPadre(list<list<SubClaveRef<int>*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension);
+
+	list<offset>* insertarHijosEnNodoPadre(list<list<SubClaveRef<string>*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension);
+
+	list<offset>* cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento);
+
 private:
 	PersistenciaArbol* persistir;
 
