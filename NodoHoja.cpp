@@ -257,6 +257,7 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
         this->ActualizarCantElem();
         /*------------------------------------------------*/
         this->proximaHoja=Nder->getIdDelNodo();//ojo con esto!
+        cout << "Se Rompio el Nodo" << this->getIdDelNodo() << endl;
     return Nder;
     }
 
