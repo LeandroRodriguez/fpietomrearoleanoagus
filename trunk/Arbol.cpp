@@ -219,10 +219,10 @@ int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* li
 		int paso = 1;
 		list<SubClaveRef*>::iterator itClave;
 		itClave = listaSubClaves->begin();
+		list<Dato*>* listaDatosAux = new list<Dato*>();
+		NodoInterno* nodoInterno = new NodoInterno();
 		for(;itClave!=listaSubClaves->end();itClave++){
 			Resultado res;
-			list<Dato*>* listaDatosAux = new list<Dato*>();
-			NodoInterno* nodoInterno = new NodoInterno();
 			list<Dato*>::iterator itDato;
 			itDato = (*itListaDatos)->begin();
 			for(;itDato!=(*itListaDatos)->end();itDato++){
@@ -245,6 +245,8 @@ int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* li
 				NodoInterno* nodoInterno = new NodoInterno();
 				/*le inserto el dato(con inicializar)*/
 				nodoInterno->Inicializar(0, (*itClave)->getSubClave(), 0);
+				/*instancio una nueva lista datos aux*/
+				list<Dato*>* listaDatosAux = new list<Dato*>();
 			}
 			paso++;
 
