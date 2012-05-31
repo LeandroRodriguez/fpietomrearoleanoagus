@@ -59,10 +59,13 @@ Resultado NodoInterno::InsertarNuevaSubClaveRef ( string subclave,int refAbloque
             int aux = item->getRefNodo();
             item->setRefNodo(this->Ref1erNodo);
             this->Ref1erNodo=aux;/*tiene un grado mas de complejidad, debido a 1er ref nodo*/
-            }
+            this->ListaSubClaveRef->push_front(item);
+            this->CantElem=this->CantElem+1;
+            }else{
             this->ListaSubClaveRef->push_back(item);
             this->ListaSubClaveRef->sort();
             this->CantElem=this->CantElem+1;
+            }
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
         return RES_OK;
     }
@@ -214,8 +217,8 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq ){
 
 void NodoInterno::imprimir(){
         std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
-			<<	", dimension:" << this->dimension<< endl;
-		std::cout<<	" idNodo: " << this->Ref1erNodo << " ";
+			<<	", dimension:" << this->dimension<< ", Referencias:"<<endl;
+		std::cout<<	"idNodo: " << this->Ref1erNodo << endl;
 
         list< SubClaveRef* >::iterator it;
         it= this->ListaSubClaveRef->begin();
@@ -224,7 +227,7 @@ void NodoInterno::imprimir(){
             SubClaveRef* cosa = *it;
             cosa->imprimir();
             }
-        std::cout <<"******************************" << endl;
+        std::cout <<"***************+++***************" << endl;
         list< SubClaveRef* >::iterator it2;
         it2= this->ListaSubClaveRef->begin();
 
