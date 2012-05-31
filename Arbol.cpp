@@ -62,7 +62,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		    Nder = raizvieja->PartirEn2(k);//parti mi raiz hoja en 2
             NodoInterno* RAIZNUEVA = (NodoInterno*) this->crearNuevoNodo(1);
             //consigo la subclave que va a subir
-		    string subclaveRaizNueva = *((string*)k->getSubClaveSegunDim(Key::getDimensionSegunAltura(1)));
+		    string subclaveRaizNueva = k->getSubClaveSegunDim(Key::getDimensionSegunAltura(1));
             //a continuacion, swapeo IDS, para dejar la raiz siempre en su ID_RAIZ
             int auxID = RAIZNUEVA->getIdDelNodo();
             RAIZNUEVA->setIdDelNodo(raizvieja->getIdDelNodo());
@@ -218,7 +218,7 @@ int Arbol::conseguirNivelMayor(list<int>* listaMaestraNiveles){
         return 2;
 }
 
-void* Arbol::obtenerClavesSegunPos(list<list<SubClaveRef*>*>* listaMaestraClaves, int j, int dimension){
+list<SubClaveRef*>* Arbol::obtenerClavesSegunPos(list<list<SubClaveRef*>*>* listaMaestraClaves, int j, int dimension){
         int i = 0;
         list<SubClaveRef*>* listaClavesSubarboles = new list<SubClaveRef*>();
         list<list<SubClaveRef*>*>::iterator itListaClaves;
@@ -266,20 +266,66 @@ offset Arbol::obtenerReferenciaNodosSegunPos(list<offset>* listaReferenciasNodos
 }
 
 /*consigo la clave media(segun tamanio) y las dos sublistas que se parten a partir de esa clave*/
-void* Arbol::partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos){
-        //TO DO
-        /*de mi lista de listas de datos vieja las voy metiendo en una sola lista de datos, agregando en orden al final*/
+list<SubClaveRef*>* Arbol::partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos){
+	/*de mi lista de listas de datos vieja las voy metiendo en una sola lista de datos, agregando en orden al final*/
 
-        /*busco la clave del medio de mi lista de datos*/
-        /*guardo en listasDatosSubArbolesNuevos mis dos subarboles y la clave la meto en una lista y la devuelvo*/
+	/*busco la clave del medio de mi lista de datos*/
+	/*guardo en listasDatosSubArbolesNuevos mis dos subarboles y la clave la meto en una lista y la devuelvo*/
+	int tamanio = 0;
+	list<Dato*>* listaTotal = new list<Dato*>();
+	list<list<Dato*>*>::iterator itListaDatos;
+	itListaDatos= listaDatosSubArbol->begin();
+	for(;itListaDatos!=listaDatosSubArbol->end();itListaDatos++){
+		list<Dato*>::iterator itSubListaDatos;
+		itSubListaDatos = (*itListaDatos)->begin();
+		for(;itSubListaDatos!=(*itListaDatos)->end();itSubListaDatos++){
+			listaTotal->push_back(*itSubListaDatos);
+			tamanio += (*itSubListaDatos)->getClave()->getTamanioSerializado();
+		}
+	}
+
 	list<SubClaveRef*>* listaClavesSubarboles = new list<SubClaveRef*>();
+
+	list<Dato*>* listDatosIzq = new list<Dato*>();
+	list<Dato*>* listDatosDer = new list<Dato*>();
+
+	list<Dato*>::iterator itlistaTotal;
+	itlistaTotal= listaTotal->begin();
+	int cursor = 0;
+	bool seleccionoClaveMitad = false;
+	for(;itlistaTotal!=listaTotal->end();itlistaTotal++){
+		Key* c = (*itlistaTotal)->getClave();
+		if(cursor >= (tamanio/2))
+		{
+			if(!seleccionoClaveMitad){
+				string clave = c->getSubClaveSegunDim(dimension);
+				SubClaveRef* subClave = new SubClaveRef(clave, 0);
+				listaClavesSubarboles->push_back(subClave);
+				seleccionoClaveMitad = true;
+			}
+			listDatosDer->push_back(*itlistaTotal);
+		}
+		else
+			listDatosIzq->push_back(*itlistaTotal);
+
+		cursor += c->getTamanioSerializado();
+	}
+
+	if(!seleccionoClaveMitad)
+	{
+		Dato* d = listaTotal->back();
+		string clave = d->getClave()->getSubClaveSegunDim(dimension);
+		SubClaveRef* subClave = new SubClaveRef(clave, 0);
+		listaClavesSubarboles->push_back(subClave);
+	}
+
 	return listaClavesSubarboles;
 }
 
 /*reemplazo la lista de lista de datos en la lista maestra de listas de listas de datos(en la pos j)*/
 void Arbol::reemplazarDatoListaDatos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, list<list<Dato*>*>* listasDatosSubArbolesNuevos, int j){
         int i = 0;
-        list<list<list<Dato*>*>*>* listaMaestraDatosSubarbolesNueva;
+        list<list<list<Dato*>*>*>* listaMaestraDatosSubarbolesNueva = new list<list<list<Dato*>*>*>();
         list<list<list<Dato*>*>*>::iterator itListaClaves;
         itListaClaves= listaMaestraDatosSubArboles->begin();
         for(;itListaClaves!=listaMaestraDatosSubArboles->end();itListaClaves++){
@@ -297,7 +343,7 @@ void Arbol::reemplazarDatoListaDatos(list<list<list<Dato*>*>*>* listaMaestraDato
 void Arbol::reemplazarDatoListaClaves(list<list<SubClaveRef*>*>* listaMaestraClaves, list<SubClaveRef*>* claveMediana, int j){
         int i = 0;
         /*si esta lista la malloqueo, tendria que deletear la vieja al final, antes de asignarle la nueva referencia*/
-        list<list<SubClaveRef*>*>* listaMaestraClavesNueva;
+        list<list<SubClaveRef*>*>* listaMaestraClavesNueva = new list<list<SubClaveRef*>*>();
         list<list<SubClaveRef*>*>::iterator itListaClaves;
         itListaClaves= listaMaestraClaves->begin();
         for(;itListaClaves!=listaMaestraClaves->end();itListaClaves++){
@@ -379,7 +425,7 @@ offset Arbol::insertarDatosEnNodoInterno(list<list<SubClaveRef*>*>* listaMaestra
 list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension){
         /*construyo mis NodoI*/
         int d = 0;
-        list<offset>* listaRefsNodosInternos;
+        list<offset>* listaRefsNodosInternos = new list<offset>();
 
         list<list<SubClaveRef*>*>::iterator itListaMaestraClaves;
         itListaMaestraClaves= listaMaestraClaves->begin();
@@ -446,7 +492,7 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
 
                 for(;itSubSubListas!=(*itSubListas)->end();itSubSubListas++){
                         /*ordeno datos por mi dimension*/
-                        list<Dato*>* subListaOrdenada = this->obtenerListaOrdenadaPorDimension((*itSubSubListas),dimension);//TO DO
+                        list<Dato*>* subListaOrdenada = this->obtenerListaOrdenadaPorDimension((*itSubSubListas),dimension);
                         /*una vez que tengo mi lista ordenada, comienzo con la insercion en nodos como si fuese una carga inicial comun(mmm, mas bien una                               simulacion)*/
                         /*instancio dos listas vacias para que me devuelva resultados el metodo que simula la carga inicial del subarbol*/
                         list<SubClaveRef*>* listaClaves;//lista de claves
@@ -467,14 +513,14 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
 
         /*si el mayor nivel era 2, ya podria recuperar el nodo hoja entero, auque esto lo puedo verificar mas abajo*/
         if(nivelMayor == 2){
-                list<offset>* listaNodosInternos;
+                list<offset>* listaNodosInternos = new list<offset>();
                 /*agarro los nodos de algun lado y armo mi arbol resultante*/
                 list<list<list<Dato*>*>*>::iterator itListaSubArboles;
                 itListaSubArboles= listaMaestraDatosSubArboles->begin();
                 /*para cada SubArb de la lista de SubArbs*/
                 int i = 0;
                 for(;itListaSubArboles!=listaMaestraDatosSubArboles->end();itListaSubArboles++){
-                        list<offset>* listaReferenciasNodosHoja;
+                        list<offset>* listaReferenciasNodosHoja = new list<offset>();
                         /*para cada SubSubArb de la lista de SubArb*/
                         list<list<Dato*>*>::iterator itSubSubListas;
                         itSubSubListas= (*itListaSubArboles)->begin();
@@ -514,8 +560,8 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                         /*agarro la subList de ese subArbol(sigo teniendo acceso a ella?)(ponela que la sigo teniendo de arriba) y consigo la clave del                         medio para(dimension+1)*/
                         /*mi lista de datos de subarboles, las tendria que juntar en una sola lista*/
                         list<list<Dato*>*>* listaDatosSubArbol = this->obtenerListasSegunPos(listaMaestraDatosSubArboles, j);
-                        list<list<Dato*>*>* listasDatosSubArbolesNuevos;//para que me devueve los nuevos subarboles
-                        list<SubClaveRef*>* claveMediana = (list<SubClaveRef*>*)this->partirSubarbol(listaDatosSubArbol, dimension, listasDatosSubArbolesNuevos);
+                        list<list<Dato*>*>* listasDatosSubArbolesNuevos = new list<list<Dato*>*>();//para que me devueve los nuevos subarboles
+                        list<SubClaveRef*>* claveMediana = this->partirSubarbol(listaDatosSubArbol, dimension, listasDatosSubArbolesNuevos);
 
                         /*remplazo la nueva lista de listas de subarboles por la vieja*/
                         this->reemplazarDatoListaDatos(listaMaestraDatosSubArboles, listasDatosSubArbolesNuevos, j);
