@@ -8,14 +8,14 @@ void TestNodoHoja::TestCrearNodoHoja(){
 	dato1->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato1->setFalla("no cierra puerta");
 	dato1->setAccidente("incendio");
-	dato1->setFormacion(1);
+	dato1->setFormacion("1");
 
 	Key* dato2 = new Key();
 	dato2->setLineaFerroviaria("Mitre");
 	dato2->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato2->setFalla("no frena");
 	dato2->setAccidente("choque");
-	dato2->setFormacion(1);
+	dato2->setFormacion("1");
 
 	NodoHoja* nodo = new NodoHoja();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
@@ -48,7 +48,7 @@ void TestNodoHoja::TestSerializarHidtratar(){
 	dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato->setFalla("no cierra puerta");
 	dato->setAccidente("incendio");
-	dato->setFormacion(1);
+	dato->setFormacion("1");
 
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
     string str(dato->Serializarse());
@@ -73,14 +73,14 @@ void TestNodoHoja::TestPartirHojaEn2(){
 	dato1->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato1->setFalla("no cierra puerta");
 	dato1->setAccidente("incendio");
-	dato1->setFormacion(1);
+	dato1->setFormacion("1");
 
 	Key* dato2 = new Key();
 	dato2->setLineaFerroviaria("Mitre");
 	dato2->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato2->setFalla("no frena");
 	dato2->setAccidente("choque");
-	dato2->setFormacion(1);
+	dato2->setFormacion("1");
 
 	NodoHoja* nodo1 = new NodoHoja();
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
