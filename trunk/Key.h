@@ -25,7 +25,7 @@ class Key {
 
     public:
 
-	string* getSubClaveSegunDim( int dim );
+	string getSubClaveSegunDim( int dim );
 
 	Key(){
 	    this->Accidente="";
