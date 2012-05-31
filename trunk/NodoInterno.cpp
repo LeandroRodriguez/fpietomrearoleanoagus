@@ -226,7 +226,17 @@ void NodoInterno::imprimir(){
             cosa->imprimir();
             }
         std::cout <<"******************************" << endl;
+        list< SubClaveRef* >::iterator it2;
+        it2= this->ListaSubClaveRef->begin();
+
+        this->arbol->DevolverNodoSegunID(this->Ref1erNodo)->imprimir();
+
+        for(;it2!=this->ListaSubClaveRef->end();it2++){
+            SubClaveRef* sc = *it2;
+            Nodo* cosa = this->arbol->DevolverNodoSegunID(sc->getRefNodo());
+            cosa->imprimir();
         }
+    }
 
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
         string subclave = dato->getSubClaveSegunDim(this->dimension);
