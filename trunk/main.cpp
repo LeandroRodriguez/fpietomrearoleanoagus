@@ -39,9 +39,9 @@ int main(){
     testPersistencia->TestCrearArchivoArbol();
     delete testPersistencia;
 
-    TestArbol* testArbol = new TestArbol();
+    */TestArbol* testArbol = new TestArbol();
 	testArbol->Testear();
-    delete testArbol;
+    delete testArbol;/*
 
     TestControlador* testControlador = new TestControlador();
     testControlador->TestInsertarDato();
@@ -51,9 +51,9 @@ int main(){
     testKey->TestSerializarHidratarKey();
     delete testKey;*/
 
-    TestNodoHoja* testNodoHoja = new TestNodoHoja();
-    testNodoHoja->TestCrearNodoHoja();
-    testNodoHoja->TestSerializarHidtratar();
+    //TestNodoHoja* testNodoHoja = new TestNodoHoja();
+    //testNodoHoja->TestCrearNodoHoja();
+    //testNodoHoja->TestSerializarHidtratar();
     //ESTE NO ANDA POR AHORA
     //testNodoHoja->TestPartirHojaEn2();
 };
