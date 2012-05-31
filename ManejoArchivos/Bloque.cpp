@@ -10,6 +10,7 @@
 Bloque::Bloque(const cantBytes& tamanio) {
 	this->tamanio = tamanio;
 	this->usados = 0;
+	this->registros = new list<RegistroVariable*>();
 	/*el nroBloque se lo setean desde afuera*/
 	/*IUC sigo sin saber que es, pero tmp se inicializa*/
 }
@@ -38,7 +39,7 @@ bool Bloque::agregarRegistro(RegistroVariable* registro) {
 
 	/*verifico que el registro no sea nulo, e inserto*/
 	if (registro != NULL) {
-		this->registros.push_back(registro);
+		this->registros->push_back(registro);
     	} else {
     		cerr << "Error: Se intento agregar un registro nulo.";
     	}
@@ -62,10 +63,10 @@ Bytes Bloque::serializarse() {
 	//Bytes serializacion;
 	/*defino un iterador para recorrer mi lista de registros*/
 	string serializacion = "";
-	list<RegistroVariable*>::iterator it = this->registros.begin();
+	list<RegistroVariable*>::iterator it = this->registros->begin();
 
 	//Serializar cada uno de los registros y los voy metiendo todos juntos en una cadena
-	for ( ; it != this->registros.end(); it++) {
+	for ( ; it != this->registros->end(); it++) {
 		//le pido al reg que se serialize
 		Bytes registroSerializado = (*it)->serializarse();
 		serializacion += (registroSerializado.toString());
@@ -187,9 +188,9 @@ cantBytes Bloque::getEspacioLibre() {
 Bytes Bloque::obtenerRegistro(uint32_t nRegistro){
 	Bytes registroBuscado;
 
-	list<RegistroVariable*>::iterator it = this->registros.begin();
+	list<RegistroVariable*>::iterator it = this->registros->begin();
 	/*busco en la lista si encuentro el UID dado. Si lo encuentro devuelvo el dato, sino un string vacio*/
-	while (it != this->registros.end()) {
+	while (it != this->registros->end()) {
 		RegistroVariable* registro = (RegistroVariable*)*it;
 		Bytes dato = registro->getDato();
 		uint32 UID = registro->getNRegistro();
