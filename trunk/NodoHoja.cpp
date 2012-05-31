@@ -229,7 +229,7 @@ void NodoHoja::ordenarBloquesRegistros(){
         minReg = i1;
         minBloq = i2;
         minItReg = itRegi1;
-        minItReg = itBloqi2;
+        minItBloq = itBloqi2;
         itRegj1 = ++itRegi1;
         itRegi1--;
         itBloqj2 = ++itBloqi2;
