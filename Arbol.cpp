@@ -207,6 +207,67 @@ list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dim
         return listaOrdenadaDatosSubArboles;
 }
 
+int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>* listaListasResultadosDevolucion, list<SubClaveRef*>* listaClavesDevolucion){
+	nivel++;
+	if(listaSubClaves.size()>1){
+		/*aca guardo los resultados de este nivel*/
+		list<list<Dato*>*>* listaListasResultadosNueva = new list<list<Dato*>*>();
+		list<SubClaveRef*>* listaClavesNueva = new list<SubClaveRef*>();
+
+		list<list<Dato*>*>::iterator itListaDatos;
+		itListaDatos = listaListasResultados->begin();
+		int paso = 1;
+		list<SubClaveRef*>::iterator itClave;
+		itClave = listaSubClaves->begin();
+		for(;itClave!=listaSubClaves->end();itClave++){
+			list<Dato*>* listaDatosAux = new list<Dato*>();
+			NodoInterno* nodoInterno = new NodoInterno();
+			list<Dato*>::iterator itDato;
+			itDato = (*itListaDatos)->begin();
+			for(;itDato!=(*itListaDatos)->end();itDato++){
+				listaDatosAux->push_back(*itDato);
+			}
+			/*meto clave en el nodo Interno*/
+			if(paso == 1){
+				nodoInterno->Inicializar(0, (*itClave)->getSubClaveSegunDim(dimension), 0);
+				Resultado res = RES_OK;
+			}
+			else{
+				Resultado res = nodoInterno->InsertarNuevaSubClaveRef((*itClave)->getSubClaveSegunDim(dimension), 0);
+			}
+			if(res == RES_DESBORDADO){
+				/*meto lista datos en lista listas datos*/
+				listaListasResultadosNueva->push_back(listaDatosAux);
+				/*meto clave en lista claves*/
+				listaClavesNueva->push_back((*itClave));
+				/*instancio nodointerno nuevo*/
+				NodoInterno* nodoInterno = new NodoInterno();
+				/*le inserto el dato(con inicializar)*/
+				nodoInterno->Inicializar(0, (*itClave)->getSubClaveSegunDim(dimension), 0);
+			}
+			paso++;
+
+			itListaDatos++;
+		}
+		/*meto los datos (n+1) en mi lista*/
+		list<Dato*>::iterator itDato;
+		itDato = (*itListaDatos)->begin();
+		for(;itDato!=(*itListaDatos)->end();itDato++){
+			listaDatosAux->push_back(*itDato);
+		}
+		listaListasResultadosNueva->push_back(listaDatosAux);
+		/*llamado recursivo*/
+		return conseguirParticionRecursiva(nivel, dimension, listaListasResultadosNueva, listaClavesNueva, listaListasResultadosDevolucion, listaClavesDevolucion);
+	}
+	else{
+		/*listas nuevas igual a las que me llegaron*/
+		/*deletear la referencia vieja de listas Devolucion???*/
+		listaListasResultadosDevolucion = listaListasResultados;
+		listaClavesDevolucion = listaSubClaves;
+		return nivel;
+	}
+}
+
 int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento, int dimension){
         /*si la subListaOrdenada tiene un solo elemento, devuelvo en la sublista, ese elemento y uno vacio. y en la de clave tomo la clave del unico elemento
         (total, ante igualdad hay que ir para las 2 ramas)*/
@@ -215,14 +276,14 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
         //int i = 0;
 	/*primer recorrida*/
 	list<list<Dato*>*>* listaListasResultados = new list<list<Dato*>*>();
-	list<SubClave*>* listaSubClaves = new list<Dato*>();
+	list<SubClaveRef*>* listaSubClaves = new list<SubClaveRef*>();
 	list<Dato*>* listaAux = new list<Dato*>();
 	for(;itDato!=subListaOrdenada->end();itDato++){
 		/*guardo el dato en un nodo(solo en RAM)*/
 		Dato* dato = (*itDato);
 		offset idRegistro = dato->getIdRegistro();
                 offset nroBloque = dato->getNroBoque();
-                Key clave = dato->getClave();
+                Key* clave = dato->getClave();
 		NodoHoja* nodoHoja = new NodoHoja();
 		Resultado res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
 		/*veo si desbordo el nodo*/
@@ -245,10 +306,11 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	/*tendria que verificar el caso que lista de claves el size sea 0(aca tendria que crear nodo vacio)*/
 	if(listaSubClaves.size()==0){
 		/*setear un nodo vacio o algo*/
+		/*agarro la clave del ultimo elemento*/
 	}
 	else{
 		/*le paso las listas a ordenar, y las 2 donde quiero que me devuelva los resultados*/
-		nivel = conseguirParticionRecursiva(nivel, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
+		nivel = conseguirParticionRecursiva(nivel, dimension, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
 	}
 
         return nivel;
