@@ -76,6 +76,8 @@ class Arbol {
 private:
 	PersistenciaArbol* persistir;
 
+	Resultado LazyInicialization(offset nroBloque,offset nroRegistro,Key* dato);
+
 };
 
 
