@@ -56,7 +56,6 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 			}
 		if(res == RES_DESBORDADO && (this->raiz->getHojaOInterno()=='H')){
             //se desborda y solo habia 1 nodo hoja
-		    //NodoHoja* Nder = (NodoHoja*) this->crearNuevoNodo(0,' ');
 		    NodoHoja* Nder=NULL;
 		    NodoHoja* raizvieja = (NodoHoja*) this->raiz;
             Key* k=NULL;
@@ -89,15 +88,14 @@ NodoHoja* Arbol::crearRaiz() {
 	return nuevaRaiz;
 	}
 
-Nodo* Arbol::crearNuevoNodo(int nivel) {
+Nodo* Arbol::crearNuevoNodo(unsigned int nivel) {
 	Nodo* nuevoNodo = NULL;
 	if (nivel == 0) {
 		nuevoNodo = new NodoHoja(this);
 	} else {
-		nuevoNodo = new NodoInterno(this);
-		((NodoInterno*) nuevoNodo)->setAltura(nivel);
-      }
-
+             nuevoNodo = new NodoInterno(this);
+            ((NodoInterno*) nuevoNodo)->setAltura(nivel);
+            }
 	this->persistir->agregarNodo( nuevoNodo);
 	return nuevoNodo;
 }
