@@ -229,8 +229,8 @@ void NodoInterno::imprimir(){
         }
 
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
-        string* subclave = (string*)dato->getSubClaveSegunDim(this->dimension);
-        int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(*subclave);
+        string subclave = dato->getSubClaveSegunDim(this->dimension);
+        int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
         Resultado Res;
 
         if (this->Altura > 1 ){/*He aqui la recursividad.Voy bajando por el arbol */
@@ -247,7 +247,7 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
                 Key* k=NULL;
                 NHder = NodoHleido->PartirEn2(k);
 
-            Res = this->InsertarNuevaSubClaveRef(*((string*)k->getSubClaveSegunDim(this->dimension)),NHder->getIdDelNodo());
+            Res = this->InsertarNuevaSubClaveRef((k->getSubClaveSegunDim(this->dimension)),NHder->getIdDelNodo());
 
                  if (Res==RES_OK || Res==RES_DESBORDADO){//actualizo todos los cambios
                     this->arbol->actualizarNodo(this);
