@@ -63,6 +63,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             NodoInterno* RAIZNUEVA = (NodoInterno*) this->crearNuevoNodo(1);
             //consigo la subclave que va a subir
 		    string subclaveRaizNueva = k->getSubClaveSegunDim(Key::getDimensionSegunAltura(1));
+
             //a continuacion, swapeo IDS, para dejar la raiz siempre en su ID_RAIZ
             int auxID = RAIZNUEVA->getIdDelNodo();
             RAIZNUEVA->setIdDelNodo(raizvieja->getIdDelNodo());
@@ -214,8 +215,8 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 }
 
 int Arbol::conseguirNivelMayor(list<int>* listaMaestraNiveles){
-        //TO DO
-        return 2;
+        listaMaestraNiveles->sort();
+        return listaMaestraNiveles->back();
 }
 
 list<SubClaveRef*>* Arbol::obtenerClavesSegunPos(list<list<SubClaveRef*>*>* listaMaestraClaves, int j, int dimension){
