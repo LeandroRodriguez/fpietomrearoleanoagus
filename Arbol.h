@@ -2,7 +2,7 @@
 #define ARBOL_H_
 
 #include "Nodo.h"
-#include "Dato.h"
+//#include "Dato.h"
 #include "ManejoArchivos/PersistenciaArbol.h"
 #include <list>
 #include <typeinfo>
@@ -33,7 +33,7 @@ class Arbol {
 
 	void actualizarNodo(Nodo* nodoAActualizar);
 
-	void ultimosAdisco();
+/*	void ultimosAdisco();
 
 	void cargaInicial(list<Dato*>* listaDeDatos);
 
@@ -72,7 +72,7 @@ class Arbol {
 	list<offset>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension);
 
 	list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento);
-
+*/
 private:
 	PersistenciaArbol* persistir;
 
