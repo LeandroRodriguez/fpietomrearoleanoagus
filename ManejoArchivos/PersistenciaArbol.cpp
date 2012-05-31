@@ -196,11 +196,7 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
         	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
         		lectura[i] = lectura2[i+6];
         	}
-        	char* tipo = new char[5];
-        	memcpy(tipo,lectura2+1,sizeof(int)+1);
-
-        	if ( !strcmp( tipo, "int" ) )auxiliar = new NodoInterno<int>(lectura);
-        	if ( !strcmp( tipo,"string") )auxiliar = new NodoInterno<string>(lectura);
+        	auxiliar = new NodoInterno(lectura);
         }
         /*libero la memoria de la lectura y retorno el puntero a la raiz*/
         free(lectura);
