@@ -59,7 +59,6 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		    NodoHoja* Nder=NULL;
 		    NodoHoja* raizvieja = (NodoHoja*) this->raiz;
             Key* k=NULL;
-		    raizvieja->ordenarBloquesRegistros();
 		    Nder = raizvieja->PartirEn2(k);//parti mi raiz hoja en 2
             NodoInterno* RAIZNUEVA = (NodoInterno*) this->crearNuevoNodo(1);
             //consigo la subclave que va a subir
