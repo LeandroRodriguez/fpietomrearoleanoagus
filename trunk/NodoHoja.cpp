@@ -188,6 +188,17 @@ Resultado NodoHoja::insertarElemento(offset idRegistro, offset nroBloque, Key* d
 	return RES_OK;
 }
 
+Resultado NodoHoja::insertarElementoSimuladoCargaInicial(offset idRegistro, offset nroBloque, Key* dato, double porcentaje){
+	//chequeo overflow
+	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO*porcentaje)
+		return RES_DESBORDADO;
+	
+	this->listIdRegistros->push_back(idRegistro);
+	this->listNroBloque->push_back(nroBloque);
+
+	return RES_OK;
+}
+
 vector<int> NodoHoja::getTamanios(){
             vector<int> tamanios;
             list<int>::iterator itRegistros;
