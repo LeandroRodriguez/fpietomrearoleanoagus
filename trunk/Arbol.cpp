@@ -199,17 +199,29 @@ void setElemento (list<Dato*>* lista, int index, Dato* dato){
         return;
 }
 
-list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension){
+list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension){
         list<Dato*>* listaOrdenadaDatosSubArboles = new list<Dato*>();
         bool swapped;
         do{
              swapped = false;
              int i;
-             for (i = 1; i <= lista->size() - 1; i++) {
-                 if((Key::EsIntEstaDimension(dimension) && (*((int*)(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)))) >
-                                 (*((int*)(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension))))) || (!(Key->EsIntEstaDimension(dimension)) &&
-                                 (*((string*)(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)))) >
-                                 (*((string*)(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension))))))
+             for (i = 1; i <= lista->size() - 1; i++)
+             {
+				 bool cambiar = false;
+				 void* anterior = (this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension));
+				 void* posterior = (this->getElemento(lista, i)->getClave()->getSubClaveSegunDim(dimension));
+				 if((Key::EsIntEstaDimension(dimension)))
+				 {
+            		 if((*((int*)anterior)) > (*((int*)posterior)))
+            			 cambiar = true;
+
+				 }
+            	 else
+            	 {
+            		 if((*((string*)anterior)) > (*((string*)posterior)))
+						 cambiar = true;
+            	 }
+            	 if(cambiar)
                  {
                          Dato* aux = this->getElemento(lista, i-1);
                          Dato* elem = this->getElemento(lista, i);
