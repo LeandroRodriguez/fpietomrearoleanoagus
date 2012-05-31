@@ -192,7 +192,7 @@ Resultado NodoHoja::insertarElementoSimuladoCargaInicial(offset idRegistro, offs
 	//chequeo overflow
 	if(this->getTamanioConDatos() > LONGITUD_BLOQUE_NODO*porcentaje)
 		return RES_DESBORDADO;
-	
+
 	this->listIdRegistros->push_back(idRegistro);
 	this->listNroBloque->push_back(nroBloque);
 
@@ -324,13 +324,13 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
         this->ActualizarCantElem();
         /*------------------------------------------------*/
         this->proximaHoja=Nder->getIdDelNodo();//ojo con esto!
-        cout << "Se Rompio el Nodo" << this->getIdDelNodo() << endl;
+        cout << "Se Partio el Nodo" << this->getIdDelNodo() << endl;
     return Nder;
     }
 
 void NodoHoja::imprimir() {
-	std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
-			<<	", dimension:" << this->dimension<< ", proximahoja:" << this->proximaHoja<< "refs: " << endl;
+	std::cout <<"idBloqueHoja:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
+			<<	", dimension:" << this->dimension<< ", proximahoja:" << this->proximaHoja<< "Referencias: " << endl;
 
 	list<int>::iterator itRegistros;
 	itRegistros= this->listIdRegistros->begin();

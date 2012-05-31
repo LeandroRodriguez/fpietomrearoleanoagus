@@ -182,7 +182,6 @@ void NodoInterno::Hidratar(char* bytes){
 int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq ){
         list< SubClaveRef* >::iterator it;
         it= this->ListaSubClaveRef->begin();
-
         SubClaveRef* cosa = *it;
 
         bool SubIgual = (cosa->operator==(subcReq));
@@ -207,7 +206,7 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq ){
                 cosa = *it;
                 return (  cosa->getRefNodo()   );
                 }
-            it++;/*si llegue aca, mi subcReq,es mayor que mi subK de la pos en la que estoy */
+            /*si llegue aca, mi subcReq,es mayor que mi subK de la pos en la que estoy */
             }
         /*si llegue hasta aca, tengo que irme por el extremo derecho  */
         return cosa->getRefNodo();

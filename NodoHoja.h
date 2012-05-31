@@ -27,7 +27,7 @@ class NodoHoja: public Nodo{
         this->listNroBloque->push_back(Blo);
         this->ActualizarCantElem();
     }
-    bool EliminarIdRegistro(int id){
+ /*   bool EliminarIdRegistro(int id){
         bool found = false;
         list<int>::iterator itRegistros;
         itRegistros= this->listIdRegistros->begin();
@@ -58,7 +58,7 @@ class NodoHoja: public Nodo{
         }
         this->ActualizarCantElem();
         return found;
-        }
+        }*/
     void ActualizarCantElem(){
         bool Size = (this->listIdRegistros->size() == this->listNroBloque->size());
         if (Size) {
@@ -74,7 +74,7 @@ class NodoHoja: public Nodo{
         this->listIdRegistros = new list<int>();
         this->listNroBloque = new list<int>();
         this->proximaHoja=0;//ojo con esto
-    }
+        }
     public:
 
     NodoHoja();
