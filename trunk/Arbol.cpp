@@ -207,7 +207,7 @@ list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dim
         return listaOrdenadaDatosSubArboles;
 }
 
-int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>* listaListasResultadosDevolucion, list<SubClaveRef*>* listaClavesDevolucion){
+int Arbol::conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>* listaListasResultadosDevolucion, list<SubClaveRef*>* listaClavesDevolucion){
 	nivel++;
 	if(listaSubClaves->size()>1){
 		/*aca guardo los resultados de este nivel*/

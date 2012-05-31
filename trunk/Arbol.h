@@ -69,8 +69,6 @@ class Arbol {
 
 	list<offset>* insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension, int altura);
 
-
-
 	list<offset>* cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento, int* alturaVuelta);
 
 private:

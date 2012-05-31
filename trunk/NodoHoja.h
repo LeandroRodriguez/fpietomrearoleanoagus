@@ -91,10 +91,9 @@ class NodoHoja: public Nodo{
     void imprimir();
     void ordenarBloquesRegistros();
 
-    Resultado insertarElementoSimuladoCargaInicial(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
-
     NodoHoja* PartirEn2(Key* &key);
 
+    Resultado insertarElementoSimuladoCargaInicial(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
 };
 
 #endif
