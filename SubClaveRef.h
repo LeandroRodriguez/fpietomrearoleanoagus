@@ -130,7 +130,7 @@ class SubClaveRef{
     }
 
     void setSubClave(string h){
-
+        this->subclave=h;
     }
 
     void setRefNodo(int c){
