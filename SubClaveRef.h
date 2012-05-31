@@ -129,6 +129,10 @@ class SubClaveRef{
         return this->subclave;
     }
 
+    void setSubClave(string h){
+
+    }
+
     void setRefNodo(int c){
      this->RefNodo=c;
     }
