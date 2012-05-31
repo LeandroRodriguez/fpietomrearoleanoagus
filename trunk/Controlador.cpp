@@ -41,7 +41,6 @@ void Controlador::InsertarDato(Key* dato){
 		almacena.agregarRegistro(&registro);
 		/*le paso al arbol el numero de bloque y el UID del reg en donde guarde el dato*/
 		Resultado res = indice->agregarDato(almacena.getNumeroBloque(), almacena.getNumeroUID(), dato);
-        cout << res << endl;
 	}
 }
 
