@@ -264,6 +264,7 @@ void NodoHoja::ordenarBloquesRegistros(){
 // obviamente divide segun tamanios
 //Devuelve la clave perteneciente al dato del "medio" ponderado.
 NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
+    this->ordenarBloquesRegistros();
     vector<int> S = this->getTamanios();
 
     //int TamMitad = ( this->getTamanioConDatos() )/2;
