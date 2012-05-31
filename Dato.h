@@ -15,8 +15,8 @@ class Dato{
     public:
 	Dato(){
 		this->clave = NULL;
-		this->nroBloque = -1;
-		this->idRegistro = -1;
+		this->nroBloque = VACIO;
+		this->idRegistro = VACIO;
 	};
      	~Dato(){};
 

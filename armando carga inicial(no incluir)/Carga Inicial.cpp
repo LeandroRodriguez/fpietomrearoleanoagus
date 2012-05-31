@@ -47,7 +47,7 @@ list<Dato*>* obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension)
 	     int i;
 	     for (i = 1; i <= lista->size() - 1; i++) {
 	    	 if((Key->EsIntEstaDimension(dimension) && (*(int*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)) >
-				 (*(int*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension))) || (!(Key->EsIntEstaDimension(dimension)) &&
+				 (*(int*)(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)))) || (!(Key->EsIntEstaDimension(dimension)) &&
 				 (*(string*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension)) >
 				 (*(string*)this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension))))
 	    	 {
@@ -175,11 +175,12 @@ void* partirSubarbol(list<list*>* listaDatosSubArbol, int dimension, list<list*>
 	
 	/*busco la clave del medio de mi lista de datos*/
 	/*guardo en listasDatosSubArbolesNuevos mis dos subarboles y la clave la meto en una lista y la devuelvo*/
+	void* listaClavesSubarboles;
 	if(Key::EsIntEstaDimension(dimension)){	
-		list<SubClaveRef<int>*>* listaClavesSubarboles;
+		listaClavesSubarboles = new list<SubClaveRef<int>*>();
 	}
 	else{
-		list<SubClaveRef<string>*>* listaClavesSubarboles
+		listaClavesSubarboles = new list<SubClaveRef<string>*>();
 	}
 	return listaClavesSubarboles;
 }
@@ -241,7 +242,7 @@ void reemplazarDatoListaClaves(list<list*>* listaMaestraClaves, list<SubClaveRef
 }
 
 /*creo un nodo hoja y meto todos los datos de la lista pasada. Luego lo persisto y retorno el nro de nodo*/
-offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje)){
+offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje){
 	/*instancio un nodoHoja*/
 	NodoHoja* nodoHoja = new NodoHoja();
 	
@@ -253,7 +254,7 @@ offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaj
 		offset idRegistro = (*itSubListaDatos)->getIdRegistro();
 		offset nroBloque = (*itSubListaDatos)->getNroBoque();
 		Key clave = (*itSubListaDatos)->getClave();
-		if(idRegistro == -1){
+		if(idRegistro == (offset)VACIO){
 			/*el nodo queda vacio*/
 			/*si esto pasa este tuviese que ser el unico dato*/
 		}

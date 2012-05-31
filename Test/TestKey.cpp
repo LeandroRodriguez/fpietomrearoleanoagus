@@ -8,7 +8,7 @@ void TestKey::TestSerializarHidratarKey(){
 	dato1->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato1->setFalla("no cierra puerta");
 	dato1->setAccidente("incendio");
-	dato1->setFormacion(1);
+	dato1->setFormacion("1");
 	string serializacion = dato1->Serializarse();
 
 	Key* dato2 = new Key(serializacion);
