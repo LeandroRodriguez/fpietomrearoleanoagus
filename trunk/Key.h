@@ -12,7 +12,7 @@ class Key {
     private:
 	string LineaFerroviaria;
 
-	int   Formacion;
+	string Formacion;
 
 	string Falla;
 
@@ -25,13 +25,13 @@ class Key {
 
     public:
 
-	void* getSubClaveSegunDim( int dim );
+	string* getSubClaveSegunDim( int dim );
 
 	Key(){
 	    this->Accidente="";
 	    this->Falla="";
 	    this->FranjaHorariaDelSiniestro="";
-	    this->Formacion=-1;
+	    this->Formacion="-1";
 	    this->LineaFerroviaria="";
 	    };
 
@@ -47,7 +47,7 @@ class Key {
     bool esIgual(Key* dato);
 
     void setLineaFerroviaria(string linea){this->LineaFerroviaria = linea;}
-    void setFormacion(int formacion){this->Formacion = formacion;}
+    void setFormacion(string formacion){this->Formacion = formacion;}
     void setFalla(string falla){this->Falla = falla;}
     void setAccidente(string acc){this->Accidente= acc;}
     void setFranjaHorariaDelSiniestro(string franja){this->FranjaHorariaDelSiniestro = franja;}
