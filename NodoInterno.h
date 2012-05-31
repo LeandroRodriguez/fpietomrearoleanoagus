@@ -32,21 +32,21 @@ class NodoInterno: public Nodo{
     list< SubClaveRef<T>* >* ListaSubClaveRef;
 
     /*funciona para char*,y todos los demas tipos  */
-    bool VerSiSeRepiteSubclave(SubClaveRef<T>* item){
+    bool SeRepiteSubclave(SubClaveRef<T>* item){
         typename list< SubClaveRef<T>* >::iterator it;
         it = this->ListaSubClaveRef->begin();
 
-        bool NoSeRepite=true;
+        bool SeRepite=false;
 
         for(;it!=this->ListaSubClaveRef->end();it++){
                 SubClaveRef<T>* cosa = *it;
                 if( cosa == item ){
-                    NoSeRepite=false;
+                    SeRepite=true;
                     break;
                     }
                 }
-        return NoSeRepite;
-    }
+        return SeRepite;
+        }
 
     void inicialize(){
         this->tamanioMaximoNodo=LONGITUD_BLOQUE_NODO;
@@ -95,7 +95,7 @@ class NodoInterno: public Nodo{
 
         SubClaveRef<T>* item = new SubClaveRef<T>(subclave,refAbloqueArbol);
 
-        if( this->VerSiSeRepiteSubclave(item) )return RES_DUPLICADO;
+        if( this->SeRepiteSubclave(item) )return RES_DUPLICADO;
 
         if( item < (this->ListaSubClaveRef->front() )){
             int aux = item->getRefNodo();
@@ -259,7 +259,7 @@ class NodoInterno: public Nodo{
 
     void imprimir(){
         std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
-			<<	", dimension:" << this->dimension<< "refs: " << endl;
+			<<	", dimension:" << this->dimension<< " refs: " << this->Ref1erNodo << " ";
 
         typename list< SubClaveRef<T>* >::iterator it;
         it= this->ListaSubClaveRef->begin();
@@ -268,6 +268,7 @@ class NodoInterno: public Nodo{
             SubClaveRef<T>* cosa = *it;
             cosa->imprimir();
             }
+        std::cout << endl;
         }
 
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
