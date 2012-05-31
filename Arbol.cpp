@@ -130,8 +130,10 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
         listaDeSubListasDatos->push_back(subListasDatos);
         /*elijo un porcentaje de empaquetamineto inicial del 75%*/
         double porcentajeDeEmpaquetamiento = 0.75;
+        /**/
+        int alturaInicial = 0;
         /*funcion recursiva*/
-        list<offset>* listaRefs = cargaInicialArmarNodos(listaDeSubListasDatos, dimension, porcentajeDeEmpaquetamiento);
+        list<offset>* listaRefs = cargaInicialArmarNodos(listaDeSubListasDatos, dimension, porcentajeDeEmpaquetamiento, &alturaInicial);
         /*me tiene que devolver una sola referencia*/
         list<offset>::iterator itListaRefs;
         itListaRefs = listaRefs->begin();
@@ -211,8 +213,8 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	list<Dato*>::iterator itDato;
         itDato = subListaOrdenada->begin();
         //int i = 0;
-	/*primer recorrida*/      
-	list<list<Dato*>*>* listaListasResultados = new list<list<Dato*>*>();  
+	/*primer recorrida*/
+	list<list<Dato*>*>* listaListasResultados = new list<list<Dato*>*>();
 	list<SubClave*>* listaSubClaves = new list<Dato*>();
 	list<Dato*>* listaAux = new list<Dato*>();
 	for(;itDato!=subListaOrdenada->end();itDato++){
@@ -227,7 +229,7 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 		if(res==RES_DESBORDADO){
 			listaListasResultados->push_back(listaAux);
 			NodoHoja* nodoHoja = new NodoHoja();
-			/*no checkeo el res pq el primero tiene que entrar bien siempre*/			
+			/*no checkeo el res pq el primero tiene que entrar bien siempre*/
 			Resultado res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
 			list<Dato*>* listaAux = new list<Dato*>();
 			/*creo y guardo la subClave*/
@@ -455,13 +457,17 @@ offset Arbol::insertarDatosEnNodoInterno(list<list<SubClaveRef*>*>* listaMaestra
 				nodoInterno->InsertarNuevaSubClaveRef(subClave->getSubClave(), referenciaSiguiente);
 			}
 	}
+	/*le agrego la dimension al nodo*/
+    nodoInterno->setDim(dimension);
+    /*tengo que setear la altura, que para este metodo es 1*/
+    nodoInterno->setAltura(1);
 	/*persisto el nodo*/
 	offset nroNodo = this->persistir->agregarNodo(nodoInterno);
 	/*me devuelve el nro de nodo, yo retorno ese numero de nodo*/
 	return nroNodo;
 }
 
-list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension){
+list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension, int alturaVuelta){
         /*construyo mis NodoI*/
         int d = 0;
         list<offset>* listaRefsNodosInternos = new list<offset>();
@@ -498,6 +504,10 @@ list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMa
 					}
 			}
 			k++;
+			/*le agrego la dimension al nodo*/
+            nodoInterno->setDim(dimension);
+            /*le agrego la altura*/
+            nodoInterno->setAltura(alturaVuelta);
 			/*persisto el nodo*/
 			offset nroNodo = this->persistir->agregarNodo(nodoInterno);
 			/*meto las refs en mi lista*/
@@ -514,7 +524,7 @@ list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMa
 /*una opcion, devolver los nodos de abajo para arriba a medida que fui terminando, y usar algun flag que me indique cuando llego al nivel de la raiz(la veo muy viable)(repensarlo maniana)*/
 
 /*funcion recursiva encargada de hacer la coordinacion de la magia de la carga inicial*/
-list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento){
+list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento, int* alturaVuelta){
         /*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
         list<int>* listaMaestraNiveles = new list<int>();
         list<list<SubClaveRef*>*>* listaMaestraClaves = new list<list<SubClaveRef*>*>();
@@ -577,6 +587,8 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                         listaNodosInternos->push_back(nroNodoInterno);
                         i++;
                 }
+                /*luego de este cilco la altura del siguiente es 2*/
+                (*alturaVuelta)++;
                 /*libero memoria*/
                 delete listaMaestraNiveles;
                 delete listaMaestraClaves;
@@ -615,11 +627,13 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
         /*para cada una de estas sublistas tendria que recomenzar*/
         /*Arme una lista de sublistas =0*/
         /*quizas en su momento podria recalcular el porcentajeDeEmpaquetamiento*/
-        list<offset>* listaRefsNodosArmados = cargaInicialArmarNodos(listaMaestraDatosSubArboles, Key::getSiguienteDimension(dimension),                                porcentajeDeEmpaquetamiento);
-
+        list<offset>* listaRefsNodosArmados = cargaInicialArmarNodos(listaMaestraDatosSubArboles, Key::getSiguienteDimension(dimension), porcentajeDeEmpaquetamiento, alturaVuelta);
         /*con los nodos recibidos, reconstruyo mis nodos de nivel superior*/
         /*para cada SubArb de la lista de SubArbs*/
-        list<offset>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados, dimension);
+        list<offset>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados, dimension, *alturaVuelta);
+
+        /*aumento la altura*/
+        (*alturaVuelta)++;
 
         delete listaMaestraNiveles;
         delete listaMaestraClaves;
