@@ -68,7 +68,12 @@ long int Indice::getTamanioSerializado(){
 	return sizeof(this->arbol->cantidadElem);
 }
 
+void Indice::agregarDatosCargaInicial(list<Dato*>* listaDatosCargaInicial){
+    this->arbol->cargaInicial(listaDatosCargaInicial);
+}
+
 bool Indice::hidratarMetada(char* metadata){
 	memcpy(&(this->arbol->cantidadElem) ,metadata,sizeof(this->arbol->cantidadElem));
 	return true;
 };
+

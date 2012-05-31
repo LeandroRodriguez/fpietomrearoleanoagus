@@ -39,6 +39,8 @@ public:
 	void ListarForcaciones();
 	void ListarLineas();
 	void ListarAccidentes();
+
+    void InsertarDatosCargaInicial(list<Key*>* listaDatos);
 };
 
 #endif /* CONTROLADOR_H_ */

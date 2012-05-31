@@ -23,6 +23,7 @@ public:
 	Resultado agregarDato(offset nroBloque, offset nroRegistro, Key* dato);
 	Indice(string nombreArchivo);
 	virtual ~Indice();
+	void agregarDatosCargaInicial(list<Dato*>* listaDatosCargaInicial);
 	//virtual offset buscar(Key* dato){}
 };
 
