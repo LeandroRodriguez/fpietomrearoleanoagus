@@ -275,12 +275,13 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
         /*si la subListaOrdenada tiene un solo elemento, devuelvo en la sublista, ese elemento y uno vacio. y en la de clave tomo la clave del unico elemento
         (total, ante igualdad hay que ir para las 2 ramas)*/
 	list<Dato*>::iterator itDato;
-        itDato = subListaOrdenada->begin();
+    itDato = subListaOrdenada->begin();
         //int i = 0;
 	/*primer recorrida*/
 	list<list<Dato*>*>* listaListasResultados = new list<list<Dato*>*>();
 	list<SubClaveRef*>* listaSubClaves = new list<SubClaveRef*>();
 	list<Dato*>* listaAux = new list<Dato*>();
+	Key* clave;
 	for(;itDato!=subListaOrdenada->end();itDato++){
 		/*guardo el dato en un nodo(solo en RAM)*/
 		Dato* dato = (*itDato);
@@ -307,16 +308,43 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	/*acabo de pasar el nivel 1*/
 	int nivel = 1;
 	/*tendria que verificar el caso que lista de claves el size sea 0(aca tendria que crear nodo vacio)*/
+	/*tambien si claves->size <= listaDatos->size*/
 	if(listaSubClaves->size()==0){
 		/*setear un nodo vacio o algo*/
-		/*agarro la clave del ultimo elemento*/
+		/*agarro la clave del ultimo elemento y la meto en la lista*/
+        SubClaveRef* subClave = new SubClaveRef(clave->getSubClaveSegunDim(dimension),0);
+        listaSubClaves->push_back(subClave);
+        /*meto un dato vacio a la lista*/
+        Dato* dato = (*itDato);
+		dato->setIdRegistro(0);
+        dato->setNroBoque(0);
+        dato->setClave(NULL);
+
+        list<Dato*>* listaAux = new list<Dato*>();
+        listaAux->push_back(dato);
+        /*meto la lista, a mi lista de listas*/
+        listaListasResultados->push_back(listaAux);
+        nivel++;
 	}
 	else{
-		/*le paso las listas a ordenar, y las 2 donde quiero que me devuelva los resultados*/
-		nivel = this->conseguirParticionRecursiva(nivel, dimension, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
+        if((listaSubClaves->size() == listaListasResultados->size())){
+            /*meto un dato vacio a la lista para balancear*/
+            Dato* dato = (*itDato);
+            dato->setIdRegistro(0);
+            dato->setNroBoque(0);
+            dato->setClave(NULL);
+
+            list<Dato*>* listaAux = new list<Dato*>();
+            listaAux->push_back(dato);
+            /*meto la lista, a mi lista de listas*/
+            listaListasResultados->push_back(listaAux);
+        }
+        /*le paso las listas a ordenar, y las 2 donde quiero que me devuelva los resultados*/
+        nivel = this->conseguirParticionRecursiva(nivel, dimension, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
 	}
 
-        return nivel;
+
+    return nivel;
 }
 
 int Arbol::conseguirNivelMayor(list<int>* listaMaestraNiveles){
