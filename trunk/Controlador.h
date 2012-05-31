@@ -41,6 +41,9 @@ public:
 	void ListarAccidentes();
 
     void InsertarDatosCargaInicial(list<Key*>* listaDatos);
+
+    list<Key*>* getListaKey(string path);
+
 };
 
 #endif /* CONTROLADOR_H_ */

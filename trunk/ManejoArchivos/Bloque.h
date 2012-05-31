@@ -14,14 +14,13 @@ class Bloque {
 
 protected:
 
-	list<RegistroVariable*> registros; /*registros fisicos guardados en el bloque*/
+	list<RegistroVariable*>* registros; /*registros fisicos guardados en el bloque*/
 
 public:
 
 	cantBytes tamanio; /*tamanio limite del bloque, ningun reg puede pesar mas que esto*/
 	cantBytes usados; /*tamanio en uso*/
 	uint32 nBloque; /*nro del bloque(unsigned int)*/
-	uint32_t IUC; /*nose*/
 
 	Bloque(const cantBytes& tamanio); /*constructor*/
 	Bloque();
@@ -54,6 +53,8 @@ public:
 
 	/*Devuelve el espacio que le queda libre*/
 	cantBytes getEspacioLibre();
+
+	list<RegistroVariable*>* getRegistros(){return this->registros;}
 };
 
 #endif /* BLOQUE_H_ */

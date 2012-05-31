@@ -44,6 +44,38 @@ void Controlador::InsertarDato(Key* dato){
 	}
 }
 
+list<Key*>* Controlador::getListaKey(string path){
+	list<Key*>* lista = new list<Key*>();
+	ifstream almacenamientoEntrada;
+
+	almacenamientoEntrada.open(path.c_str());
+	almacenamientoEntrada.seekg(LONGITUD_BLOQUE_DATA, ios_base::beg);//me paro en el bloque 1
+	while(!almacenamientoEntrada.eof())
+	{
+		string stream;
+		char* aux = (char*) malloc (sizeof(char)*LONGITUD_BLOQUE_DATA);
+		/*voy obteniendo de a un bloque y verificando*/
+		almacenamientoEntrada.read(aux, LONGITUD_BLOQUE_DATA);
+		stream.append(aux, LONGITUD_BLOQUE_DATA);
+		delete[] aux;
+		Bytes bloqueBytes(stream.c_str());
+		/*hidrato el bloque recuperado*/
+		Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
+		bloqueTemporal.hidratarse(bloqueBytes);
+		list<RegistroVariable*>* registros = bloqueTemporal.getRegistros();
+		list<RegistroVariable*>::iterator itRegistros;
+		itRegistros= registros->begin();
+		for(;itRegistros!=registros->end();itRegistros++)
+		{
+			Key* dato = new Key();
+			dato -> Hidratar((*itRegistros)->getDato().toString());
+			lista->push_back(dato);
+		}
+
+	}
+	return lista;
+}
+
 void Controlador::ListarTenesPorFalla(string falla){
     //not implemented
     }
@@ -122,7 +154,6 @@ void Controlador::InsertarDatosCargaInicial(list<Key*>* listaKey){
 	/*llamo al indice, que a su vez mediara con el arbol, para ejecutar la carga inicial*/
 	this->indice->agregarDatosCargaInicial(listaDatosCargaInicial);//AGREGAR ESTA FUNCION MEDIADORA A INDICE
 }
-
 
 
 /*
