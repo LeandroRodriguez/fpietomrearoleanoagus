@@ -219,6 +219,8 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
     vector<int>::iterator itTam = S.begin();
     list<int>::iterator itReg = this->listIdRegistros->begin();
     list<int>::iterator itBloq = this->listNroBloque->begin();
+    list<int>* nLR = new list<int>;
+    list<int>* l2B = new list<int>;
 
     int SumaParcial=0;
 
@@ -227,14 +229,14 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
         while(!SeLlegoAlaMitad){
         SumaParcial += *itTam;
         if (SumaParcial > TamMitad ){
+            nLR->push_back(*itReg);
+            l2B->push_back(*itBloq);
             SeLlegoAlaMitad=true;//paso a la derecha desde el que me pasa la "mitad", en adelante.
             }
             itTam++;
             itReg++;
             itBloq++;
             }
-        list<int>::iterator itRegErase=itReg;//guardo estas posiciones, para borrar despues
-        list<int>::iterator itBloqErase=itBloq;//no se puede borrar sobre lo que se esta iterando
 
         kAsubir=this->cargarDato(*itReg,*itBloq);
         //me quedan los iT, apuntando en la "mitad"
@@ -249,14 +251,13 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
         Nder->proximaHoja= this->proximaHoja;//ojo con esto !
         //********************************************
         //borro la mitad derecha de ESTE nodo, ya que los pase a otro nodo
-        for( ;itBloqErase!=this->listNroBloque->end() ;itBloqErase++){
-            this->EliminarNroBloque(*itBloqErase);
-            }
-        for( ;itRegErase!=this->listIdRegistros->end() ;itRegErase++){
-            this->EliminarIdRegistro(*itRegErase);
-            }
+        delete this->listIdRegistros;
+        delete this->listNroBloque;
+        this->listIdRegistros=nLR;
+        this->listNroBloque=l2B;
+        this->ActualizarCantElem();
+        /*------------------------------------------------*/
         this->proximaHoja=Nder->getIdDelNodo();//ojo con esto!
-
     return Nder;
     }
 

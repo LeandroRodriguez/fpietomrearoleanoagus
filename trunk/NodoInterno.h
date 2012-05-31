@@ -47,7 +47,7 @@ class NodoInterno: public Nodo{
 
     NodoInterno(char* cadena);
 
-        NodoInterno(Arbol* arbol):Nodo(arbol){
+    NodoInterno(Arbol* arbol):Nodo(arbol){
         this->inicialize();
         }
 
