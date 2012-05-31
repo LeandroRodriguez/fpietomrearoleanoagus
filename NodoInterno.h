@@ -259,7 +259,8 @@ class NodoInterno: public Nodo{
 
     void imprimir(){
         std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
-			<<	", dimension:" << this->dimension<< " refs: " << this->Ref1erNodo << " ";
+			<<	", dimension:" << this->dimension<< endl;
+		std::cout<<	" idNodo: " << this->Ref1erNodo << " ";
 
         typename list< SubClaveRef<T>* >::iterator it;
         it= this->ListaSubClaveRef->begin();
