@@ -264,10 +264,6 @@ class NodoInterno: public Nodo{
         typename list< SubClaveRef<T>* >::iterator it;
         it= this->ListaSubClaveRef->begin();
 
-        SubClaveRef<T>* cosa = *it;
-        cosa->imprimir();
-        it++;
-
         for(;it!=this->ListaSubClaveRef->end();it++){
             SubClaveRef<T>* cosa = *it;
             cosa->imprimir();
