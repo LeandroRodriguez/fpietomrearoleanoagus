@@ -9,12 +9,8 @@
     }
 
 	void* Key::getSubClaveSegunDim(int dim){ /*hardcodeadisimo */
-		if (dim==0){
-		    cout << this->LineaFerroviaria << endl;
-		    string* aux = new string(LineaFerroviaria);
-		    return aux;
-		}
-		//if (dim==1)return &this->Formacion;
+		if (dim==0)return &this->LineaFerroviaria;
+		if (dim==1)return &this->Formacion;
 		if (dim==2)return &this->Accidente;
 		if (dim==3)return &this->Falla;
 		if (dim==4)return &this->FranjaHorariaDelSiniestro;
