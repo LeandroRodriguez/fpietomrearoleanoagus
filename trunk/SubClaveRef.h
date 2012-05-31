@@ -144,15 +144,24 @@ class SubClaveRef{
 
     bool operator< (const SubClaveRef* otro){
         int hola = this->subclave.compare(otro->getSubClave());
-        if ( hola <0)return true;
-        return false;
+        if ( hola <0){
+            cout << this->subclave << "es menor que" << otro->getSubClave() << endl;
+            return true;
+            }
+            cout << this->subclave << "es mayor o igual que" << otro->getSubClave() << endl;
+            return false;
         //http://www.cplusplus.com/reference/string/string/compare/
         }
 
     bool operator< (const string subc){
         int hola = this->subclave.compare(subc);
-        if ( hola ==0)return true;
-        return false;
+        if ( hola <0){
+            cout << this->subclave << "es menor que" << subc << endl;
+            return true;
+            }
+            cout << this->subclave << "es mayor o igual que" << subc << endl;
+            return false;
+        //http://www.cplusplus.com/reference/string/string/compare/
         }
 
     bool operator== (const SubClaveRef* otro){
@@ -166,6 +175,11 @@ class SubClaveRef{
         return false;
         }
 
+    bool operator> (const string otro){
+       int hola = this->subclave.compare(otro);
+       if(hola>0)return true;
+       return false;
+    }
     SubClaveRef(char* bytes,unsigned int& cur){
         this->Hidratar(bytes,cur);
     }
