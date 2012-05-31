@@ -191,14 +191,14 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
         		lectura[i] = lectura2[i+1];
         	}
         	auxiliar = new NodoHoja(lectura);
-        	//auxiliar -> setIdDelNodo(nroNodo);
+        	auxiliar -> setIdDelNodo(nroNodo);
         }else if  (lectura2[0] == 'I' ){
             /*bis asi no leo tipo y flag*/
         	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
         		lectura[i] = lectura2[i+6];
         	}
         	auxiliar = new NodoInterno(lectura);
-        	//auxiliar -> setIdDelNodo(nroNodo);
+        	auxiliar -> setIdDelNodo(nroNodo);
         }
         /*libero la memoria de la lectura y retorno el puntero a la raiz*/
         free(lectura);
