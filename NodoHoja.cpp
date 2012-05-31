@@ -228,14 +228,15 @@ NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
         while(!SeLlegoAlaMitad){
         SumaParcial += *itTam;
         if (SumaParcial > TamMitad ){
+            SeLlegoAlaMitad=true;//paso a la derecha desde el que me pasa la "mitad", en adelante.
+            }else{
             nLR->push_back(*itReg);
             l2B->push_back(*itBloq);
-            SeLlegoAlaMitad=true;//paso a la derecha desde el que me pasa la "mitad", en adelante.
-            }
             itTam++;
             itReg++;
             itBloq++;
             }
+        }
 
         kAsubir=this->cargarDato(*itReg,*itBloq);
         //me quedan los iT, apuntando en la "mitad"
