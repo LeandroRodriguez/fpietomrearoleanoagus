@@ -531,8 +531,13 @@ list<offset>* insertarHijosEnNodoPadre(list<list*>* listaMaestraClaves, list<off
 list<offset>* cargaInicialArmarNodos(list<list*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento){
 	/*Creo 3 listas que voy a ir usando a lo largo de la funcion*/
 	list<int>* listaMaestraNiveles = new list<int>();
-	list<list*>* listaMaestraClaves = new list<list*>();
-	list<list*>* listaMaestraDatosSubArboles = new list<list*>();
+	if(Key::EsIntEstaDimension(dimension)){
+        list<list<SubClaveRef<int>*>* listaMaestraClaves = new list<list<SubClaveRef<int>*>*>();
+	}
+	else{
+        list<list<SubClaveRef<string>*>* listaMaestraClaves = new list<list<SubClaveRef<string>*>*>();
+	}
+	list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles = new list<list<list<Dato*>*>*>();
 
 	/*para cada una de mis sublistas:*/
 	list<list*>::iterator itSubListas;
