@@ -9,7 +9,7 @@ void TestControlador::TestInsertarDato(){
 	dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato->setFalla("no cierra puerta");
 	dato->setAccidente("incendio");
-	dato->setFormacion(1);
+	dato->setFormacion("1");
 	controlador->InsertarDato(dato);
 
 	Key* dato2 = new Key();
@@ -17,7 +17,7 @@ void TestControlador::TestInsertarDato(){
 	dato2->setFranjaHorariaDelSiniestro("2012/01/21 00:00 00:30");
 	dato2->setFalla("asientos rotos");
 	dato2->setAccidente("choco con estacion");
-	dato2->setFormacion(2);
+	dato2->setFormacion("2");
 	controlador->InsertarDato(dato2);
 
 	Key* dato3 = new Key();
@@ -29,10 +29,10 @@ void TestControlador::TestInsertarDato(){
 	dato3->setFalla(falla3);
 	char acc3[] = "choco con otro tren";
 	dato3->setAccidente(acc3);
-	dato3->setFormacion(3);
+	dato3->setFormacion("3");
 	controlador->InsertarDato(dato3);
 
-	/*Key* dato4 = new Key();
+	Key* dato4 = new Key();
 	char linea4[] ="San martin";
 	dato4->setLineaFerroviaria(linea4);
 	char franja4[] = "2012/02/25 00:00 00:30";
@@ -41,9 +41,9 @@ void TestControlador::TestInsertarDato(){
 	dato4->setFalla(falla4);
 	char acc4[] = "exploto";
 	dato4->setAccidente(acc4);
-	dato4->setFormacion(4);
+	dato4->setFormacion("4");
 	controlador->InsertarDato(dato4);
-
+    /*
 	Key* dato5 = new Key();
 	char linea5[] ="Belgrano";
 	dato5->setLineaFerroviaria(linea5);
@@ -108,13 +108,13 @@ void TestControlador::TestInsertarDato(){
 	dato11->setFormacion(6);
 	controlador->InsertarDato(dato11);*/
 
-    controlador->indicePrimario->imprimir();
+    controlador->indice->imprimir();
 	delete controlador;
 	delete dato;
 	delete dato2;
-	/*delete dato3;
+	delete dato3;
 	delete dato4;
-	delete dato5;
+	/*delete dato5;
 	delete dato6;
 	delete dato7;
 	delete dato8;
