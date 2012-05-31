@@ -225,7 +225,7 @@ void NodoInterno::imprimir(){
             SubClaveRef* cosa = *it;
             cosa->imprimir();
             }
-        std::cout << endl;
+        std::cout <<"******************************" << endl;
         }
 
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
