@@ -423,6 +423,14 @@ list<SubClaveRef*>* Arbol::partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol
 		string clave = d->getClave()->getSubClaveSegunDim(dimension);
 		SubClaveRef* subClave = new SubClaveRef(clave, 0);
 		listaClavesSubarboles->push_back(subClave);
+		if(listaTotal->size() == 1)
+		{
+			Dato* d = new Dato();
+			d->setIdRegistro(0);
+			d->setNroBoque(0);
+			d->setClave(NULL);
+			listDatosDer->push_back(d);
+		}
 	}
 
 	return listaClavesSubarboles;
