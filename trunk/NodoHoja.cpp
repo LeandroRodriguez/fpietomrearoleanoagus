@@ -145,7 +145,6 @@ int NodoHoja::getTamanioConDatos(){
 		tamanio += dato->getTamanioSerializado();
 		itBloques++;
         }
-	tamanio += sizeof(this->proximaHoja);
 	return tamanio;
 
 }

@@ -48,13 +48,13 @@ class Arbol {
 
 	int conseguirNivelMayor(list<int>* listaMaestraNiveles);
 
-	void* obtenerClavesSegunPos(list<list<SubClaveRef*>*>* listaMaestraClaves, int j, int dimension);
+	list<SubClaveRef*>* obtenerClavesSegunPos(list<list<SubClaveRef*>*>* listaMaestraClaves, int j, int dimension);
 
 	list<list<Dato*>*>* obtenerListasSegunPos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, int j);
 
 	offset obtenerReferenciaNodosSegunPos(list<offset>* listaReferenciasNodosHios, int j);
 
-	void* partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos);
+	list<SubClaveRef*>* partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos);
 
 	void reemplazarDatoListaDatos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, list<list<Dato*>*>* listasDatosSubArbolesNuevos, int j);
 
