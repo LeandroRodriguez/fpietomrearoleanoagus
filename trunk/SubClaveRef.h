@@ -88,10 +88,10 @@ class SubClaveRef{
     bool esMenorEstrictoQue(const string& sub){
         int hola = this->subclave.compare(sub);
         if ( hola <0){
-            cout << this->subclave << " es menor que " << sub << endl;
+            //cout << this->subclave << " es menor que " << sub << endl;
             return true;
             }
-            cout << this->subclave << " es mayor o igual que " << sub << endl;
+            //cout << this->subclave << " es mayor o igual que " << sub << endl;
             return false;
         //http://www.cplusplus.com/reference/string/string/compare/
         }
@@ -106,6 +106,27 @@ class SubClaveRef{
         int hola = this->subclave.compare(sub );
         if ( hola == 0 )return true;
         return false;
+        }
+
+    bool esMayorEstrictoQue(const string& sub){
+        int hola = this->subclave.compare(sub);
+        if ( hola >0){
+            //cout << this->subclave << " es mayor que " << sub << endl;
+            return true;
+            }
+            //cout << this->subclave << " es menor o igual que " << sub << endl;
+            return false;
+        }
+
+    bool esMayorEstrictoQue(const SubClaveRef* otro){
+        int hola = this->subclave.compare(otro->getSubClave());
+        if ( hola >0){
+            //cout << this->subclave << " es mayor que " << otro->getSubClave() << endl;
+            return true;
+            }
+          //  cout << this->subclave << " es menor o igual que " << otro->getSubClave() << endl;
+            return false;
+        //http://www.cplusplus.com/reference/string/string/compare/
         }
 
     SubClaveRef(char* bytes,unsigned int& cur){
