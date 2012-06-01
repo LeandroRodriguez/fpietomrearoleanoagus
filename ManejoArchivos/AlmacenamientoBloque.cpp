@@ -56,32 +56,6 @@ AlmacenamientoBloque::AlmacenamientoBloque(const string &pathDato,const string &
 	}
 	//Hasta aca
 
-
-	/*
-	if (!this->aDatos.is_open()) {
-		ofstream aux(pathDato.c_str());
-		if (aux.is_open()) {
-			aux.close();
-		}
-		this->aDatos.open(pathDato.c_str(), fstream::binary | fstream::out
-				| fstream::in);
-	}
-	*/
-
-	/*
-	this->aLibres.open(pathLibres.c_str(), fstream::binary | fstream::out
-				| fstream::in | ios::trunc);
-
-	if (!this->aLibres.is_open()) {
-		ofstream aux(pathLibres.c_str());
-		if (aux.is_open()) {
-			aux.close();
-		}
-		this->aLibres.open(pathLibres.c_str(), fstream::binary | fstream::out
-				| fstream::in | ios::trunc);
-	}
-	*/
-
 	/*intento abrir el archivo de libres*/
 	this->aLibres.open(auxLibres.c_str(), fstream::in | fstream::out
 			| fstream::ate | ios:: binary);
@@ -289,7 +263,6 @@ offset AlmacenamientoBloque::getUltimoUID(){
 	offset offset = 0;
 	Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
 
-	//ifstream almacenamientoEntrada;
 	string stream;
 
 	ifstream almacenamientoEntrada;

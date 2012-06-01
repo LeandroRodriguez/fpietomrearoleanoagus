@@ -74,10 +74,6 @@ bool PersistenciaArbol::ActualizarNodo(Nodo* nodo){
 			return false;
 		}
 
-		/*if (nodo->getIdDelNodo() == ID_RAIZ){
-			return NULL;
-		}*/
-
 		/*creo un string auxliar para guardar la cadena total que dps voy a guardar en el archivo*/
 		char auxiliar[LONGITUD_BLOQUE_NODO ];
 		/*serializo el nodo*/
