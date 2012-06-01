@@ -193,6 +193,7 @@ void NodoInterno::Hidratar(char* bytes){
     }
 
 int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq,int& OtroIdNodoEnCasoDeSubClaveIgual){
+        OtroIdNodoEnCasoDeSubClaveIgual= IDNODOINVALIDO;//DEFAULT
         list< SubClaveRef* >::iterator it;
         it= this->ListaSubClaveRef->begin();
         SubClaveRef* cosa = *it;
@@ -206,7 +207,6 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq,int& OtroIdNodoEnC
 
         bool FirstSubMayorEstrictoAsubReq = (cosa->esMayorEstrictoQue(subcReq));
         if (FirstSubMayorEstrictoAsubReq){
-            OtroIdNodoEnCasoDeSubClaveIgual= IDNODOINVALIDO;
             return this->Ref1erNodo;
             }
 /***********************************************************************/
@@ -226,7 +226,6 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq,int& OtroIdNodoEnC
             /*si la subK en la que estoy en la lista, es mas grande que subcReq, devuelvo ref anterior */
                 it--;
                 cosa = *it;
-                OtroIdNodoEnCasoDeSubClaveIgual= IDNODOINVALIDO;
                 return (  cosa->getRefNodo()   );
                 }
             /*si llegue aca, mi subcReq,es mayor que mi subK de la pos en la que estoy */
@@ -267,7 +266,7 @@ void NodoInterno::imprimir(){
 bool NodoInterno::BuscarDato(Key* datoBuscado){
     bool encontrado = false;
     string subclave = datoBuscado->getSubClaveSegunDim(this->dimension);
-    int otroNodoPorSiDaIgualSub = 0;
+    int otroNodoPorSiDaIgualSub = IDNODOINVALIDO;
     int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
     Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
 
