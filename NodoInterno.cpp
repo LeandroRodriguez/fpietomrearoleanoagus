@@ -87,7 +87,7 @@ void NodoInterno::Inicializar( int ref1 ,string subclave ,int ref2 ){
         this->InsertarNuevaSubClaveRef(subclave,ref2);
     }
 
-        //esto hay que mejorarlo.
+/*
 string NodoInterno::conseguirClaveQueDividaAlMedioPonderadoElNodo(){
 
         list< SubClaveRef* >::iterator it;
@@ -105,7 +105,7 @@ string NodoInterno::conseguirClaveQueDividaAlMedioPonderadoElNodo(){
         }
         SubClaveRef* cosa = *it;
         return cosa->getSubClave();
-    }
+    }*/
 
 unsigned long int NodoInterno::getTamanioSerializado(){
 
@@ -125,7 +125,6 @@ unsigned long int NodoInterno::getTamanioSerializado(){
         }
 	return tamanioSerializado;
 }
-
 
 char* NodoInterno::Serializarse(){
 	unsigned long int  tamanioTotal = this->getTamanioSerializado();
@@ -159,11 +158,10 @@ char* NodoInterno::Serializarse(){
         memcpy(str+cur, serializacion, cosa->getTamanioSerializado() );
         cur+=cosa->getTamanioSerializado();
     }
-     cout << "linea" << string(str) << endl;
+     //cout << "linea" << string(str) << endl;
 
 	return str;
 }
-
 
 void NodoInterno::Hidratar(char* bytes){
 
@@ -189,7 +187,7 @@ void NodoInterno::Hidratar(char* bytes){
         SubClaveRef scr(bytes,cur);
         this->InsertarNuevaSubClaveRef( scr.getSubClave(),scr.getRefNodo() );
         //el cur se va incrementando solo, adentro del constructor de SubClaveRef
-        cout << "cursor: " << (cur-hastaaca) << endl;
+        //cout << "cursor: " << (cur-hastaaca) << endl;
         i=i+1;
         }
     }
@@ -243,11 +241,15 @@ void NodoInterno::imprimir(){
         list< SubClaveRef* >::iterator it2;
         it2= this->ListaSubClaveRef->begin();
 
-        this->arbol->DevolverNodoSegunID(this->Ref1erNodo)->imprimir();
+        Nodo* nodito = this->arbol->DevolverNodoSegunID(this->Ref1erNodo);
+
+        if(!nodito->tieneArbol())nodito->setArbol(this->arbol);
+        nodito->imprimir();
 
         for(;it2!=this->ListaSubClaveRef->end();it2++){
             SubClaveRef* sc = *it2;
             Nodo* cosa = this->arbol->DevolverNodoSegunID(sc->getRefNodo());
+            if(!cosa->tieneArbol())cosa->setArbol(this->arbol);
             cosa->imprimir();
         }
     }

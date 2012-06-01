@@ -242,7 +242,7 @@ void NodoHoja::ordenarBloquesRegistros(){
     list<int>::iterator itBloqj2 = this->listNroBloque->begin();
     list<int>::iterator minItReg;
     list<int>::iterator minItBloq;
-    int dim = Key::getDimensionSegunAltura(this->Altura);
+    int dim = Key::getDimensionSegunAltura(this->Altura+1);
     int i1,i2,j1,j2,minReg,minBloq;
     bool seguir = true;
     while (itRegi1 != this->listIdRegistros->end() && itBloqi2 != this->listNroBloque->end() && seguir){
@@ -262,7 +262,7 @@ void NodoHoja::ordenarBloquesRegistros(){
         while(itRegj1 != this->listIdRegistros->end() && itBloqj2 != this->listNroBloque->end()){
             j1=*itRegj1;
             j2=*itBloqj2;
-            dim = 0;
+           // dim = 0;
             Key* siguiente = this->cargarDato(j1, j2);
             if (siguiente->getSubClaveSegunDim(dim) < actual->getSubClaveSegunDim(dim)){
                 minReg = j1;
