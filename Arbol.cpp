@@ -109,6 +109,7 @@ Nodo* Arbol::getRaiz(){
 void Arbol::imprimir(){
 	if (raiz != NULL) {
 		cout << "Raiz Del Arbol: " << endl;
+		if(!this->raiz->tieneArbol())this->raiz->setArbol(this);
 		this->raiz->imprimir();
 	}
 	else{
