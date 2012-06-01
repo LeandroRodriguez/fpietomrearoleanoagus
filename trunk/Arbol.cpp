@@ -177,6 +177,8 @@ void Arbol::setElemento (list<Dato*>* lista, int index, Dato* dato){
         for(;it!=lista->end();it++){
                 if(i == index){
                         lista->insert(it, dato);
+                        it++;
+                        lista->remove(*it);
                         return;
                 }
                 i++;
@@ -195,10 +197,10 @@ list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dim
             	 if(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension) >
 					 this->getElemento(lista, i)->getClave()->getSubClaveSegunDim(dimension))
                  {
-                         Dato* aux = this->getElemento(lista, i-1);
-                         Dato* elem = this->getElemento(lista, i);
-                         this->setElemento(lista, i - 1,elem);
-                         this->setElemento(lista, i,aux);
+                         Dato aux = *this->getElemento(lista, i-1);
+                         Dato elem = *this->getElemento(lista, i);
+                         this->setElemento(lista, i - 1,&elem);
+                         this->setElemento(lista, i,&aux);
                          swapped = true;
                  }
              }
