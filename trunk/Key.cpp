@@ -85,7 +85,7 @@
 		char* formacion;
 		formacion =(&(str.substr(cur,t)[0]));
 		this->Formacion= formacion;
-		cur +=4;
+		cur +=t;
     /**********************************************/
 		t = atoi(str.substr(cur, 4).c_str());
 		cur +=4;
@@ -120,6 +120,7 @@
 		tamanioSerializado += this->Falla.size();
 		tamanioSerializado += this->Accidente.size();
 		tamanioSerializado += this->FranjaHorariaDelSiniestro.size();
+		tamanioSerializado += this->Formacion.size();
 		tamanioSerializado += 5*4;
 
 		return tamanioSerializado;
