@@ -16,8 +16,8 @@ NodoHoja::NodoHoja(Arbol* arbol){
 bool NodoHoja::BuscarDato(Key* datoBuscado){
     bool encontrado = false;
     list<int>::iterator itReg = this->listIdRegistros->begin();
-    list<int>::iterator itBloq = this->listIdRegistros->begin();
-    while (!encontrado){
+    list<int>::iterator itBloq = this->listNroBloque->begin();
+    while (!encontrado && itReg != listIdRegistros->end() && itBloq != listNroBloque->end()){
         Key* dato = this->cargarDato(*itReg,*itBloq);
         if(dato->esIgual(datoBuscado))
             encontrado = true;
