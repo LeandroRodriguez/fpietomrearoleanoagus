@@ -140,7 +140,7 @@
 	bool Key::esIgual(Key* dato){
         if(this->LineaFerroviaria != dato->LineaFerroviaria)
             return false;
-        if(this->Formacion != dato->Formacion)
+        if(atoi(this->Formacion.c_str()) != atoi(dato->Formacion.c_str()))
             return false;
         if(this->Accidente != dato->Accidente)
             return false;

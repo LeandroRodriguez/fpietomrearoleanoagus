@@ -54,11 +54,12 @@ int main(){
     testKey->TestSerializarHidratarKey();
     delete testKey;*/
 
-    //TestNodoHoja* testNodoHoja = new TestNodoHoja();
+    TestNodoHoja* testNodoHoja = new TestNodoHoja();
     //testNodoHoja->TestCrearNodoHoja();
     //testNodoHoja->TestSerializarHidtratar();
     //ESTE NO ANDA POR AHORA
-    //testNodoHoja->TestPartirHojaEn2();*/
+    //testNodoHoja->TestPartirHojaEn2();
+    testNodoHoja->TestBuscarDato();
 
     /*TestNodoInterno* testNodoInterno = new TestNodoInterno();
     //testNodoInterno->TestCrearNodoInterno();
