@@ -135,26 +135,17 @@ char* NodoInterno::Serializarse(){
 	unsigned int cur = 0;/*cur = cursor*/
 
     /*guardo la cantidad de elementos */
-
-    int* pInt = new int;//artilugio para usar memcopy
-    *pInt = this->CantElem;
-
-	memcpy(str + cur, pInt , sizeof(this->CantElem));
+	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
 
-    *pInt = this->Altura;
 
-	memcpy(str + cur, pInt, sizeof(this->Altura));
+	memcpy(str + cur,&this->Altura, sizeof(this->Altura));
 	cur += sizeof(this->Altura);
 
-    *pInt = this->dimension;
-
-	memcpy(str + cur,pInt , sizeof(this->dimension));
+	memcpy(str + cur,&this->dimension , sizeof(this->dimension));
 	cur += sizeof(this->dimension);
 
-    *pInt = this->Ref1erNodo;
-
-	memcpy(str + cur, pInt , sizeof(this->Ref1erNodo));
+	memcpy(str + cur,&this->Ref1erNodo, sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
 
     /*tengo que guardar todos los elementos de la lista */
@@ -168,8 +159,7 @@ char* NodoInterno::Serializarse(){
         memcpy(str+cur, serializacion, cosa->getTamanioSerializado() );
         cur+=cosa->getTamanioSerializado();
     }
-    delete pInt;
-     cout << str << endl;
+     cout << "linea" << string(str) << endl;
 
 	return str;
 }
@@ -190,15 +180,16 @@ void NodoInterno::Hidratar(char* bytes){
 	cur += sizeof(this->dimension);
     	cout << "Dimension: " << this->dimension << endl;
 
-	memcpy(bytes + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
+	memcpy(&this->Ref1erNodo, bytes+ cur, sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
     	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
-
+    int hastaaca = cur;
 	int i=0;
     while(i< this->CantElem ){
         SubClaveRef scr(bytes,cur);
         this->InsertarNuevaSubClaveRef( scr.getSubClave(),scr.getRefNodo() );
         //el cur se va incrementando solo, adentro del constructor de SubClaveRef
+        cout << "cursor: " << (cur-hastaaca) << endl;
         i=i+1;
         }
     }
