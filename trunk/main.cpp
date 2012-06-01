@@ -46,20 +46,21 @@ int main(){
 	//testArbol->UnDatoMas();
     delete testArbol;*/
 
-    /*TestControlador* testControlador = new TestControlador();
-    testControlador->TestInsertarDato();
-    delete testControlador;*/
+    TestControlador* testControlador = new TestControlador();
+    //testControlador->TestInsertarDato();
+    testControlador->TestControladorBuscarDato();
+    delete testControlador;
 
     /*TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();
     delete testKey;*/
 
-    TestNodoHoja* testNodoHoja = new TestNodoHoja();
-    //testNodoHoja->TestCrearNodoHoja();
-    //testNodoHoja->TestSerializarHidtratar();
+    /*TestNodoHoja* testNodoHoja = new TestNodoHoja();
+    testNodoHoja->TestCrearNodoHoja();
+    testNodoHoja->TestSerializarHidtratar();
     //ESTE NO ANDA POR AHORA
     //testNodoHoja->TestPartirHojaEn2();
-    testNodoHoja->TestBuscarDato();
+    testNodoHoja->TestBuscarDato();*/
 
     /*TestNodoInterno* testNodoInterno = new TestNodoInterno();
     //testNodoInterno->TestCrearNodoInterno();

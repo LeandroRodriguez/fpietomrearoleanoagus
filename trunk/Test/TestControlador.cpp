@@ -32,7 +32,7 @@ void TestControlador::TestInsertarDato(){
 	dato3->setFormacion("3");
 	controlador->InsertarDato(dato3);
 
-	/*Key* dato4 = new Key();
+	Key* dato4 = new Key();
 	char linea4[] ="San martin";
 	dato4->setLineaFerroviaria(linea4);
 	char franja4[] = "2012/02/25 00:00 00:30";
@@ -43,8 +43,8 @@ void TestControlador::TestInsertarDato(){
 	dato4->setAccidente(acc4);
 	dato4->setFormacion("4");
 	controlador->InsertarDato(dato4);
-    /*
-	/*Key* dato5 = new Key();
+
+	Key* dato5 = new Key();
 	char linea5[] ="Belgrano";
 	dato5->setLineaFerroviaria(linea5);
 	char franja5[] = "2011/02/21 00:00 00:30";
@@ -53,7 +53,7 @@ void TestControlador::TestInsertarDato(){
 	dato5->setFalla(falla5);
 	char acc5[] = "no prende";
 	dato5->setAccidente(acc5);
-	dato5->setFormacion(5);
+	dato5->setFormacion("5");
 	controlador->InsertarDato(dato5);
 
 	Key* dato6 = new Key();
@@ -65,7 +65,7 @@ void TestControlador::TestInsertarDato(){
 	dato6->setFalla(falla6);
 	char acc6[] = "descarrilo";
 	dato6->setAccidente(acc6);
-	dato6->setFormacion(6);
+	dato6->setFormacion("6");
 	controlador->InsertarDato(dato6);
 
 	Key* dato7 = new Key();
@@ -73,10 +73,10 @@ void TestControlador::TestInsertarDato(){
 	dato7->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato7->setFalla("no cierra puerta");
 	dato7->setAccidente("incendio");
-	dato7->setFormacion(5);
+	dato7->setFormacion("5");
 	controlador->InsertarDato(dato7);
 
-	Key* dato8 = new Key();
+	/*Key* dato8 = new Key();
 	dato8->setLineaFerroviaria("Ledesma");
 	dato8->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato8->setFalla("no tiene puerta");
@@ -113,13 +113,61 @@ void TestControlador::TestInsertarDato(){
 	delete dato;
 	delete dato2;
 	delete dato3;
-//	delete dato4;
-	/*delete dato5;
+    delete dato4;
+	delete dato5;
 	delete dato6;
-	delete dato7;
+	delete dato7;/*
 	delete dato8;
 	delete dato9;
 	delete dato10;
 	delete dato11;*/
 
+}
+
+void TestControlador::TestControladorBuscarDato(){
+    Controlador* controlador = new Controlador();
+    Key* dato = new Key();
+    dato->setLineaFerroviaria("Sarmiento");
+	dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+	dato->setFalla("no cierra puerta");
+	dato->setAccidente("incendio");
+	dato->setFormacion("1");
+	controlador->InsertarDato(dato);
+
+	Key* dato2 = new Key();
+	dato2->setLineaFerroviaria("Mitre");
+	dato2->setFranjaHorariaDelSiniestro("2012/01/21 00:00 00:30");
+	dato2->setFalla("asientos rotos");
+	dato2->setAccidente("choco con estacion");
+	dato2->setFormacion("2");
+	controlador->InsertarDato(dato2);
+
+	Key* dato3 = new Key();
+	char linea3[] ="Roca";
+	dato3->setLineaFerroviaria(linea3);
+	char franja3[] = "2012/02/23 00:00 00:30";
+	dato3->setFranjaHorariaDelSiniestro(franja3);
+	char falla3[] = "no frena";
+	dato3->setFalla(falla3);
+	char acc3[] = "choco con otro tren";
+	dato3->setAccidente(acc3);
+	dato3->setFormacion("3");
+	controlador->InsertarDato(dato3);
+
+    //busco dato q este
+	if (controlador->BuscarDato(dato3))
+        cout << "TestControladorBuscarDato: OK" << endl;
+    else
+        cout << "TestControladorBuscarDato: FAIl" << endl;
+
+    //busco dato que no este
+    dato3->setLineaFerroviaria("gkhfkjh");
+    if (!controlador->BuscarDato(dato3))
+        cout << "TestControladorBuscarDato: OK" << endl;
+    else
+        cout << "TestControladorBuscarDato: FAIl" << endl;
+	delete controlador;
+	delete dato;
+	delete dato2;
+    delete dato3;
 }
