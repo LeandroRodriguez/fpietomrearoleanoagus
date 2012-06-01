@@ -59,6 +59,7 @@ void TestNodoInterno::TestSerializarHidratar(){
 	almacena.agregarRegistro(&registro1);
 	offset nBloque1 = almacena.getNumeroBloque();
 	offset nReg1 = almacena.getNumeroUID();
+	nodo1->insertarElemento(nReg1, nBloque1, dato1, 1);
 
     //nodo1->imprimir();
 
