@@ -38,15 +38,16 @@ int main(){
 
     TestPersistenciaArbol* testPersistencia = new TestPersistenciaArbol();
     testPersistencia->TestCrearArchivoArbol();
-    delete testPersistencia;/*
+    delete testPersistencia;*/
 
     /*TestArbol* testArbol = new TestArbol();
 	testArbol->Testear();
+	testArbol->UnDatoMas();
     delete testArbol;*/
 
-    TestControlador* testControlador = new TestControlador();
+    /*TestControlador* testControlador = new TestControlador();
     testControlador->TestInsertarDato();
-    delete testControlador;
+    delete testControlador;*/
 
     /*TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();
@@ -58,8 +59,9 @@ int main(){
     //ESTE NO ANDA POR AHORA
     //testNodoHoja->TestPartirHojaEn2();*/
 
-    /*TestNodoInterno* testNodoInterno = new TestNodoInterno();
-    testNodoInterno->TestCrearNodoInterno();*/
+    TestNodoInterno* testNodoInterno = new TestNodoInterno();
+    //testNodoInterno->TestCrearNodoInterno();
+    testNodoInterno->TestSerializarHidratar();
 };
 
 
