@@ -90,7 +90,8 @@ class SubClaveRef{
         }
 
     unsigned int getTamanioSerializado(){
-        return (this->subclave.length()+sizeof(int)+sizeof(this->RefNodo)) ;
+        unsigned int tam = this->subclave.length()+sizeof(int)+sizeof(this->RefNodo);
+        return tam ;
     }
     char* Serializarse(){// haciendo strlen() la cadena que me devuelve, se cuanto mover cursor exterior
         int cur=0;

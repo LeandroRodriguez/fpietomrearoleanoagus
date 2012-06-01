@@ -121,7 +121,7 @@ unsigned long int NodoInterno::getTamanioSerializado(){
     it = this->ListaSubClaveRef->begin();
 
     for(;it!=this->ListaSubClaveRef->end();it++){
-        tamanioSerializado += strlen( (*it)->Serializarse() );
+        tamanioSerializado += (*it)->getTamanioSerializado();
         }
 	return tamanioSerializado;
 }
@@ -166,7 +166,7 @@ char* NodoInterno::Serializarse(){
         SubClaveRef* cosa = *it;
         char* serializacion = cosa->Serializarse();
         memcpy(str+cur, serializacion, cosa->getTamanioSerializado() );
-        cur+=strlen(serializacion);
+        cur+=cosa->getTamanioSerializado();
     }
     delete pInt;
 	return str;
@@ -178,6 +178,7 @@ void NodoInterno::Hidratar(char* bytes){
     unsigned int cur = 0;/*cur = cursor ,ya se sabe el tipo*/
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
+	cout << "CantElem" << this->CantElem << endl;
 
 	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
 	cur += sizeof(this->Altura);
