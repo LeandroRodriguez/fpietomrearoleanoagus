@@ -1,16 +1,8 @@
 #ifndef CONTROLADOR_H_
 #define CONTROLADOR_H_
 
-//#include "ManejoArchivos/Almacenamiento.h"
-//#include "Datos/Registro.h"
-//#include "Key.h"
-
-//#include "Datos/ClaveNumero.h"
-//#include "Datos/Clave.h"
 #include "Indice.h"
-//#include "ManejoArchivos/Bytes.h"
 #include "ManejoArchivos/AlmacenamientoBloque.h"
-
 #include "exception"
 #include "string"
 #include "iostream"

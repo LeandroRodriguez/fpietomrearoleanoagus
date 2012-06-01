@@ -1,6 +1,5 @@
 #include "Controlador.h"
 
-/*REVISAR Y ARREGLAR*/
 Controlador::Controlador() {
 	 /*creo las carpetas donde guardo los archivos*/
 	 ManipuladorArchivos* manipulo = new ManipuladorArchivos();
@@ -168,29 +167,3 @@ void Controlador::InsertarDatosCargaInicial(list<Key*>* listaKey){
 bool Controlador::BuscarDato(Key* dato){
     return this->indice->BuscarDato(dato);
 }
-
-
-/*
-void Controlador::cargarArchivos(){
-
-	 ManipuladorArchivos* manipulo = new ManipuladorArchivos();
-
-	 archivosClasificacion
-		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES_CLASIFICACION,"",".idx");
-
-	 archivosSeleccion
-		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES_SELECCION,"",".idx");
-
-	 archivoPrimario
-		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES,"",".idx")[0];
-
-	 delete manipulo;
-}*/
-
-
-/*Controlador::Controlador(){
-    //not implemented
-    }
-
-
-*/

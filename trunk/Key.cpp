@@ -8,7 +8,7 @@
 
     }
 
-	string Key::getSubClaveSegunDim(int dim){ /*hardcodeadisimo */
+	string Key::getSubClaveSegunDim(int dim){
 		if (dim==0)return this->LineaFerroviaria;
 		if (dim==1)return this->Formacion;
 		if (dim==2)return this->Accidente;

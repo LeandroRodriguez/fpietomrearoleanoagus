@@ -14,12 +14,9 @@ typedef unsigned long int tamanioBloque;
 #define TAMANIO_STRING_MAXIMO 100
 #define VACIO 9999;
 
-#define INDICES_EXTENSION ".idx"
-
 #define DIR_ARCHIVO_DATOS "./Archivos/"
 #define DIR_ARCHIVO_INDICES "./Indices/"
 
-#define ARCHIVO_INDICE_PRIMARIO "PRIMARIO"
 #define ARCHIVO_DATOS "ArchivoDatos.fde"
 #define ARCHIVO_DATOS_LIBRES "ArchivoDatosLibres.fde"
 #define ARCHIVO_ARBOL "ArchivoArbol.idx"
