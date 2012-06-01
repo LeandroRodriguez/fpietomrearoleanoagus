@@ -65,7 +65,7 @@ Resultado NodoInterno::InsertarNuevaSubClaveRef ( string subclave,int refAbloque
 
         if( this->SeRepiteSubclave(itemNuevo) )return RES_DUPLICADO;
 
-        SubClaveRef* primeritem = this->ListaSubClaveRef->front();
+       // SubClaveRef* primeritem = this->ListaSubClaveRef->front();
 
       //  if( itemNuevo->esMenorEstrictoQue(primeritem) ) {
         //    int aux = itemNuevo->getRefNodo();
@@ -115,16 +115,13 @@ unsigned long int NodoInterno::getTamanioSerializado(){
 	tamanioSerializado += sizeof(this->Altura);
 	tamanioSerializado += sizeof(this->dimension);
     tamanioSerializado += sizeof(this->Ref1erNodo);
-    //tamanioSerializado += ESPACIO_TIPOS;              /*aca guardo el tipo*/
-
     /* consigo el tamanio de los elementos contenidos en ListaSubClaveRef*/
-
     list< SubClaveRef* >::iterator it;
 
     it = this->ListaSubClaveRef->begin();
 
     for(;it!=this->ListaSubClaveRef->end();it++){
-        tamanioSerializado += strlen( (*it)->Serializarse() );//la magia del polimorfismo
+        tamanioSerializado += strlen( (*it)->Serializarse() );
         }
 	return tamanioSerializado;
 }
@@ -137,24 +134,27 @@ char* NodoInterno::Serializarse(){
 	char* str =(char*) malloc(tamanioTotal * sizeof(char));
 	unsigned int cur = 0;/*cur = cursor*/
 
-    /*PRIMERO GUARDO EL TIPO*/
-    //memcpy(str + cur, typeid(string).name(), ESPACIO_TIPOS);
-	//cur += ESPACIO_TIPOS;
-
     /*guardo la cantidad de elementos */
-	memcpy(str + cur, &this->CantElem , sizeof(this->CantElem));
+
+    int* pInt = new int;//artilugio para usar memcopy
+    *pInt = this->CantElem;
+
+	memcpy(str + cur, pInt , sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
 
-    /*bis altura*/
-	memcpy(str + cur, &this->Altura , sizeof(this->Altura));
+    *pInt = this->Altura;
+
+	memcpy(str + cur, pInt, sizeof(this->Altura));
 	cur += sizeof(this->Altura);
 
-    /*bis ref 1er hijo izq  */
-	memcpy(str + cur, &this->dimension , sizeof(this->dimension));
+    *pInt = this->dimension;
+
+	memcpy(str + cur,pInt , sizeof(this->dimension));
 	cur += sizeof(this->dimension);
 
-    /*bis dimension  */
-	memcpy(str + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
+    *pInt = this->Ref1erNodo;
+
+	memcpy(str + cur, pInt , sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
 
     /*tengo que guardar todos los elementos de la lista */
