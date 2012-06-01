@@ -165,9 +165,10 @@ char* NodoInterno::Serializarse(){
     for(;it!=this->ListaSubClaveRef->end();it++){
         SubClaveRef* cosa = *it;
         char* serializacion = cosa->Serializarse();
-        memcpy(str+cur, serializacion, strlen(serializacion) );
+        memcpy(str+cur, serializacion, cosa->getTamanioSerializado() );
         cur+=strlen(serializacion);
     }
+    delete pInt;
 	return str;
 }
 
@@ -187,10 +188,12 @@ void NodoInterno::Hidratar(char* bytes){
 	memcpy(bytes + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
 
-    while(cur < strlen(bytes) ){
+	int i=0;
+    while(i< this->CantElem ){
         SubClaveRef scr(bytes,cur);
         this->InsertarNuevaSubClaveRef( scr.getSubClave(),scr.getRefNodo() );
         //el cur se va incrementando solo, adentro del constructor de SubClaveRef
+        i=i+1;
         }
     }
 
