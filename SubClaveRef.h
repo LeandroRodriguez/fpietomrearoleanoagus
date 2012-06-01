@@ -96,16 +96,16 @@ class SubClaveRef{
     char* Serializarse(){// haciendo strlen() la cadena que me devuelve, se cuanto mover cursor exterior
         int cur=0;
         char* str = new char[(this->subclave.length()+sizeof(int)+sizeof(this->RefNodo)) ];
-        int* pInt = new int;
-        *pInt = this->subclave.length();//artilugio para usar memcopy
-        memcpy(str + cur,pInt,sizeof(int) );
+
+        int pInt = this->subclave.length();//artilugio para usar memcopy
+
+        memcpy(str + cur,&pInt,sizeof(int) );
 
         cur += sizeof(int);//guarde longitud de la subclave en un int
         memcpy(str + cur, &this->subclave , this->subclave.length());
         cur += this->subclave.length();//guarde la subclave
         memcpy(str + cur, &this->RefNodo , sizeof(RefNodo));
         cur += sizeof(RefNodo);//guarde el nodo
-        delete pInt;
         return str;
         }
 
@@ -113,18 +113,20 @@ class SubClaveRef{
         int longitud=0;
         memcpy(&longitud, bytes + cur  , sizeof(int) );
         cur += sizeof(int);
+        cout << "long " << longitud << endl;
 
-        string subcl;
-        memcpy(&subcl, bytes + cur  , longitud );
+        char* cadena = new char[longitud];
+        memcpy(cadena, bytes + cur  , longitud );
         cur += longitud;
 
         int RefNod;
 
         memcpy(&RefNod, bytes + cur  , sizeof(this->RefNodo) );
         cur += sizeof(this->RefNodo);
+        cout << "refnod " << RefNod << endl;
 
         this->setRefNodo(RefNod);
-        this->subclave=subcl;
+        this->subclave= string(cadena) ;
         }
 
     string getSubClave()const{
