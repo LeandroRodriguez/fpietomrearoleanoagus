@@ -181,7 +181,7 @@ void NodoInterno::Hidratar(char* bytes){
 	memcpy(&this->Ref1erNodo, bytes+ cur, sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
     	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
-    int hastaaca = cur;
+    //int hastaaca = cur;
     int i=0;
     while( i < AUXMAXCANT ){
         SubClaveRef scr(bytes,cur);
@@ -192,31 +192,41 @@ void NodoInterno::Hidratar(char* bytes){
         }
     }
 
-int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq ){
+int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq,int& OtroIdNodoEnCasoDeSubClaveIgual){
         list< SubClaveRef* >::iterator it;
         it= this->ListaSubClaveRef->begin();
         SubClaveRef* cosa = *it;
+        //CasoParticularExtremoIzquierdo
+/***********************************************************************/
+        bool FirstSubIgualaSubReq = (cosa->esIgualQue(subcReq));
+        if(FirstSubIgualaSubReq){
+            OtroIdNodoEnCasoDeSubClaveIgual = this->Ref1erNodo;
+            return cosa->getRefNodo();
+            }
 
-        bool SubIgual = (cosa->esIgualQue(subcReq));
-        bool SubMenorOigual = !(cosa->esMenorEstrictoQue(subcReq));
-
-        if (SubMenorOigual && !(SubIgual)){
+        bool FirstSubMayorEstrictoAsubReq = (cosa->esMayorEstrictoQue(subcReq));
+        if (FirstSubMayorEstrictoAsubReq){
+            OtroIdNodoEnCasoDeSubClaveIgual= IDNODOINVALIDO;
             return this->Ref1erNodo;
-        }
+            }
+/***********************************************************************/
         /*ya considere para el caso del extremo izquierdo  */
-
         for(;it!=this->ListaSubClaveRef->end();it++){
             cosa = *it;
             bool SubIgual = (cosa->esIgualQue(subcReq));
-            bool SubMenorOigual = !(cosa->esMenorEstrictoQue(subcReq));
+            bool SubMayorEstricto = (cosa->esMayorEstrictoQue(subcReq));
 
-            /*si es igual, devuelvo ref a la derecha la subK de la lista */
-            if( SubIgual ) return cosa->getRefNodo();
+            /*si es igual, devuelvo ref a la derecha la subK de la lista,y el anterior */
+            if( SubIgual ) {
+                OtroIdNodoEnCasoDeSubClaveIgual =  (*(it--))->getRefNodo();
+                return cosa->getRefNodo();
+                }
 
-            if (SubMenorOigual && !(SubIgual)){
+            if (SubMayorEstricto){
             /*si la subK en la que estoy en la lista, es mas grande que subcReq, devuelvo ref anterior */
                 it--;
                 cosa = *it;
+                OtroIdNodoEnCasoDeSubClaveIgual= IDNODOINVALIDO;
                 return (  cosa->getRefNodo()   );
                 }
             /*si llegue aca, mi subcReq,es mayor que mi subK de la pos en la que estoy */
@@ -255,10 +265,19 @@ void NodoInterno::imprimir(){
     }
 
 bool NodoInterno::BuscarDato(Key* datoBuscado){
+    bool encontrado = false;
     string subclave = datoBuscado->getSubClaveSegunDim(this->dimension);
-    int id = this->DevolverNodoHijoSegunSubclave(subclave);
+    int otroNodoPorSiDaIgualSub = 0;
+    int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
     Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
-    return nodoHijo->BuscarDato(datoBuscado);
+
+    if( otroNodoPorSiDaIgualSub != IDNODOINVALIDO ){
+    Nodo* otroHijo = arbol->DevolverNodoSegunID(otroNodoPorSiDaIgualSub);
+    encontrado = ( nodoHijo->BuscarDato(datoBuscado) || otroHijo->BuscarDato(datoBuscado));
+    }else{
+        encontrado = nodoHijo->BuscarDato(datoBuscado);
+        }
+    return encontrado;
 }
 
 list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
@@ -267,7 +286,8 @@ list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fecha
 
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
         string subclave = dato->getSubClaveSegunDim(this->dimension);
-        int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);
+        int dummy =0;
+        int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave,dummy);
         Resultado Res;
 
         if (this->Altura > 1 ){/*He aqui la recursividad.Voy bajando por el arbol */

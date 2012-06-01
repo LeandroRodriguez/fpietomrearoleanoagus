@@ -71,7 +71,7 @@ class NodoInterno: public Nodo{
     void Hidratar(char* bytes);
     ~NodoInterno(){}
 
-    int DevolverNodoHijoSegunSubclave(string subcReq );
+    int DevolverNodoHijoSegunSubclave(string subcReq ,int& OtraIdNodoSiSubclaveIgual);
 
     void imprimir();
 
