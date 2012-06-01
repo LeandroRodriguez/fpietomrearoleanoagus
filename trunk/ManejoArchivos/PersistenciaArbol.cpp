@@ -185,18 +185,14 @@ bool PersistenciaArbol::guardarRaiz(Nodo* nodo){
 
         Nodo* auxiliar = NULL;
         /*aca evaluo el flag de tipo de nodo y creo el objeto correspondiente*/
+        for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
+        		lectura[i] = lectura2[i+1];
+        }
         if  ( lectura2[0] == 'H' ){
         /*copio la lectura 1 caracter corrido para no levantar el flag si es hoja o interno*/
-        	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-        		lectura[i] = lectura2[i+1];
-        	}
         	auxiliar = new NodoHoja(lectura);
         	auxiliar -> setIdDelNodo(nroNodo);
         }else if  (lectura2[0] == 'I' ){
-            /*bis asi no leo tipo y flag*/
-        	for (unsigned int i = 0; i < (LONGITUD_BLOQUE_NODO) -1 ; i++) {
-        		lectura[i] = lectura2[i+6];
-        	}
         	auxiliar = new NodoInterno(lectura);
         	auxiliar -> setIdDelNodo(nroNodo);
         }
