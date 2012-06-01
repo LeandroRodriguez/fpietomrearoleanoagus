@@ -168,9 +168,9 @@ char* NodoInterno::Serializarse(){
 void NodoInterno::Hidratar(char* bytes){
 
     unsigned int cur = 0;/*cur = cursor ,ya se sabe el tipo*/
-	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
+    int AUXMAXCANT =0;//OJO, cant de elementos crece naturalmente al ingresar datos
+	memcpy(&AUXMAXCANT, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
-	cout << "CantElem: " << this->CantElem << endl;
 
 	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
 	cur += sizeof(this->Altura);
@@ -184,8 +184,8 @@ void NodoInterno::Hidratar(char* bytes){
 	cur += sizeof(this->Ref1erNodo);
     	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
     int hastaaca = cur;
-	int i=0;
-    while(i< this->CantElem ){
+    int i=0;
+    while( i < AUXMAXCANT ){
         SubClaveRef scr(bytes,cur);
         this->InsertarNuevaSubClaveRef( scr.getSubClave(),scr.getRefNodo() );
         //el cur se va incrementando solo, adentro del constructor de SubClaveRef
