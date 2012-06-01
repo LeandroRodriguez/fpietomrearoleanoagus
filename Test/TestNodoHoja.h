@@ -11,6 +11,7 @@ class TestNodoHoja{
     void TestCrearNodoHoja();
     void TestSerializarHidtratar();
     void TestPartirHojaEn2();
+    void TestBuscarDato();
 };
 
 

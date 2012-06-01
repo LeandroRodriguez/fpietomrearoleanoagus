@@ -108,3 +108,28 @@ void TestNodoHoja::TestPartirHojaEn2(){
     delete dato2;
     delete nodo1;
 }
+
+void TestNodoHoja::TestBuscarDato(){
+    Key* dato1 = new Key();
+	dato1->setLineaFerroviaria("Carapachay");
+	dato1->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+	dato1->setFalla("no funca puerta");
+	dato1->setAccidente("incendio");
+	dato1->setFormacion("1");
+
+	NodoHoja* nodo = new NodoHoja();
+	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
+    string str1(dato1->Serializarse());
+    Bytes bytes1(str1);
+	RegistroVariable registro1(bytes1);
+
+	almacena.agregarRegistro(&registro1);
+	offset nBloque1 = almacena.getNumeroBloque();
+	offset nReg1 = almacena.getNumeroUID();
+	nodo->insertarElemento(nReg1, nBloque1, dato1, 1);
+
+	if (nodo->BuscarDato(dato1))
+        cout << "TestBuscarDato: OK" << endl;
+    else
+        cout << "TestBuscarDato: OK" << endl;
+}
