@@ -218,13 +218,13 @@ void TestControlador::TestBuscarFallaSegunFecha(){
 	dato->setFormacion("1");
 	controlador->InsertarDato(dato);
 
-	/*Key* dato2 = new Key();
+	Key* dato2 = new Key();
 	dato2->setLineaFerroviaria("Mitre");
 	dato2->setFranjaHorariaDelSiniestro("2012/01/21 00:00 00:30");
 	dato2->setFalla("no cierra puerta");
 	dato2->setAccidente("choco con estacion");
 	dato2->setFormacion("2");
-	controlador->InsertarDato(dato2);*/
+	controlador->InsertarDato(dato2);
 
 	Key* dato3 = new Key();
 	dato3->setLineaFerroviaria("Midland");

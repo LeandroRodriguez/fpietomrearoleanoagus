@@ -280,7 +280,21 @@ bool NodoInterno::BuscarDato(Key* datoBuscado){
 }
 
 list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
-    list<Key*>* datos = new list<Key*>();
+    list<Key*>* datos1 = new list<Key*>();
+    list<Key*>* datos2 = new list<Key*>();
+    int otroNodoPorSiDaIgualSub = IDNODOINVALIDO;
+    int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
+    Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
+
+    if( otroNodoPorSiDaIgualSub != IDNODOINVALIDO ){
+    Nodo* otroHijo = arbol->DevolverNodoSegunID(otroNodoPorSiDaIgualSub);
+    datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+    datos2 = otroHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+    }else{
+        datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+        }
+    datos1->merge(*datos2);
+    return datos1;
 }
 
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
