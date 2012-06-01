@@ -119,7 +119,7 @@ class SubClaveRef{
         memcpy(cadena, bytes + cur  , longitud );
         cur += longitud;
 
-        int RefNod;
+        int RefNod=0;
 
         memcpy(&RefNod, bytes + cur  , sizeof(this->RefNodo) );
         cur += sizeof(this->RefNodo);

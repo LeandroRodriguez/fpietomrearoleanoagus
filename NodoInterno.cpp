@@ -184,7 +184,7 @@ void NodoInterno::Hidratar(char* bytes){
 	cur += sizeof(this->Ref1erNodo);
     	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
     int hastaaca = cur;
-	int i=0;
+	int i=1;//importantisimo, igual a 1
     while(i< this->CantElem ){
         SubClaveRef scr(bytes,cur);
         this->InsertarNuevaSubClaveRef( scr.getSubClave(),scr.getRefNodo() );
