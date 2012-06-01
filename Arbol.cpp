@@ -125,7 +125,7 @@ void Arbol::imprimir(){
 /*funcion de arranque para la carga inicial. Aca seteo los datos iniciales para arrancar con la recursividad*/
 void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
     /*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
-        int dimension = 1;
+        int dimension = 3;
         /*creo la raiz vacia, dps la voy a modificar*/
         NodoInterno* raiz = new NodoInterno();
         offset nroNodo = this->persistir->guardarRaiz(raiz);
@@ -172,19 +172,16 @@ Dato* Arbol::getElemento (list<Dato*>* lista, int index){
                         return *it;
                 i++;
         }
-        return NULL;
 }
 
-void Arbol::setElemento (list<Dato*>* lista, int index, Dato* dato){
+void Arbol::setElemento (list<Dato*>* lista, int index, Dato dato){
         list<Dato*>::iterator it;
         it=lista->begin();
 
         int i = 0;
         for(;it!=lista->end();it++){
                 if(i == index){
-                        lista->insert(it, dato);
-                        it++;
-                        lista->remove(*it);
+						*it = &dato;
                         return;
                 }
                 i++;
@@ -192,26 +189,61 @@ void Arbol::setElemento (list<Dato*>* lista, int index, Dato* dato){
         return;
 }
 
+
+
 list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dimension){
         list<Dato*>* listaOrdenadaDatosSubArboles = new list<Dato*>();
+
+        vector<Dato*> vec;
+        list<Dato*>::iterator it;
+		it=lista->begin();
+
+		for(;it!=lista->end();it++){
+			vec.push_back(*it);
+		}
+
         bool swapped;
         do{
              swapped = false;
              int i;
-             for (i = 1; i <= lista->size() - 1; i++)
+             for (i = 1; i <= vec.size() - 1; i++)
              {
-            	 if(this->getElemento(lista, i-1)->getClave()->getSubClaveSegunDim(dimension) >
-					 this->getElemento(lista, i)->getClave()->getSubClaveSegunDim(dimension))
+            	 string anterior = vec[i-1]->getClave()->getSubClaveSegunDim(dimension);
+            	 string posterior = vec[i]->getClave()->getSubClaveSegunDim(dimension);
+            	 if(anterior > posterior)
                  {
-                         Dato aux = *this->getElemento(lista, i-1);
-                         Dato elem = *this->getElemento(lista, i);
-                         this->setElemento(lista, i - 1,&elem);
-                         this->setElemento(lista, i,&aux);
-                         swapped = true;
+            		 Dato** ante = &(vec[i-1]);
+            		 Dato** poste = &(vec[i]);
+            		 Dato* temp = *poste;
+            		 *poste = *ante;
+            		 *ante = temp;
+
+            		 //list<Dato*>::iterator ante = this->getElemento(lista, i-1);
+            		 //list<Dato*>::iterator poste = this->getElemento(lista, i);
+            		 //swap(ante, poste);
+
+					 //this->setElemento(lista, i - 1,elem);
+					 //this->setElemento(lista, i,aux);
+
+            		 //es asi, tengo mi list<Dato*>* y quiero hacer el swap. como lo hago? porque tengo que intercambiar
+            		 //los punteros en realidad y ya me maree
+            		 // o sea, vos queres hacer el reordenamiento en el lugar, no crear una lista nueva con los mismos elementos, o what?
+
+            		 //si, en la misma lista. te parece muy sucio? no
+					 swapped = true;
                  }
              }
         }
         while (swapped);
+
+        lista->clear();
+        vector<Dato*>::iterator ite;
+        ite=vec.begin();
+
+		for(;ite!=vec.end();ite++){
+			lista->push_back(*ite);
+		}
+
         return lista;
 }
 
