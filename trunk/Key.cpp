@@ -39,33 +39,35 @@
         serializacion += this->getTamString(streamTamanio.str());
 
         serializacion += this->LineaFerroviaria;
-
-
+    /**********************************************/
         stringstream  streamTamanioForm;
-        streamTamanioForm<<this->Formacion;
+        f = this->Formacion.size();
+        streamTamanioForm<<f;
         serializacion += this->getTamString(streamTamanioForm.str());
 
+        serializacion += this->Formacion;
+    /**********************************************/
         stringstream streamTamanioAcc;
 		f = this->Accidente.size();
 		streamTamanioAcc << f;
 		serializacion += this->getTamString(streamTamanioAcc.str());
 
 		serializacion += this->Accidente;
-
+    /**********************************************/
 		stringstream streamTamanioFalla;
 		f = this->Falla.size();
 		streamTamanioFalla << f;
 		serializacion += this->getTamString(streamTamanioFalla.str());
 
 		serializacion += this->Falla;
-
+    /**********************************************/
 		stringstream streamTamanioFranja;
 		f = this->FranjaHorariaDelSiniestro.size();
 		streamTamanioFranja << f;
 		serializacion += this->getTamString(streamTamanioFranja.str());
 
 		serializacion += this->FranjaHorariaDelSiniestro;
-
+    /**********************************************/
 		return  serializacion;
 	}
 
@@ -77,12 +79,14 @@
 		linea = &(str.substr(4,t)[0]);
 		this->LineaFerroviaria=(linea);
 		cur += t;
-
+    /**********************************************/
+		t = atoi(str.substr(cur, 4).c_str());
+		cur +=4;
 		char* formacion;
-		formacion =(&(str.substr(cur,4)[0]));
+		formacion =(&(str.substr(cur,t)[0]));
 		this->Formacion= formacion;
 		cur +=4;
-
+    /**********************************************/
 		t = atoi(str.substr(cur, 4).c_str());
 		cur +=4;
 		char* acc = (&(str.substr(cur,t)[0]));
@@ -140,7 +144,7 @@
 	bool Key::esIgual(Key* dato){
         if(this->LineaFerroviaria != dato->LineaFerroviaria)
             return false;
-        if(atoi(this->Formacion.c_str()) != atoi(dato->Formacion.c_str()))
+        if(this->Formacion != dato->Formacion)
             return false;
         if(this->Accidente != dato->Accidente)
             return false;
