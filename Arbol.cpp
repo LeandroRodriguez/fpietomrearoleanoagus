@@ -639,18 +639,21 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
         list<list<list<Dato*>*>*>::iterator itSubListas;
         itSubListas= subListasDatos->begin();
 
+        list<Dato*>* subListaOrdenada;
+        list<SubClaveRef*>* listaClaves;
+        list<list<Dato*>*>* listaListasDatosSubArboles;
         for(;itSubListas!=subListasDatos->end();itSubListas++){
                 list<list<Dato*>*>::iterator itSubSubListas;
                 itSubSubListas= (*itSubListas)->begin();
 
                 for(;itSubSubListas!=(*itSubListas)->end();itSubSubListas++){
                         /*ordeno datos por mi dimension*/
-                        list<Dato*>* subListaOrdenada = this->obtenerListaOrdenadaPorDimension((*itSubSubListas),dimension);
+                        subListaOrdenada = this->obtenerListaOrdenadaPorDimension((*itSubSubListas),dimension);
                         /*una vez que tengo mi lista ordenada, comienzo con la insercion en nodos como si fuese una carga inicial comun(mmm, mas bien una                               simulacion)*/
                         /*instancio dos listas vacias para que me devuelva resultados el metodo que simula la carga inicial del subarbol*/
-                        list<SubClaveRef*>* listaClaves;//lista de claves
+                        listaClaves = new list<SubClaveRef*>();//lista de claves
 
-                        list<list<Dato*>*>* listaListasDatosSubArboles;//lista de listas de datos
+                        listaListasDatosSubArboles = new list<list<Dato*>*>();//lista de listas de datos
                         int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
                         /*recupero el nivel del arbol, las claves del nodo raiz y una lista de subarboles*/
 
@@ -674,6 +677,7 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                 int i = 0;
                 offset nroNodoHoja;
                 offset nroNodoInterno;
+                list<Dato*>* listaDatosAuxiliar;
                 for(;itListaSubArboles!=listaMaestraDatosSubArboles->end();itListaSubArboles++){
                         list<offset>* listaReferenciasNodosHoja = new list<offset>();
                         /*para cada SubSubArb de la lista de SubArb*/
@@ -681,8 +685,9 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                         itSubSubListas= (*itListaSubArboles)->begin();
 
                         for(;itSubSubListas!=(*itListaSubArboles)->end();itSubSubListas++){
+                                listaDatosAuxiliar = (*itSubSubListas);
                                 /*inserto el SubSubArbol de datos en un nodoHoja*/
-                                nroNodoHoja = this->insertarDatosEnNodoHoja((*itSubSubListas), porcentajeDeEmpaquetamiento);//TO DO
+                                nroNodoHoja = this->insertarDatosEnNodoHoja(listaDatosAuxiliar, porcentajeDeEmpaquetamiento);//TO DO
                                 /*inserto la ref al nodo hoja en una nueva lista*/
                                 listaReferenciasNodosHoja->push_back(nroNodoHoja);
                         }
