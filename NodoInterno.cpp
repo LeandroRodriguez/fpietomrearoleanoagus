@@ -1,5 +1,10 @@
 #include "NodoInterno.h"
 
+bool compare (SubClaveRef* s1, SubClaveRef* s2){
+    bool resultado = s1->operator<((*s2).getSubClave());
+    return resultado;
+};
+
 
 bool NodoInterno::SeRepiteSubclave(SubClaveRef* item){
         list< SubClaveRef* >::iterator it;
@@ -56,21 +61,21 @@ Resultado NodoInterno::InsertarNuevaSubClaveRef ( string subclave,int refAbloque
             return RES_OK;
             }
 
-        SubClaveRef* item = new SubClaveRef(subclave,refAbloqueArbol);
+        SubClaveRef* itemNuevo = new SubClaveRef(subclave,refAbloqueArbol);
 
-        if( this->SeRepiteSubclave(item) )return RES_DUPLICADO;
+        if( this->SeRepiteSubclave(itemNuevo) )return RES_DUPLICADO;
 
         SubClaveRef* primeritem = this->ListaSubClaveRef->front();
 
-        if( item < ( primeritem )){
-            int aux = item->getRefNodo();
-            item->setRefNodo(this->Ref1erNodo);
+        if( itemNuevo->operator<((*primeritem).getSubClave() ) ){
+            int aux = itemNuevo->getRefNodo();
+            itemNuevo->setRefNodo(this->Ref1erNodo);
             this->Ref1erNodo=aux;/*tiene un grado mas de complejidad, debido a 1er ref nodo*/
-            this->ListaSubClaveRef->push_front(item);
+            this->ListaSubClaveRef->push_front(itemNuevo);
             this->CantElem=this->CantElem+1;
             }else{
-            this->ListaSubClaveRef->push_back(item);
-            this->ListaSubClaveRef->sort();
+            this->ListaSubClaveRef->push_back(itemNuevo);
+            this->ListaSubClaveRef->sort(compare);
             this->CantElem=this->CantElem+1;
             }
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;

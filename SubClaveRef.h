@@ -141,7 +141,7 @@ class SubClaveRef{
         return this->RefNodo;
         }
 
-    bool operator< (const SubClaveRef* otro){
+    bool operator< (const SubClaveRef *otro){
         int hola = this->subclave.compare(otro->getSubClave());
         if ( hola <0){
             cout << this->subclave << " es menor que " << otro->getSubClave() << endl;
@@ -152,7 +152,7 @@ class SubClaveRef{
         //http://www.cplusplus.com/reference/string/string/compare/
         }
 
-    bool operator< (const string subc){
+    bool operator< (const string &subc){
         int hola = this->subclave.compare(subc);
         if ( hola <0){
             cout << this->subclave << " es menor que " << subc << endl;
@@ -168,13 +168,13 @@ class SubClaveRef{
         if ( hola ==0)return true;
         return false;
         }
-    bool operator== (const string otro){
+    bool operator== (const string &otro){
         int hola = this->subclave.compare(otro );
         if ( hola ==0)return true;
         return false;
         }
 
-    bool operator> (const string otro){
+    bool operator> (const string &otro){
        int hola = this->subclave.compare(otro);
        if(hola>0)return true;
        return false;
@@ -190,6 +190,4 @@ class SubClaveRef{
     SubClaveRef(){};
     ~SubClaveRef(){}
 };
-
-
 #endif // SUBCLAVEREF_H_INCLUDED
