@@ -78,7 +78,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             this->cantidadElem+=2;
             res=RES_OK;//queda todo bien
             }
-            //if(res==RES_DESBORDADO){}
+            //if(res==RES_DESBORDADO && this->raiz-getHojaOinterno()=='i'){}
 	}
     return res;
 }
@@ -342,7 +342,6 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
         /*le paso las listas a ordenar, y las 2 donde quiero que me devuelva los resultados*/
         nivel = this->conseguirParticionRecursiva(nivel, dimension, listaListasResultados, listaSubClaves, listaListasDatosSubArboles, listaClaves);
 	}
-
 
     return nivel;
 }
@@ -648,11 +647,11 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                         list<SubClaveRef*>* listaClaves;//lista de claves
 
                         list<list<Dato*>*>* listaListasDatosSubArboles;//lista de listas de datos
-                        int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
+//                        int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
                         /*recupero el nivel del arbol, las claves del nodo raiz y una lista de subarboles*/
 
                         /*estos datos los tengo que guardar en algun lado o los voy a perder en la siguiente iteracion(ponele que los voy metiendo en 3 listas)*/
-                        listaMaestraNiveles->push_back(nivel);
+                     //   listaMaestraNiveles->push_back(nivel);
                         listaMaestraClaves->push_back(listaClaves);
                         listaMaestraDatosSubArboles->push_back(listaListasDatosSubArboles);
                 }
