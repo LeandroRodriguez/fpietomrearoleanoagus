@@ -83,6 +83,7 @@ class NodoHoja: public Nodo{
     ~NodoHoja(){};
 
     bool BuscarDato(Key* datoBuscado);
+    list<Key*>* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin);
     unsigned long int getTamanioSerializado();
     char* Serializarse();
     void Hidratar(char* bytes);

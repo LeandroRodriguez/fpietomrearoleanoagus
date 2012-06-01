@@ -261,6 +261,10 @@ bool NodoInterno::BuscarDato(Key* datoBuscado){
     return nodoHijo->BuscarDato(datoBuscado);
 }
 
+list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
+    list<Key*>* datos = new list<Key*>();
+}
+
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
         string subclave = dato->getSubClaveSegunDim(this->dimension);
         int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);

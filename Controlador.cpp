@@ -167,3 +167,39 @@ void Controlador::InsertarDatosCargaInicial(list<Key*>* listaKey){
 bool Controlador::BuscarDato(Key* dato){
     return this->indice->BuscarDato(dato);
 }
+
+list<Key*>* Controlador::BuscarTrenesConFallaSegunFecha(string falla, string fechaInicio, string fechaFin){
+    //falla dim=3
+    return this->BuscarSegunFecha(falla, 3, fechaInicio, fechaFin);
+}
+
+list<Key*>* Controlador::BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin){
+    return this->indice->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+}
+
+
+/*
+void Controlador::cargarArchivos(){
+
+	 ManipuladorArchivos* manipulo = new ManipuladorArchivos();
+
+	 archivosClasificacion
+		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES_CLASIFICACION,"",".idx");
+
+	 archivosSeleccion
+		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES_SELECCION,"",".idx");
+
+	 archivoPrimario
+		 = manipulo->getArchivos(DIR_ARCHIVO_INDICES,"",".idx")[0];
+
+	 delete manipulo;
+}*/
+
+
+/*Controlador::Controlador(){
+    //not implemented
+    }
+
+
+*/
+
