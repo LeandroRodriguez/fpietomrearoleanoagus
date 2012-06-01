@@ -79,7 +79,7 @@
 		cur += t;
 
 		char* formacion;
-		formacion =(&(str.substr(cur,t)[0]));
+		formacion =(&(str.substr(cur,4)[0]));
 		this->Formacion= formacion;
 		cur +=4;
 
@@ -113,11 +113,10 @@
 		unsigned long int tamanioSerializado = 0;
 
 		tamanioSerializado += this->LineaFerroviaria.size();
-		tamanioSerializado += sizeof(this->Formacion);
 		tamanioSerializado += this->Falla.size();
 		tamanioSerializado += this->Accidente.size();
 		tamanioSerializado += this->FranjaHorariaDelSiniestro.size();
-		tamanioSerializado += 4*4;
+		tamanioSerializado += 5*4;
 
 		return tamanioSerializado;
 	}
