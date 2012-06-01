@@ -126,6 +126,38 @@ void TestControlador::TestInsertarDato(){
 
 void TestControlador::TestControladorBuscarDato(){
     Controlador* controlador = new Controlador();
+    Key* dato8 = new Key();
+	dato8->setLineaFerroviaria("Ledesma");
+	dato8->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+	dato8->setFalla("no tiene puerta");
+	dato8->setAccidente("incendio");
+	dato8->setFormacion("4");
+	controlador->InsertarDato(dato8);
+
+	Key* dato9 = new Key();
+	dato9->setLineaFerroviaria("Rivadavia");
+	dato9->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:30");
+	dato9->setFalla("no cierra");
+	dato9->setAccidente("quemado");
+	dato9->setFormacion("4");
+	controlador->InsertarDato(dato9);
+
+	Key* dato10 = new Key();
+	dato10->setLineaFerroviaria("TorCuato");
+	dato10->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
+	dato10->setFalla("no cierra");
+	dato10->setAccidente("roto");
+	dato10->setFormacion("4");
+	controlador->InsertarDato(dato10);
+
+	Key* dato11 = new Key();
+	dato11->setLineaFerroviaria("LaBoca");
+	dato11->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
+	dato11->setFalla("no abre ventanas");
+	dato11->setAccidente("descarrilamiento");
+	dato11->setFormacion("6");
+	controlador->InsertarDato(dato11);
+
     Key* dato = new Key();
     dato->setLineaFerroviaria("Sarmiento");
 	dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
@@ -170,4 +202,8 @@ void TestControlador::TestControladorBuscarDato(){
 	delete dato;
 	delete dato2;
     delete dato3;
+    delete dato10;
+    delete dato8;
+    delete dato9;
+    delete dato11;
 }
