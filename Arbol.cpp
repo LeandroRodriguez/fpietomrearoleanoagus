@@ -138,7 +138,7 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
 
 
     /*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
-        int dimension = 3;
+        int dimension = 1;
         /*creo la raiz vacia, dps la voy a modificar*/
         NodoInterno* raiz = new NodoInterno();
         offset nroNodo = this->persistir->guardarRaiz(raiz);
@@ -519,6 +519,9 @@ list<SubClaveRef*>* Arbol::partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol
 			listDatosDer->push_back(d);
 		}
 	}
+
+	listasDatosSubArbolesNuevos->push_back(listDatosIzq);
+	listasDatosSubArbolesNuevos->push_back(listDatosDer);
 
 	return listaClavesSubarboles;
 }
