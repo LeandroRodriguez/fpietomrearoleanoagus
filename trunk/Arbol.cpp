@@ -124,6 +124,19 @@ void Arbol::imprimir(){
 
 /*funcion de arranque para la carga inicial. Aca seteo los datos iniciales para arrancar con la recursividad*/
 void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
+        /*list<Dato*>::iterator itListaPrint;
+        itListaPrint = listaDeDatos->begin();
+        offset idRegistro;
+        offset nroBloque;
+        for(;itListaPrint!=listaDeDatos->end();itListaPrint++){
+            idRegistro = (*itListaPrint)->getIdRegistro();
+            nroBloque = (*itListaPrint)->getNroBoque();
+            cout << idRegistro << endl;
+            cout << nroBloque << endl;
+        }*/
+
+
+
     /*seteo la dimension con la que comienzo a ordenar(sin ninguna razon en particular elijo una sobre las otras)*/
         int dimension = 3;
         /*creo la raiz vacia, dps la voy a modificar*/
@@ -134,6 +147,7 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
         subListasDatos->push_back(listaDeDatos);
         list<list<list<Dato*>*>*>* listaDeSubListasDatos = new list<list<list<Dato*>*>*>();
         listaDeSubListasDatos->push_back(subListasDatos);
+
         /*elijo un porcentaje de empaquetamineto inicial del 75%*/
         double porcentajeDeEmpaquetamiento = 0.75;
         /**/
@@ -683,6 +697,7 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
         list<list<list<Dato*>*>*>::iterator itSubListas;
         itSubListas= subListasDatos->begin();
 
+        int nivel;
         list<Dato*>* subListaOrdenada;
         list<SubClaveRef*>* listaClaves;
         list<list<Dato*>*>* listaListasDatosSubArboles;
@@ -691,14 +706,45 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                 itSubSubListas= (*itSubListas)->begin();
 
                 for(;itSubSubListas!=(*itSubListas)->end();itSubSubListas++){
+
+                        /*list<Dato*>::iterator itListaPrint;
+                            itListaPrint = (*itSubSubListas)->begin();
+                            offset idRegistro;
+                            offset nroBloque;
+                            Key* clave;
+                            string subClave;
+                            for(;itListaPrint!=(*itSubSubListas)->end();itListaPrint++){
+                                idRegistro = (*itListaPrint)->getIdRegistro();
+                                nroBloque = (*itListaPrint)->getNroBoque();
+                                cout << idRegistro << endl;
+                                cout << nroBloque << endl;
+                            }
+                        cout << "-------------------------" << endl;*/
                         /*ordeno datos por mi dimension*/
                         subListaOrdenada = this->obtenerListaOrdenadaPorDimension((*itSubSubListas),dimension);
                         /*una vez que tengo mi lista ordenada, comienzo con la insercion en nodos como si fuese una carga inicial comun(mmm, mas bien una                               simulacion)*/
                         /*instancio dos listas vacias para que me devuelva resultados el metodo que simula la carga inicial del subarbol*/
+
+                        cout << "------------" << endl;
+                            itListaPrint = (subListaOrdenada)->begin();
+                            for(;itListaPrint!=(subListaOrdenada)->end();itListaPrint++){
+                                idRegistro = (*itListaPrint)->getIdRegistro();
+                                nroBloque = (*itListaPrint)->getNroBoque();
+                                clave = (*itListaPrint)->getClave();
+                                subClave = clave->getSubClaveSegunDim(dimension);
+                                cout << idRegistro;
+                                cout << ";";
+                                cout << nroBloque;
+                                cout << ";Clave: ";
+                                cout << subClave;
+                                cout << ";" << endl;
+                            }
+                        cout << "------------" << endl;
+
                         listaClaves = new list<SubClaveRef*>();//lista de claves
 
                         listaListasDatosSubArboles = new list<list<Dato*>*>();//lista de listas de datos
-                        int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, &listaClaves, &listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
+                        nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, &listaClaves, &listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
                         /*recupero el nivel del arbol, las claves del nodo raiz y una lista de subarboles*/
 
                         /*estos datos los tengo que guardar en algun lado o los voy a perder en la siguiente iteracion(ponele que los voy metiendo en 3 listas)*/
