@@ -58,9 +58,9 @@ class Arbol {
 
 	list<SubClaveRef*>* partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol, int dimension, list<list<Dato*>*>* listasDatosSubArbolesNuevos);
 
-	void reemplazarDatoListaDatos(list<list<list<Dato*>*>*>* listaMaestraDatosSubArboles, list<list<Dato*>*>* listasDatosSubArbolesNuevos, int j);
+	void reemplazarDatoListaDatos(list<list<list<Dato*>*>*>** listaMaestraDatosSubArboles, list<list<Dato*>*>* listasDatosSubArbolesNuevos, int j);
 
-	void reemplazarDatoListaClaves(list<list<SubClaveRef*>*>* listaMaestraClaves, list<SubClaveRef*>* claveMediana, int j);
+	void reemplazarDatoListaClaves(list<list<SubClaveRef*>*>** listaMaestraClaves, list<SubClaveRef*>* claveMediana, int j);
 
 	offset insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje);
 
