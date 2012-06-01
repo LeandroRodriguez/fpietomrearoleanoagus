@@ -77,10 +77,10 @@ class SubClaveRef{
     bool esMenorEstrictoQue(const SubClaveRef* otro){
         int hola = this->subclave.compare(otro->getSubClave());
         if ( hola <0){
-            cout << this->subclave << " es menor que " << otro->getSubClave() << endl;
+            //cout << this->subclave << " es menor que " << otro->getSubClave() << endl;
             return true;
             }
-            cout << this->subclave << " es mayor o igual que " << otro->getSubClave() << endl;
+            //cout << this->subclave << " es mayor o igual que " << otro->getSubClave() << endl;
             return false;
         //http://www.cplusplus.com/reference/string/string/compare/
         }
