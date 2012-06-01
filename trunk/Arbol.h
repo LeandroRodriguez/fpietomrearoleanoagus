@@ -42,7 +42,7 @@ class Arbol {
 
 	Dato* getElemento (list<Dato*>* lista, int index);
 
-	void setElemento (list<Dato*>* lista, int index, Dato* dato);
+	void setElemento (list<Dato*>* lista, int index, Dato dato);
 
     int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>** listaListasResultadosDevolucion, list<SubClaveRef*>** listaClavesDevolucion);
 
