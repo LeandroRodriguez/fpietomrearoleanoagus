@@ -9,6 +9,7 @@ class TestControlador{
     public:
     TestControlador();
     void TestInsertarDato();
+    void TestControladorBuscarDato();
 };
 
 
