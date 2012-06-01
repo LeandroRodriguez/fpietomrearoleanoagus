@@ -75,5 +75,9 @@ void Indice::agregarDatosCargaInicial(list<Dato*>* listaDatosCargaInicial){
 bool Indice::hidratarMetada(char* metadata){
 	memcpy(&(this->arbol->cantidadElem) ,metadata,sizeof(this->arbol->cantidadElem));
 	return true;
-};
+}
+
+bool Indice::BuscarDato(Key* dato){
+    return this->arbol->BuscarDato(dato);
+}
 

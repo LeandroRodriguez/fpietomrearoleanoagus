@@ -7,6 +7,11 @@ Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
 	return aux;
 }
 
+bool Arbol::BuscarDato(Key* datoBuscado){
+    //if (this->raiz->getHojaOInterno()=='H')
+      return raiz->BuscarDato(datoBuscado);
+}
+
 void Arbol::actualizarNodo(Nodo* nodoAActualizar){
 	this->persistir->ActualizarNodo( nodoAActualizar);
     }

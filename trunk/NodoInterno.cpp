@@ -252,6 +252,14 @@ void NodoInterno::imprimir(){
         }
     }
 
+bool NodoInterno::BuscarDato(Key* datoBuscado){
+    //FALTA TERMINAR
+    string subclave = datoBuscado->getSubClaveSegunDim(this->dimension);
+    int id = this->DevolverNodoHijoSegunSubclave(subclave);
+    //PARA Q NO PINCHE
+    return false;
+}
+
 Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje){
         string subclave = dato->getSubClaveSegunDim(this->dimension);
         int IDNodoAbajo = this->DevolverNodoHijoSegunSubclave(subclave);

@@ -13,6 +13,20 @@ NodoHoja::NodoHoja(Arbol* arbol){
     this->inicializar();
 }
 
+bool NodoHoja::BuscarDato(Key* datoBuscado){
+    bool encontrado = false;
+    list<int>::iterator itReg = this->listIdRegistros->begin();
+    list<int>::iterator itBloq = this->listIdRegistros->begin();
+    while (!encontrado){
+        Key* dato = this->cargarDato(*itReg,*itBloq);
+        if(dato->esIgual(datoBuscado))
+            encontrado = true;
+        itReg++;
+        itBloq++;
+    }
+    return encontrado;
+}
+
 unsigned long int NodoHoja::getTamanioSerializado(){
 
 	unsigned long int tamanioSerializado = 0;
@@ -269,6 +283,8 @@ void NodoHoja::ordenarBloquesRegistros(){
     }
     this->listIdRegistros = listOrdenadaIdReg;
     this->listNroBloque = listOrdenadaNroBloq;
+    list<int>::iterator itR = this->listIdRegistros->begin();
+    list<int>::iterator itB = this->listNroBloque->begin();
 }
 
 //Devuelve la mitad derecha, deja en el original la mitad izquierda
