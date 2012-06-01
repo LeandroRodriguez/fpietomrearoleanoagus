@@ -409,9 +409,11 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
     return nivel;
 }
 
-int Arbol::conseguirNivelMayor(list<int>* listaMaestraNiveles){
-        listaMaestraNiveles->sort();
-        return listaMaestraNiveles->back();
+int Arbol::conseguirNivelMayor(list<int>* const listaMaestraNiveles){
+        list<int>* aux = new list<int>();
+        aux = listaMaestraNiveles;
+        aux->sort();//bien fuerza bruta, pero es en ram, asi que...
+        return aux->back();
 }
 
 list<SubClaveRef*>* Arbol::obtenerClavesSegunPos(list<list<SubClaveRef*>*>* listaMaestraClaves, int j, int dimension){
