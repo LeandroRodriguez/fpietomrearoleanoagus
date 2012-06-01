@@ -672,6 +672,8 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                 itListaSubArboles= listaMaestraDatosSubArboles->begin();
                 /*para cada SubArb de la lista de SubArbs*/
                 int i = 0;
+                offset nroNodoHoja;
+                offset nroNodoInterno;
                 for(;itListaSubArboles!=listaMaestraDatosSubArboles->end();itListaSubArboles++){
                         list<offset>* listaReferenciasNodosHoja = new list<offset>();
                         /*para cada SubSubArb de la lista de SubArb*/
@@ -680,12 +682,12 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
 
                         for(;itSubSubListas!=(*itListaSubArboles)->end();itSubSubListas++){
                                 /*inserto el SubSubArbol de datos en un nodoHoja*/
-                                offset nroNodoHoja = this->insertarDatosEnNodoHoja((*itSubSubListas), porcentajeDeEmpaquetamiento);//TO DO
+                                nroNodoHoja = this->insertarDatosEnNodoHoja((*itSubSubListas), porcentajeDeEmpaquetamiento);//TO DO
                                 /*inserto la ref al nodo hoja en una nueva lista*/
                                 listaReferenciasNodosHoja->push_back(nroNodoHoja);
                         }
 
-                        offset nroNodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja, i, dimension);
+                        nroNodoInterno = this->insertarDatosEnNodoInterno(listaMaestraClaves, listaReferenciasNodosHoja, i, dimension);
 
                         /*meto el nodo interno en una lista de resultados, con las refs de los nodos internos*/
                         listaNodosInternos->push_back(nroNodoInterno);
