@@ -169,6 +169,8 @@ char* NodoInterno::Serializarse(){
         cur+=cosa->getTamanioSerializado();
     }
     delete pInt;
+     cout << str << endl;
+
 	return str;
 }
 
@@ -178,16 +180,19 @@ void NodoInterno::Hidratar(char* bytes){
     unsigned int cur = 0;/*cur = cursor ,ya se sabe el tipo*/
 	memcpy(&this->CantElem, bytes + cur, sizeof(this->CantElem));
 	cur += sizeof(this->CantElem);
-	cout << "CantElem" << this->CantElem << endl;
+	cout << "CantElem: " << this->CantElem << endl;
 
 	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
 	cur += sizeof(this->Altura);
+    	cout << "Altura: " << this->Altura << endl;
 
 	memcpy(&this->dimension, bytes + cur, sizeof(this->dimension));
 	cur += sizeof(this->dimension);
+    	cout << "Dimension: " << this->dimension << endl;
 
 	memcpy(bytes + cur, &this->Ref1erNodo , sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
+    	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
 
 	int i=0;
     while(i< this->CantElem ){
