@@ -511,6 +511,7 @@ void Arbol::reemplazarDatoListaClaves(list<list<SubClaveRef*>*>* listaMaestraCla
 offset Arbol::insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double porcentaje){
         /*instancio un nodoHoja*/
         NodoHoja* nodoHoja = new NodoHoja();
+        nodoHoja->setIdDelNodo(10);
 
         list<Dato*>::iterator itSubListaDatos;
         itSubListaDatos= listaSubSubArboles->begin();
