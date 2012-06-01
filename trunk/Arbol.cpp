@@ -244,11 +244,11 @@ int Arbol::conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*
 				/*meto clave en lista claves*/
 				listaClavesNueva->push_back((*itClave));
 				/*instancio nodointerno nuevo*/
-				NodoInterno* nodoInterno = new NodoInterno();
+				nodoInterno = new NodoInterno();
 				/*le inserto el dato(con inicializar)*/
 				nodoInterno->Inicializar(0, (*itClave)->getSubClave(), 0);
 				/*instancio una nueva lista datos aux*/
-				list<Dato*>* listaDatosAux = new list<Dato*>();
+				listaDatosAux = new list<Dato*>();
 			}
 			paso++;
 
@@ -295,10 +295,10 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 		/*veo si desbordo el nodo*/
 		if(res==RES_DESBORDADO){
 			listaListasResultados->push_back(listaAux);
-			NodoHoja* nodoHoja = new NodoHoja();
+			nodoHoja = new NodoHoja();
 			/*no checkeo el res pq el primero tiene que entrar bien siempre*/
 			Resultado res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
-			list<Dato*>* listaAux = new list<Dato*>();
+			listaAux = new list<Dato*>();
 			/*creo y guardo la subClave*/
 			SubClaveRef* subClave = new SubClaveRef(clave->getSubClaveSegunDim(dimension),0);
 			listaSubClaves->push_back(subClave);
@@ -578,12 +578,13 @@ list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMa
         list<list<SubClaveRef*>*>::iterator itListaMaestraClaves;
         itListaMaestraClaves= listaMaestraClaves->begin();
         int k = 0;
+        NodoInterno* nodoInterno;
         /*construyo un nodo por cada lista de listas de claves*/
         for(;itListaMaestraClaves!=listaMaestraClaves->end();itListaMaestraClaves++){
 			/*instancio un nodo interno por cada lista de claves*/
 			/*voy a iterar sobre mis listas de claves para ir armando el nodo interno*/
 
-			NodoInterno* nodoInterno = new NodoInterno();
+			nodoInterno = new NodoInterno();
 			list<SubClaveRef*>::iterator itListaClaves;
 
 			itListaClaves = (*itListaMaestraClaves)->begin();
