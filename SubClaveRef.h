@@ -102,8 +102,10 @@ class SubClaveRef{
         memcpy(str + cur,&pInt,sizeof(int) );
 
         cur += sizeof(int);//guarde longitud de la subclave en un int
-        memcpy(str + cur, &this->subclave , this->subclave.length());
-        cur += this->subclave.length();//guarde la subclave
+
+        memcpy(str + cur, this->subclave.c_str() ,strlen( this->subclave.c_str() ));
+        cur += strlen( this->subclave.c_str() );//guarde la subclave
+
         memcpy(str + cur, &this->RefNodo , sizeof(RefNodo));
         cur += sizeof(RefNodo);//guarde el nodo
         return str;
@@ -127,6 +129,7 @@ class SubClaveRef{
 
         this->setRefNodo(RefNod);
         this->subclave= string(cadena) ;
+        cout <<"subclave" <<this->subclave << endl;
         }
 
     string getSubClave()const{
