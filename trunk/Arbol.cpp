@@ -212,6 +212,8 @@ list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dim
 int Arbol::conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>** listaListasResultadosDevolucion, list<SubClaveRef*>** listaClavesDevolucion){
 	nivel++;
 	if(listaSubClaves->size()>1){
+	    /*flag para ver si se uso mas de un nodo interno, en cuyo caso la recursividad debe volver a llamarse*/
+	    bool usoMasDeUnNodo = false;
 		/*aca guardo los resultados de este nivel*/
 		list<list<Dato*>*>* listaListasResultadosNueva = new list<list<Dato*>*>();
 		list<SubClaveRef*>* listaClavesNueva = new list<SubClaveRef*>();
@@ -239,6 +241,8 @@ int Arbol::conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*
 				res = nodoInterno->InsertarNuevaSubClaveRef((*itClave)->getSubClave(), 0);
 			}
 			if(res == RES_DESBORDADO){
+			    /*si el nodo se desbordo, voy a tener que usar otro nivel mas*/
+			    usoMasDeUnNodo = true;
 				/*meto lista datos en lista listas datos*/
 				listaListasResultadosNueva->push_back(listaDatosAux);
 				/*meto clave en lista claves*/
@@ -261,16 +265,17 @@ int Arbol::conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*
 			listaDatosAux->push_back(*itDato);
 		}
 		listaListasResultadosNueva->push_back(listaDatosAux);
-		/*llamado recursivo*/
-		return conseguirParticionRecursiva(nivel, dimension, listaListasResultadosNueva, listaClavesNueva, listaListasResultadosDevolucion, listaClavesDevolucion);
+
+		if(usoMasDeUnNodo){
+            /*llamado recursivo*/
+            return conseguirParticionRecursiva(nivel, dimension, listaListasResultadosNueva, listaClavesNueva, listaListasResultadosDevolucion, listaClavesDevolucion);
+		}
 	}
-	else{
-		/*listas nuevas igual a las que me llegaron*/
-		/*deletear la referencia vieja de listas Devolucion???*/
-		*listaListasResultadosDevolucion = listaListasResultados;
-		*listaClavesDevolucion = listaSubClaves;
-		return nivel;
-	}
+	/*listas nuevas igual a las que me llegaron*/
+	/*deletear la referencia vieja de listas Devolucion???*/
+	*listaListasResultadosDevolucion = listaListasResultados;
+	*listaClavesDevolucion = listaSubClaves;
+    return nivel;
 }
 
 int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>** listaClaves, list<list<Dato*>*>** listaListasDatosSubArboles, double  porcentajeDeEmpaquetamiento, int dimension){
