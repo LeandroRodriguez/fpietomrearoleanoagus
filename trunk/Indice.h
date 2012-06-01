@@ -18,6 +18,7 @@ public:
 	virtual long int getTamanioSerializado();
 	virtual bool hidratarMetada(char* metadata);
 	bool BuscarDato(Key* dato);
+	list<Key*>* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin);
 
 	PersistenciaArbol* persistencia;
 	void imprimir();

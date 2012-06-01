@@ -57,6 +57,7 @@ class NodoInterno: public Nodo{
     Resultado InsertarNuevaSubClaveRef ( string subclave,int refAbloqueArbol );
 
     bool BuscarDato(Key* datoBuscado);
+    list<Key*>* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin);
 
     void Inicializar( int ref1 ,string subclave ,int ref2 );
 

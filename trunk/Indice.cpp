@@ -81,3 +81,7 @@ bool Indice::BuscarDato(Key* dato){
     return this->arbol->BuscarDato(dato);
 }
 
+list<Key*>* Indice::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
+    return this->arbol->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+}
+

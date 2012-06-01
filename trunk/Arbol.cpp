@@ -8,8 +8,11 @@ Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
 }
 
 bool Arbol::BuscarDato(Key* datoBuscado){
-    //if (this->raiz->getHojaOInterno()=='H')
-      return raiz->BuscarDato(datoBuscado);
+    return raiz->BuscarDato(datoBuscado);
+}
+
+list<Key*>* Arbol::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
+    return raiz->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
 }
 
 void Arbol::actualizarNodo(Nodo* nodoAActualizar){
