@@ -99,7 +99,7 @@ class SubClaveRef{
 
         int pInt = strlen( this->subclave.c_str())+1;//artilugio para usar memcopy
 
-        cout << "longitud de la subclave a serializar "<< pInt << endl;
+        //cout << "longitud de la subclave a serializar "<< pInt << endl;
 
         memcpy(str + cur,&pInt,sizeof(int) );
 
@@ -117,7 +117,7 @@ class SubClaveRef{
         int longitud=0;
         memcpy(&longitud, bytes + cur  , sizeof(int) );
         cur += sizeof(int);
-        cout << "long subclave " << longitud << endl;
+       // cout << "long subclave " << longitud << endl;
 
         char* cadena = new char[longitud];
         memcpy(cadena, bytes + cur  , longitud );
@@ -127,11 +127,11 @@ class SubClaveRef{
 
         memcpy(&RefNod, bytes + cur  , sizeof(this->RefNodo) );
         cur += sizeof(this->RefNodo);
-        cout << "refnod " << RefNod << endl;
+        //cout << "refnod " << RefNod << endl;
 
         this->setRefNodo(RefNod);
         this->subclave= string(cadena) ;
-        cout <<"subclave " <<this->subclave << endl;
+        //cout <<"subclave " <<this->subclave << endl;
         }
 
     string getSubClave()const{
