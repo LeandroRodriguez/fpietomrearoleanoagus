@@ -183,7 +183,7 @@ void AlmacenamientoBloque::escribirBloque(const Bytes& dato, offset offsetBloque
 	/*seteo la posicion del put pointer donde necesito*/
 	file.seekp(offsetBloque, ios_base::beg);
 	/*escribo y guardo*/
-	file.write(buffer.c_str(), buffer.size());
+	file.write(buffer.c_str(), LONGITUD_BLOQUE_DATA);
 	file.flush();
 }
 
