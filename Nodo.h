@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Key.h"
-
+#include <list>
 class Arbol;
 
 class Nodo : public InterfazSerializar {
@@ -37,7 +37,7 @@ class Nodo : public InterfazSerializar {
 
 	virtual bool BuscarDato (Key* dato)=0;
 
-	virtual list<Key*>* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin)=0;
+	virtual list< Key* >* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin)=0;
 
 	void setArbol(Arbol* arbol);
 

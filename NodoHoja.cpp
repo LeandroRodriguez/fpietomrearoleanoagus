@@ -27,7 +27,7 @@ bool NodoHoja::BuscarDato(Key* datoBuscado){
     return encontrado;
 }
 
-list<Key*>* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
+list<Key*>* NodoHoja::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
     list<int>::iterator itReg = this->listIdRegistros->begin();
     list<int>::iterator itBloq = this->listNroBloque->begin();
     list<Key*>* datos = new list<Key*>();
