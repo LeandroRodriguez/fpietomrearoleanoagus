@@ -10,6 +10,7 @@ class TestControlador{
     TestControlador();
     void TestInsertarDato();
     void TestControladorBuscarDato();
+    void TestBuscarFallaSegunFecha();
 };
 
 

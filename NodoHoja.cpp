@@ -32,9 +32,8 @@ list<Key*>* NodoHoja::BuscarSegunFecha(string subclave, int dim, string fechaIni
     list<int>::iterator itBloq = this->listNroBloque->begin();
     list<Key*>* datos = new list<Key*>();
     while (itReg != listIdRegistros->end() && itBloq != listNroBloque->end()){
-        //FALTA LO DE LA FECHA
         Key* dato = this->cargarDato(*itReg,*itBloq);
-        if(dato->getSubClaveSegunDim(dim)==subclave)
+        if(dato->getSubClaveSegunDim(dim)==subclave && dato->getSubClaveSegunDim(4) >= fechaInicio && dato->getSubClaveSegunDim(4)<= fechaFin)
            datos->push_back(dato);
         itReg++;
         itBloq++;
