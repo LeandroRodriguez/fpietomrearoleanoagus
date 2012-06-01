@@ -9,7 +9,7 @@ class TestNodoInterno{
     public:
     TestNodoInterno();
     void TestCrearNodoInterno();
-    //void TestSerializarHidtratar();
+    void TestSerializarHidratar();
     //void TestPartirHojaEn2();
 };
 

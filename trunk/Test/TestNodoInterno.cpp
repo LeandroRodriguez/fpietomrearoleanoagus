@@ -41,3 +41,33 @@ void TestNodoInterno::TestCrearNodoInterno(){
     delete dato2;
     delete nodo;
 }
+
+void TestNodoInterno::TestSerializarHidratar(){
+    NodoInterno* nodo1 = new NodoInterno();
+    Key* dato1 = new Key();
+	dato1->setLineaFerroviaria("Sarmiento");
+	dato1->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+	dato1->setFalla("no cierra puerta");
+	dato1->setAccidente("incendio");
+	dato1->setFormacion("1");
+
+	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
+    string str1(dato1->Serializarse());
+    Bytes bytes1(str1);
+	RegistroVariable registro1(bytes1);
+
+	almacena.agregarRegistro(&registro1);
+	offset nBloque1 = almacena.getNumeroBloque();
+	offset nReg1 = almacena.getNumeroUID();
+
+    //nodo1->imprimir();
+
+	char* serializacion = nodo1->Serializarse();
+	NodoInterno* nodo2 = new NodoInterno(serializacion);
+    char* str = nodo2->Serializarse();
+
+    cout << "Serializacion1: " << serializacion << endl;
+    cout << "Serializacion2: " << str << endl;
+	//nodo2->imprimir();
+
+}
