@@ -284,13 +284,13 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	list<SubClaveRef*>* listaSubClaves = new list<SubClaveRef*>();
 	list<Dato*>* listaAux = new list<Dato*>();
 	Key* clave;
+	NodoHoja* nodoHoja = new NodoHoja();
 	for(;itDato!=subListaOrdenada->end();itDato++){
 		/*guardo el dato en un nodo(solo en RAM)*/
 		Dato* dato = (*itDato);
 		offset idRegistro = dato->getIdRegistro();
         offset nroBloque = dato->getNroBoque();
         clave = dato->getClave();
-		NodoHoja* nodoHoja = new NodoHoja();
 		Resultado res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
 		/*veo si desbordo el nodo*/
 		if(res==RES_DESBORDADO){
