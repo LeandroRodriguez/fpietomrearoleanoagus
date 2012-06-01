@@ -560,10 +560,10 @@ offset Arbol::insertarDatosEnNodoInterno(list<list<SubClaveRef*>*>* listaMaestra
 				nodoInterno->InsertarNuevaSubClaveRef(subClave->getSubClave(), referenciaSiguiente);
 			}
 	}
-	/*le agrego la dimension al nodo*/
-    nodoInterno->setDim(dimension);
     /*tengo que setear la altura, que para este metodo es 1*/
     nodoInterno->setAltura(1);
+	/*le agrego la dimension al nodo*/
+    nodoInterno->setDim(dimension);
 	/*persisto el nodo*/
 	offset nroNodo = this->persistir->agregarNodo(nodoInterno);
 	/*me devuelve el nro de nodo, yo retorno ese numero de nodo*/
@@ -608,10 +608,10 @@ list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMa
 					}
 			}
 			k++;
+			/*le agrego la altura*/
+            nodoInterno->setAltura(alturaVuelta);
 			/*le agrego la dimension al nodo*/
             nodoInterno->setDim(dimension);
-            /*le agrego la altura*/
-            nodoInterno->setAltura(alturaVuelta);
 			/*persisto el nodo*/
 			offset nroNodo = this->persistir->agregarNodo(nodoInterno);
 			/*meto las refs en mi lista*/
