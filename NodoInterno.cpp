@@ -87,26 +87,6 @@ void NodoInterno::Inicializar( int ref1 ,string subclave ,int ref2 ){
         this->InsertarNuevaSubClaveRef(subclave,ref2);
     }
 
-/*
-string NodoInterno::conseguirClaveQueDividaAlMedioPonderadoElNodo(){
-
-        list< SubClaveRef* >::iterator it;
-        it = this->ListaSubClaveRef->begin();
-        if( this->CantElem == 0) return "-1";
-
-        unsigned int Value = 0;
-        if ( this->CantElem % 2 != 0){
-            Value = ( this->CantElem / 2 )+1;
-            }else{
-                Value=  this->CantElem/2 ;
-                }
-
-        for(int I=0;I<=(int)Value;it++){
-        }
-        SubClaveRef* cosa = *it;
-        return cosa->getSubClave();
-    }*/
-
 unsigned long int NodoInterno::getTamanioSerializado(){
 
 	size_t tamanioSerializado = 0;
@@ -234,6 +214,18 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq,int& OtroIdNodoEnC
         return cosa->getRefNodo();
     }
 
+list<int>* NodoInterno::DevolverTodosSusIdHijosEnOrden(){
+    list<int>* listIdHijos = new list<int>();
+    list< SubClaveRef* >::iterator it;
+    it= this->ListaSubClaveRef->begin();
+
+    listIdHijos->push_back(this->Ref1erNodo);
+    for( ; it != this->ListaSubClaveRef->end() ; it++ ){
+       SubClaveRef* item = *it;
+       listIdHijos->push_back(item->getRefNodo() );
+       }
+       return listIdHijos;
+    }
 void NodoInterno::imprimir(){
         std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
 			<<	", dimension:" << this->dimension<< ", Referencias:"<<endl;
