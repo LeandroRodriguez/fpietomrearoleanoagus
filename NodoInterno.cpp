@@ -1,7 +1,7 @@
 #include "NodoInterno.h"
 
 bool compare (SubClaveRef* s1, SubClaveRef* s2){
-    bool resultado = s1->operator<((*s2).getSubClave());
+    bool resultado = s1->esMenorEstrictoQue(s2);
     return resultado;
 };
 
@@ -14,7 +14,7 @@ bool NodoInterno::SeRepiteSubclave(SubClaveRef* item){
 
         for(;it!=this->ListaSubClaveRef->end();it++){
                 SubClaveRef* cosa = *it;
-                if( cosa == item ){
+                if( cosa->esIgualQue(item)){
                     SeRepite=true;
                     break;
                     }
@@ -67,17 +67,17 @@ Resultado NodoInterno::InsertarNuevaSubClaveRef ( string subclave,int refAbloque
 
         SubClaveRef* primeritem = this->ListaSubClaveRef->front();
 
-        if( itemNuevo->operator<((*primeritem).getSubClave() ) ){
-            int aux = itemNuevo->getRefNodo();
-            itemNuevo->setRefNodo(this->Ref1erNodo);
-            this->Ref1erNodo=aux;/*tiene un grado mas de complejidad, debido a 1er ref nodo*/
-            this->ListaSubClaveRef->push_front(itemNuevo);
-            this->CantElem=this->CantElem+1;
-            }else{
+      //  if( itemNuevo->esMenorEstrictoQue(primeritem) ) {
+        //    int aux = itemNuevo->getRefNodo();
+          //  itemNuevo->setRefNodo(this->Ref1erNodo);
+        //    this->Ref1erNodo=aux;/*tiene un grado mas de complejidad, debido a 1er ref nodo*/
+       //     this->ListaSubClaveRef->push_front(itemNuevo);
+       //     this->CantElem=this->CantElem+1;
+      //      }else{
             this->ListaSubClaveRef->push_back(itemNuevo);
             this->ListaSubClaveRef->sort(compare);
             this->CantElem=this->CantElem+1;
-            }
+      //      }
         if ( this->getTamanioSerializado() > this->tamanioMaximoNodo ) return RES_DESBORDADO;
         return RES_OK;
     }
@@ -199,8 +199,8 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq ){
         it= this->ListaSubClaveRef->begin();
         SubClaveRef* cosa = *it;
 
-        bool SubIgual = (cosa->operator==(subcReq));
-        bool SubMenorOigual = !(cosa->operator<(subcReq));
+        bool SubIgual = (cosa->esIgualQue(subcReq));
+        bool SubMenorOigual = !(cosa->esMenorEstrictoQue(subcReq));
 
         if (SubMenorOigual && !(SubIgual)){
             return this->Ref1erNodo;
@@ -209,8 +209,8 @@ int NodoInterno::DevolverNodoHijoSegunSubclave(string subcReq ){
 
         for(;it!=this->ListaSubClaveRef->end();it++){
             cosa = *it;
-            bool SubIgual = (cosa->operator==(subcReq));
-            bool SubMenorOigual = !(cosa->operator<(subcReq));
+            bool SubIgual = (cosa->esIgualQue(subcReq));
+            bool SubMenorOigual = !(cosa->esMenorEstrictoQue(subcReq));
 
             /*si es igual, devuelvo ref a la derecha la subK de la lista */
             if( SubIgual ) return cosa->getRefNodo();

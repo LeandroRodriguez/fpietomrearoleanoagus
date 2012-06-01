@@ -141,6 +141,7 @@ class SubClaveRef{
         return this->RefNodo;
         }
 
+/*
     bool operator< (const SubClaveRef *otro){
         int hola = this->subclave.compare(otro->getSubClave());
         if ( hola <0){
@@ -179,6 +180,41 @@ class SubClaveRef{
        if(hola>0)return true;
        return false;
     }
+*/
+    bool esMenorEstrictoQue(const SubClaveRef* otro){
+        int hola = this->subclave.compare(otro->getSubClave());
+        if ( hola <0){
+            cout << this->subclave << " es menor que " << otro->getSubClave() << endl;
+            return true;
+            }
+            cout << this->subclave << " es mayor o igual que " << otro->getSubClave() << endl;
+            return false;
+        //http://www.cplusplus.com/reference/string/string/compare/
+        }
+
+    bool esMenorEstrictoQue(const string& sub){
+        int hola = this->subclave.compare(sub);
+        if ( hola <0){
+            cout << this->subclave << " es menor que " << sub << endl;
+            return true;
+            }
+            cout << this->subclave << " es mayor o igual que " << sub << endl;
+            return false;
+        //http://www.cplusplus.com/reference/string/string/compare/
+        }
+
+    bool esIgualQue(const SubClaveRef* otro){
+        int hola = this->subclave.compare(otro->getSubClave() );
+        if ( hola == 0 )return true;
+        return false;
+        }
+
+    bool esIgualQue(const string& sub){
+        int hola = this->subclave.compare(sub );
+        if ( hola == 0 )return true;
+        return false;
+        }
+
     SubClaveRef(char* bytes,unsigned int& cur){
         this->Hidratar(bytes,cur);
     }
