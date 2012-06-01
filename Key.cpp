@@ -78,7 +78,9 @@
 		this->LineaFerroviaria=(linea);
 		cur += t;
 
-		this->Formacion= (atoi(str.substr(cur, 4).c_str()));
+		char* formacion;
+		formacion =(&(str.substr(cur,t)[0]));
+		this->Formacion= formacion;
 		cur +=4;
 
 		t = atoi(str.substr(cur, 4).c_str());
