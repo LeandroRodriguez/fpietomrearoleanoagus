@@ -707,13 +707,13 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
 
                 for(;itSubSubListas!=(*itSubListas)->end();itSubSubListas++){
 
-                        /*list<Dato*>::iterator itListaPrint;
+                        list<Dato*>::iterator itListaPrint;
                             itListaPrint = (*itSubSubListas)->begin();
                             offset idRegistro;
                             offset nroBloque;
                             Key* clave;
                             string subClave;
-                            for(;itListaPrint!=(*itSubSubListas)->end();itListaPrint++){
+                            /*for(;itListaPrint!=(*itSubSubListas)->end();itListaPrint++){
                                 idRegistro = (*itListaPrint)->getIdRegistro();
                                 nroBloque = (*itListaPrint)->getNroBoque();
                                 cout << idRegistro << endl;
