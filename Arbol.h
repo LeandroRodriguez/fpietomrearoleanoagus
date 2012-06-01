@@ -46,7 +46,7 @@ class Arbol {
 
     int conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*>*>* listaListasResultados, list<SubClaveRef*>* listaSubClaves, list<list<Dato*>*>* listaListasResultadosDevolucion, list<SubClaveRef*>* listaClavesDevolucion);
 
-	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento, int dimension);
+	int cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, double  porcentajeDeEmpaquetamiento, int dimension);
 
 	int conseguirNivelMayor(list<int>* listaMaestraNiveles);
 

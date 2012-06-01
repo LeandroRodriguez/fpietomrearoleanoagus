@@ -271,7 +271,7 @@ int Arbol::conseguirParticionRecursiva(int nivel, int dimension, list<list<Dato*
 	}
 }
 
-int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, int  porcentajeDeEmpaquetamiento, int dimension){
+int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada, list<SubClaveRef*>* listaClaves, list<list<Dato*>*>* listaListasDatosSubArboles, double  porcentajeDeEmpaquetamiento, int dimension){
         /*si la subListaOrdenada tiene un solo elemento, devuelvo en la sublista, ese elemento y uno vacio. y en la de clave tomo la clave del unico elemento
         (total, ante igualdad hay que ir para las 2 ramas)*/
 	list<Dato*>::iterator itDato;
@@ -647,11 +647,11 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                         list<SubClaveRef*>* listaClaves;//lista de claves
 
                         list<list<Dato*>*>* listaListasDatosSubArboles;//lista de listas de datos
-//                        int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
+                        int nivel = cargaInicialConseguirParticionConNivel(subListaOrdenada, listaClaves, listaListasDatosSubArboles, porcentajeDeEmpaquetamiento, dimension); //TO DO
                         /*recupero el nivel del arbol, las claves del nodo raiz y una lista de subarboles*/
 
                         /*estos datos los tengo que guardar en algun lado o los voy a perder en la siguiente iteracion(ponele que los voy metiendo en 3 listas)*/
-                     //   listaMaestraNiveles->push_back(nivel);
+                        listaMaestraNiveles->push_back(nivel);
                         listaMaestraClaves->push_back(listaClaves);
                         listaMaestraDatosSubArboles->push_back(listaListasDatosSubArboles);
                 }
