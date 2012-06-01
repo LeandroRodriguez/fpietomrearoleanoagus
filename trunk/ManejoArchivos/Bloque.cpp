@@ -1,9 +1,3 @@
-/*
- * Bloque.cpp
- *
- *	¿Commenting?: Leo
- */
-
 #include "Bloque.h"
 
 /*constructor*/
@@ -12,7 +6,6 @@ Bloque::Bloque(const cantBytes& tamanio) {
 	this->usados = 0;
 	this->registros = new list<RegistroVariable*>();
 	/*el nroBloque se lo setean desde afuera*/
-	/*IUC sigo sin saber que es, pero tmp se inicializa*/
 }
 
     Bloque::Bloque(){}
@@ -28,15 +21,6 @@ bool Bloque::agregarRegistro(RegistroVariable* registro) {
 	cantBytes tamanioSerializado = registro->getTamanioSerializado();
 	/*me tendria que fijar con ese tamanio, si entra en el bloque*/
 
-	//uint32 ultimoIUC = this->IUC;
-
-	/* esto se debise descomentar para mi
-	if (!tieneLugar(registro)) {
-		cerr << "Error: No hay lugar para el registro que desea ingresar." << endl;
-		return false;
-	}
-	 */
-
 	/*verifico que el registro no sea nulo, e inserto*/
 	if (registro != NULL) {
 		this->registros->push_back(registro);
@@ -50,11 +34,6 @@ bool Bloque::agregarRegistro(RegistroVariable* registro) {
 
 	return true;
 }
-
-/*nose que carajo sear esta cosa hardcodeada fea ni pa que sirve*/
-/*bool Bloque::agregarEspacioNulo() {
-	return true;
-}*/
 
 /*devuelve la tira de bytes del objeto serializado*/
 Bytes Bloque::serializarse() {
