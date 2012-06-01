@@ -305,6 +305,7 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 		}
 		listaAux->push_back(dato);
 	}
+	itDato--;
 	listaListasResultados->push_back(listaAux);
 	/*entonces, tengo una lista de listas de datos, y una lista de subclaves*/
 	/*acabo de pasar el nivel 1*/
