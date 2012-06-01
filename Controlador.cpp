@@ -49,13 +49,21 @@ list<Key*>* Controlador::getListaKey(string path){
 	ifstream almacenamientoEntrada;
 
 	almacenamientoEntrada.open(path.c_str());
+
+	long begin, end;
+	begin = almacenamientoEntrada.tellg();
+	almacenamientoEntrada.seekg (0, ios::end);
+	end = almacenamientoEntrada.tellg();
+	long size = (end-begin);
+
+	int i = 1;
+	int cursor = i*LONGITUD_BLOQUE_DATA;
 	almacenamientoEntrada.seekg(LONGITUD_BLOQUE_DATA, ios_base::beg);//me paro en el bloque 1
-	while(!almacenamientoEntrada.eof())
+	while(cursor < size)
 	{
 		string stream;
 		char* aux = (char*) malloc (sizeof(char)*LONGITUD_BLOQUE_DATA);
-		/*voy obteniendo de a un bloque y verificando*/
-		almacenamientoEntrada.read(aux, LONGITUD_BLOQUE_DATA);
+		almacenamientoEntrada.read(aux,LONGITUD_BLOQUE_DATA);
 		stream.append(aux, LONGITUD_BLOQUE_DATA);
 		delete[] aux;
 		Bytes bloqueBytes(stream.c_str());
@@ -71,7 +79,9 @@ list<Key*>* Controlador::getListaKey(string path){
 			dato -> Hidratar((*itRegistros)->getDato().toString());
 			lista->push_back(dato);
 		}
-
+		i++;
+		cursor = i*LONGITUD_BLOQUE_DATA;
+		almacenamientoEntrada.seekg(cursor, ios_base::beg);//me paro en el bloque 1
 	}
 	return lista;
 }
