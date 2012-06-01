@@ -71,6 +71,8 @@ class Arbol {
 
 	list<offset>* cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListasDatos, int dimension, double porcentajeDeEmpaquetamiento, int* alturaVuelta);
 
+	bool BuscarDato(Key* datoBuscado);
+
 private:
 	PersistenciaArbol* persistir;
 

@@ -17,6 +17,7 @@ public:
 	virtual char* serializarMetadata();
 	virtual long int getTamanioSerializado();
 	virtual bool hidratarMetada(char* metadata);
+	bool BuscarDato(Key* dato);
 
 	PersistenciaArbol* persistencia;
 	void imprimir();

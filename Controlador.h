@@ -30,6 +30,7 @@ public:
 
 	/*Inserto el dato pasado por parametro tanto en el archivo de data, como sus referencias en el arbol*/
 	void InsertarDato(Key* dato);
+	bool BuscarDato(Key* dato);
 
 	void ListarTenesPorFalla(string falla);
 	void ListarTenesPorAccidente(string accidente);

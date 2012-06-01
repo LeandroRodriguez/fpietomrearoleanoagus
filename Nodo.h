@@ -35,6 +35,8 @@ class Nodo : public InterfazSerializar {
 
 	virtual void imprimir()=0;
 
+	virtual bool BuscarDato (Key* dato)=0;
+
 	void setArbol(Arbol* arbol);
 
 	bool tieneArbol(){

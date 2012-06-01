@@ -165,6 +165,10 @@ void Controlador::InsertarDatosCargaInicial(list<Key*>* listaKey){
 	this->indice->agregarDatosCargaInicial(listaDatosCargaInicial);//AGREGAR ESTA FUNCION MEDIADORA A INDICE
 }
 
+bool Controlador::BuscarDato(Key* dato){
+    return this->indice->BuscarDato(dato);
+}
+
 
 /*
 void Controlador::cargarArchivos(){

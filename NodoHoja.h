@@ -82,6 +82,7 @@ class NodoHoja: public Nodo{
     NodoHoja(char* str);
     ~NodoHoja(){};
 
+    bool BuscarDato(Key* datoBuscado);
     unsigned long int getTamanioSerializado();
     char* Serializarse();
     void Hidratar(char* bytes);

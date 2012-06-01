@@ -9,6 +9,7 @@
 #include "Test/TestArbol.h"
 #include "Test/TestNodoHoja.h"
 #include "Test/TestNodoInterno.h"
+
 using namespace std;
 
 int main(){
@@ -42,7 +43,7 @@ int main(){
 
     /*TestArbol* testArbol = new TestArbol();
 	testArbol->Testear();
-	testArbol->UnDatoMas();
+	//testArbol->UnDatoMas();
     delete testArbol;*/
 
     /*TestControlador* testControlador = new TestControlador();
@@ -59,9 +60,9 @@ int main(){
     //ESTE NO ANDA POR AHORA
     //testNodoHoja->TestPartirHojaEn2();*/
 
-    TestNodoInterno* testNodoInterno = new TestNodoInterno();
+    /*TestNodoInterno* testNodoInterno = new TestNodoInterno();
     //testNodoInterno->TestCrearNodoInterno();
-    testNodoInterno->TestSerializarHidratar();
+    testNodoInterno->TestSerializarHidratar();*/
 };
 
 
