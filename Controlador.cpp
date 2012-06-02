@@ -40,6 +40,26 @@ void Controlador::InsertarDato(Key* dato){
 		almacena.agregarRegistro(&registro);
 		/*le paso al arbol el numero de bloque y el UID del reg en donde guarde el dato*/
 		Resultado res = indice->agregarDato(almacena.getNumeroBloque(), almacena.getNumeroUID(), dato);
+		if(res == RES_DESBORDADO)
+		{
+			string aux = DIR_ARCHIVO_INDICES;
+			aux += this->archivoArbol;
+			remove(aux.c_str());
+			this->indice = new Indice(this->archivoArbol);
+
+			string pathDatos = DIR_ARCHIVO_DATOS;
+			pathDatos += ARCHIVO_DATOS;
+			string pathLibres = DIR_ARCHIVO_DATOS;
+			pathLibres += ARCHIVO_DATOS_LIBRES;
+			remove(pathLibres.c_str());
+
+			string pathNuevosDatos = DIR_ARCHIVO_DATOS;
+			pathNuevosDatos += "a";
+			pathNuevosDatos += ARCHIVO_DATOS;
+			rename(pathDatos.c_str(), pathNuevosDatos.c_str());
+			this->CargaInicial(pathNuevosDatos);
+			remove(pathNuevosDatos.c_str());
+		}
 	}
 };
 
@@ -302,6 +322,25 @@ void Controlador::CargarDatosPrueba(){
 	cin.get();
 }
 
+
+void Controlador::CargaInicial(string path){
+	string aux = DIR_ARCHIVO_INDICES;
+	aux += this->archivoArbol;
+	remove(aux.c_str());
+	this->indice = new Indice(this->archivoArbol);
+
+	string pathDatos = DIR_ARCHIVO_DATOS;
+	pathDatos += ARCHIVO_DATOS;
+	string pathLibres = DIR_ARCHIVO_DATOS;
+	pathLibres += ARCHIVO_DATOS_LIBRES;
+	remove(pathLibres.c_str());
+	remove(pathDatos.c_str());
+
+	list<Key*>* lista = this->getListaKey(path);
+	this->InsertarDatosCargaInicial(lista);
+}
+
+
 void Controlador::ImprimirArbol(){
     this->indice->imprimir();
     cin.get();
@@ -332,4 +371,5 @@ void Controlador::cargarArchivos(){
 
 
 */
+
 

@@ -39,11 +39,19 @@ public:
 	void ListarFormaciones();
 	void ListarLineasFerroviarias();
 	void ListarAccidentes();
+	void CargaInicial(string path);
+
+	void InsertarDatosCargaInicial(list<Key*>* listaDatos);
+
+
+private:
 
     bool dat(Key* dato);
-    void InsertarDatosCargaInicial(list<Key*>* listaDatos);
+
 
     list<Key*>* getListaKey(string path);
+
+
 
 };
 
