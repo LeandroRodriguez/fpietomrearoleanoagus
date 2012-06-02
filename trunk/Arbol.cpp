@@ -920,12 +920,12 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
         /*Arme una lista de sublistas =0*/
         /*quizas en su momento podria recalcular el porcentajeDeEmpaquetamiento*/
         list<offset>* listaRefsNodosArmados = cargaInicialArmarNodos(listaMaestraDatosSubArboles, Key::getSiguienteDimension(dimension), porcentajeDeEmpaquetamiento, alturaVuelta);
-        /*con los nodos recibidos, reconstruyo mis nodos de nivel superior*/
-        /*para cada SubArb de la lista de SubArbs*/
-        list<offset>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados, dimension, *alturaVuelta);
 
         /*aumento la altura*/
         (*alturaVuelta)++;
+
+        /*con los nodos recibidos, reconstruyo mis nodos de nivel superior*/
+        list<offset>* listaNodosInternos = this->insertarHijosEnNodoPadre(listaMaestraClaves, listaRefsNodosArmados, dimension, *alturaVuelta);
 
         delete listaMaestraNiveles;
         delete listaMaestraClaves;
