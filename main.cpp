@@ -15,8 +15,7 @@
 using namespace std;
 
 int main(){
-
-    cout << "nw" << endl;
+    cout << "n" << endl;
     Menu();
 
     /*TestRegistro* testRegistro = new TestRegistro();
