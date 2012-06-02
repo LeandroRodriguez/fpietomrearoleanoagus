@@ -307,15 +307,10 @@ list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fecha
         //devuelve lista de nodos hijos
         list<Nodo*>* nodos= this->DevolverNodosDadasIds(ids);
         list<Nodo*>::iterator itNodo = nodos->begin();
-        //lista de datos del primer nodo
-        datos1 = (*itNodo)->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
         while (itNodo != nodos->end()){
-            //incremento
-            itNodo++;
-            // lista de datos del nodo siguiente
             datos2 = (*itNodo)->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
-            //mergeo con lista anterior
             datos1->merge(*datos2);
+            itNodo++;
         }
     }
     return datos1;

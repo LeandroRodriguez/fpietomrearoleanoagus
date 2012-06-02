@@ -279,12 +279,16 @@ void TestControlador::TestBuscarFallaSegunFecha(){
 	dato7->setFormacion("5");
 	controlador->InsertarDato(dato7);
 
-	controlador->indice->imprimir();
-
 	list<Key*>* datos = new list<Key*>();
 	datos = controlador->BuscarTrenesConFallaSegunFecha("no cierra puerta", "2011/01/21 00:00 00:30", "2013/01/21 00:00 00:30");
-    //tiene q dar 1
-    cout << datos->size() <<endl;
+    //tiene q dar 3
+    cout << "Cantidad Elementos" << datos->size() <<endl;
+    list<Key*>::iterator itDato = datos->begin();
+    for(;itDato != datos->end();itDato++){
+            //me imprime la linea ferroviaria de los q "no cierra puerta"
+            cout << (*itDato)->getSubClaveSegunDim(0) << endl;
+    }
+
     delete controlador;
 	delete dato;
 	delete dato2;
