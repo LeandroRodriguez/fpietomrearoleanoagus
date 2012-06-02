@@ -25,9 +25,10 @@ public:
 	bool BuscarDato(Key* dato);
 	list<Key*>* BuscarTrenesConFallaSegunFecha(string falla, string fechaInicio, string fechaFin);
 	list<Key*>* BuscarTrenesConAccidenteSegunFecha(string accidente, string fechaInicio, string fechaFin);
+	list<Key*>* BuscarTrenesConFormacionSegunFecha(string formacion, string fechaInicio, string fechaFin);
 	list<Key*>* BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin);
 
-	void ListarTenesPorFalla(string falla);
+	void ListarTenesPorFalla(string falla, string fechaInicio, string fechaFin);
 	void ListarTenesPorAccidente(string accidente);
 	void ListarFallasPorFormacion(int formacion);
 	void ListarAccidentesPorFormacion(int formacion);

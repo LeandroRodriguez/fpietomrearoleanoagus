@@ -279,7 +279,7 @@ void TestControlador::TestBuscarFallaSegunFecha(){
 	dato7->setFormacion("5");
 	controlador->InsertarDato(dato7);
 
-	list<Key*>* datos = new list<Key*>();
+	/*list<Key*>* datos = new list<Key*>();
 	datos = controlador->BuscarTrenesConFallaSegunFecha("no cierra puerta", "2011/01/21 00:00 00:30", "2013/01/21 00:00 00:30");
     //tiene q dar 3
     cout << "Cantidad Elementos" << datos->size() <<endl;
@@ -287,7 +287,8 @@ void TestControlador::TestBuscarFallaSegunFecha(){
     for(;itDato != datos->end();itDato++){
             //me imprime la linea ferroviaria de los q "no cierra puerta"
             cout << (*itDato)->getSubClaveSegunDim(0) << endl;
-    }
+    }*/
+    controlador->ListarTenesPorFalla("no cierra puerta", "2011/01/21 00:00 00:30", "2013/01/21 00:00 00:30");
 
     delete controlador;
 	delete dato;

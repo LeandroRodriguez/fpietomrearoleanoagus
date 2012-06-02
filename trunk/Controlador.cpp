@@ -85,9 +85,17 @@ list<Key*>* Controlador::getListaKey(string path){
 	return lista;
 }
 
-void Controlador::ListarTenesPorFalla(string falla){
-    //not implemented
+void Controlador::ListarTenesPorFalla(string falla, string fechaInicio, string fechaFin){
+    list<Key*>* datos = new list<Key*>();
+	datos = this->BuscarTrenesConFallaSegunFecha(falla, fechaInicio, fechaFin);
+    cout << "Cantidad Elementos" << datos->size() <<endl;
+    list<Key*>::iterator itDato = datos->begin();
+    for(;itDato != datos->end();itDato++){
+            //LineaFerroviaria dim = 0
+            cout << (*itDato)->getSubClaveSegunDim(0) << endl;
     }
+}
+
 
 void Controlador::ListarTenesPorAccidente(string accidente){
     //not implemented
@@ -176,6 +184,11 @@ list<Key*>* Controlador::BuscarTrenesConFallaSegunFecha(string falla, string fec
 list<Key*>* Controlador::BuscarTrenesConAccidenteSegunFecha(string accidente, string fechaInicio, string fechaFin){
     //accidente dim=2
     return this->BuscarSegunFecha(accidente, 2, fechaInicio, fechaFin);
+}
+
+list<Key*>* Controlador::BuscarTrenesConFormacionSegunFecha(string formacion, string fechaInicio, string fechaFin){
+    //formacion dim=1
+    return this->BuscarSegunFecha(formacion, 1, fechaInicio, fechaFin);
 }
 
 list<Key*>* Controlador::BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin){
