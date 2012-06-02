@@ -29,9 +29,9 @@ public:
 	list<Key*>* BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin);
 
 	void ListarTenesPorFalla(string falla, string fechaInicio, string fechaFin);
-	void ListarTenesPorAccidente(string accidente);
-	void ListarFallasPorFormacion(int formacion);
-	void ListarAccidentesPorFormacion(int formacion);
+	void ListarTenesPorAccidente(string accidente, string fechaInicio, string fechaFin);
+	void ListarFallasPorFormacion(string formacion, string fechaInicio, string fechaFin);
+	void ListarAccidentesPorFormacion(string formacion, string fechaInicio, string fechaFin);
 	void ListarFallas();
 	void ListarForcaciones();
 	void ListarLineas();

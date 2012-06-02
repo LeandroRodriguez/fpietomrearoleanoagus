@@ -49,7 +49,8 @@ int main(){
     TestControlador* testControlador = new TestControlador();
     //testControlador->TestInsertarDato();
     //testControlador->TestControladorBuscarDato();
-    testControlador->TestBuscarFallaSegunFecha();
+    //testControlador->TestBuscarFallaSegunFecha();
+    testControlador->TestImprimirListados();
     delete testControlador;
 
     /*TestKey* testKey = new TestKey();

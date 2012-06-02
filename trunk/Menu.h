@@ -11,7 +11,7 @@ class Menu{
     int continuar;
     string falla;
     string accidente;
-    int formacion;
+    string formacion;
     string fechaInicio;
     string fechaFin;
 

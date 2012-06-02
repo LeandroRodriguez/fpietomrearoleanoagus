@@ -96,18 +96,40 @@ void Controlador::ListarTenesPorFalla(string falla, string fechaInicio, string f
     }
 }
 
-
-void Controlador::ListarTenesPorAccidente(string accidente){
-    //not implemented
+void Controlador::ListarTenesPorAccidente(string accidente, string fechaInicio, string fechaFin){
+    list<Key*>* datos = new list<Key*>();
+	datos = this->BuscarTrenesConAccidenteSegunFecha(accidente, fechaInicio, fechaFin);
+    cout << "Cantidad Elementos" << datos->size() <<endl;
+    list<Key*>::iterator itDato = datos->begin();
+    for(;itDato != datos->end();itDato++){
+            //LineaFerroviaria dim = 0
+            cout << (*itDato)->getSubClaveSegunDim(0) << endl;
     }
+}
 
-void Controlador::ListarFallasPorFormacion(int formacion){
-    //not implemented
-    }
+void Controlador::ListarFallasPorFormacion(string formacion, string fechaInicio, string fechaFin){
+    list<Key*>* datos = new list<Key*>();
+	datos = this->BuscarTrenesConFormacionSegunFecha(formacion, fechaInicio, fechaFin);
+    cout << "Cantidad Elementos" << datos->size() <<endl;
+    list<Key*>::iterator itDato = datos->begin();
+    for(;itDato != datos->end();itDato++){
+            //Fallas dim = 3
+            cout << (*itDato)->getSubClaveSegunDim(3) << endl;
 
-void Controlador::ListarAccidentesPorFormacion(int formacion){
-    //not implemented
     }
+}
+
+void Controlador::ListarAccidentesPorFormacion(string formacion, string fechaInicio, string fechaFin){
+    list<Key*>* datos = new list<Key*>();
+	datos = this->BuscarTrenesConFormacionSegunFecha(formacion, fechaInicio, fechaFin);
+    cout << "Cantidad Elementos" << datos->size() <<endl;
+    list<Key*>::iterator itDato = datos->begin();
+    for(;itDato != datos->end();itDato++){
+            //Accidente dim = 2
+            cout << (*itDato)->getSubClaveSegunDim(2) << endl;
+
+    }
+}
 
 void Controlador::ListarFallas(){
     //not implemented

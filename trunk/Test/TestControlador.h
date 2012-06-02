@@ -11,6 +11,7 @@ class TestControlador{
     void TestInsertarDato();
     void TestControladorBuscarDato();
     void TestBuscarFallaSegunFecha();
+    void TestImprimirListados();
 };
 
 

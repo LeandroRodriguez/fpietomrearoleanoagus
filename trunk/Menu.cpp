@@ -23,17 +23,29 @@ Menu::Menu(){
             case 2:
                 cout << "Ingrese el accidente" << endl;
                 cin >> accidente;
-                controlador->ListarTenesPorAccidente(accidente);
+                cout << "Ingrese Fecha Inicio" << endl;
+                cin >> fechaInicio;
+                cout << "Ingrese Fecha Fin" << endl;
+                cin >> fechaFin;
+                controlador->ListarTenesPorAccidente(accidente, fechaInicio, fechaFin);
                 break;
             case 3:
                 cout << "Ingrese la formación" << endl;
                 cin >> formacion;
-                controlador->ListarFallasPorFormacion(formacion);
+                cout << "Ingrese Fecha Inicio" << endl;
+                cin >> fechaInicio;
+                cout << "Ingrese Fecha Fin" << endl;
+                cin >> fechaFin;
+                controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
                 break;
             case 4:
                 cout << "Ingrese la formación" << endl;
                 cin >> formacion;
-                controlador->ListarAccidentesPorFormacion(formacion);
+                cout << "Ingrese Fecha Inicio" << endl;
+                cin >> fechaInicio;
+                cout << "Ingrese Fecha Fin" << endl;
+                cin >> fechaFin;
+                controlador->ListarAccidentesPorFormacion(formacion, fechaInicio, fechaFin);
                 break;
             case 5:
                 controlador->ListarFallas();
