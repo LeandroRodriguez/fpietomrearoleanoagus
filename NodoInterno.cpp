@@ -288,7 +288,7 @@ list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fecha
     list<Key*>* datos1 = new list<Key*>();
     list<Key*>* datos2 = new list<Key*>();
     int otroNodoPorSiDaIgualSub = IDNODOINVALIDO;
-    if (this->getDim() == dim)
+    if (this->getDim() == dim){
         //caso feliz en q la dim coindice
         int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
         Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
@@ -299,20 +299,22 @@ list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fecha
         }else{
             datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
         }
-    else
+    }
+    else{
         //caso no feliz en q la dim no coincide
         list<int>* ids = this->DevolverTodosSusIdHijosEnOrden();
-        list<Nodo*>* nodos= this->DevolverNodosSegunIds();
-        list<int>::iterator itNodo = nodos->begin();
-        datos1->itNodo->BuscarSegun(subclave, dim, fechaInicio, fechaFin);
+        list<Nodo*>* nodos= this->DevolverNodosDadasIds(ids);
+        list<Nodo*>::iterator itNodo = nodos->begin();
+        datos1=BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
         //primer dato lo hagarro afuera
         while (itNodo != nodos->end()){
             //incremento
-            itNodo++:
+            itNodo++;
             //segundo dato
-            datos2->itNodo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+            datos2=BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
             datos1->merge(*datos2);
         }
+    }
     return datos1;
 }
 
