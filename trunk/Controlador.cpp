@@ -24,6 +24,28 @@ Controlador::~Controlador(){
 	// TODO Auto-generated destructor stub
 }
 
+void Controlador::ArmarDatoEInsertar(){
+    system("clear");
+    string linea,accidente,falla,formacion,horario;
+    cout << "Ingrese Linea Ferroviaria" << endl;
+    cin >> linea;
+    cout << "Ingrese Accidente Ferroviaria" << endl;
+    cin >> accidente;
+    cout << "Ingrese Falla Ferroviaria" << endl;
+    cin >> falla;
+    cout << "Ingrese Formacion Ferroviaria" << endl;
+    cin >> formacion;
+    cout << "Ingrese Franja Horaria Del Siniestro" << endl;
+    cin >> horario;
+    Key* key = new Key();
+    key->setLineaFerroviaria(linea);
+    key->setAccidente(accidente);
+    key->setFalla(falla);
+    key->setFormacion(formacion);
+    key->setFranjaHorariaDelSiniestro(horario);
+    this->InsertarDato(key);
+}
+
 /*Inserto el dato pasado por parametro tanto en el archivo de data, como sus referencias en el arbol*/
 void Controlador::InsertarDato(Key* dato){
 	/*creo un objeto que se encargara de almacenar el dato en el archivo correspondiente*/
