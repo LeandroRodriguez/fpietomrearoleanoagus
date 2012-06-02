@@ -96,6 +96,7 @@ class NodoHoja: public Nodo{
     NodoHoja* PartirEn2(Key* &key, int dimension);
 
     Resultado insertarElementoSimuladoCargaInicial(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
+    bool Baja(Key* dato);
 };
 
 #endif

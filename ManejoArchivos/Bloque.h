@@ -55,6 +55,8 @@ public:
 	cantBytes getEspacioLibre();
 
 	list<RegistroVariable*>* getRegistros(){return this->registros;}
+
+	void setRegistro(uint32_t UID, RegistroVariable* r);
 };
 
 #endif /* BLOQUE_H_ */

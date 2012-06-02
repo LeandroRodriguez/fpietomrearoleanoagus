@@ -41,6 +41,8 @@ class Nodo : public InterfazSerializar {
 
 	void setArbol(Arbol* arbol);
 
+	virtual bool Baja(Key* dato) = 0;
+
 	bool tieneArbol(){
 	    if(this->arbol!=NULL)return true;
 	    return false;

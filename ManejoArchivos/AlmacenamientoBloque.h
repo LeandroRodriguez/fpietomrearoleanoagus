@@ -57,6 +57,7 @@ public:
 	offset getUltimoBloque();
 	void actualizarBloqueUIDs(int valor);
 	void actualizarEspacioLibre(offset nBloqueDisponible, cantBytes ssEspacioLibre);
+	void sobreEscribirRegistro(offset nBloque, uint32_t UID, RegistroVariable* r);
 };
 
 

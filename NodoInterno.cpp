@@ -363,3 +363,26 @@ int NodoInterno::getDim(){
 int NodoInterno::getAltura(){
         return this->Altura;
     }
+
+bool NodoInterno::Baja(Key* datoBuscado){
+	bool encontrado = false;
+	string subclave = datoBuscado->getSubClaveSegunDim(this->dimension);
+	int otroNodoPorSiDaIgualSub = IDNODOINVALIDO;
+	int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
+	Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
+
+	if( otroNodoPorSiDaIgualSub != IDNODOINVALIDO ){
+		Nodo* otroHijo = arbol->DevolverNodoSegunID(otroNodoPorSiDaIgualSub);
+		bool encontroPrimero = nodoHijo->Baja(datoBuscado);
+		if(!encontroPrimero){
+			bool encontroSegundo = otroHijo->Baja(datoBuscado);
+			encontrado = encontroSegundo;
+		}
+		else
+			return true;
+	}else{
+		encontrado = nodoHijo->Baja(datoBuscado);
+		}
+	return encontrado;
+
+}

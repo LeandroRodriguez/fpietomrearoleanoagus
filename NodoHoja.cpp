@@ -376,3 +376,29 @@ void NodoHoja::imprimir() {
 		}
 
 }
+
+bool NodoHoja::Baja(Key* datoBuscado){
+	bool encontrado = false;
+	list<int>::iterator itReg = this->listIdRegistros->begin();
+	list<int>::iterator itBloq = this->listNroBloque->begin();
+	while (!encontrado && itReg != listIdRegistros->end() && itBloq != listNroBloque->end()){
+		Key* dato = this->cargarDato(*itReg,*itBloq);
+		if(dato->esIgual(datoBuscado))
+		{
+			encontrado = true;
+			int r = *itReg;
+			int b = *itBloq;
+			AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
+			RegistroVariable* reg= new RegistroVariable(almacena.recuperarRegistro(b, r));
+			reg->setVivo(false);
+			reg->setNRegistro(r);
+			almacena.sobreEscribirRegistro(b,r, reg);
+
+			break;
+		}
+		itReg++;
+		itBloq++;
+	}
+	return encontrado;
+}
+

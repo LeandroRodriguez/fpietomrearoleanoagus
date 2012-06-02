@@ -27,6 +27,7 @@ public:
 	virtual ~Indice();
 	void agregarDatosCargaInicial(list<Dato*>* listaDatosCargaInicial);
 	//virtual offset buscar(Key* dato){}
+	void Baja(Key* dato);
 };
 
 #endif /* INDICE_H_ */

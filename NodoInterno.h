@@ -82,6 +82,7 @@ class NodoInterno: public Nodo{
     void setDim(int h);
     int getDim();
     int getAltura();
+    bool Baja(Key* dato);
 
 };
 
