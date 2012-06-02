@@ -351,16 +351,12 @@ void TestControlador::TestImprimirListados(){
 	controlador->InsertarDatosCargaInicial(lista);
 
     cout << "*********************************" << endl;
-    cout << "---------------FALLAS------------" << endl;
     controlador->ListarFallas();
     cout << "*********************************" << endl;
-    cout << "---------------FORMACIONES------------" << endl;
     controlador->ListarFormaciones();
     cout << "*********************************" << endl;
-    cout << "---------------ACCIDENTES------------" << endl;
     controlador->ListarAccidentes();
     cout << "*********************************" << endl;
-    cout << "---------------LineasFerroviarias------------" << endl;
     controlador->ListarLineasFerroviarias();
     cout << "*********************************" << endl;
     string fechaInicio = "2011/02/29 00:00 00:00";
