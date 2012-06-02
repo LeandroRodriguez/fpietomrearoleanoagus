@@ -352,7 +352,7 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
 
 void NodoInterno::setAltura(int h){
         this->Altura=h;
-        this->dimension= Key::getDimensionSegunAltura(h);
+        //this->dimension= Key::getDimensionSegunAltura(h);
         }
 void NodoInterno::setDim(int h){
         this->dimension=h;
