@@ -24,6 +24,7 @@ public:
 	void InsertarDato(Key* dato);
 	bool BuscarDato(Key* dato);
 	list<Key*>* BuscarTrenesConFallaSegunFecha(string falla, string fechaInicio, string fechaFin);
+	list<Key*>* BuscarTrenesConAccidenteSegunFecha(string accidente, string fechaInicio, string fechaFin);
 	list<Key*>* BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin);
 
 	void ListarTenesPorFalla(string falla);
