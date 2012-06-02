@@ -275,17 +275,31 @@ list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fecha
     list<Key*>* datos1 = new list<Key*>();
     list<Key*>* datos2 = new list<Key*>();
     int otroNodoPorSiDaIgualSub = IDNODOINVALIDO;
-    int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
-    Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
-
-    if( otroNodoPorSiDaIgualSub != IDNODOINVALIDO ){
-    Nodo* otroHijo = arbol->DevolverNodoSegunID(otroNodoPorSiDaIgualSub);
-    datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
-    datos2 = otroHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
-    }else{
-        datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+    if (this->getDim() == dim)
+        //caso feliz en q la dim coindice
+        int id = this->DevolverNodoHijoSegunSubclave(subclave,otroNodoPorSiDaIgualSub);
+        Nodo* nodoHijo = arbol->DevolverNodoSegunID(id);
+        if( otroNodoPorSiDaIgualSub != IDNODOINVALIDO ){
+            Nodo* otroHijo = arbol->DevolverNodoSegunID(otroNodoPorSiDaIgualSub);
+            datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+            datos2 = otroHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+        }else{
+            datos1 = nodoHijo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
         }
-    datos1->merge(*datos2);
+    else
+        //caso no feliz en q la dim no coincide
+        list<int>* ids = this->DevolverTodosSusIdHijosEnOrden();
+        list<Nodo*>* nodos= this->DevolverNodosSegunIds();
+        list<int>::iterator itNodo = nodos->begin();
+        datos1->itNodo->BuscarSegun(subclave, dim, fechaInicio, fechaFin);
+        //primer dato lo hagarro afuera
+        while (itNodo != nodos->end()){
+            //incremento
+            itNodo++:
+            //segundo dato
+            datos2->itNodo->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+            datos1->merge(*datos2);
+        }
     return datos1;
 }
 
