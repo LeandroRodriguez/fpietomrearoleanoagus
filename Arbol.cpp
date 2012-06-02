@@ -18,7 +18,7 @@ bool Arbol::BuscarDato(Key* datoBuscado){
 }
 
 list<Key*>* Arbol::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
-    return raiz->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+    if(this->raiz)return raiz->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
 }
 
 void Arbol::actualizarNodo(Nodo* nodoAActualizar){
@@ -46,6 +46,10 @@ Arbol::~Arbol() {
 	if (this->raiz!=NULL)
 		delete this->raiz;
 }
+
+long int Arbol::getCantElemen(){
+    return this->cantidadElem;
+    }
 
 
 Resultado Arbol::LazyInicialization(offset nroBloque,offset nroRegistro,Key* dato){
