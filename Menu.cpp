@@ -15,10 +15,13 @@ Menu::Menu(){
             case 1:
                 system("clear");
                 cout << "Ingrese la falla" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, falla);
                 cout << "Ingrese Fecha Inicio" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 system("clear");
                 controlador->ListarTenesPorFalla(falla, fechaInicio, fechaFin);
@@ -29,10 +32,13 @@ Menu::Menu(){
             case 2:
                 system("clear");
                 cout << "Ingrese el accidente" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, accidente);
                 cout << "Ingrese Fecha Inicio" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 system("clear");
                 controlador->ListarTenesPorAccidente(accidente, fechaInicio, fechaFin);
@@ -43,10 +49,13 @@ Menu::Menu(){
             case 3:
                 system("clear");
                 cout << "Ingrese la formación" << endl;
+                cin.ignore(256,'\n');
                 getline(cin,formacion);
                 cout << "Ingrese Fecha Inicio" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
                 cout<<endl;
@@ -56,10 +65,13 @@ Menu::Menu(){
             case 4:
                 system("clear");
                 cout << "Ingrese la formación" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, formacion);
                 cout << "Ingrese Fecha Inicio" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
+                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 system("clear");
                 controlador->ListarAccidentesPorFormacion(formacion, fechaInicio, fechaFin);
