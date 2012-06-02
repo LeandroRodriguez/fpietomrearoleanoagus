@@ -17,15 +17,10 @@ Menu::Menu(){
                 cout << "Ingrese la falla" << endl;
                 cin.ignore(256,'\n');
                 getline(cin, falla);
-                cout << falla <<endl;
                 cout << "Ingrese Fecha Inicio" << endl;
-
                 getline(cin, fechaInicio);
-                cout << fechaInicio <<endl;
                 cout << "Ingrese Fecha Fin" << endl;
-
                 getline(cin, fechaFin);
-                cout << fechaFin <<endl;
                 system("clear");
                 controlador->ListarTenesPorFalla(falla, fechaInicio, fechaFin);
                 cout<<endl;
@@ -38,10 +33,8 @@ Menu::Menu(){
                 cin.ignore(256,'\n');
                 getline(cin, accidente);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 system("clear");
                 controlador->ListarTenesPorAccidente(accidente, fechaInicio, fechaFin);
@@ -55,10 +48,8 @@ Menu::Menu(){
                 cin.ignore(256,'\n');
                 getline(cin,formacion);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
                 cout<<endl;
@@ -71,10 +62,8 @@ Menu::Menu(){
                 cin.ignore(256,'\n');
                 getline(cin, formacion);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin.ignore(256,'\n');
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin.ignore(256,'\n');
                 getline(cin, fechaFin);
                 system("clear");
                 controlador->ListarAccidentesPorFormacion(formacion, fechaInicio, fechaFin);
