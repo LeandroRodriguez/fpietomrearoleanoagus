@@ -15,11 +15,12 @@ Menu::Menu(){
             case 1:
                 system("clear");
                 cout << "Ingrese la falla" << endl;
-                cin >> falla;
+                getline(cin, falla);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin >> fechaInicio;
+                getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin >> fechaFin;
+                getline(cin, fechaFin);
+                system("clear");
                 controlador->ListarTenesPorFalla(falla, fechaInicio, fechaFin);
                 cout<<endl;
                 cout <<("PRESS ENTER");
@@ -28,11 +29,12 @@ Menu::Menu(){
             case 2:
                 system("clear");
                 cout << "Ingrese el accidente" << endl;
-                cin >> accidente;
+                getline(cin, accidente);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin >> fechaInicio;
+                getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin >> fechaFin;
+                getline(cin, fechaFin);
+                system("clear");
                 controlador->ListarTenesPorAccidente(accidente, fechaInicio, fechaFin);
                 cout<<endl;
                 cout <<("PRESS ENTER");
@@ -41,11 +43,11 @@ Menu::Menu(){
             case 3:
                 system("clear");
                 cout << "Ingrese la formación" << endl;
-                cin >> formacion;
+                getline(cin,formacion);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin >> fechaInicio;
+                getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin >> fechaFin;
+                getline(cin, fechaFin);
                 controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
                 cout<<endl;
                 cout <<("PRESS ENTER");
@@ -54,11 +56,12 @@ Menu::Menu(){
             case 4:
                 system("clear");
                 cout << "Ingrese la formación" << endl;
-                cin >> formacion;
+                getline(cin, formacion);
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin >> fechaInicio;
+                getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
-                cin >> fechaFin;
+                getline(cin, fechaFin);
+                system("clear");
                 controlador->ListarAccidentesPorFormacion(formacion, fechaInicio, fechaFin);
                 cout<<endl;
                 cout <<("PRESS ENTER");
