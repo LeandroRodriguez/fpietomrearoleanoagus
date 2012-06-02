@@ -30,7 +30,7 @@ void Controlador::InsertarDato(Key* dato){
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
 
 	/*si el dato no es null, lo guardo*/
-	if (dato) {
+	if (dato && !dat(dato) ) {
 		/*obtengo los bytes del dato serializado*/
 		string str(dato->Serializarse());
 		Bytes bytes(str);
@@ -41,7 +41,11 @@ void Controlador::InsertarDato(Key* dato){
 		/*le paso al arbol el numero de bloque y el UID del reg en donde guarde el dato*/
 		Resultado res = indice->agregarDato(almacena.getNumeroBloque(), almacena.getNumeroUID(), dato);
 	}
-}
+};
+
+bool Controlador::dat(Key* dato){
+    return this->indice->BuscarDato(dato);
+    }
 
 list<Key*>* Controlador::getListaKey(string path){
 	list<Key*>* lista = new list<Key*>();
