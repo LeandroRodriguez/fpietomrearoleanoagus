@@ -632,6 +632,7 @@ offset Arbol::insertarDatosEnNodoInterno(list<list<SubClaveRef*>*>* listaMaestra
 	/*construyo mi NodoI*/
 	NodoInterno* nodoInterno = new NodoInterno();
 	int k = 0;
+	nodoInterno->setIdDelNodo(10);
 	SubClaveRef* subClave;
 	offset referenciaSiguiente;
 	offset primerReferencia = this->obtenerReferenciaNodosSegunPos(listaReferenciasNodosHios, k);
@@ -679,6 +680,7 @@ list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMa
 			/*voy a iterar sobre mis listas de claves para ir armando el nodo interno*/
         		d = 0;
 			nodoInterno = new NodoInterno();
+			nodoInterno->setIdDelNodo(10);
 			list<SubClaveRef*>::iterator itListaClaves;
 
 			itListaClaves = (*itListaMaestraClaves)->begin();
