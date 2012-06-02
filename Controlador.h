@@ -24,6 +24,7 @@ public:
 	void ImprimirArbol();
 	void CargarDatosPrueba();
 	void InsertarDato(Key* dato);
+	void ArmarDatoEInsertar();
 	bool BuscarDato(Key* dato);
 	list<Key*>* BuscarTrenesConFallaSegunFecha(string falla, string fechaInicio, string fechaFin);
 	list<Key*>* BuscarTrenesConAccidenteSegunFecha(string accidente, string fechaInicio, string fechaFin);

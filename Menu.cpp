@@ -122,7 +122,11 @@ Menu::Menu(){
                 while (cin.get() != '\n');
                 break;
             case 11:
-                //controlador->ListarAccidentes();
+                system("clear");
+                controlador->ArmarDatoEInsertar();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             default:
                 cout << "Ingrese una opción valida" << endl;
@@ -147,8 +151,7 @@ void Menu::ImprimirOpciones(){
     cout << " 9)  Cargar datos de prueba" << endl;
     cout << " 10) Imprimir arbol" << endl;
     cout << " 11) Ingresar dato" << endl;
-    cout << " 11) Eliminar dato" << endl;
-	cout << endl;
+    cout << endl;
 	cout << " 0)  Salir" << endl;
 	cout << endl;
 };
