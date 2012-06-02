@@ -143,12 +143,13 @@ void Controlador::ListarFallas(){
     list<Key*>* datos = this->getListaKey(path);
 	//Fallas dim = 3
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(3, datos);
-	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+	cout << "LISTADO FALLAS" << endl;
+	cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
-
+            cout << "- " << (*itDato) <<endl;
     }
+    cin.get();
 }
 
 void Controlador::ListarFormaciones(){
@@ -157,12 +158,14 @@ void Controlador::ListarFormaciones(){
     list<Key*>* datos = this->getListaKey(path);
 	//Formacion dim = 1
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(1, datos);
-	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+	cout << "LISTADO FORMACIONES" << endl;
+	cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
+            cout << "- "<<(*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 void Controlador::ListarLineasFerroviarias(){
@@ -171,12 +174,14 @@ void Controlador::ListarLineasFerroviarias(){
     list<Key*>* datos = this->getListaKey(path);
 	//Linea Ferroviaria dim = 0
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(0, datos);
-	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+	cout << "LISTADO LINEAS FERROVIARIAS" << endl;
+	cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
+            cout << "- "<<(*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 void Controlador::ListarAccidentes(){
@@ -185,12 +190,14 @@ void Controlador::ListarAccidentes(){
     list<Key*>* datos = this->getListaKey(path);
 	//Accidentes dim = 2
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(2, datos);
-	cout << "Cantidad Elementos" << subclaves->size() <<endl;
-    list<string>::iterator itDato = subclaves->begin();
+	cout << "LISTADO ACCIDENTES" << endl;
+	cout << "Cantidad Elementos : " << subclaves->size() <<endl;
+	list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
+            cout << "- " << (*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 /*Inserto el dato pasado por parametro tanto en el archivo de data, como sus referencias en el arbol*/
