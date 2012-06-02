@@ -2,6 +2,11 @@
 #include <string.h>
 
 Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
+	int a = 2;
+	if(this == NULL)
+			a = 1;
+	if(this->persistir == NULL)
+		a = 0;
     Nodo* aux = this->persistir->leerNodo(IdNodo);
 	aux->setArbol(this);
 	return aux;
@@ -70,7 +75,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
 		    NodoHoja* Nder=NULL;
 		    NodoHoja* raizvieja = (NodoHoja*) this->raiz;
             Key* k=NULL;
-		    Nder = raizvieja->PartirEn2(k);//parti mi raiz hoja en 2
+		    Nder = raizvieja->PartirEn2(k, Key::getDimensionSegunAltura(1));//parti mi raiz hoja en 2
             NodoInterno* RAIZNUEVA = (NodoInterno*) this->crearNuevoNodo(1);
             //consigo la subclave que va a subir
 		    string subclaveRaizNueva = k->getSubClaveSegunDim(Key::getDimensionSegunAltura(1));
@@ -90,10 +95,7 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             res=RES_OK;//queda todo bien
             }
             if(res==RES_DESBORDADO && this->raiz->getHojaOInterno()=='i'){
-                /******************************************/
-                //ACA SE LLAMA A LA CARGA INICIAL
-                /******************************************/
-            res = RES_OK;
+				return RES_DESBORDADO;
             }
 	}
     return res;
@@ -113,6 +115,7 @@ Nodo* Arbol::crearNuevoNodo(unsigned int nivel) {
 	} else {
              nuevoNodo = new NodoInterno(this);
             ((NodoInterno*) nuevoNodo)->setAltura(nivel);
+            ((NodoInterno*) nuevoNodo)->setDim(3);
             }
 	this->persistir->agregarNodo( nuevoNodo);
 	return nuevoNodo;
@@ -125,7 +128,7 @@ Nodo* Arbol::getRaiz(){
 void Arbol::imprimir(){
 	if (raiz != NULL) {
 		cout << "Raiz Del Arbol: " << endl;
-		if(!this->raiz->tieneArbol())this->raiz->setArbol(this);
+		this->raiz->setArbol(this);
 		this->raiz->imprimir();
 	}
 	else{
@@ -180,6 +183,7 @@ void Arbol::cargaInicial(list<Dato*>* listaDeDatos){
         NodoHoja* nodoVacio = new NodoHoja();
         nodoVacio->setIdDelNodo(referencia);
         this->persistir->ActualizarNodo(nodoVacio);
+        this->raiz = ra;
 }
 /*desde aca, la recu me va a devolver una lista con un solo nodo, que va a ser el raiz*/
 
@@ -242,19 +246,6 @@ list<Dato*>* Arbol::obtenerListaOrdenadaPorDimension(list<Dato*>* lista, int dim
             		 Dato* temp = *poste;
             		 *poste = *ante;
             		 *ante = temp;
-
-            		 //list<Dato*>::iterator ante = this->getElemento(lista, i-1);
-            		 //list<Dato*>::iterator poste = this->getElemento(lista, i);
-            		 //swap(ante, poste);
-
-					 //this->setElemento(lista, i - 1,elem);
-					 //this->setElemento(lista, i,aux);
-
-            		 //es asi, tengo mi list<Dato*>* y quiero hacer el swap. como lo hago? porque tengo que intercambiar
-            		 //los punteros en realidad y ya me maree
-            		 // o sea, vos queres hacer el reordenamiento en el lugar, no crear una lista nueva con los mismos elementos, o what?
-
-            		 //si, en la misma lista. te parece muy sucio? no
 					 swapped = true;
                  }
              }

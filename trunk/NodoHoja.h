@@ -91,9 +91,9 @@ class NodoHoja: public Nodo{
     Resultado insertarElemento(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
     vector<int> getTamanios();
     void imprimir();
-    void ordenarBloquesRegistros();
+    void ordenarBloquesRegistros(int dim);
 
-    NodoHoja* PartirEn2(Key* &key);
+    NodoHoja* PartirEn2(Key* &key, int dimension);
 
     Resultado insertarElementoSimuladoCargaInicial(offset idRegistro, offset nroBloque, Key* dato, double porcentaje);
 };

@@ -101,7 +101,7 @@ void TestNodoHoja::TestPartirHojaEn2(){
 	offset nReg2 = almacena.getNumeroUID();
 	nodo1->insertarElemento(nReg2, nBloque2, dato2, 1);
 	nodo1->imprimir();
-	Nodo* nodo2 = nodo1->PartirEn2(dato2);
+	Nodo* nodo2 = nodo1->PartirEn2(dato2, Key::getDimensionSegunAltura(1));
 	nodo1->imprimir();
 	nodo2->imprimir();
 	delete dato1;

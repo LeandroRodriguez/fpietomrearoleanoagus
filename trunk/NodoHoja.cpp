@@ -247,7 +247,7 @@ vector<int> NodoHoja::getTamanios(){
 	return tamanios;
 }
 
-void NodoHoja::ordenarBloquesRegistros(){
+void NodoHoja::ordenarBloquesRegistros(int dim){
     list<int>* listOrdenadaIdReg = new list<int>();
     list<int>* listOrdenadaNroBloq = new list<int>();
     list<int>::iterator itRegi1 = this->listIdRegistros->begin();;
@@ -256,7 +256,6 @@ void NodoHoja::ordenarBloquesRegistros(){
     list<int>::iterator itBloqj2 = this->listNroBloque->begin();
     list<int>::iterator minItReg;
     list<int>::iterator minItBloq;
-    int dim = Key::getDimensionSegunAltura(this->Altura+1);
     int i1,i2,j1,j2,minReg,minBloq;
     bool seguir = true;
     while (itRegi1 != this->listIdRegistros->end() && itBloqi2 != this->listNroBloque->end() && seguir){
@@ -304,8 +303,8 @@ void NodoHoja::ordenarBloquesRegistros(){
 //Devuelve la mitad derecha, deja en el original la mitad izquierda
 // obviamente divide segun tamanios
 //Devuelve la clave perteneciente al dato del "medio" ponderado.
-NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir){
-    this->ordenarBloquesRegistros();
+NodoHoja* NodoHoja::PartirEn2(Key* &kAsubir, int dimension){
+    this->ordenarBloquesRegistros(dimension);
     vector<int> S = this->getTamanios();
 
     //int TamMitad = ( this->getTamanioConDatos() )/2;

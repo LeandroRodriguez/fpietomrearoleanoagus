@@ -334,7 +334,7 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
             if (Res == RES_DESBORDADO ){/*Aca tengo que solucionar overflow Hojas  */
                 NodoHoja* NHder=NULL;
                 Key* k=NULL;
-                NHder = NodoHleido->PartirEn2(k);
+                NHder = NodoHleido->PartirEn2(k, this->dimension);
 
             Res = this->InsertarNuevaSubClaveRef((k->getSubClaveSegunDim(this->dimension)),NHder->getIdDelNodo());
 
@@ -352,7 +352,6 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
 
 void NodoInterno::setAltura(int h){
         this->Altura=h;
-        //this->dimension= Key::getDimensionSegunAltura(h);
         }
 void NodoInterno::setDim(int h){
         this->dimension=h;
