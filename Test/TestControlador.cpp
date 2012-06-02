@@ -348,14 +348,14 @@ void TestControlador::TestImprimirListados(){
 	dato->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato->setFalla("no cierra puerta");
 	dato->setAccidente("incendio");
-	dato->setFormacion("1");
+	dato->setFormacion("4");
 	controlador->InsertarDato(dato);
 
 	Key* dato2 = new Key();
 	dato2->setLineaFerroviaria("Mitre");
 	dato2->setFranjaHorariaDelSiniestro("2012/01/21 00:00 00:30");
 	dato2->setFalla("asientos rotos");
-	dato2->setAccidente("choco con estacion");
+	dato2->setAccidente("incerndio");
 	dato2->setFormacion("2");
 	controlador->InsertarDato(dato2);
 
@@ -434,9 +434,9 @@ void TestControlador::TestImprimirListados(){
 	Key* dato10 = new Key();
 	dato10->setLineaFerroviaria("TorCuato");
 	dato10->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
-	dato10->setFalla("no cierra");
+	dato10->setFalla("no abre ventanas");
 	dato10->setAccidente("roto");
-	dato10->setFormacion("4");
+	dato10->setFormacion("6");
 	controlador->InsertarDato(dato10);
 
 	Key* dato11 = new Key();
@@ -447,6 +447,11 @@ void TestControlador::TestImprimirListados(){
 	dato11->setFormacion("6");
 	controlador->InsertarDato(dato11);
 
+
+    controlador->ListarFallas();
+    controlador->ListarFormaciones();
+    controlador->ListarAccidentes();
+    controlador->ListarLineasFerroviarias();
     string fechaInicio = "2011/02/29 00:00 00:00";
     string fechaFin = "2013/02/29 00:00 00:00";
     cout << endl;
@@ -473,5 +478,4 @@ void TestControlador::TestImprimirListados(){
 	delete dato9;
 	delete dato10;
 	delete dato11;
-
 }
