@@ -73,6 +73,7 @@ class NodoInterno: public Nodo{
 
     int DevolverNodoHijoSegunSubclave(string subcReq ,int& OtraIdNodoSiSubclaveIgual);
     list<int>* DevolverTodosSusIdHijosEnOrden();
+    list<Nodo*>* DevolverNodosDadasIds(list<int>* ListaIdsNodos);
     void imprimir();
 
     Resultado insertarElemento(offset nroBloque, offset nroRegistro, Key* dato, double porcentaje);

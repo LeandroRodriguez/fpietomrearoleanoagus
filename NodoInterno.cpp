@@ -226,6 +226,18 @@ list<int>* NodoInterno::DevolverTodosSusIdHijosEnOrden(){
        }
        return listIdHijos;
     }
+
+list<Nodo*>* NodoInterno::DevolverNodosDadasIds(list<int>* ListaIdsNodos){
+        list<Nodo*>* ListaNodosAdevolver = new list<Nodo*>();
+        list<int>::iterator it;
+        it= ListaIdsNodos->begin();
+        for(;it!=ListaIdsNodos->end();it++){
+            ListaNodosAdevolver->push_back(this->arbol->DevolverNodoSegunID(*it));
+            }
+        return ListaNodosAdevolver;
+        }
+
+
 void NodoInterno::imprimir(){
         std::cout <<"idBloque:"<<this->idBloque << ", cantElem:"<< this->CantElem << ", altura:" << this->Altura
 			<<	", dimension:" << this->dimension<< ", Referencias:"<<endl;
@@ -271,6 +283,7 @@ bool NodoInterno::BuscarDato(Key* datoBuscado){
     return encontrado;
 }
 
+/*Se le pasa la subclave y la dimension a la que corresponde esta, mas el rango de fechas  */
 list<Key*>* NodoInterno::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
     list<Key*>* datos1 = new list<Key*>();
     list<Key*>* datos2 = new list<Key*>();
