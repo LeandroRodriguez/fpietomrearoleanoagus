@@ -66,6 +66,7 @@ class Arbol {
 
 	offset insertarDatosEnNodoInterno(list<list<SubClaveRef*>*>* listaMaestraClaves, list<offset>* listaReferenciasNodosHios, int i, int dimension);
 
+    long int getCantElemen();
 
 	list<offset>* insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMaestraClaves, list<offset>* listaRefsNodosArmados, int dimension, int altura);
 

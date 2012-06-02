@@ -45,7 +45,7 @@ public:
 
 	void InsertarDatosCargaInicial(list<Key*>* listaDatos);
 	void Baja(Key* dato);
-
+    void MostrarStrings(list<string>* list);
     list<Key*>* getListaKey(string path);
 
 
