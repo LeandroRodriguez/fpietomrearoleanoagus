@@ -13,6 +13,7 @@ Menu::Menu(){
                 continuar = false;
                 break;
             case 1:
+                system("clear");
                 cout << "Ingrese la falla" << endl;
                 cin >> falla;
                 cout << "Ingrese Fecha Inicio" << endl;
@@ -20,8 +21,12 @@ Menu::Menu(){
                 cout << "Ingrese Fecha Fin" << endl;
                 cin >> fechaFin;
                 controlador->ListarTenesPorFalla(falla, fechaInicio, fechaFin);
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 2:
+                system("clear");
                 cout << "Ingrese el accidente" << endl;
                 cin >> accidente;
                 cout << "Ingrese Fecha Inicio" << endl;
@@ -29,8 +34,12 @@ Menu::Menu(){
                 cout << "Ingrese Fecha Fin" << endl;
                 cin >> fechaFin;
                 controlador->ListarTenesPorAccidente(accidente, fechaInicio, fechaFin);
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 3:
+                system("clear");
                 cout << "Ingrese la formación" << endl;
                 cin >> formacion;
                 cout << "Ingrese Fecha Inicio" << endl;
@@ -38,6 +47,9 @@ Menu::Menu(){
                 cout << "Ingrese Fecha Fin" << endl;
                 cin >> fechaFin;
                 controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 4:
                 system("clear");
@@ -88,7 +100,11 @@ Menu::Menu(){
                 while (cin.get() != '\n');
                 break;
             case 10:
-//                controlador->InsertarDatosCargaInicial();
+                system("clear");
+                controlador->ImprimirArbol();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 11:
                 //controlador->ListarAccidentes();
@@ -114,7 +130,8 @@ void Menu::ImprimirOpciones(){
 	cout << " 7)  Listado de todas las lineas ferroviarias" << endl;
 	cout << " 8)  Listado de todos los accidentes" << endl;
     cout << " 9)  Cargar datos de prueba" << endl;
-    cout << " 10) Ingresar dato" << endl;
+    cout << " 10) Imprimir arbol" << endl;
+    cout << " 11) Ingresar dato" << endl;
     cout << " 11) Eliminar dato" << endl;
 	cout << endl;
 	cout << " 0)  Salir" << endl;

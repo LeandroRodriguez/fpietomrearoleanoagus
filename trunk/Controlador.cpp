@@ -301,6 +301,11 @@ void Controlador::CargarDatosPrueba(){
 	cin.get();
 }
 
+void Controlador::ImprimirArbol(){
+    this->indice->imprimir();
+    cin.get();
+}
+
 
 /*
 void Controlador::cargarArchivos(){
