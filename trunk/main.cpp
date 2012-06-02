@@ -15,7 +15,10 @@
 using namespace std;
 
 int main(){
+
+    cout << "nw" << endl;
     Menu();
+
     /*TestRegistro* testRegistro = new TestRegistro();
     testRegistro->TestCrearRegistro();
     testRegistro->TestSerializarHidratarRegistro();
@@ -49,15 +52,15 @@ int main(){
 	//testArbol->UnDatoMas();
     delete testArbol;*/
 
-    /*TestControlador* testControlador = new TestControlador();
+    //TestControlador* testControlador = new TestControlador();
    // testControlador->TestInsertarDato();
     //testControlador->TestControladorBuscarDato();
     //testControlador->TestBuscarFallaSegunFecha();
+   // testControlador->TestImprimirListados();
+/*
+    testControlador->TestBuscarFallaSegunFecha();
     testControlador->TestImprimirListados();
-
-    //testControlador->TestBuscarFallaSegunFecha();
-    testControlador->TestImprimirListados();
-    delete testControlador;*/
+    delete testControlador;
 
     /*TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();

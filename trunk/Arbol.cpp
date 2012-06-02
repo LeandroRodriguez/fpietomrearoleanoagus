@@ -34,7 +34,7 @@ Arbol::Arbol( PersistenciaArbol* persistencia) {
 		this->raiz = this->persistir->obtenerRaiz();
 		cout << "El ARBOL cargo raiz existente" << endl;
 		cout << "*****************************" << endl;
-        this->raiz->setArbol(this);
+		this->raiz->setArbol(this);
 		}else{
         this->raiz=NULL;
 	cout << "No existia raiz previa" << endl;
