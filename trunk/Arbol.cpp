@@ -402,8 +402,9 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	else{
         if((listaSubClaves->size() == listaListasResultados->size())){
             /*meto un dato vacio a la lista para balancear*/
-            Dato* dato = (*itDato);
-            dato->setIdRegistro(0);
+            Dato* dato = new Dato();
+            int vacio = (int)VACIO;
+            dato->setIdRegistro(vacio);
             dato->setNroBoque(0);
             dato->setClave(NULL);
 
