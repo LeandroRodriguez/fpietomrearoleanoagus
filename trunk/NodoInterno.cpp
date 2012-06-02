@@ -337,11 +337,11 @@ Resultado NodoInterno::insertarElemento(offset nroBloque, offset nroRegistro, Ke
 
             Res = this->InsertarNuevaSubClaveRef((k->getSubClaveSegunDim(this->dimension)),NHder->getIdDelNodo());
 
-                 if (Res==RES_OK || Res==RES_DESBORDADO){//actualizo todos los cambios
-                    this->arbol->actualizarNodo(this);
-                    this->arbol->actualizarNodo(NodoHleido);
-                    this->arbol->actualizarNodo(NHder);
-                    }else cout << "subclave repetida, error mortal" << endl;
+                    if (Res==RES_OK || Res==RES_DESBORDADO){//actualizo todos los cambios
+                        this->arbol->actualizarNodo(this);
+                        this->arbol->actualizarNodo(NodoHleido);
+                        this->arbol->actualizarNodo(NHder);
+                        }
                 }else{
                     this->arbol->actualizarNodo(NodoHleido);
                     }
