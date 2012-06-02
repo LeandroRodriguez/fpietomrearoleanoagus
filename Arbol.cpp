@@ -8,7 +8,8 @@ Nodo* Arbol::DevolverNodoSegunID(int IdNodo){
 }
 
 bool Arbol::BuscarDato(Key* datoBuscado){
-    return raiz->BuscarDato(datoBuscado);
+    //if (this->raiz->getHojaOInterno()=='H')
+      return raiz->BuscarDato(datoBuscado);
 }
 
 list<Key*>* Arbol::BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin){
@@ -343,15 +344,20 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	list<list<Dato*>*>* listaListasResultados = new list<list<Dato*>*>();
 	list<SubClaveRef*>* listaSubClaves = new list<SubClaveRef*>();
 	list<Dato*>* listaAux = new list<Dato*>();
+	SubClaveRef* subClave;
 	Key* clave;
+	Dato* dato;
 	NodoHoja* nodoHoja = new NodoHoja();
+	offset idRegistro;
+	offset nroBloque;
+	Resultado res;
 	for(;itDato!=subListaOrdenada->end();itDato++){
 		/*guardo el dato en un nodo(solo en RAM)*/
-		Dato* dato = (*itDato);
-		offset idRegistro = dato->getIdRegistro();
-        offset nroBloque = dato->getNroBoque();
+		dato = (*itDato);
+		idRegistro = dato->getIdRegistro();
+        nroBloque = dato->getNroBoque();
         clave = dato->getClave();
-		Resultado res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
+		res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
 		/*veo si desbordo el nodo*/
 		if(res==RES_DESBORDADO){
 			listaListasResultados->push_back(listaAux);
@@ -360,7 +366,7 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 			Resultado res = nodoHoja->insertarElementoSimuladoCargaInicial(idRegistro, nroBloque, clave, porcentajeDeEmpaquetamiento);
 			listaAux = new list<Dato*>();
 			/*creo y guardo la subClave*/
-			SubClaveRef* subClave = new SubClaveRef(clave->getSubClaveSegunDim(dimension),0);
+			subClave = new SubClaveRef(clave->getSubClaveSegunDim(dimension),0);
 			listaSubClaves->push_back(subClave);
 		}
 		listaAux->push_back(dato);
@@ -375,19 +381,23 @@ int Arbol::cargaInicialConseguirParticionConNivel(list<Dato*>* subListaOrdenada,
 	if(listaSubClaves->size()==0){
 		/*setear un nodo vacio o algo*/
 		/*agarro la clave del ultimo elemento y la meto en la lista*/
-        SubClaveRef* subClave = new SubClaveRef(clave->getSubClaveSegunDim(dimension),0);
+        subClave = new SubClaveRef(clave->getSubClaveSegunDim(dimension),0);
         listaSubClaves->push_back(subClave);
         /*meto un dato vacio a la lista*/
-        Dato* dato = (*itDato);
-		dato->setIdRegistro(0);
+        dato = new Dato();
+        int vacio = (int)VACIO;
+		dato->setIdRegistro(vacio);
         dato->setNroBoque(0);
         dato->setClave(NULL);
 
-        list<Dato*>* listaAux = new list<Dato*>();
+        listaAux = new list<Dato*>();
         listaAux->push_back(dato);
         /*meto la lista, a mi lista de listas*/
         listaListasResultados->push_back(listaAux);
         nivel++;
+        /*pongo los datos en la lista de Resultados*/
+        *listaListasDatosSubArboles = listaListasResultados;
+        *listaClaves = listaSubClaves;
 	}
 	else{
         if((listaSubClaves->size() == listaListasResultados->size())){
@@ -518,7 +528,8 @@ list<SubClaveRef*>* Arbol::partirSubarbol(list<list<Dato*>*>* listaDatosSubArbol
 		if(listaTotal->size() == 1)
 		{
 			Dato* d = new Dato();
-			d->setIdRegistro(0);
+			int vacio = (int)VACIO;
+			d->setIdRegistro(vacio);
 			d->setNroBoque(0);
 			d->setClave(NULL);
 			listDatosDer->push_back(d);
@@ -576,19 +587,24 @@ offset Arbol::insertarDatosEnNodoHoja(list<Dato*>* listaSubSubArboles, double po
         list<Dato*>::iterator itSubListaDatos;
         itSubListaDatos= listaSubSubArboles->begin();
 
+        Key* clave;
+        offset nroBloque;
+        offset idRegistro;
+        offset va;
+        Resultado res;
         for(;itSubListaDatos!=listaSubSubArboles->end();itSubListaDatos++){
                 /*obtengo de mi dato los 3 datos que necesito para insertar en el nodo*/
-                offset idRegistro = (*itSubListaDatos)->getIdRegistro();
-                offset nroBloque = (*itSubListaDatos)->getNroBoque();
-                Key* clave = (*itSubListaDatos)->getClave();
-                offset va = VACIO;
+                idRegistro = (*itSubListaDatos)->getIdRegistro();
+                nroBloque = (*itSubListaDatos)->getNroBoque();
+                clave = (*itSubListaDatos)->getClave();
+                va = VACIO;
                 if(idRegistro == va){
                         /*el nodo queda vacio*/
                         /*si esto pasa este tuviese que ser el unico dato*/
                 }
                 else{
                         /*para cada elemento de la lista voy insertandolo en mi nodo hoja*/
-                        Resultado res = nodoHoja->insertarElemento(idRegistro, nroBloque, clave, porcentaje);
+                        res = nodoHoja->insertarElemento(idRegistro, nroBloque, clave, porcentaje);
                         /*por como lo arme, no hay chance de que tire overflow. Y verifique antes que no se repitiesen los datos*/
                         if(res == RES_OK){
                                 this->cantidadElem++;
@@ -655,7 +671,7 @@ list<offset>* Arbol::insertarHijosEnNodoPadre(list<list<SubClaveRef*>*>* listaMa
         for(;itListaMaestraClaves!=listaMaestraClaves->end();itListaMaestraClaves++){
 			/*instancio un nodo interno por cada lista de claves*/
 			/*voy a iterar sobre mis listas de claves para ir armando el nodo interno*/
-            d = 0;
+        		d = 0;
 			nodoInterno = new NodoInterno();
 			list<SubClaveRef*>::iterator itListaClaves;
 
