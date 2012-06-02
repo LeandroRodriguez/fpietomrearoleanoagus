@@ -2,6 +2,7 @@
 void TestArbol::Testear(){
 		Controlador* c = new Controlador();
 
+/*
         Key* dato = new Key();
 		dato->setLineaFerroviaria("Sarmiento");
 		dato->setFranjaHorariaDelSiniestro("2012/03/4 00:00 00:30");
@@ -32,7 +33,7 @@ void TestArbol::Testear(){
 		c->InsertarDato(dato3);
 
         //c->indice->imprimir();
-		Key* dato4 = new Key();
+    	Key* dato4 = new Key();
 		char linea4[] ="San martin";
 		dato4->setLineaFerroviaria(linea4);
 		char franja4[] = "2012/07/2 00:00 9:30";
@@ -44,9 +45,7 @@ void TestArbol::Testear(){
 		dato4->setFormacion("4");
 		c->InsertarDato(dato4);
 
-		c->indice->imprimir();
-
-		/*Key* dato5 = new Key();
+		Key* dato5 = new Key();
 		char linea5[] ="Belgrano";
 		dato5->setLineaFerroviaria(linea5);
 		char franja5[] = "2011/02/21 00:00 00:30";
@@ -55,11 +54,11 @@ void TestArbol::Testear(){
 		dato5->setFalla(falla5);
 		char acc5[] = "no prende";
 		dato5->setAccidente(acc5);
-		dato5->setFormacion(5);
+		dato5->setFormacion("5");
 		c->InsertarDato(dato5);
 
 		Key* dato6 = new Key();
-		char linea6[] ="Subte";
+		char linea6[] ="Ledesma";
 		dato6->setLineaFerroviaria(linea6);
 		char franja6[] = "2012/02/18 00:00 00:30";
 		dato6->setFranjaHorariaDelSiniestro(franja6);
@@ -67,7 +66,7 @@ void TestArbol::Testear(){
 		dato6->setFalla(falla6);
 		char acc6[] = "descarrilo";
 		dato6->setAccidente(acc6);
-		dato6->setFormacion(6);
+		dato6->setFormacion("6");
 		c->InsertarDato(dato6);
 
 		Key* dato7 = new Key();
@@ -75,47 +74,47 @@ void TestArbol::Testear(){
 		dato7->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 		dato7->setFalla("no cierra puerta");
 		dato7->setAccidente("incendio");
-		dato7->setFormacion(5);
+		dato7->setFormacion("5");
 		c->InsertarDato(dato7);
 
 		Key* dato8 = new Key();
 		dato8->setLineaFerroviaria("Ledesma");
-		dato8->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+		dato8->setFranjaHorariaDelSiniestro("2012/02/21 10:00 00:30");
 		dato8->setFalla("no tiene puerta");
 		dato8->setAccidente("incendio");
-		dato8->setFormacion(4);
+		dato8->setFormacion("4");
 		c->InsertarDato(dato8);
 
 		Key* dato9 = new Key();
 		dato9->setLineaFerroviaria("Rivadavia");
-		dato9->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:30");
+		dato9->setFranjaHorariaDelSiniestro("2012/02/29 05:00 07:01");
 		dato9->setFalla("no cierra");
 		dato9->setAccidente("quemado");
-		dato9->setFormacion(4);
+		dato9->setFormacion("4");
 		c->InsertarDato(dato9);
 
-		Key* dato10 = new Key();
+        Key* dato10 = new Key();
 		dato10->setLineaFerroviaria("TorCuato");
-		dato10->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
+		dato10->setFranjaHorariaDelSiniestro("2012/02/29 20:00 05:15");
 		dato10->setFalla("no cierra");
 		dato10->setAccidente("roto");
-		dato10->setFormacion(4);
+		dato10->setFormacion("4");
 		c->InsertarDato(dato10);
 
 		Key* dato11 = new Key();
 		dato11->setLineaFerroviaria("LaBoca");
-		dato11->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
+		dato11->setFranjaHorariaDelSiniestro("2012/02/29 11:00 13:00");
 		dato11->setFalla("no abre ventanas");
 		dato11->setAccidente("descarrilamiento");
-		dato11->setFormacion(6);
+		dato11->setFormacion("16");
 		c->InsertarDato(dato11);
-
-		c->indicePrimario->imprimir();*/
+*/
+		c->indice->imprimir();
 
 		delete c;
-		delete dato;
+/*		delete dato;
 		delete dato2;
-		/*delete dato3;
+		delete dato3;
 		delete dato4;
 		delete dato5;
 		delete dato6;
@@ -123,7 +122,7 @@ void TestArbol::Testear(){
 		delete dato8;
 		delete dato9;
 		delete dato10;
-		delete dato11;*/
-
+		delete dato11;
+*/
 
 }
