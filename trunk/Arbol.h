@@ -74,6 +74,8 @@ class Arbol {
 	bool BuscarDato(Key* datoBuscado);
 	list<Key*>* BuscarSegunFecha(string subclave, int dim, string fechaInicio, string fechaFin);
 
+	void Baja(Key* dato);
+
 private:
 	PersistenciaArbol* persistir;
 

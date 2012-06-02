@@ -182,3 +182,13 @@ Bytes Bloque::obtenerRegistro(uint32_t nRegistro){
 	return Bytes("");
 
 }
+
+void Bloque::setRegistro(uint32_t UID, RegistroVariable* r){
+	list<RegistroVariable*>::iterator it;
+	it=registros->begin();
+
+	for(;it!=registros->end();it++){
+		if((*it)->getNRegistro() == UID)
+			*it = r;
+	}
+}

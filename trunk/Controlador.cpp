@@ -352,7 +352,14 @@ void Controlador::CargarDatosPrueba(){
 }
 
 
+
 void Controlador::CargaInicial(string path){
+	ifstream ifs(path.c_str());
+	if(!ifs.is_open()){
+		cerr<<"Archivo inexistente";
+		return;
+	}
+
 	string aux = DIR_ARCHIVO_INDICES;
 	aux += this->archivoArbol;
 	remove(aux.c_str());
@@ -373,6 +380,11 @@ void Controlador::CargaInicial(string path){
 void Controlador::ImprimirArbol(){
     this->indice->imprimir();
     cin.get();
+}
+
+void Controlador::Baja(Key* dato){
+	this->indice->Baja(dato);
+
 }
 
 

@@ -367,3 +367,40 @@ void AlmacenamientoBloque::actualizarEspacioLibre(offset nBloqueDisponible, cant
 	return;
 }
 
+/*levanto del archivo el registro pedido*/
+void AlmacenamientoBloque::sobreEscribirRegistro(offset nBloque, uint32_t UID, RegistroVariable* r){
+	Bloque bloqueTemporal(LONGITUD_BLOQUE_DATA);
+
+	fstream almacenamientoEntrada;
+
+	almacenamientoEntrada.open(this->pathDatos.c_str());
+	string stream;
+	/* Valido que el offset y la cantidad de bytes sean validos */
+	if (almacenamientoEntrada.is_open()) {
+		/*seteo el get pointer en la posicion del bloque donde se encuentra el reg pedido*/
+		almacenamientoEntrada.seekg(nBloque * LONGITUD_BLOQUE_DATA, ios_base::beg);
+		char* buffer;
+		buffer = new char[LONGITUD_BLOQUE_DATA];
+
+		/*levanto el bloque*/
+		almacenamientoEntrada.read(buffer, LONGITUD_BLOQUE_DATA);
+		/*paso la lectura a stream y borro el buffer auxiliar*/
+		stream.append(buffer, LONGITUD_BLOQUE_DATA);
+		delete[] buffer;
+
+		/*creo Bytes con mi stream*/
+		Bytes bloqueBytes(stream.c_str());
+		/*hidrato el bloque recuperado*/
+		bloqueTemporal.hidratarse(bloqueBytes);
+		/*obtengo el registro que busco del bloque que acabo de levantar, lo armo y devuelvo su dato*/
+		bloqueTemporal.setRegistro(UID, r);
+		Bytes serial = bloqueTemporal.serializarse();
+
+		almacenamientoEntrada.seekg(nBloque * LONGITUD_BLOQUE_DATA, ios_base::beg);
+
+		almacenamientoEntrada.write(serial.toString().c_str(), LONGITUD_BLOQUE_DATA);
+		almacenamientoEntrada.flush();
+		return;
+	}
+	return;
+}

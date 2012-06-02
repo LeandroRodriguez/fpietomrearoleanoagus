@@ -934,3 +934,12 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
         return listaNodosInternos;
 }
 
+void Arbol::Baja(Key* dato)
+{
+	if(this->raiz != NULL)
+	{
+		this->raiz->Baja(dato);
+
+	}
+
+}

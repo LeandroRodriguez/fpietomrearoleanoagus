@@ -43,6 +43,7 @@ public:
 	void CargaInicial(string path);
 
 	void InsertarDatosCargaInicial(list<Key*>* listaDatos);
+	void Baja(Key* dato);
 
     list<Key*>* getListaKey(string path);
 
