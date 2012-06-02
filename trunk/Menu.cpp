@@ -3,14 +3,14 @@
 
 Menu::Menu(){
     Controlador* controlador = new Controlador();
-    continuar = 1;
+    continuar = true;
     while (continuar){
         system("clear");
         ImprimirOpciones();
         cin >> opcion;
         switch(opcion){
             case 0:
-                continuar = 0;
+                continuar = false;
             case 1:
                 cout << "Ingrese la falla" << endl;
                 cin >> falla;
@@ -48,24 +48,40 @@ Menu::Menu(){
                 controlador->ListarAccidentesPorFormacion(formacion, fechaInicio, fechaFin);
                 break;
             case 5:
+                system("clear");
                 controlador->ListarFallas();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 6:
+                system("clear");
                 controlador->ListarFormaciones();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 7:
+                system("clear");
                 controlador->ListarLineasFerroviarias();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
+                break;
+            case 8:
+                system("clear");
+                controlador->ListarAccidentes();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 9:
-                controlador->ListarAccidentes();
-                break;
-            case 10:
 //                controlador->InsertarDato();
                 break;
-            case 11:
+            case 10:
 //                controlador->InsertarDatosCargaInicial();
                 break;
-            case 12:
+            case 11:
                 //controlador->ListarAccidentes();
                 break;
             default:
@@ -85,12 +101,12 @@ void Menu::ImprimirOpciones(){
 	cout << " 3)  Listado de todas las fallas de una formación determinada" << endl;
 	cout << " 4)  Listado de todos los accidentes de una formación determinada" << endl;
 	cout << " 5)  Listado de todas las fallas" << endl;
-	cout << " 7)  Listado de todas las formaciones" << endl;
-	cout << " 8)  Listado de todas las lineas" << endl;
-	cout << " 9)  Listado de todos los accidentes" << endl;
-    cout << " 10) Ingresar datos de prueba" << endl;
-    cout << " 11) Ingresar dato" << endl;
-    cout << " 12) Eliminar dato" << endl;
+	cout << " 6)  Listado de todas las formaciones" << endl;
+	cout << " 7)  Listado de todas las lineas ferroviarias" << endl;
+	cout << " 8)  Listado de todos los accidentes" << endl;
+    cout << " 9) Ingresar datos de prueba" << endl;
+    cout << " 10) Ingresar dato" << endl;
+    cout << " 11) Eliminar dato" << endl;
 	cout << endl;
 	cout << " 0)  Salir" << endl;
 	cout << endl;

@@ -9,10 +9,12 @@
 #include "Test/TestArbol.h"
 #include "Test/TestNodoHoja.h"
 #include "Test/TestNodoInterno.h"
+#include "Menu.h"
 
 using namespace std;
 
 int main(){
+    Menu();
     /*TestRegistro* testRegistro = new TestRegistro();
     testRegistro->TestCrearRegistro();
     testRegistro->TestSerializarHidratarRegistro();
@@ -46,12 +48,12 @@ int main(){
 	//testArbol->UnDatoMas();
     delete testArbol;*/
 
-    TestControlador* testControlador = new TestControlador();
+    /*TestControlador* testControlador = new TestControlador();
     //testControlador->TestInsertarDato();
     //testControlador->TestControladorBuscarDato();
     //testControlador->TestBuscarFallaSegunFecha();
     testControlador->TestImprimirListados();
-    delete testControlador;
+    delete testControlador;*/
 
     /*TestKey* testKey = new TestKey();
     testKey->TestSerializarHidratarKey();
