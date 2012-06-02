@@ -51,13 +51,23 @@ Menu::Menu(){
                 controlador->ListarFallas();
                 break;
             case 6:
-                controlador->ListarForcaciones();
+                controlador->ListarFormaciones();
                 break;
             case 7:
-                controlador->ListarLineas();
+                controlador->ListarLineasFerroviarias();
                 break;
             case 9:
                 controlador->ListarAccidentes();
+                break;
+            case 10:
+//                controlador->InsertarDato();
+                break;
+            case 11:
+//                controlador->InsertarDatosCargaInicial();
+                break;
+            case 12:
+                //controlador->ListarAccidentes();
+                break;
             default:
                 cout << "Ingrese una opción valida" << endl;
                 break;
@@ -70,14 +80,17 @@ void Menu::ImprimirOpciones(){
 	cout << endl;
 	cout << "Ingrese la opción que desee:" << endl;
 	cout << endl;
-	cout << " 1) Listado de todos los trenes que tengan una misma falla" << endl;
-	cout << " 2) Listado de todos los trenes que tengan un mismo accidente" << endl;
-	cout << " 3) Listado de todas las fallas de una formación determinada" << endl;
-	cout << " 4) Listado de todos los accidentes de una formación determinada" << endl;
-	cout << " 5) Listado de todas las fallas" << endl;
-	cout << " 7) Listado de todas las formaciones" << endl;
-	cout << " 8) Listado de todas las lineas" << endl;
-	cout << " 9) Listado de todos los accidentes" << endl;
+	cout << " 1)  Listado de todos los trenes que tengan una misma falla" << endl;
+	cout << " 2)  Listado de todos los trenes que tengan un mismo accidente" << endl;
+	cout << " 3)  Listado de todas las fallas de una formación determinada" << endl;
+	cout << " 4)  Listado de todos los accidentes de una formación determinada" << endl;
+	cout << " 5)  Listado de todas las fallas" << endl;
+	cout << " 7)  Listado de todas las formaciones" << endl;
+	cout << " 8)  Listado de todas las lineas" << endl;
+	cout << " 9)  Listado de todos los accidentes" << endl;
+    cout << " 10) Ingresar datos de prueba" << endl;
+    cout << " 11) Ingresar dato" << endl;
+    cout << " 12) Eliminar dato" << endl;
 	cout << endl;
 	cout << " 0)  Salir" << endl;
 	cout << endl;

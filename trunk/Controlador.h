@@ -27,14 +27,15 @@ public:
 	list<Key*>* BuscarTrenesConAccidenteSegunFecha(string accidente, string fechaInicio, string fechaFin);
 	list<Key*>* BuscarTrenesConFormacionSegunFecha(string formacion, string fechaInicio, string fechaFin);
 	list<Key*>* BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin);
+	list<string>* GenerarListaDeSubclaveSegunDim(int dim, list<Key*>* lista);
 
 	void ListarTenesPorFalla(string falla, string fechaInicio, string fechaFin);
 	void ListarTenesPorAccidente(string accidente, string fechaInicio, string fechaFin);
 	void ListarFallasPorFormacion(string formacion, string fechaInicio, string fechaFin);
 	void ListarAccidentesPorFormacion(string formacion, string fechaInicio, string fechaFin);
 	void ListarFallas();
-	void ListarForcaciones();
-	void ListarLineas();
+	void ListarFormaciones();
+	void ListarLineasFerroviarias();
 	void ListarAccidentes();
 
     void InsertarDatosCargaInicial(list<Key*>* listaDatos);

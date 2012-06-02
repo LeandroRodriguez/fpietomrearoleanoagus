@@ -88,33 +88,38 @@ list<Key*>* Controlador::getListaKey(string path){
 void Controlador::ListarTenesPorFalla(string falla, string fechaInicio, string fechaFin){
     list<Key*>* datos = new list<Key*>();
 	datos = this->BuscarTrenesConFallaSegunFecha(falla, fechaInicio, fechaFin);
-    cout << "Cantidad Elementos" << datos->size() <<endl;
-    list<Key*>::iterator itDato = datos->begin();
-    for(;itDato != datos->end();itDato++){
-            //LineaFerroviaria dim = 0
-            cout << (*itDato)->getSubClaveSegunDim(0) << endl;
+    //LineaFerroviaria dim = 0
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(0, datos);
+    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
+
     }
 }
 
 void Controlador::ListarTenesPorAccidente(string accidente, string fechaInicio, string fechaFin){
     list<Key*>* datos = new list<Key*>();
 	datos = this->BuscarTrenesConAccidenteSegunFecha(accidente, fechaInicio, fechaFin);
-    cout << "Cantidad Elementos" << datos->size() <<endl;
-    list<Key*>::iterator itDato = datos->begin();
-    for(;itDato != datos->end();itDato++){
-            //LineaFerroviaria dim = 0
-            cout << (*itDato)->getSubClaveSegunDim(0) << endl;
+    //LineaFerroviaria dim = 0
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(0, datos);
+    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
+
     }
 }
 
 void Controlador::ListarFallasPorFormacion(string formacion, string fechaInicio, string fechaFin){
     list<Key*>* datos = new list<Key*>();
 	datos = this->BuscarTrenesConFormacionSegunFecha(formacion, fechaInicio, fechaFin);
-    cout << "Cantidad Elementos" << datos->size() <<endl;
-    list<Key*>::iterator itDato = datos->begin();
-    for(;itDato != datos->end();itDato++){
-            //Fallas dim = 3
-            cout << (*itDato)->getSubClaveSegunDim(3) << endl;
+    //Fallas dim = 3
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(3, datos);
+    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
 
     }
 }
@@ -122,30 +127,71 @@ void Controlador::ListarFallasPorFormacion(string formacion, string fechaInicio,
 void Controlador::ListarAccidentesPorFormacion(string formacion, string fechaInicio, string fechaFin){
     list<Key*>* datos = new list<Key*>();
 	datos = this->BuscarTrenesConFormacionSegunFecha(formacion, fechaInicio, fechaFin);
-    cout << "Cantidad Elementos" << datos->size() <<endl;
-    list<Key*>::iterator itDato = datos->begin();
-    for(;itDato != datos->end();itDato++){
-            //Accidente dim = 2
-            cout << (*itDato)->getSubClaveSegunDim(2) << endl;
+    //Accidentes dim = 2
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(2, datos);
+    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
 
     }
 }
 
 void Controlador::ListarFallas(){
-    //not implemented
-    }
+    string path = DIR_ARCHIVO_DATOS;
+    path += ARCHIVO_DATOS;
+    list<Key*>* datos = this->getListaKey(path);
+	//Fallas dim = 3
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(3, datos);
+	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
 
-void Controlador::ListarForcaciones(){
-    //not implemented
     }
+}
 
-void Controlador::ListarLineas(){
-    //not implemented
+void Controlador::ListarFormaciones(){
+    string path = DIR_ARCHIVO_DATOS;
+    path += ARCHIVO_DATOS;
+    list<Key*>* datos = this->getListaKey(path);
+	//Formacion dim = 1
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(1, datos);
+	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
+
     }
+}
+
+void Controlador::ListarLineasFerroviarias(){
+    string path = DIR_ARCHIVO_DATOS;
+    path += ARCHIVO_DATOS;
+    list<Key*>* datos = this->getListaKey(path);
+	//Linea Ferroviaria dim = 0
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(0, datos);
+	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
+
+    }
+}
 
 void Controlador::ListarAccidentes(){
-    //not implemented
+    string path = DIR_ARCHIVO_DATOS;
+    path += ARCHIVO_DATOS;
+    list<Key*>* datos = this->getListaKey(path);
+	//Accidentes dim = 2
+	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(2, datos);
+	cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    list<string>::iterator itDato = subclaves->begin();
+    for(;itDato != subclaves->end();itDato++){
+            cout << (*itDato) <<endl;
+
     }
+}
 
 /*Inserto el dato pasado por parametro tanto en el archivo de data, como sus referencias en el arbol*/
 void Controlador::InsertarDatosCargaInicial(list<Key*>* listaKey){
@@ -215,6 +261,18 @@ list<Key*>* Controlador::BuscarTrenesConFormacionSegunFecha(string formacion, st
 
 list<Key*>* Controlador::BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin){
     return this->indice->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
+}
+
+list<string>* Controlador::GenerarListaDeSubclaveSegunDim(int dim, list<Key*>* lista){
+    list<string>* subclaves= new list<string>();
+    list<Key*>::iterator it = lista->begin();
+    for(;it != lista->end();it++){
+        string subclave = (*it)->getSubClaveSegunDim(dim);
+        subclaves->push_back(subclave);
+    }
+    subclaves->sort();
+    subclaves->unique();
+    return subclaves;
 }
 
 
