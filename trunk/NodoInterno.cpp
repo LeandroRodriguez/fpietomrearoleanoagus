@@ -152,15 +152,15 @@ void NodoInterno::Hidratar(char* bytes){
 
 	memcpy(&this->Altura, bytes + cur, sizeof(this->Altura));
 	cur += sizeof(this->Altura);
-    	cout << "Altura: " << this->Altura << endl;
+    	//cout << "Altura: " << this->Altura << endl;
 
 	memcpy(&this->dimension, bytes + cur, sizeof(this->dimension));
 	cur += sizeof(this->dimension);
-    	cout << "Dimension: " << this->dimension << endl;
+    //	cout << "Dimension: " << this->dimension << endl;
 
 	memcpy(&this->Ref1erNodo, bytes+ cur, sizeof(this->Ref1erNodo));
 	cur += sizeof(this->Ref1erNodo);
-    	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
+    //	cout << "Ref1erNodo: " << this->Ref1erNodo << endl;
     //int hastaaca = cur;
     int i=0;
     while( i < AUXMAXCANT ){
@@ -222,6 +222,7 @@ list<int>* NodoInterno::DevolverTodosSusIdHijosEnOrden(){
     listIdHijos->push_back(this->Ref1erNodo);
     for( ; it != this->ListaSubClaveRef->end() ; it++ ){
        SubClaveRef* item = *it;
+   //    std::cout << "Id Hijo: " << (*item).getRefNodo() << endl;
        listIdHijos->push_back(item->getRefNodo() );
        }
        return listIdHijos;
