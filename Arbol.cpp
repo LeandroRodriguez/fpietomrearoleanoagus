@@ -942,7 +942,7 @@ void Arbol::Baja(Key* dato)
 {
 	if(this->raiz != NULL)
 	{
-		this->raiz->Baja(dato);
+	    if(this->raiz->BuscarDato(dato))this->raiz->Baja(dato);
 
 	}
 
