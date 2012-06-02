@@ -11,6 +11,7 @@
 #include "Test/TestNodoInterno.h"
 #include "Menu.h"
 
+
 using namespace std;
 
 int main(){
@@ -49,8 +50,11 @@ int main(){
     delete testArbol;*/
 
     /*TestControlador* testControlador = new TestControlador();
-    //testControlador->TestInsertarDato();
+   // testControlador->TestInsertarDato();
     //testControlador->TestControladorBuscarDato();
+    //testControlador->TestBuscarFallaSegunFecha();
+    testControlador->TestImprimirListados();
+
     //testControlador->TestBuscarFallaSegunFecha();
     testControlador->TestImprimirListados();
     delete testControlador;*/
@@ -64,11 +68,16 @@ int main(){
     testNodoHoja->TestSerializarHidtratar();
     //ESTE NO ANDA POR AHORA
     //testNodoHoja->TestPartirHojaEn2();
-    testNodoHoja->TestBuscarDato();*/
+
+    /*TestNodoInterno* testNodoI = new TestNodoInterno();
+    testNodoI->TestSerializarHidratar();*/
+
+    //testNodoHoja->TestBuscarDato();
 
     /*TestNodoInterno* testNodoInterno = new TestNodoInterno();
     //testNodoInterno->TestCrearNodoInterno();
     testNodoInterno->TestSerializarHidratar();*/
+
 };
 
 
