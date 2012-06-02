@@ -766,21 +766,21 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                         /*una vez que tengo mi lista ordenada, comienzo con la insercion en nodos como si fuese una carga inicial comun(mmm, mas bien una                               simulacion)*/
                         /*instancio dos listas vacias para que me devuelva resultados el metodo que simula la carga inicial del subarbol*/
 
-                        cout << "------------" << endl;
+                        //cout << "------------" << endl;
                             itListaPrint = (subListaOrdenada)->begin();
                             for(;itListaPrint!=(subListaOrdenada)->end();itListaPrint++){
                                 idRegistro = (*itListaPrint)->getIdRegistro();
                                 nroBloque = (*itListaPrint)->getNroBoque();
                                 clave = (*itListaPrint)->getClave();
                                 subClave = clave->getSubClaveSegunDim(dimension);
-                                cout << idRegistro;
-                                cout << ";";
-                                cout << nroBloque;
-                                cout << ";Clave: ";
-                                cout << subClave;
-                                cout << ";" << endl;
+                                //cout << idRegistro;
+                                //cout << ";";
+                                //cout << nroBloque;
+                                //cout << ";Clave: ";
+                                //cout << subClave;
+                                //cout << ";" << endl;
                             }
-                        cout << "------------" << endl;
+                        //cout << "------------" << endl;
 
                         listaClaves = new list<SubClaveRef*>();//lista de claves
 
@@ -867,20 +867,20 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                                 Key* clave;
                                 string subClave;
 
-                            cout << "------SUBLISTAS------" << endl;
+                            //cout << "------SUBLISTAS------" << endl;
                                 for(;itListaPrint!=(*itListaVIEPrint)->end();itListaPrint++){
                                     idRegistro = (*itListaPrint)->getIdRegistro();
                                     nroBloque = (*itListaPrint)->getNroBoque();
                                     clave = (*itListaPrint)->getClave();
                                     subClave = clave->getSubClaveSegunDim(dimension);
-                                    cout << idRegistro;
-                                    cout << ";";
-                                    cout << nroBloque;
-                                    cout << ";Clave: ";
-                                    cout << subClave;
-                                    cout << ";" << endl;
+                                    //cout << idRegistro;
+                                    //cout << ";";
+                                    //cout << nroBloque;
+                                    //cout << ";Clave: ";
+                                    //cout << subClave;
+                                    //cout << ";" << endl;
                                 }
-                            cout << "------FIN LISTA VIE------" << endl;
+                            //cout << "------FIN LISTA VIE------" << endl;
                         }
 
 
@@ -899,20 +899,20 @@ list<offset>* Arbol::cargaInicialArmarNodos(list<list<list<Dato*>*>*>* subListas
                                 Key* clave;
                                 string subClave;
 
-                            cout << "------OTRA SUBLISTA------" << endl;
+                            //cout << "------OTRA SUBLISTA------" << endl;
                                 for(;itListaPrint!=(*itListaRESPrint)->end();itListaPrint++){
                                     idRegistro = (*itListaPrint)->getIdRegistro();
                                     nroBloque = (*itListaPrint)->getNroBoque();
                                     clave = (*itListaPrint)->getClave();
                                     subClave = clave->getSubClaveSegunDim(dimension);
-                                    cout << idRegistro;
-                                    cout << ";";
-                                    cout << nroBloque;
-                                    cout << ";Clave: ";
-                                    cout << subClave;
-                                    cout << ";" << endl;
+                                    //cout << idRegistro;
+                                    //cout << ";";
+                                    //cout << nroBloque;
+                                    //cout << ";Clave: ";
+                                    //cout << subClave;
+                                    //cout << ";" << endl;
                                 }
-                            cout << "------------" << endl;
+                            //cout << "------------" << endl;
                         }
 
                         /*remplazo la nueva lista de listas de subarboles por la vieja*/
