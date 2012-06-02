@@ -349,13 +349,21 @@ void TestControlador::TestImprimirListados(){
 	path += ARCHIVO_DATOS;
 	list<Key*>* lista = controlador->getListaKey(path);
 	controlador->InsertarDatosCargaInicial(lista);
-
+    cout << "*********************************" << endl;
+    cout << "---------------FALLAS------------" << endl;
     controlador->ListarFallas();
+    cout << "*********************************" << endl;
+    cout << "---------------FORMACIONES------------" << endl;
     controlador->ListarFormaciones();
+    cout << "*********************************" << endl;
+    cout << "---------------ACCIDENTES------------" << endl;
     controlador->ListarAccidentes();
+    cout << "*********************************" << endl;
+    cout << "---------------LineasFerroviarias------------" << endl;
     controlador->ListarLineasFerroviarias();
+    cout << "*********************************" << endl;
     string fechaInicio = "2011/02/29 00:00 00:00";
-    string fechaFin = "2013/02/29 00:00 00:00";
+    string fechaFin = "2011/02/29 00:00 00:00";
     cout << endl;
     cout << "Listado Accidentes de Formacion 4" << endl;
     controlador->ListarAccidentesPorFormacion("4", fechaInicio, fechaFin);
