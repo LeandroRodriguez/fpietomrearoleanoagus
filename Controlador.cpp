@@ -90,12 +90,14 @@ void Controlador::ListarTenesPorFalla(string falla, string fechaInicio, string f
 	datos = this->BuscarTrenesConFallaSegunFecha(falla, fechaInicio, fechaFin);
     //LineaFerroviaria dim = 0
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(0, datos);
-    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    cout << "LISTADO TRENES CON FALLA: "<< falla << endl;
+    cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
+            cout << "- "<<(*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 void Controlador::ListarTenesPorAccidente(string accidente, string fechaInicio, string fechaFin){
@@ -103,12 +105,14 @@ void Controlador::ListarTenesPorAccidente(string accidente, string fechaInicio, 
 	datos = this->BuscarTrenesConAccidenteSegunFecha(accidente, fechaInicio, fechaFin);
     //LineaFerroviaria dim = 0
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(0, datos);
-    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    cout << "LISTADO TRENES CON ACCIDENTES "<< accidente << endl;
+    cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
+            cout << "- " <<(*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 void Controlador::ListarFallasPorFormacion(string formacion, string fechaInicio, string fechaFin){
@@ -116,12 +120,14 @@ void Controlador::ListarFallasPorFormacion(string formacion, string fechaInicio,
 	datos = this->BuscarTrenesConFormacionSegunFecha(formacion, fechaInicio, fechaFin);
     //Fallas dim = 3
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(3, datos);
-    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    cout << "LISTADO FALLAS DE FORMACION "<< formacion << endl;
+    cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
             cout << (*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 void Controlador::ListarAccidentesPorFormacion(string formacion, string fechaInicio, string fechaFin){
@@ -129,12 +135,14 @@ void Controlador::ListarAccidentesPorFormacion(string formacion, string fechaIni
 	datos = this->BuscarTrenesConFormacionSegunFecha(formacion, fechaInicio, fechaFin);
     //Accidentes dim = 2
 	list<string>* subclaves = this->GenerarListaDeSubclaveSegunDim(2, datos);
-    cout << "Cantidad Elementos" << subclaves->size() <<endl;
+    cout << "LISTADO ACCIDENTES DE FORMACION "<< formacion << endl;
+    cout << "Cantidad Elementos: " << subclaves->size() <<endl;
     list<string>::iterator itDato = subclaves->begin();
     for(;itDato != subclaves->end();itDato++){
-            cout << (*itDato) <<endl;
+            cout << "- "<< (*itDato) <<endl;
 
     }
+    cin.get();
 }
 
 void Controlador::ListarFallas(){
@@ -280,6 +288,17 @@ list<string>* Controlador::GenerarListaDeSubclaveSegunDim(int dim, list<Key*>* l
     subclaves->sort();
     subclaves->unique();
     return subclaves;
+}
+
+void Controlador::CargarDatosPrueba(){
+    string path = DIR_ARCHIVO_DATOS;
+	path += "a";
+	path += ARCHIVO_DATOS;
+	list<Key*>* lista = this->getListaKey(path);
+	this->InsertarDatosCargaInicial(lista);
+	system("clear");
+	cout << "DATOS DE PRUEBA CARGADOS" << endl;
+	cin.get();
 }
 
 

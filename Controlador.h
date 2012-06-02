@@ -21,6 +21,7 @@ public:
 	virtual ~Controlador();
 
 	/*Inserto el dato pasado por parametro tanto en el archivo de data, como sus referencias en el arbol*/
+	void CargarDatosPrueba();
 	void InsertarDato(Key* dato);
 	bool BuscarDato(Key* dato);
 	list<Key*>* BuscarTrenesConFallaSegunFecha(string falla, string fechaInicio, string fechaFin);
