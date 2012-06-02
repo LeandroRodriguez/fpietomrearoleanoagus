@@ -15,5 +15,5 @@ Nodo::Nodo(Arbol* arb){
     }
 
 void Nodo::setArbol(Arbol* arb){
-    this->arbol=arb;
+    if(arb!=NULL)this->arbol=arb;
 }
