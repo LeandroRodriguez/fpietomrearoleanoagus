@@ -234,13 +234,63 @@ void TestControlador::TestBuscarFallaSegunFecha(){
 	dato3->setFormacion("2");
 	controlador->InsertarDato(dato3);
 
-    //busco dato q este
+
+	Key* dato4 = new Key();
+	char linea4[] ="San martin";
+	dato4->setLineaFerroviaria(linea4);
+	char franja4[] = "2012/02/25 00:00 00:30";
+	dato4->setFranjaHorariaDelSiniestro(franja4);
+	char falla4[] = "esta roto";
+	dato4->setFalla(falla4);
+	char acc4[] = "exploto";
+	dato4->setAccidente(acc4);
+	dato4->setFormacion("4");
+	controlador->InsertarDato(dato4);
+
+	Key* dato5 = new Key();
+	char linea5[] ="Belgrano";
+	dato5->setLineaFerroviaria(linea5);
+	char franja5[] = "2011/02/21 00:00 00:30";
+	dato5->setFranjaHorariaDelSiniestro(franja5);
+	char falla5[] = "no arranca";
+	dato5->setFalla(falla5);
+	char acc5[] = "no prende";
+	dato5->setAccidente(acc5);
+	dato5->setFormacion("5");
+	controlador->InsertarDato(dato5);
+
+	Key* dato6 = new Key();
+	char linea6[] ="Subte";
+	dato6->setLineaFerroviaria(linea6);
+	char franja6[] = "2012/02/18 00:00 00:30";
+	dato6->setFranjaHorariaDelSiniestro(franja6);
+	char falla6[] = "motor roto";
+	dato6->setFalla(falla6);
+	char acc6[] = "descarrilo";
+	dato6->setAccidente(acc6);
+	dato6->setFormacion("6");
+	controlador->InsertarDato(dato6);
+
+	Key* dato7 = new Key();
+	dato7->setLineaFerroviaria("Junin");
+	dato7->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
+	dato7->setFalla("no cierra puerta");
+	dato7->setAccidente("incendio");
+	dato7->setFormacion("5");
+	controlador->InsertarDato(dato7);
+
+	controlador->indice->imprimir();
+
 	list<Key*>* datos = new list<Key*>();
 	datos = controlador->BuscarTrenesConFallaSegunFecha("no cierra puerta", "2011/01/21 00:00 00:30", "2013/01/21 00:00 00:30");
     //tiene q dar 1
     cout << datos->size() <<endl;
     delete controlador;
 	delete dato;
-	//delete dato2;
+	delete dato2;
 	delete dato3;
+	delete dato4;
+	delete dato5;
+	delete dato6;
+	delete dato7;
 }
