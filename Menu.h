@@ -12,6 +12,8 @@ class Menu{
     string falla;
     string accidente;
     int formacion;
+    string fechaInicio;
+    string fechaFin;
 
     public:
     Menu();

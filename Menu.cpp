@@ -14,7 +14,11 @@ Menu::Menu(){
             case 1:
                 cout << "Ingrese la falla" << endl;
                 cin >> falla;
-                controlador->ListarTenesPorFalla(falla);
+                cout << "Ingrese Fecha Inicio" << endl;
+                cin >> fechaInicio;
+                cout << "Ingrese Fecha Fin" << endl;
+                cin >> fechaFin;
+                controlador->ListarTenesPorFalla(falla, fechaInicio, fechaFin);
                 break;
             case 2:
                 cout << "Ingrese el accidente" << endl;
