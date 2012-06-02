@@ -51,6 +51,7 @@ Menu::Menu(){
                 getline(cin, fechaInicio);
                 cout << "Ingrese Fecha Fin" << endl;
                 getline(cin, fechaFin);
+                system("clear");
                 controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
                 cout<<endl;
                 cout <<("PRESS ENTER");
