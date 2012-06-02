@@ -40,6 +40,7 @@ public:
 	void ListarLineasFerroviarias();
 	void ListarAccidentes();
 
+    bool dat(Key* dato);
     void InsertarDatosCargaInicial(list<Key*>* listaDatos);
 
     list<Key*>* getListaKey(string path);
