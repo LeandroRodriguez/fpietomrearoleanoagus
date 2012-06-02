@@ -76,12 +76,12 @@ void TestControlador::TestInsertarDato(){
 	dato7->setFormacion("5");
 	controlador->InsertarDato(dato7);
 
-	/*Key* dato8 = new Key();
+	Key* dato8 = new Key();
 	dato8->setLineaFerroviaria("Ledesma");
 	dato8->setFranjaHorariaDelSiniestro("2012/02/21 00:00 00:30");
 	dato8->setFalla("no tiene puerta");
 	dato8->setAccidente("incendio");
-	dato8->setFormacion(4);
+	dato8->setFormacion("4");
 	controlador->InsertarDato(dato8);
 
 	Key* dato9 = new Key();
@@ -89,7 +89,7 @@ void TestControlador::TestInsertarDato(){
 	dato9->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:30");
 	dato9->setFalla("no cierra");
 	dato9->setAccidente("quemado");
-	dato9->setFormacion(4);
+	dato9->setFormacion("4");
 	controlador->InsertarDato(dato9);
 
 	Key* dato10 = new Key();
@@ -97,7 +97,7 @@ void TestControlador::TestInsertarDato(){
 	dato10->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
 	dato10->setFalla("no cierra");
 	dato10->setAccidente("roto");
-	dato10->setFormacion(4);
+	dato10->setFormacion("4");
 	controlador->InsertarDato(dato10);
 
 	Key* dato11 = new Key();
@@ -105,10 +105,10 @@ void TestControlador::TestInsertarDato(){
 	dato11->setFranjaHorariaDelSiniestro("2012/02/29 00:00 00:00");
 	dato11->setFalla("no abre ventanas");
 	dato11->setAccidente("descarrilamiento");
-	dato11->setFormacion(6);
-	controlador->InsertarDato(dato11);*/
+	dato11->setFormacion("6");
+	controlador->InsertarDato(dato11);
 
-    controlador->indice->imprimir();
+    //controlador->indice->imprimir();
 	delete controlador;
 	delete dato;
 	delete dato2;
@@ -116,11 +116,11 @@ void TestControlador::TestInsertarDato(){
     delete dato4;
 	delete dato5;
 	delete dato6;
-	delete dato7;/*
+	delete dato7;
 	delete dato8;
 	delete dato9;
 	delete dato10;
-	delete dato11;*/
+	delete dato11;
 
 }
 
