@@ -17,12 +17,15 @@ Menu::Menu(){
                 cout << "Ingrese la falla" << endl;
                 cin.ignore(256,'\n');
                 getline(cin, falla);
+                cout << falla <<endl;
                 cout << "Ingrese Fecha Inicio" << endl;
-                cin.ignore(256,'\n');
+
                 getline(cin, fechaInicio);
+                cout << fechaInicio <<endl;
                 cout << "Ingrese Fecha Fin" << endl;
-                cin.ignore(256,'\n');
+
                 getline(cin, fechaFin);
+                cout << fechaFin <<endl;
                 system("clear");
                 controlador->ListarTenesPorFalla(falla, fechaInicio, fechaFin);
                 cout<<endl;
