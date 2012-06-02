@@ -87,7 +87,12 @@ Resultado Arbol::insertar(offset nroBloque, offset nroRegistro, Key* dato){
             this->cantidadElem+=2;
             res=RES_OK;//queda todo bien
             }
-            //if(res==RES_DESBORDADO && this->raiz-getHojaOinterno()=='i'){}
+            if(res==RES_DESBORDADO && this->raiz->getHojaOInterno()=='i'){
+                /******************************************/
+                //ACA SE LLAMA A LA CARGA INICIAL
+                /******************************************/
+            res = RES_OK;
+            }
 	}
     return res;
 }
