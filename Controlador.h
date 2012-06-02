@@ -44,12 +44,6 @@ public:
 
 	void InsertarDatosCargaInicial(list<Key*>* listaDatos);
 
-
-private:
-
-    bool dat(Key* dato);
-
-
     list<Key*>* getListaKey(string path);
 
 

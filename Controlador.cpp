@@ -131,6 +131,7 @@ list<Key*>* Controlador::getListaKey(string path){
 		cursor = i*LONGITUD_BLOQUE_DATA;
 		almacenamientoEntrada.seekg(cursor, ios_base::beg);//me paro en el bloque 1
 	}
+	almacenamientoEntrada.close();
 	return lista;
 }
 
