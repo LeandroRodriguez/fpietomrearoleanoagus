@@ -8,6 +8,7 @@ Menu::Menu(){
         system("clear");
         ImprimirOpciones();
         cin >> opcion;
+//        if(archivosCreados)
         switch(opcion){
             case 0:
                 continuar = false;
@@ -121,6 +122,13 @@ Menu::Menu(){
                 cout <<("PRESS ENTER");
                 while (cin.get() != '\n');
                 break;
+            case 12:
+                system("clear");
+                controlador->ArmarKeyYDarBaja();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
+                break;
             default:
                 cout << "Ingrese una opción valida" << endl;
                 break;
@@ -144,6 +152,7 @@ void Menu::ImprimirOpciones(){
     cout << " 9)  Cargar datos de prueba" << endl;
     cout << " 10) Imprimir arbol" << endl;
     cout << " 11) Ingresar dato" << endl;
+    cout << " 12) Eliminar dato" << endl;
     cout << endl;
 	cout << " 0)  Salir" << endl;
 	cout << endl;

@@ -30,19 +30,14 @@ void Controlador::ArmarDatoEInsertar(){
     cout << "Ingrese Linea Ferroviaria" << endl;
     cin.ignore(256,'\n');
     getline(cin,linea);
-    cout << linea << endl;
     cout << "Ingrese Accidente Ferroviaria" << endl;
     getline(cin,accidente);
-    cout << accidente << endl;
     cout << "Ingrese Falla Ferroviaria" << endl;
     getline(cin,falla);
-    cout << falla << endl;
     cout << "Ingrese Formacion Ferroviaria" << endl;
     getline(cin,formacion);
-    cout << formacion << endl;
     cout << "Ingrese Franja Horaria Del Siniestro" << endl;
     getline(cin,horario);
-    cout << horario << endl;
     Key* key = new Key();
     key->setLineaFerroviaria(linea);
     key->setAccidente(accidente);
@@ -380,6 +375,29 @@ void Controlador::CargaInicial(string path){
 void Controlador::ImprimirArbol(){
     this->indice->imprimir();
     cin.get();
+}
+
+void Controlador::ArmarKeyYDarBaja(){
+    system("clear");
+    string linea,accidente,falla,formacion,horario;
+    cout << "Ingrese Linea Ferroviaria" << endl;
+    cin.ignore(256,'\n');
+    getline(cin,linea);
+    cout << "Ingrese Accidente Ferroviaria" << endl;
+    getline(cin,accidente);
+    cout << "Ingrese Falla Ferroviaria" << endl;
+    getline(cin,falla);
+    cout << "Ingrese Formacion Ferroviaria" << endl;
+    getline(cin,formacion);
+    cout << "Ingrese Franja Horaria Del Siniestro" << endl;
+    getline(cin,horario);
+    Key* key = new Key();
+    key->setLineaFerroviaria(linea);
+    key->setAccidente(accidente);
+    key->setFalla(falla);
+    key->setFormacion(formacion);
+    key->setFranjaHorariaDelSiniestro(horario);
+    this->Baja(key);
 }
 
 void Controlador::Baja(Key* dato){
