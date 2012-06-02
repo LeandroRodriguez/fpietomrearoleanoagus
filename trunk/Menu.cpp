@@ -11,6 +11,7 @@ Menu::Menu(){
         switch(opcion){
             case 0:
                 continuar = false;
+                break;
             case 1:
                 cout << "Ingrese la falla" << endl;
                 cin >> falla;
@@ -39,6 +40,7 @@ Menu::Menu(){
                 controlador->ListarFallasPorFormacion(formacion, fechaInicio, fechaFin);
                 break;
             case 4:
+                system("clear");
                 cout << "Ingrese la formación" << endl;
                 cin >> formacion;
                 cout << "Ingrese Fecha Inicio" << endl;
@@ -46,6 +48,9 @@ Menu::Menu(){
                 cout << "Ingrese Fecha Fin" << endl;
                 cin >> fechaFin;
                 controlador->ListarAccidentesPorFormacion(formacion, fechaInicio, fechaFin);
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 5:
                 system("clear");
@@ -76,7 +81,11 @@ Menu::Menu(){
                 while (cin.get() != '\n');
                 break;
             case 9:
-//                controlador->InsertarDato();
+                system("clear");
+                controlador->CargarDatosPrueba();
+                cout<<endl;
+                cout <<("PRESS ENTER");
+                while (cin.get() != '\n');
                 break;
             case 10:
 //                controlador->InsertarDatosCargaInicial();
@@ -104,7 +113,7 @@ void Menu::ImprimirOpciones(){
 	cout << " 6)  Listado de todas las formaciones" << endl;
 	cout << " 7)  Listado de todas las lineas ferroviarias" << endl;
 	cout << " 8)  Listado de todos los accidentes" << endl;
-    cout << " 9) Ingresar datos de prueba" << endl;
+    cout << " 9)  Cargar datos de prueba" << endl;
     cout << " 10) Ingresar dato" << endl;
     cout << " 11) Eliminar dato" << endl;
 	cout << endl;
