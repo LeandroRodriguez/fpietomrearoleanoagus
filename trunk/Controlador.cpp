@@ -30,7 +30,7 @@ void Controlador::InsertarDato(Key* dato){
 	AlmacenamientoBloque almacena(ARCHIVO_DATOS, ARCHIVO_DATOS_LIBRES);
 
 	/*si el dato no es null, lo guardo*/
-	if (dato && !dat(dato) ) {
+	if (dato ) {
 		/*obtengo los bytes del dato serializado*/
 		string str(dato->Serializarse());
 		Bytes bytes(str);
@@ -43,9 +43,6 @@ void Controlador::InsertarDato(Key* dato){
 	}
 };
 
-bool Controlador::dat(Key* dato){
-    return this->indice->BuscarDato(dato);
-    }
 
 list<Key*>* Controlador::getListaKey(string path){
 	list<Key*>* lista = new list<Key*>();
