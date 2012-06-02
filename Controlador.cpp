@@ -173,6 +173,11 @@ list<Key*>* Controlador::BuscarTrenesConFallaSegunFecha(string falla, string fec
     return this->BuscarSegunFecha(falla, 3, fechaInicio, fechaFin);
 }
 
+list<Key*>* Controlador::BuscarTrenesConAccidenteSegunFecha(string accidente, string fechaInicio, string fechaFin){
+    //accidente dim=2
+    return this->BuscarSegunFecha(accidente, 2, fechaInicio, fechaFin);
+}
+
 list<Key*>* Controlador::BuscarSegunFecha(string subclave, int dim , string fechaInicio, string fechaFin){
     return this->indice->BuscarSegunFecha(subclave, dim, fechaInicio, fechaFin);
 }
